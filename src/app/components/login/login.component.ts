@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+declare var $: any;
 
 @Component({
 	selector: "app-login",
@@ -8,5 +9,19 @@ import { Component, OnInit } from "@angular/core";
 export class LoginComponent implements OnInit {
 	constructor() {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		$(document).ready(() => {
+			$('.input100').each(function(){
+				$(this).on('blur', function(){
+					if($(this).val().trim() != "") {
+						$(this).addClass('has-val');
+					}
+					else {
+						$(this).removeClass('has-val');
+					}
+				})
+			})
+		});
+
+	}
 }
