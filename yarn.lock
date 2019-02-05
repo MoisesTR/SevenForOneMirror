@@ -4308,9 +4308,11 @@ neo-async@^2.5.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
 
-"ng-uikit-pro-standard@git+https://oauth2:zdX7A4esXxa73NcMWLMD@git.mdbootstrap.com/mdb/angular/ng-uikit-pro-standard.git#7.2.0":
-  version "7.2.0"
-  resolved "git+https://oauth2:zdX7A4esXxa73NcMWLMD@git.mdbootstrap.com/mdb/angular/ng-uikit-pro-standard.git#d776c1e5f934577af2047ff96161f3e7f54419b4"
+"ng-uikit-pro-standard@git+https://oauth2:zdX7A4esXxa73NcMWLMD@git.mdbootstrap.com/mdb/angular/ng-uikit-pro-standard.git":
+  version "7.4.0"
+  resolved "git+https://oauth2:zdX7A4esXxa73NcMWLMD@git.mdbootstrap.com/mdb/angular/ng-uikit-pro-standard.git#fa3c853bc0740b7613a300773f200ce376d95808"
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
