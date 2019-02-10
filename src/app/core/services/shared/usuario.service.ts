@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Global} from './global';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {User} from '../../../models/models.index';
-import {Observable, throwError as observableThrowError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Global } from "./global";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { User } from "../../../models/models.index";
+import { Observable, throwError as observableThrowError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root"
@@ -16,15 +16,14 @@ export class UsuarioService {
 	}
 
 	login(usuario: User) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': '' });
-    const options = { headers: headers };
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json",
+			Authorization: ""
+		});
+		const options = { headers: headers };
 
-    return this.http
-      .post<Observable<any>>(this.url + 'signin', usuario, options)
-      .pipe(catchError(this.handleError));
-  }
+		return this.http.post<Observable<any>>(this.url + "signin", usuario, options).pipe(catchError(this.handleError));
+	}
 
 	getUsuarios() {
 		return this.http.get<User[]>(this.url + "users").pipe(
@@ -33,15 +32,26 @@ export class UsuarioService {
 		);
 	}
 
-	createUsuario(usuario: User)  {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': '' });
-    const options = { headers: headers };
+	createUsuario(usuario: User) {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json",
+			Authorization: ""
+		});
+		const options = { headers: headers };
 
-    return this.http
-      .post<Observable<any>>(this.url + 'signup', usuario, options)
-      .pipe(catchError(this.handleError));
+		return this.http.post<Observable<any>>(this.url + "signup", usuario, options).pipe(catchError(this.handleError));
+	}
+
+	verifyEmail(token, username) {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json",
+			Authorization: ""
+		});
+		const options = { headers: headers };
+
+		return this.http
+			.post<Observable<any>>(this.url + "verifyemail/" + token + "/" + username, options)
+			.pipe(catchError(this.handleError));
 	}
 
 	private handleError(res: HttpErrorResponse | any) {
