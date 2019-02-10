@@ -36,7 +36,9 @@
     "screenfull": "3.3.0",
     "zone.js": "^0.8.26",
     "@ng-select/ng-select": "2.3.2",
-    "ng-pick-datetime": "^6.0.16"
+    "ng-pick-datetime": "^6.0.16",
+    "moment": "^2.22.1",
+    "deep-equal": "^1.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
