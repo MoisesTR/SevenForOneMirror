@@ -13,6 +13,7 @@ import { Platform } from "@angular/cdk/platform";
 		ReactiveFormsModule,
 		NgSelectModule,
 		OwlDateTimeModule,
+		OwlNativeDateTimeModule
 
 	],
 	declarations: [
