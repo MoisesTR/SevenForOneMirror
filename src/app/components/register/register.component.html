@@ -10,7 +10,8 @@
           <div class="row p-a">
 
             <div class="col-md-12 text-center mb-5  wow fadeInDownBig" data-wow-delay="0.5s">
-              <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 30em;">
+              <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo"
+                style="width: 30em;">
             </div>
 
             <form [formGroup]="formRegisterUser" (ngSubmit)="createdUser()" class="col-md-12">
@@ -20,7 +21,8 @@
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <!-- User -->
                     <div class="wrap-input100">
-                      <input class="input100" type="text" name="user" autocomplete="off" formControlName="user" AlphanumericDirective>
+                      <input class="input100" type="text" name="user" autocomplete="off" formControlName="user"
+                        AlphanumericDirective>
                       <span class="focus-input100"></span>
                       <span class="label-input100">User</span>
                     </div>
@@ -38,7 +40,9 @@
                   <div class="col-sm-12 col-md-12 col-lg-6">
                     <!-- Confirm Password -->
                     <div class="wrap-input100">
-                      <input class="input100" type="password" name="pass" autocomplete="off" formControlName="confirmPassword" (input) ="probarCambio($event.target.value)">
+                      <input class="input100" type="password" name="pass" autocomplete="off"
+                        formControlName="confirmPassword" (input)="probarCambio($event.target.value)">
+                      <span class="focus-input100"></span>
                       <span class="label-input100">Confirm</span>
                     </div>
                   </div>
@@ -46,7 +50,7 @@
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <!-- Email -->
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                      <input class="input100" type="text" name="email" autocomplete="off" formControlName="email"> 
+                      <input class="input100" type="text" name="email" autocomplete="off" formControlName="email">
                       <span class="focus-input100"></span>
                       <span class="label-input100">Email</span>
                     </div>
@@ -55,7 +59,8 @@
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <!-- Names -->
                     <div class="wrap-input100">
-                      <input class="input100 letras" type="text" name="firstNames" autocomplete="off" formControlName="firstNames">
+                      <input class="input100 letras" type="text" name="firstNames" autocomplete="off"
+                        formControlName="firstNames">
                       <span class="focus-input100"></span>
                       <span class="label-input100">First Name</span>
                     </div>
@@ -64,7 +69,8 @@
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <!-- Lastname -->
                     <div class="wrap-input100">
-                      <input class="input100 letras" type="text" name="lastName" autocomplete="off" formControlName="lastName">
+                      <input class="input100 letras" type="text" name="lastName" autocomplete="off"
+                        formControlName="lastName">
                       <span class="focus-input100"></span>
                       <span class="label-input100">Last Name</span>
                     </div>
@@ -73,7 +79,8 @@
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <!-- Number phone -->
                     <div class="wrap-input100">
-                      <input onlyNumbersInt class="input100" type="text" name="phone" autocomplete="off" formControlName="phone">
+                      <input onlyNumbersInt class="input100" type="text" name="phone" autocomplete="off"
+                        formControlName="phone">
                       <span class="focus-input100"></span>
                       <span class="label-input100">Number Phone</span>
                     </div>
@@ -95,8 +102,8 @@
                   <div class="col-sm-12 col-md-12 col-lg-6">
                     <!-- Birthday -->
                     <div class="wrap-input100">
-                      <input class="input100" type="text" autocomplete="off" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
-                        formControlName="birthday" readonly>
+                      <input class="input100" type="text" autocomplete="off" [owlDateTimeTrigger]="dt2"
+                        [owlDateTime]="dt2" formControlName="birthday" readonly>
                       <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
                       <span class="focus-input100"></span>
                       <span class="label-input100">Birthday</span>
@@ -107,7 +114,8 @@
 
                 <div class="mt-3">
                   <!-- Sign in button -->
-                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2" type="submit" [disabled]="!formRegisterUser.valid">Sign 
+                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2"
+                    type="submit" [disabled]="!formRegisterUser.valid">Sign
                     up</button>
                 </div>
 
