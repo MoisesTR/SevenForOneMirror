@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { DashboardComponent } from "../dashboard/dashboard.component";
+import { ConfirmComponent } from "../confirm/confirm.component";
 
 const menuRoutes = [
-	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
+  { path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
+  { path: "confirm", component: ConfirmComponent, data: {titulo: "Confirm"}},
 	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 ];
 
