@@ -48,6 +48,26 @@ export class LoginComponent implements OnInit {
 
 	createUser() {
 		this.getDatoUser();
+		// this.user.firstName = "Moises";
+		// this.user.lastName = "Trigueros";
+		// this.user.gender = "Masculino";
+		// this.user.userName = this.userForm.value.user;
+		// this.user.password = this.userForm.value.password;
+		// this.user.role = "5c5de2211d65b81ce0497480";
+		// this.telefonos.push("2249274");
+		// this.user.phones = this.telefonos;
+		// this.user.birthDate = "1996-11-04";
+		// this.user.email = "moisesakt@gmail.com";
+        //
+		// this.usuarioService.createUsuario(this.user).subscribe(
+		// 	response => {
+        // localStorage.setItem("username", this.user.userName);
+		// 		console.log("El usuario ha sido registrado exitosamente");
+		// 	},
+		// 	error => {
+		// 		console.log(error);
+		// 	}
+		// );
 	}
 
 	getDatoUser() {
