@@ -1,4 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import {AppComponent} from './app.component';
@@ -19,7 +20,7 @@ import {NotFound404Component} from './components/not-found404/not-found404.compo
 		MenuComponent,
 		NotFound404Component
 	],
-	imports: [BrowserModule, CoreModule, MDBBootstrapModulesPro.forRoot(), AppRoutingModule],
+	imports: [BrowserModule, BrowserAnimationsModule, CoreModule, MDBBootstrapModulesPro.forRoot(), AppRoutingModule],
 	schemas: [NO_ERRORS_SCHEMA],
 	providers: [MDBSpinningPreloader],
 	bootstrap: [AppComponent]
