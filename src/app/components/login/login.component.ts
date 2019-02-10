@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
+import { UsuarioService } from "../../core/services/shared/usuario.service";
 
 declare var $: any;
 
@@ -12,9 +13,10 @@ declare var $: any;
 export class LoginComponent implements OnInit {
 	userForm: FormGroup;
 	public user: User;
-	constructor(private formBuilder: FormBuilder) {
-	  this.user = new User();
-  }
+	public telefonos: string[] = [];
+	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder) {
+		this.user = new User();
+	}
 
 	ngOnInit() {
 		$(document).ready(() => {
@@ -23,7 +25,7 @@ export class LoginComponent implements OnInit {
 					if (
 						$(this)
 							.val()
-							.trim() != ""
+							.trim() !== ""
 					) {
 						$(this).addClass("has-val");
 					} else {
@@ -32,32 +34,24 @@ export class LoginComponent implements OnInit {
 				});
 			});
 		});
-    this.inituser();
+		this.inituser();
 	}
 
 	inituser() {
-    this.userForm = this.formBuilder.group({
-      'user': new FormControl('', [
-        Validators.required
-        , Validators.minLength(4)
-         , Validators.maxLength(40)
-      ])
-      , 'password': new FormControl( '', [
-          Validators.required
-          , Validators.minLength(4)
-          , Validators.maxLength(25)
-        ]
-      )
-    });
+		this.userForm = this.formBuilder.group({
+			user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
+			password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
+		});
+	}
 
-  }
+	registrar() {}
 
-  registrar() {
-
-  }
+	createUser() {
+		this.getDatoUser();
+	}
 
 	getDatoUser() {
-		this.user.UserName = this.userForm.value.user;
-		this.user.Password = this.userForm.value.password;
+		this.user.userName = this.userForm.value.user;
+		this.user.password = this.userForm.value.password;
 	}
 }
