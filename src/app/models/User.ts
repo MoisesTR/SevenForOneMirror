@@ -9,7 +9,7 @@ export class User{
     public SecretToken: string;
     public IsVerified: boolean;
     public IdRole: number;
-    public Password: string
+    public Password: string;
     public Enable: number;
     public CreatedAt: string;
     public UpdateAt: string;
