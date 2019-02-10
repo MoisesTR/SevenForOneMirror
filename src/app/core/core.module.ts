@@ -9,10 +9,11 @@ import { Platform } from "@angular/cdk/platform";
 import { AuthService } from "./services/auth/auth.service";
 import { AuthGuardService } from "./services/auth/auth-guard.service";
 import { UsuarioService } from "./services/shared/usuario.service";
+import { DirectivesModule } from "../directives/directives.module";
 
 @NgModule({
 	imports: [],
-	exports: [CommonModule, ReactiveFormsModule, NgSelectModule, OwlDateTimeModule, OwlNativeDateTimeModule],
+	exports: [CommonModule, ReactiveFormsModule, DirectivesModule,NgSelectModule, OwlDateTimeModule, OwlNativeDateTimeModule],
 	declarations: [],
 	providers: [
 		AuthService,

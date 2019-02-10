@@ -5,6 +5,7 @@ import { NegOrPosNumbergDirective } from "../directives/negorposnumber.directive
 import { NumbersOnlyIntDirective } from "../directives/numbers-only-int.directive";
 import { NumberOnlyDirective } from "../directives/onlynumber.directive";
 import { NumberDirective } from "../directives/onlypositivenumber.directive";
+import { EqualValidatorDirective } from "../directives/equal.directive";
 
 @NgModule({
 	imports: [],
@@ -14,15 +15,17 @@ import { NumberDirective } from "../directives/onlypositivenumber.directive";
 		NegOrPosNumbergDirective,
 		NumbersOnlyIntDirective,
 		NumberOnlyDirective,
-		NumberDirective
+		NumberDirective,
+		EqualValidatorDirective
 	],
-	declarations: [
+	declarations: [	
 		AcceptCharactersDirective,
 		AlphanumericDirective,
 		NegOrPosNumbergDirective,
 		NumbersOnlyIntDirective,
 		NumberOnlyDirective,
-		NumberDirective
+		NumberDirective,
+		EqualValidatorDirective
 	]
 })
 export class DirectivesModule {}
