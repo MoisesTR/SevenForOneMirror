@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h2 class="h2-responsive"><strong>Complete the Registration</strong></h2>
 
-                    <form [formGroup]="" id="payment-form">
+                    <form [formGroup]="formConfirm" (ngSubmit)="verificarUsuario()" id="payment-form">
 
                         <div class="dpf-card-placeholder"></div>
 
@@ -19,7 +19,7 @@
                                 <div class="dpf-input-container with-icon">
                                     <span class="dpf-input-icon"><i class="fa fa-credit-card mt-1"
                                             aria-hidden="true"></i></span>
-                                    <input type="text" class="dpf-input" size="20" data-type="number">
+                                    <input formControlName="numberCard" type="text" class="dpf-input" size="20" data-type="number">
                                 </div>
                             </div>
 
@@ -29,18 +29,18 @@
 
                                     <input type="hidden" size="2" data-type="exp_month" placeholder="MM">
 
-                                    <input type="hidden" size="2" data-type="exp_year" placeholder="YY">
+                                    <input  type="hidden" size="2" data-type="exp_year" placeholder="YY">
 
                                     <label class="dpf-input-label">Expiration Date</label>
                                     <div class="dpf-input-container">
-                                        <input type="text" class="dpf-input" data-type="expiry">
+                                        <input formControlName="expDate" type="text" class="dpf-input" data-type="expiry">
                                     </div>
                                 </div>
 
                                 <div class="dpf-input-column">
                                     <label class="dpf-input-label">Code</label>
                                     <div class="dpf-input-container">
-                                        <input type="text" class="dpf-input" size="4" data-type="cvc">
+                                        <input formControlName="cvc" type="text" class="dpf-input" size="4" data-type="cvc">
                                     </div>
                                 </div>
                             </div>
@@ -48,12 +48,12 @@
                             <div class="dpf-input-row">
                                 <label class="dpf-input-label">Full Name</label>
                                 <div class="dpf-input-container">
-                                    <input type="text" size="4" class="dpf-input" data-type="name">
+                                    <input formControlName="nombreCompleto" type="text" size="4" class="dpf-input" data-type="name">
                                 </div>
                             </div>
 
                             <div class="text-center">
-                                <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
+                                <button mdbBtn rounded="true" [disabled]="formConfirm.invalid" class="green-seven-one white-text mt-2"
                                     type="submit">Complete</button>
                             </div>
                         </div>

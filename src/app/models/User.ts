@@ -15,6 +15,7 @@ export class User {
 	public enabled: number;
 	public createdAt: string;
 	public updatedAt: string;
+	public getUserInfo: boolean;
 
 	constructor() {}
 }

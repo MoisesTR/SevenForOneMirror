@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
+import swal from "sweetalert2";
+import { Router } from "@angular/router";
+import {Token} from '../../models/models.index';
 
 declare var $: any;
 
@@ -14,7 +17,7 @@ export class LoginComponent implements OnInit {
 	userForm: FormGroup;
 	public user: User;
 	public telefonos: string[] = [];
-	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder) {
+	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
 		this.user = new User();
 	}
 
@@ -44,34 +47,29 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-	registrar() {}
-
-	createUser() {
+	login() {
 		this.getDatoUser();
-		// this.user.firstName = "Moises";
-		// this.user.lastName = "Trigueros";
-		// this.user.gender = "Masculino";
-		// this.user.userName = this.userForm.value.user;
-		// this.user.password = this.userForm.value.password;
-		// this.user.role = "5c5de2211d65b81ce0497480";
-		// this.telefonos.push("2249274");
-		// this.user.phones = this.telefonos;
-		// this.user.birthDate = "1996-11-04";
-		// this.user.email = "moisesakt@gmail.com";
-        //
-		// this.usuarioService.createUsuario(this.user).subscribe(
-		// 	response => {
-        // localStorage.setItem("username", this.user.userName);
-		// 		console.log("El usuario ha sido registrado exitosamente");
-		// 	},
-		// 	error => {
-		// 		console.log(error);
-		// 	}
-		// );
+		this.user.getUserInfo = false;
+
+		this.usuarioService.login(this.user).subscribe(res => {
+      const token: Token = res;
+      localStorage.setItem("token", token.token);
+			this.user.getUserInfo = true;
+			this.usuarioService.login(this.user).subscribe(resuser => {
+				this.usuarioService.identity = resuser;
+				this.router.navigate(["/dashboard"]);
+			});
+		});
 	}
 
 	getDatoUser() {
 		this.user.userName = this.userForm.value.user;
 		this.user.password = this.userForm.value.password;
 	}
+
+	createUser() {
+		this.router.navigate(["/register"]);
+	}
+
+	forgotPassword() {}
 }
