@@ -13,7 +13,7 @@
               <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 30em;">
             </div>
 
-            <form [formGroup]="userForm" (ngSubmit)="createUser()" class="col-md-12">
+            <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12">
               <div class="wow fadeInUp" data-wow-delay="0.8s">
               <!-- Email -->
               <div class="wrap-input100">
@@ -37,7 +37,7 @@
 
                 <div class="text-center mt-5">
                   <!-- Forgot password -->
-                  <a href="" class="green-seven-one-text">Forgot password?</a>
+                  <a (click)="forgotPassword()" class="green-seven-one-text">Forgot password?</a>
 
                   <div class="or mt-3">
                     <hr class="bar">
@@ -46,7 +46,7 @@
                   </div>
 
                   <div class="">
-                    <button mdbBtn type="button" class="btn-seven-one outline-seven-one" mdbWavesEffect (click)="registrar()">Create
+                    <button mdbBtn type="button" class="btn-seven-one outline-seven-one" mdbWavesEffect (click)="createUser()">Create
                       an account</button>
                   </div>
 

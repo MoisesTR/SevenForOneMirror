@@ -10,14 +10,23 @@ import { AuthService } from "./services/auth/auth.service";
 import { AuthGuardService } from "./services/auth/auth-guard.service";
 import { UsuarioService } from "./services/shared/usuario.service";
 import { DirectivesModule } from "../directives/directives.module";
+import { LoginGuardService } from "./services/auth/login.guard.service";
 
 @NgModule({
 	imports: [],
-	exports: [CommonModule, ReactiveFormsModule, DirectivesModule,NgSelectModule, OwlDateTimeModule, OwlNativeDateTimeModule],
+	exports: [
+		CommonModule,
+		ReactiveFormsModule,
+		DirectivesModule,
+		NgSelectModule,
+		OwlDateTimeModule,
+		OwlNativeDateTimeModule
+	],
 	declarations: [],
 	providers: [
 		AuthService,
 		AuthGuardService,
+		LoginGuardService,
 		UsuarioService,
 		{
 			provide: NG_SELECT_DEFAULT_CONFIG,

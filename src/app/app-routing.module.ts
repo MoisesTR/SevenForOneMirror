@@ -6,10 +6,11 @@ import { MenuComponent } from "./components/menu/menu.component";
 import { NotFound404Component } from "./components/not-found404/not-found404.component";
 import { AuthGuardService } from "./core/services/auth/auth-guard.service";
 import { ConfirmComponent } from "./components/confirm/confirm.component";
+import {LoginGuardService} from './core/services/auth/login.guard.service';
 
 export const routes: Routes = [
-	{ path: "login", component: LoginComponent },
-	{ path: "register", component: RegisterComponent },
+	{ path: "login", canActivate: [LoginGuardService], component: LoginComponent },
+	{ path: "register", canActivate: [LoginGuardService], component: RegisterComponent },
 	{ path: "confirm/:token", component: ConfirmComponent, data: { titulo: "Confirm" } },
 	{
 		path: "",
