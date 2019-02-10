@@ -2,6 +2,7 @@ import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {SharedModule} from '../../shared-module/shared.module';
 import {MenuRoutingModule} from './menu.routing.module';
 import {DashboardComponent} from '../dashboard/dashboard.component';
+import {ConfirmComponent} from '../confirm/confirm.component';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
     MenuRoutingModule
   ],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    ConfirmComponent
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })
