@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
+import { User } from "../../models/models.index";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-dashboard",
@@ -7,19 +9,22 @@ import { UsuarioService } from "../../core/services/shared/usuario.service";
 	styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-	constructor(private usuarioService: UsuarioService) { }
+	public usuarios: User[];
+	public userActual: User;
+	constructor(private usuarioService: UsuarioService, private router: Router) {}
 
-	elements: any = [
-		{ id: 1, first: 'Mark', last: 'Otto', handle: '@mdo' },
-		{ id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat' },
-		{ id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter' },
-	];
-
-	headElements = ['ID', 'First', 'Last', 'Handle'];
+	headElements = ["#", "First Name", "Last Name", "Email"];
 
 	ngOnInit() {
+	  this.userActual = JSON.parse(localStorage.getItem("identity"));
 		this.usuarioService.getUsuarios().subscribe(usuarios => {
-			console.log(usuarios);
+			this.usuarios = usuarios;
 		});
+	}
+
+	logout() {
+		localStorage.clear();
+		this.usuarioService.identity = null;
+		this.router.navigate(["/login"]);
 	}
 }

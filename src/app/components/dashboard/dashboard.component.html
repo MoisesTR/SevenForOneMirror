@@ -7,10 +7,10 @@
     <div class="col-md-8 col-lg-7 mx-auto float-none white z-depth-1 py-2 px-2" id="pattern">
 
       <!--Naked Form-->
-      <div class="card-body">
+      <div class="card-body" *ngIf="userActual.userName === 'admin'">
 
         <!-- En caso que no sea admin -->
-        <h2 class="h2-responsive text-center"><strong>Nombre de Usuario</strong></h2>
+        <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
 
         <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
 
@@ -22,18 +22,51 @@
               </tr>
             </thead>
             <tbody>
-              <tr mdbTableCol *ngFor="let el of elements">
-                <th scope="row">{{el.id}}</th>
-                <td>{{el.first}}</td>
-                <td>{{el.last}}</td>
-                <td>{{el.handle}}</td>
+              <tr mdbTableCol *ngFor="let usuario of usuarios; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{usuario.firstName}}</td>
+                <td>{{usuario.lastName}}</td>
+                <td>{{usuario.email}}</td>
               </tr>
             </tbody>
           </table>
 
 
           <div class="text-center">
-            <button class=" btn btn-rounded green-seven-one white-text mt-2">Log out</button>
+            <button class=" btn btn-rounded green-seven-one white-text mt-2" (click)="logout()">Log out</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card-body" *ngIf="userActual.userName !== 'admin'">
+
+        <!-- En caso que no sea admin -->
+        <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
+
+        <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
+
+        <div class="container mt-5">
+          <table class="table table-striped table-hover table-sm">
+            <thead>
+            <tr>
+              <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr mdbTableCol >
+              <th scope="row">1</th>
+              <td>{{userActual.firstName}}</td>
+              <td>{{userActual.lastName}}</td>
+              <td>{{userActual.email}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+
+          <div class="text-center">
+            <button class=" btn btn-rounded green-seven-one white-text mt-2" (click)="logout()">Log out</button>
           </div>
 
         </div>

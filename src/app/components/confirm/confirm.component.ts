@@ -64,6 +64,7 @@ export class ConfirmComponent implements OnInit {
 						this.user.getUserInfo = true;
 						this.usuarioService.login(this.user).subscribe(resuser => {
 							this.usuarioService.identity = resuser;
+              localStorage.setItem("identity", JSON.stringify(resuser));
 							swal.fire("Confirmation", "Welcome to Seven for One, your email is verified!", "success").then(() => {
 								this.router.navigate(["/dashboard"]);
 							});

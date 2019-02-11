@@ -13,7 +13,7 @@ export const routes: Routes = [
 	{ path: "login", canActivate: [LoginGuardService], component: LoginComponent },
 	{ path: "register", canActivate: [LoginGuardService], component: RegisterComponent },
 	{ path: "confirm/:token", component: ConfirmComponent, data: { titulo: "Confirm" } },
-	{ path: "emailConfirm", canActivate: [AuthGuardService], component: EmailConfirmComponent },
+	{ path: "emailConfirm", canActivate: [LoginGuardService], component: EmailConfirmComponent },
 	{
 		path: "",
 		component: MenuComponent,

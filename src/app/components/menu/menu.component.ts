@@ -11,10 +11,4 @@ export class MenuComponent implements OnInit {
 	constructor(private router: Router, private usuarioService: UsuarioService) {}
 
 	ngOnInit() {}
-
-	logout() {
-		localStorage.clear();
-		this.usuarioService.identity = null;
-		this.router.navigate(["/login"]);
-	}
 }

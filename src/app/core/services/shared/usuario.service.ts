@@ -6,16 +6,13 @@ import { Observable, throwError as observableThrowError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import swal from "sweetalert2";
 
-@Injectable({
-	providedIn: "root"
-})
+@Injectable()
 export class UsuarioService {
 	public url: string;
 	public identity: User;
 
 	constructor(private http: HttpClient) {
 		this.url = Global.url;
-		this.identity = new User();
 	}
 
 	login(usuario: User): Observable<any> {
