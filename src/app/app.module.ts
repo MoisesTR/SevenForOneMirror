@@ -12,6 +12,7 @@ import { MenuComponent } from "./components/menu/menu.component";
 import { NotFound404Component } from "./components/not-found404/not-found404.component";
 import { ConfirmComponent } from "./components/confirm/confirm.component";
 import { EmailConfirmComponent } from './components/email-confirm/email-confirm.component';
+import { ParticlesModule } from 'angular-particle';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,7 @@ import { EmailConfirmComponent } from './components/email-confirm/email-confirm.
 		NotFound404Component,
 		EmailConfirmComponent
 	],
-	imports: [BrowserModule, BrowserAnimationsModule, CoreModule, MDBBootstrapModulesPro.forRoot(), AppRoutingModule],
+	imports: [BrowserModule, BrowserAnimationsModule, CoreModule, MDBBootstrapModulesPro.forRoot(), AppRoutingModule, ParticlesModule],
 	schemas: [NO_ERRORS_SCHEMA],
 	providers: [MDBSpinningPreloader],
 	bootstrap: [AppComponent]
