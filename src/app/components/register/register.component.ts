@@ -32,30 +32,28 @@ export class RegisterComponent implements OnInit {
 	height: number = 100;
 
 	ngOnInit() {
-
-	
 		this.myStyle = {
-			'position': 'fixed',
-			'width': '100%',
-			'height': '100%',
-			'z-index': -1,
-			'top': 0,
-			'left': 0,
-			'right': 0,
-			'bottom': 0,
+			position: "fixed",
+			width: "100%",
+			height: "100%",
+			"z-index": -1,
+			top: 0,
+			left: 0,
+			right: 0,
+			bottom: 0
 		};
 
 		this.myParams = {
-					particles: {
-							number: {
-									value: 100,
-							},
-							color: {
-									value: '#397EF5'
-							},
-							shape: {
-				type: 'circle'
-							},
+			particles: {
+				number: {
+					value: 100
+				},
+				color: {
+					value: "#397EF5"
+				},
+				shape: {
+					type: "circle"
+				}
 			}
 		};
 
@@ -128,7 +126,7 @@ export class RegisterComponent implements OnInit {
 				res => {
 					localStorage.setItem("username", this.user.userName);
 					localStorage.setItem("password", this.user.password);
-					this.router.navigate(['/emailConfirm']);
+					this.router.navigate(["/emailConfirm"]);
 				},
 				error => {
 					swal.fire("Register", error, "error").then(() => {});
@@ -157,6 +155,23 @@ export class RegisterComponent implements OnInit {
 		}
 		this.user.password = this.formRegisterUser.value.password;
 		return true;
+	}
+
+	createUser() {
+		this.getValueForm();
+
+		this.usuarioService.createUsuario(this.user).subscribe(
+			res => {
+				localStorage.setItem("username", this.user.userName);
+				localStorage.setItem("password", this.user.password);
+				swal.fire("Info", res["success"], "success").then(() => {
+					this.router.navigate(["/emailConfirm"]);
+				});
+			},
+			error => {
+				swal.fire("Error", error, "error").then(() => {});
+			}
+		);
 	}
 
 	probarCambio(confirmPassword) {
