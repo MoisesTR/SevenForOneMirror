@@ -13,11 +13,8 @@ export const routes: Routes = [
 	{ path: "login", canActivate: [LoginGuardService], component: LoginComponent },
 	{ path: "register", canActivate: [LoginGuardService], component: RegisterComponent },
 	{ path: "confirm/:token", component: ConfirmComponent, data: { titulo: "Confirm" } },
-<<<<<<< Updated upstream
 	{ path: "emailConfirm", canActivate: [LoginGuardService], component: EmailConfirmComponent },
-=======
-	{ path: "emailConfirm", component: EmailConfirmComponent },
->>>>>>> Stashed changes
+
 	{
 		path: "",
 		component: MenuComponent,
