@@ -34,67 +34,77 @@
   padding: 10% !important;
 }
 
-// Validacion
-
-.validate-input {
-  position: relative;
+.p-a-r {
+  padding-left : 10% !important;
+  padding-right : 10% !important;
 }
 
-.alert-validate::before {
-  content: attr(data-validate);
-  position: absolute;
-  z-index: 100;
-  max-width: 70%;
-  background-color: #fff;
-  border: 1px solid #c80000;
-  border-radius: 2px;
-  padding: 4px 25px 4px 10px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 12px;
-  pointer-events: none;
-  color: #c80000;
-  font-size: 13px;
-  line-height: 1.4;
-  text-align: left;
-  visibility: hidden;
-  opacity: 0;
-
-  -webkit-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
-  transition: opacity 0.4s;
+.wrap {
+  display: flex;
 }
 
-.alert-validate::after {
-  content: "\f12a";
-  font-family: FontAwesome;
-  display: block;
-  position: absolute;
-  z-index: 110;
-  color: #c80000;
-  font-size: 16px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 18px;
-}
-
-.alert-validate:hover:before {
-  visibility: visible;
-  opacity: 1;
-}
-
-@media (max-width: 992px) {
-  .alert-validate::before {
-    visibility: visible;
-    opacity: 1;
+/*Custom Scrollbar*/
+.scrollbar {
+  margin-left: 3%;
+  float: left;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-bottom: 25px;
   }
+  
+  .scrollbar-primary::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+  
+  .scrollbar-primary::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #4285F4; }
+
+  /*** Colores de labels en inputs ***/
+.md-form input[type="text"]:focus:not([readonly]),
+.md-form input[type="password"]:focus:not([readonly]),
+.md-form input[type="number"]:focus:not([readonly]),
+.md-form input[type="email"]:focus:not([readonly]),
+.md-form input[type="search"]:focus:not([readonly]),
+.md-form textarea[type="text"]:focus:not([readonly]),
+.md-form textarea[type="password"]:focus:not([readonly]),
+.md-form textarea[type="number"]:focus:not([readonly]),
+.md-form textarea[type="email"]:focus:not([readonly]),
+.md-form textarea[type="search"]:focus:not([readonly]) {
+  border-bottom: 0.2px solid rgba(59, 122, 237, 0.8) !important;
+  box-shadow: 0 1px 0 0 rgba(59, 122, 237, 0.8) !important;
+}
+.md-form input[type="text"]:focus:not([readonly]) + label,
+.md-form input[type="password"]:focus:not([readonly]) + label,
+.md-form input[type="number"]:focus:not([readonly]) + label,
+.md-form input[type="email"]:focus:not([readonly]) + label,
+.md-form input[type="search"]:focus:not([readonly]) + label,
+.md-form textarea[type="text"]:focus:not([readonly]) + label,
+.md-form textarea[type="password"]:focus:not([readonly]) + label,
+.md-form textarea[type="number"]:focus:not([readonly]) + label,
+.md-form textarea[type="email"]:focus:not([readonly]) + label,
+.md-form textarea[type="search"]:focus:not([readonly]) + label {
+  color: rgba(59, 122, 237, 0.8) !important;
+}
+
+/*** Colores inputs 2.0 ***/
+.md-form.md-outline input[type="text"]:focus:not([readonly]),
+.md-form.md-outline input[type="password"]:focus:not([readonly]),
+.md-form.md-outline input[type="number"]:focus:not([readonly]),
+.md-form.md-outline input[type="email"]:focus:not([readonly]),
+.md-form.md-outline input[type="search"]:focus:not([readonly]),
+.md-form.md-outline textarea[type="text"]:focus:not([readonly]),
+.md-form.md-outline textarea[type="password"]:focus:not([readonly]),
+.md-form.md-outline textarea[type="number"]:focus:not([readonly]),
+.md-form.md-outline textarea[type="email"]:focus:not([readonly]),
+.md-form.md-outline textarea[type="search"]:focus:not([readonly]) {
+  border-bottom: 0.2px solid rgba(59, 122, 237, 0.8) !important;
+  border-top: 1px solid rgba(59, 122, 237, 0.8) !important;
+  border-right: 1px solid rgba(59, 122, 237, 0.8) !important;
+  border-left: 1px solid rgba(59, 122, 237, 0.8) !important;
+  box-shadow: 0 1px 0 0 rgba(59, 122, 237, 0.8) !important;
 }
