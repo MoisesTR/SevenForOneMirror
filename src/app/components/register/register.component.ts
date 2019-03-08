@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/models.index";
-import { Utils } from "../Utils";
 import { CustomValidators } from "../../validators/CustomValidators";
 import deepEqual from "deep-equal";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import swal from "sweetalert2";
+import { Router } from "@angular/router";
+import {Utils} from '../../infraestructura/Utils';
 
 declare var $: any;
 
@@ -17,10 +18,10 @@ declare var $: any;
 export class RegisterComponent implements OnInit {
 	public user: User;
 	public telefonos: string[] = [];
-	public Compare: boolean;
+	public compare: boolean;
 	formRegisterUser: FormGroup;
 
-	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder) {
+	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
 		this.user = new User();
 	}
 
@@ -31,30 +32,28 @@ export class RegisterComponent implements OnInit {
 	height: number = 100;
 
 	ngOnInit() {
-
-	
 		this.myStyle = {
-			'position': 'fixed',
-			'width': '100%',
-			'height': '100%',
-			'z-index': -1,
-			'top': 0,
-			'left': 0,
-			'right': 0,
-			'bottom': 0,
+			position: "fixed",
+			width: "100%",
+			height: "100%",
+			"z-index": -1,
+			top: 0,
+			left: 0,
+			right: 0,
+			bottom: 0
 		};
 
 		this.myParams = {
-					particles: {
-							number: {
-									value: 100,
-							},
-							color: {
-									value: '#397EF5'
-							},
-							shape: {
-				type: 'circle'
-							},
+			particles: {
+				number: {
+					value: 100
+				},
+				color: {
+					value: "#397EF5"
+				},
+				shape: {
+					type: "circle"
+				}
 			}
 		};
 
@@ -130,30 +129,34 @@ export class RegisterComponent implements OnInit {
 		this.user.email = this.formRegisterUser.value.email;
 		this.user.birthDate = Utils.formatDateYYYYMMDD(this.formRegisterUser.value.birthday);
 		this.user.role = "5c5de2211d65b81ce0497480";
-
-		if (this.Compare) {
-			this.user.password = this.formRegisterUser.value.password;
-		}
 	}
 
-	createdUser() {
+	validateForm() {
+		if (!this.compare) {
+			swal.fire("Register", "Passwords do not match ", "error").then(() => {});
+			return false;
+		}
+		this.user.password = this.formRegisterUser.value.password;
+		return true;
+	}
+
+	createUser() {
 		this.getValueForm();
 
-    this.usuarioService.createUsuario(this.user).subscribe(
-      res => {
-        localStorage.setItem("username", this.user.userName);
-        localStorage.setItem("password", this.user.password);
-        swal.fire("Info", res['success'], "success").then(() => {});
-      },
-      error => {
-        swal.fire("Error", error, "error").then(() => {});
-      }
-    );
+		this.usuarioService.createUsuario(this.user).subscribe(
+			res => {
+				localStorage.setItem("username", this.user.userName);
+				localStorage.setItem("password", this.user.password);
+				swal.fire("Info", res["success"], "success").then(() => {
+					this.router.navigate(["/emailConfirm"]);
+				});
+			}
+		);
 	}
 
 	probarCambio(confirmPassword) {
 		//devuelve true si es correcto
-		this.Compare = deepEqual(this.formRegisterUser.value.password, confirmPassword);
-		return this.Compare;
+		this.compare = deepEqual(this.formRegisterUser.value.password, confirmPassword);
+		return this.compare;
 	}
 }

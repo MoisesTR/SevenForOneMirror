@@ -11,6 +11,8 @@ import { AuthGuardService } from "./services/auth/auth-guard.service";
 import { UsuarioService } from "./services/shared/usuario.service";
 import { DirectivesModule } from "../directives/directives.module";
 import { LoginGuardService } from "./services/auth/login.guard.service";
+import {HttpInterceptorService} from './services/auth/http-interceptor.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 @NgModule({
 	imports: [],
@@ -28,6 +30,11 @@ import { LoginGuardService } from "./services/auth/login.guard.service";
 		AuthGuardService,
 		LoginGuardService,
 		UsuarioService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
 		{
 			provide: NG_SELECT_DEFAULT_CONFIG,
 			useValue: {

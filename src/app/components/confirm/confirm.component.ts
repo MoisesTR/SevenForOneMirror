@@ -17,21 +17,15 @@ export class ConfirmComponent implements OnInit {
 	public user: User;
 	private username: string;
 	private password: string;
-	formConfirm: FormGroup;
 
-	constructor(
-		private activatedRoute: ActivatedRoute,
-		private usuarioService: UsuarioService,
-		private router: Router,
-		private formBuilder: FormBuilder
-	) {
+	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, private router: Router) {
 		this.user = new User();
 		this.token = new Token();
 	}
 
 	ngOnInit() {
 		this.getParams();
-		this.initFormConfirm();
+		this.verificarUsuario();
 	}
 
 	getParams() {
@@ -42,39 +36,41 @@ export class ConfirmComponent implements OnInit {
 		});
 	}
 
-	initFormConfirm() {
-		this.formConfirm = this.formBuilder.group({
-			numberCard: new FormControl("", [Validators.required]),
-			expDate: new FormControl("", [Validators.required]),
-			cvc: new FormControl("", [Validators.required]),
-			nombreCompleto: new FormControl("", [Validators.required])
-		});
-	}
-
 	verificarUsuario() {
-		this.usuarioService.verifyEmail(this.tokenConfirmacion, this.username).subscribe(
+		this.usuarioService.verifyEmail(this.tokenConfirmacion).subscribe(
 			() => {
 				this.user.userName = this.username;
 				this.user.password = this.password;
 				this.user.getUserInfo = false;
+
 				this.usuarioService.login(this.user).subscribe(
-					res => {
-						this.token = res;
+					token => {
+						this.token = token;
 						localStorage.setItem("token", this.token.token);
 						this.user.getUserInfo = true;
-						this.usuarioService.login(this.user).subscribe(resuser => {
-							this.usuarioService.identity = resuser;
-							swal.fire("Confirmation", "Welcome to Seven for One, your email is verified!", "success").then(() => {
-								this.router.navigate(["/dashboard"]);
-							});
-						});
+
+						this.usuarioService.login(this.user).subscribe(
+							user => {
+								this.usuarioService.identity = user;
+								localStorage.setItem("identity", JSON.stringify(user));
+
+								swal.fire("Confirmation", "Welcome to Seven for One, your email is verified!", "success").then(() => {
+									localStorage.removeItem("username");
+									localStorage.removeItem("password");
+									this.router.navigate(["/dashboard"]);
+								});
+							},
+							() => {
+								this.router.navigate(["/login"]);
+							}
+						);
 					},
 					() => {
 						this.router.navigate(["/login"]);
 					}
 				);
 			},
-      () => {
+			() => {
 				this.router.navigate(["/login"]);
 			}
 		);

@@ -1,9 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/User";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
-import swal from "sweetalert2";
-import { Router } from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../models/User';
+import {UsuarioService} from '../../core/services/shared/usuario.service';
+import {Router} from '@angular/router';
 import {Token} from '../../models/models.index';
 
 declare var $: any;
@@ -66,11 +65,12 @@ export class LoginComponent implements OnInit {
 		this.user.getUserInfo = false;
 
 		this.usuarioService.login(this.user).subscribe(res => {
-      const token: Token = res;
-      localStorage.setItem("token", token.token);
+			const token: Token = res;
+			localStorage.setItem("token", token.token);
 			this.user.getUserInfo = true;
 			this.usuarioService.login(this.user).subscribe(resuser => {
 				this.usuarioService.identity = resuser;
+				localStorage.setItem("identity", JSON.stringify(resuser));
 				this.router.navigate(["/dashboard"]);
 			});
 		});
