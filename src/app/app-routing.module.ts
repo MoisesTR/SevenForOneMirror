@@ -4,10 +4,10 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { MenuComponent } from "./components/menu/menu.component";
 import { NotFound404Component } from "./components/not-found404/not-found404.component";
-import { AuthGuardService } from "./core/services/auth/auth-guard.service";
 import { ConfirmComponent } from "./components/confirm/confirm.component";
-import { LoginGuardService } from './core/services/auth/login.guard.service';
-import { EmailConfirmComponent } from './components/email-confirm/email-confirm.component';
+import { LoginGuardService } from "./core/services/auth/login.guard.service";
+import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.component";
+import { AuthGuardService } from "./core/services/auth/auth-guard.service";
 
 export const routes: Routes = [
 	{ path: "login", canActivate: [LoginGuardService], component: LoginComponent },
@@ -35,4 +35,4 @@ export const routes: Routes = [
 	exports: [RouterModule],
 	declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
