@@ -1,10 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/User";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
-import swal from "sweetalert2";
-import { Router } from "@angular/router";
-import { Token } from "../../models/models.index";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../models/User';
+import {UsuarioService} from '../../core/services/shared/usuario.service';
+import {Router} from '@angular/router';
+import {Token} from '../../models/models.index';
 
 declare var $: any;
 

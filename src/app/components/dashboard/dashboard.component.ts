@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
 	public tokenConfirmacion: string;
 	public token: Token;
 	public user: User;
+  public userActual: User;
 	public usuarios: User[] = [];
 	private username: string;
 	private password: string;
@@ -56,13 +57,14 @@ export class DashboardComponent implements OnInit {
 			if (params["token"]) {
 				this.verificarUsuario();
 			} else {
+        this.userActual = JSON.parse(localStorage.getItem("identity"));
 				this.getUsuarios();
 			}
 		});
 	}
 
 	verificarUsuario() {
-		this.usuarioService.verifyEmail(this.tokenConfirmacion, this.username).subscribe(
+		this.usuarioService.verifyEmail(this.tokenConfirmacion).subscribe(
 			() => {
 				this.user.userName = this.username;
 				this.user.password = this.password;
@@ -75,6 +77,7 @@ export class DashboardComponent implements OnInit {
 						this.usuarioService.login(this.user).subscribe(resuser => {
 							this.usuarioService.identity = resuser;
 							swal.fire("Confirmation", "Welcome to Seven for One, your email is verified!", "success").then(() => {
+                this.userActual = JSON.parse(localStorage.getItem("identity"));
 								this.getUsuarios();
 							});
 						});

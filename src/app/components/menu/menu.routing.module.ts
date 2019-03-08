@@ -4,7 +4,6 @@ import { DashboardComponent } from "../dashboard/dashboard.component";
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
-  { path: "dashboard/:id", component: DashboardComponent, data: { titulo: "Dashboard" } },
 	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 ];
 

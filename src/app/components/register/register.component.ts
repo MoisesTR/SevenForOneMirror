@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/models.index";
-import { Utils } from "../Utils";
 import { CustomValidators } from "../../validators/CustomValidators";
 import deepEqual from "deep-equal";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
+import {Utils} from '../../infraestructura/Utils';
 
 declare var $: any;
 
@@ -118,23 +118,6 @@ export class RegisterComponent implements OnInit {
 		});
 	}
 
-	createdUser() {
-		this.getValueForm();
-
-		if (this.validateForm()) {
-			this.usuarioService.createUsuario(this.user).subscribe(
-				res => {
-					localStorage.setItem("username", this.user.userName);
-					localStorage.setItem("password", this.user.password);
-					this.router.navigate(["/emailConfirm"]);
-				},
-				error => {
-					swal.fire("Register", error, "error").then(() => {});
-				}
-			);
-		}
-	}
-
 	getValueForm() {
 		this.user.userName = this.formRegisterUser.value.user;
 		this.user.password = this.formRegisterUser.value.password;
@@ -167,9 +150,6 @@ export class RegisterComponent implements OnInit {
 				swal.fire("Info", res["success"], "success").then(() => {
 					this.router.navigate(["/emailConfirm"]);
 				});
-			},
-			error => {
-				swal.fire("Error", error, "error").then(() => {});
 			}
 		);
 	}

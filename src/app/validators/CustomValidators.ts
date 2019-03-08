@@ -1,6 +1,7 @@
 import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 import {isNull} from 'util';
-import {Utils} from '../components/Utils';
+import {Utils} from '../infraestructura/Utils';
+
 
 export class CustomValidators {
 
@@ -60,27 +61,5 @@ export class CustomValidators {
 
        return error ? message : null;
   }
-
-  static rangeNumber(min: number, max: number) : ValidatorFn{
-
-      var error = '';
-        return (control: AbstractControl): { [key  : string ] : { [key: string]: string  }} | null => {
-            if (control.value !== undefined && (isNaN(control.value) || control.value < min || control.value > max)) {
-
-                if(!isNull(control.value))
-                    error = 'Fuera de rango, el rango de numeros permitidos es ['+min+' - ' + max + ']';
-            } else {
-                error = '';
-            }
-
-            const message = {
-                'rango': {
-                    'message': error
-                }
-            };
-
-            return error == '' ? null : message;
-        };
-    }
 
 }
