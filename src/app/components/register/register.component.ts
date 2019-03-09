@@ -6,7 +6,7 @@ import deepEqual from "deep-equal";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
-import {Utils} from '../../infraestructura/Utils';
+import { Utils } from "../../infraestructura/Utils";
 
 declare var $: any;
 
@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
 	public user: User;
 	public telefonos: string[] = [];
 	public compare: boolean;
+	public disabledButton = false;
 	formRegisterUser: FormGroup;
 
 	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
@@ -136,20 +137,27 @@ export class RegisterComponent implements OnInit {
 			swal.fire("Register", "Passwords do not match ", "error").then(() => {});
 			return false;
 		}
+
 		this.user.password = this.formRegisterUser.value.password;
 		return true;
 	}
 
 	createUser() {
 		this.getValueForm();
+		this.disabledButton = true;
 
 		this.usuarioService.createUsuario(this.user).subscribe(
 			res => {
+				this.disabledButton = false;
 				localStorage.setItem("username", this.user.userName);
 				localStorage.setItem("password", this.user.password);
+
 				swal.fire("Info", res["success"], "success").then(() => {
 					this.router.navigate(["/emailConfirm"]);
 				});
+			},
+			() => {
+				this.disabledButton = false;
 			}
 		);
 	}
