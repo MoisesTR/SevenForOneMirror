@@ -4,7 +4,8 @@
 
     <particles [params]="myParams" [style]="myStyle" [width]="width" [height]="height"></particles>
 
-    <div class="col-lg-7 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center" id="bg-hide">
+    <div class="col-lg-7 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center"
+      id="bg-hide">
 
       <img src="assets/images/MacBookPro.png" class="img-fluid animated fadeIn" alt="login">
       <div class="mask flex-center hm-gradient">
@@ -20,7 +21,8 @@
           <div class="row p-a">
 
             <div class="col-md-12 text-center mb-5 mt-5 wow fadeInDownBig" data-wow-delay="0.5s">
-              <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 30em;">
+              <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo"
+                style="width: 30em;">
             </div>
 
             <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12 mt-1">
@@ -29,7 +31,8 @@
                 <!-- Username -->
                 <div class="md-form md-outline">
                   <i class="fas fa-user prefix"></i>
-                  <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput>
+                  <input type="text" id="user" class="form-control" name="user" autocomplete="off"
+                    formControlName="user" mdbInput>
                   <label for="user">User</label>
                   <show-errors [control]="userForm.controls['user']"></show-errors>
                 </div>
@@ -37,14 +40,16 @@
                 <!-- Password -->
                 <div class="md-form md-outline">
                   <i class="fas fa-lock prefix"></i>
-                  <input type="password" id="password" class="form-control" name="user" autocomplete="off" formControlName="password" mdbInput>
+                  <input type="password" id="password" class="form-control" name="user" autocomplete="off"
+                    formControlName="password" mdbInput>
                   <label for="password">Password</label>
                   <show-errors [control]="userForm.controls['password']"></show-errors>
                 </div>
 
                 <div class="mt-3">
                   <!-- Sign in button -->
-                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2" type="submit" [disabled]="userForm.invalid || disabledButton">Sign
+                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2"
+                    type="submit" [disabled]="userForm.invalid || disabledButton">Sign
                     in</button>
                 </div>
 
@@ -58,7 +63,8 @@
                     <hr class="bar">
                   </div>
 
-                  <button mdbBtn type="button" class="btn-seven-one outline-seven-one" mdbWavesEffect (click)="createUser()">Create
+                  <button mdbBtn type="button" class="btn-seven-one outline-seven-one" mdbWavesEffect
+                    (click)="createUser()">Create
                     an account</button>
 
                 </div>
