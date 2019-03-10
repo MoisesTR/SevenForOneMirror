@@ -33,6 +33,7 @@
                   <mdb-icon fas icon="user"></mdb-icon>
                   <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput>
                   <label for="user">User</label>
+                  <show-errors [control]="userForm.controls['user']"></show-errors>
                 </div>
 
                 <!-- Password -->
@@ -40,6 +41,7 @@
                   <mdb-icon fas icon="lock"></mdb-icon>
                   <input type="password" id="password" class="form-control" name="user" autocomplete="off" formControlName="password" mdbInput>
                   <label for="password">Password</label>
+                  <show-errors [control]="userForm.controls['password']"></show-errors>
                 </div>
 
                 <div class="mt-3">

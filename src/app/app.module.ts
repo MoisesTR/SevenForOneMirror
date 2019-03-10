@@ -11,8 +11,9 @@ import { MDBBootstrapModulesPro, MDBSpinningPreloader } from "ng-uikit-pro-stand
 import { MenuComponent } from "./components/menu/menu.component";
 import { NotFound404Component } from "./components/not-found404/not-found404.component";
 import { ConfirmComponent } from "./components/confirm/confirm.component";
-import { EmailConfirmComponent } from './components/email-confirm/email-confirm.component';
-import { ParticlesModule } from 'angular-particle';
+import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.component";
+import { ParticlesModule } from "angular-particle";
+import { ShowErrorsComponent } from "./components/show-errors.component";
 
 @NgModule({
 	declarations: [
@@ -23,11 +24,19 @@ import { ParticlesModule } from 'angular-particle';
 		NotFound404Component,
 		MenuComponent,
 		NotFound404Component,
-		EmailConfirmComponent
+		EmailConfirmComponent,
+		ShowErrorsComponent
 	],
-	imports: [BrowserModule, BrowserAnimationsModule, CoreModule, MDBBootstrapModulesPro.forRoot(), AppRoutingModule, ParticlesModule],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		CoreModule,
+		AppRoutingModule,
+		MDBBootstrapModulesPro.forRoot(),
+		ParticlesModule
+	],
 	schemas: [NO_ERRORS_SCHEMA],
 	providers: [MDBSpinningPreloader],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

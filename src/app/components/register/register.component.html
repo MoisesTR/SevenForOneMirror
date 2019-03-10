@@ -36,6 +36,7 @@
                         <mdb-icon fas icon="user"></mdb-icon>
                         <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput AlphanumericDirective>
                         <label for="user">User</label>
+                        <show-errors [control]="formRegisterUser.controls['user']"></show-errors>
                       </div>
                     </div>
 
@@ -45,6 +46,7 @@
                         <mdb-icon fas icon="lock"></mdb-icon>
                         <input type="password" id="pass" class="form-control" name="pass" autocomplete="off" formControlName="password" mdbInput>
                         <label for="pass">Password</label>
+                        <show-errors [control]="formRegisterUser.controls['password']"></show-errors>
                       </div>
                     </div>
 
@@ -54,6 +56,7 @@
                         <mdb-icon fas icon="lock"></mdb-icon>
                         <input type="password" id="confpass" class="form-control" name="pass" autocomplete="off" formControlName="confirmPassword" mdbInput>
                         <label for="confpass">Confirm</label>
+                        <show-errors [control]="formRegisterUser.controls['confirmPassword']"></show-errors>
                       </div>
                     </div>
 
@@ -63,6 +66,7 @@
                         <mdb-icon fas icon="envelope"></mdb-icon>
                         <input type="text" id="email" class="form-control" name="email" autocomplete="off" formControlName="email" mdbInput>
                         <label for="email">Email</label>
+                        <show-errors [control]="formRegisterUser.controls['email']"></show-errors>
                       </div>
                     </div>
 
@@ -72,6 +76,7 @@
                         <mdb-icon fas icon="user"></mdb-icon>
                         <input type="text" id="firstNames" class="form-control" name="firstNames" autocomplete="off" formControlName="firstNames" mdbInput>
                         <label for="firstNames">First Name</label>
+                        <show-errors [control]="formRegisterUser.controls['firstNames']"></show-errors>
                       </div>
                     </div>
 
@@ -81,6 +86,7 @@
                         <mdb-icon fas icon="user"></mdb-icon>
                         <input type="text" id="lastName" class="form-control" name="lastName" autocomplete="off" formControlName="lastName" mdbInput>
                         <label for="lastName">Last Name</label>
+                        <show-errors [control]="formRegisterUser.controls['lastName']"></show-errors>
                       </div>
                     </div>
 
@@ -90,6 +96,7 @@
                         <mdb-icon fas icon="phone"></mdb-icon>
                         <input type="text" id="phone" class="form-control" name="phone" autocomplete="off" formControlName="phone" mdbInput>
                         <label for="phone">Phone</label>
+                        <show-errors [control]="formRegisterUser.controls['phone']"></show-errors>
                       </div>
                     </div>
 
@@ -102,6 +109,7 @@
                             <option value="1">Male</option>
                             <option value="2">Female</option>
                         </select>
+                        <show-errors [control]="formRegisterUser.controls['gender']"></show-errors>
                       </div>
                     </div>
 
@@ -112,6 +120,7 @@
                         [owlDateTime]="dt2" formControlName="birthday" readonly mdbInput>
                         <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
                         <label for="birthday">Birthday</label>
+                        <show-errors [control]="formRegisterUser.controls['birthday']"></show-errors>
                       </div>
                     </div>
 

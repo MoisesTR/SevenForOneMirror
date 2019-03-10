@@ -13,11 +13,11 @@ import { AbstractControlDirective, AbstractControl } from '@angular/forms';
 export class ShowErrorsComponent {
 
   private static readonly errorMessages = {
-    'required': () => 'Este campo es requerido  ',
-    'minlength': (params) => 'El numero minimo permitido de caracteres es ' + params.requiredLength,
-    'maxlength': (params) => 'El numero maximo permitido de caracteres es ' + params.requiredLength,
+    'required': () => 'this field is required',
+    'minlength': (params) => params.requiredLength + ' characters minimum',
+    'maxlength': (params) => params.requiredLength + 'characters maximum',
    /* 'pattern': (params) => 'The required pattern is: ' + params.requiredPattern,*/
-    'pattern': (params) => 'El correo no es valido!',
+    'pattern': (params) => 'The email is not valid',
     'uniqueName': (params) => params.message,
     'telephoneNumbers': (params) => params.message,
     'telephoneNumber': (params) => params.message,
