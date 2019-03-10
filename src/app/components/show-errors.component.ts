@@ -6,7 +6,7 @@ import { AbstractControlDirective, AbstractControl } from '@angular/forms';
   selector: 'show-errors',
   template: `
     <div *ngIf="shouldShowErrors()">
-        <span class="inputVal text-danger red-chang-text" *ngFor="let error of listOfErrors()">{{error}}</span>
+        <span class="error-message" style="left: 2.5rem;" *ngFor="let error of listOfErrors()">{{error}}</span>
     </div>
  `,
 })

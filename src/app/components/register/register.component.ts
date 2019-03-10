@@ -32,6 +32,14 @@ export class RegisterComponent implements OnInit {
 	width: number = 100;
 	height: number = 100;
 
+	cities = [
+        {id: 1, name: 'Vilnius'},
+        {id: 2, name: 'Kaunas'},
+        {id: 3, name: 'Pavilnys', disabled: true},
+        {id: 4, name: 'Pabradė'},
+        {id: 5, name: 'Klaipėda'}
+    ];
+
 	ngOnInit() {
 		this.myStyle = {
 			position: "fixed",
@@ -160,6 +168,10 @@ export class RegisterComponent implements OnInit {
 				this.disabledButton = false;
 			}
 		);
+	}
+
+	login() {
+		this.router.navigate(['/login']);
 	}
 
 	probarCambio(confirmPassword) {
