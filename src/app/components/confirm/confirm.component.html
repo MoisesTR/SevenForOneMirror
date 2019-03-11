@@ -1,67 +1,32 @@
-<section>
-    <div class="edge-header blue-seven-one"></div>
+<div class="view">
+  <div class="mask blue-seven-one d-flex justify-content-center align-items-center">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-6 text-center">
 
-    <div class="container free-bird">
-        <div class="row">
-            <div class="col-md-8 col-lg-7 mx-auto float-none white z-depth-1 py-2 px-2" id="pattern">
+          <div class="card h-75">
+            <div class="card-body content-card">
+              <img src="assets/images/email.svg" class="rounded mx-auto d-block wow fadeInDown" alt="Email confirm"
+                style="width:30%;" data-wow-delay="0.3s">
+              <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
+              <h3 class="mb-4 green-dark-seven-one-text wow fadeInDown" data-wow-delay="0.4s">
+                <strong>Congratulations!</strong>
+                <br>
+                Username
+              </h3>
 
-                <div class="card-body">
-                    <h2 class="h2-responsive"><strong>Complete the Registration</strong></h2>
+              <h4 class="gray-heading mb-4 wow fadeInDown" data-wow-delay="0.4s">Your email has been successfully
+                registered.
+                <br>
+                To complete the process please log in.</h4>
 
-                    <!--<form [formGroup]="formConfirm" (ngSubmit)="verificarUsuario()" id="payment-form">-->
-
-                        <!--<div class="dpf-card-placeholder"></div>-->
-
-                        <!--<div class="container">-->
-
-                            <!--<div class="dpf-input-row">-->
-                                <!--<label class="dpf-input-label">Credit Card Number</label>-->
-                                <!--<div class="dpf-input-container with-icon">-->
-                                    <!--<span class="dpf-input-icon"><i class="fa fa-credit-card mt-1"-->
-                                            <!--aria-hidden="true"></i></span>-->
-                                    <!--<input formControlName="numberCard" type="text" class="dpf-input" size="20" data-type="number">-->
-                                <!--</div>-->
-                            <!--</div>-->
-
-                            <!--<div class="dpf-input-row">-->
-
-                                <!--<div class="dpf-input-column">-->
-
-                                    <!--<input type="hidden" size="2" data-type="exp_month" placeholder="MM">-->
-
-                                    <!--<input  type="hidden" size="2" data-type="exp_year" placeholder="YY">-->
-
-                                    <!--<label class="dpf-input-label">Expiration Date</label>-->
-                                    <!--<div class="dpf-input-container">-->
-                                        <!--<input formControlName="expDate" type="text" class="dpf-input" data-type="expiry">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-
-                                <!--<div class="dpf-input-column">-->
-                                    <!--<label class="dpf-input-label">Code</label>-->
-                                    <!--<div class="dpf-input-container">-->
-                                        <!--<input formControlName="cvc" type="text" class="dpf-input" size="4" data-type="cvc">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-
-                            <!--<div class="dpf-input-row">-->
-                                <!--<label class="dpf-input-label">Full Name</label>-->
-                                <!--<div class="dpf-input-container">-->
-                                    <!--<input formControlName="nombreCompleto" type="text" size="4" class="dpf-input" data-type="name">-->
-                                <!--</div>-->
-                            <!--</div>-->
-
-                            <!--<div class="text-center">-->
-                                <!--<button mdbBtn rounded="true" [disabled]="formConfirm.invalid" class="green-seven-one white-text mt-2"-->
-                                    <!--type="submit">Complete</button>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                    <!--</form>-->
-                </div>
-
+              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown" data-wow-delay="0.4s"
+                (click)="login()" mdbWavesEffect>Login</button>
             </div>
+          </div>
+
         </div>
+      </div>
     </div>
-</section>
+  </div>
+</div>
