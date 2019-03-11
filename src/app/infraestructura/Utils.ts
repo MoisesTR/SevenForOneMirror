@@ -8,12 +8,19 @@ export class Utils {
 			console.log(mensaje);
 		}
 
+    // HTTP ERROR RESPONSE
+    if (mensaje.error.message) {
+      return mensaje.error.message;
+    }
+
+    // VALIDATIONS API
+    if (Array.isArray(mensaje.error)) {
+      return mensaje.error[0].param + ' ' + mensaje.error[0].msg;
+    }
+
+		// MONGO ERROR
 		if (mensaje.error.errmsg) {
 			return mensaje.error.errmsg;
-		}
-
-		if (mensaje.error.message) {
-			return mensaje.error.message;
 		}
 
 		return undefined;
