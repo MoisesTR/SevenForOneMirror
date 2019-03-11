@@ -1,3 +1,50 @@
+<!--Main Navigation-->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark blue-seven-one scrolling-navbar">
+    <a class="navbar-brand" href="#"><strong>Seven x One</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" >Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Pricing</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link"><i class="fab fa-facebook-f"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fab fa-twitter"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fab fa-instagram"></i></a>
+        </li>
+        <li class="nav-item dropdown btn-group" dropdown>
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            {{userActual.userName}}
+          </a>
+          <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+            <a class="dropdown-item">Profile</a>
+            <a class="dropdown-item">Settings</a>
+            <a class="dropdown-item" (click)="mdlLogout.show()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</header>
+<!--Main Navigation-->
+
 <!-- Purple Header -->
 <div class="edge-header blue-seven-one"></div>
 
@@ -77,4 +124,38 @@
     </div>
   </div>
 </div>
+
 <!-- /.Main Container -->
+<div mdbModal #mdlLogout="mdbModal" class="modal fade top" id="mdlLogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Logout</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlLogout.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>Are you sure that you want to logout now?</p>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="warning" class="waves-effect" (click)="logout()" mdbWavesEffect>Yes
+          <i class="far ml-1"></i>
+        </a>
+        <a type="button" mdbBtn color="warning" outline="true" class="waves-effect" mdbWavesEffect (click)="mdlLogout.hide()">No</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
