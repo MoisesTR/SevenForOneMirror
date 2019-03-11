@@ -50,6 +50,7 @@
                       <input type="text" id="firstNames" class="form-control" name="firstNames" autocomplete="off"
                         formControlName="firstNames" mdbInput>
                       <label for="firstNames">First Name</label>
+                      <show-errors [control]="formRegisterUser.controls['firstNames']"></show-errors>
                     </div>
                   </div>
 
