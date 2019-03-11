@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
 					value: "#397EF5"
 				},
 				shape: {
-					type: "circle"
+					type: "polygon"
 				}
 			}
 		};
@@ -160,6 +160,10 @@ export class RegisterComponent implements OnInit {
 				this.disabledButton = false;
 			}
 		);
+	}
+
+	login() {
+		this.router.navigate(['/login']);
 	}
 
 	probarCambio(confirmPassword) {

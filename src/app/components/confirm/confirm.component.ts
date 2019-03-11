@@ -25,7 +25,7 @@ export class ConfirmComponent implements OnInit {
 
 	ngOnInit() {
 		this.getParams();
-		this.verificarUsuario();
+		// this.verificarUsuario();
 	}
 
 	getParams() {
@@ -74,5 +74,9 @@ export class ConfirmComponent implements OnInit {
 				this.router.navigate(["/login"]);
 			}
 		);
+	}
+
+	login() {
+		this.router.navigate(['/login']);
 	}
 }
