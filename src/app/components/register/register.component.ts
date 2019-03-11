@@ -140,7 +140,6 @@ export class RegisterComponent implements OnInit {
 			res => {
 				this.disabledButton = false;
 				localStorage.setItem("username", this.user.userName);
-				localStorage.setItem("password", this.user.password);
 
 				swal.fire("Info", res["success"], "success").then(() => {
 					this.router.navigate(["/emailConfirm"]);
