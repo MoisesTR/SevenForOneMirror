@@ -31,9 +31,9 @@ export class HttpInterceptorService implements HttpInterceptor {
 								? Utils.msgError(err)
 								: `Error Code: ${err.status}\nMessage: ${err.message}`;
 
-							if (err.status === 401) {
-								this.auth.logout();
-							}
+							// if (err.status === 401) {
+							// 	this.auth.logout();
+							// }
 						}
 
 						Utils.showMsgError(errorMessage, "An internal error ocurred during your request!");
