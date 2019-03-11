@@ -60,6 +60,7 @@
                       <input type="text" id="lastName" class="form-control" name="lastName" autocomplete="off"
                         formControlName="lastName" mdbInput>
                       <label for="lastName">Last Name</label>
+                      <show-errors [control]="formRegisterUser.controls['lastName']"></show-errors>
                     </div>
                   </div>
 
@@ -81,7 +82,9 @@
                       <input type="password" id="confpass" class="form-control" name="pass" autocomplete="off"
                         formControlName="confirmPassword" mdbInput>
                       <label for="confpass">Confirm</label>
-                      <show-errors [control]="formRegisterUser.controls['confirmPassword']"></show-errors>
+                      <div *ngIf="formRegisterUser.controls['confirmPassword'].hasError('noPasswordMatch')">
+                        <span class="error-message" style="left: 2.5rem;">Password do not match</span>
+                      </div>
                     </div>
                   </div>
 
@@ -100,7 +103,7 @@
                   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="md-form md-outline">
                       <i class="fas fa-phone prefix"></i>
-                      <input type="text" id="phone" class="form-control" name="phone" autocomplete="off"
+                      <input type="text" id="phone" class="form-control" name="phone" (keypress)="keyPress($event)" autocomplete="off"
                         formControlName="phone" mdbInput>
                       <label for="phone">Phone</label>
                       <show-errors [control]="formRegisterUser.controls['phone']"></show-errors>
@@ -116,14 +119,14 @@
                         <option value="1">Male</option>
                         <option value="2">Female</option>
                       </select>
+                      <show-errors [control]="formRegisterUser.controls['gender']"></show-errors>
                     </div>
                   </div>
-
 
                   <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="md-form md-outline">
                       <i class="fas fa-birthday-cake prefix"></i>
-                      <input type="text" id="birthday" class="form-control" autocomplete="off"
+                      <input type="text" id="birthday" [max]="fechaActual" class="form-control" autocomplete="off"
                         [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" formControlName="birthday" readonly mdbInput>
                       <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
                       <label for="birthday">Birthday</label>
