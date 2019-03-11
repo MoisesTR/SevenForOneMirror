@@ -1,9 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
-import { Token, User } from "../../models/models.index";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import swal from "sweetalert2";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {UsuarioService} from '../../core/services/shared/usuario.service';
+import {Token, User} from '../../models/models.index';
 
 @Component({
 	selector: "app-confirm",
@@ -12,10 +10,11 @@ import swal from "sweetalert2";
 })
 export class ConfirmComponent implements OnInit {
 	public title = "Confirmacion de Correo";
+	public verified = false;
 	public tokenConfirmacion: string;
 	public token: Token;
 	public user: User;
-	private username: string;
+	private username = '';
 	private password: string;
 
 	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, private router: Router) {
@@ -25,7 +24,7 @@ export class ConfirmComponent implements OnInit {
 
 	ngOnInit() {
 		this.getParams();
-		// this.verificarUsuario();
+		this.verificarUsuario();
 	}
 
 	getParams() {
@@ -46,19 +45,13 @@ export class ConfirmComponent implements OnInit {
 				this.usuarioService.login(this.user).subscribe(
 					token => {
 						this.token = token;
-						localStorage.setItem("token", this.token.token);
 						this.user.getUserInfo = true;
 
 						this.usuarioService.login(this.user).subscribe(
 							user => {
-								this.usuarioService.identity = user;
-								localStorage.setItem("identity", JSON.stringify(user));
-
-								swal.fire("Confirmation", "Welcome to Seven for One, your email is verified!", "success").then(() => {
-									localStorage.removeItem("username");
-									localStorage.removeItem("password");
-									this.router.navigate(["/dashboard"]);
-								});
+							  this.verified = true;
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
 							},
 							() => {
 								this.router.navigate(["/login"]);

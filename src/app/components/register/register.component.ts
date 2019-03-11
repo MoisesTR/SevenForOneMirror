@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/models.index";
 import { CustomValidators } from "../../validators/CustomValidators";
-import deepEqual from "deep-equal";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
@@ -20,6 +19,7 @@ export class RegisterComponent implements OnInit {
 	public telefonos: string[] = [];
 	public compare: boolean;
 	public disabledButton = false;
+	public fechaActual = new Date();
 	formRegisterUser: FormGroup;
 
 	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
@@ -86,37 +86,37 @@ export class RegisterComponent implements OnInit {
 	}
 
 	private initFormRegisterUser() {
-		this.formRegisterUser = this.formBuilder.group({
-			user: new FormControl("", [
-				Validators.required,
-				Validators.minLength(4),
-				Validators.maxLength(40),
-				CustomValidators.nospaceValidator
-			]),
-			password: new FormControl("", [
-				Validators.required,
-				Validators.minLength(5),
-				Validators.maxLength(25),
-				CustomValidators.nospaceValidator
-			]),
+		this.formRegisterUser = this.formBuilder.group(
+			{
+				user: new FormControl("", [
+					Validators.required,
+					Validators.minLength(4),
+					Validators.maxLength(40),
+					CustomValidators.nospaceValidator
+				]),
+				password: new FormControl("", [
+					Validators.required,
+					Validators.minLength(5),
+					Validators.maxLength(25),
+					CustomValidators.nospaceValidator
+				]),
 
-			confirmPassword: new FormControl("", [
-				Validators.required,
-				Validators.minLength(5),
-				Validators.maxLength(25),
-				CustomValidators.nospaceValidator
-			]),
+				confirmPassword: new FormControl("", []),
 
-			email: new FormControl("", [Validators.required]),
+				email: new FormControl("", [Validators.required]),
 
-			firstNames: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+				firstNames: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
 
-			lastName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+				lastName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
 
-			phone: new FormControl("", [Validators.required, Validators.minLength(7), Validators.maxLength(25)]),
-			gender: new FormControl("", [Validators.required]),
-			birthday: new FormControl("", [Validators.required])
-		});
+				phone: new FormControl("", [Validators.required, Validators.minLength(7), Validators.maxLength(25)]),
+				gender: new FormControl("", [Validators.required]),
+				birthday: new FormControl("", [Validators.required])
+			},
+			{
+				validator: CustomValidators.passwordMatchValidator
+			}
+		);
 	}
 
 	getValueForm() {
@@ -130,16 +130,6 @@ export class RegisterComponent implements OnInit {
 		this.user.email = this.formRegisterUser.value.email;
 		this.user.birthDate = Utils.formatDateYYYYMMDD(this.formRegisterUser.value.birthday);
 		this.user.role = "5c5de2211d65b81ce0497480";
-	}
-
-	validateForm() {
-		if (!this.compare) {
-			swal.fire("Register", "Passwords do not match ", "error").then(() => {});
-			return false;
-		}
-
-		this.user.password = this.formRegisterUser.value.password;
-		return true;
 	}
 
 	createUser() {
@@ -163,12 +153,15 @@ export class RegisterComponent implements OnInit {
 	}
 
 	login() {
-		this.router.navigate(['/login']);
+		this.router.navigate(["/login"]);
 	}
 
-	probarCambio(confirmPassword) {
-		//devuelve true si es correcto
-		this.compare = deepEqual(this.formRegisterUser.value.password, confirmPassword);
-		return this.compare;
+	keyPress(event: any) {
+		const pattern = /[0-9\+\-\ ]/;
+
+		const inputChar = String.fromCharCode(event.charCode);
+		if (event.keyCode !== 8 && !pattern.test(inputChar)) {
+			event.preventDefault();
+		}
 	}
 }
