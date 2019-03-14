@@ -13,6 +13,9 @@ import {NotFound404Component} from './components/not-found404/not-found404.compo
 import {ConfirmComponent} from './components/confirm/confirm.component';
 import {EmailConfirmComponent} from './components/email-confirm/email-confirm.component';
 import {ParticlesModule} from 'angular-particle';
+import { UsersComponent } from './components/users/users.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { GroupsComponent } from './components/groups/groups.component';
 
 @NgModule({
 	declarations: [
@@ -23,7 +26,10 @@ import {ParticlesModule} from 'angular-particle';
 		NotFound404Component,
 		MenuComponent,
 		NotFound404Component,
-		EmailConfirmComponent
+		EmailConfirmComponent,
+		UsersComponent,
+		ProfileComponent,
+		GroupsComponent
 	],
 	imports: [
 		BrowserModule,
