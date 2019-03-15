@@ -1,10 +1,16 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { DashboardComponent } from "../dashboard/dashboard.component";
+import {UsersComponent} from "../users/users.component";
+import {ProfileComponent} from "../profile/profile.component";
+import {GroupsComponent} from "../groups/groups.component";
 
 const menuRoutes = [
-	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
-	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
+	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } }
+	, { path: "users", component: UsersComponent, data: { titulo: "Users" } }
+	, { path: "profile", component: ProfileComponent, data: { titulo: "Profile" } }
+  , { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
+  , { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 ];
 
 @NgModule({
