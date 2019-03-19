@@ -1,21 +1,30 @@
-<section>
-  <div class="view jarallax"
-    style="background-image: url('assets/images/email.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-4 white-text text-center">
-            <h1 class="h1-reponsive white-text mb-0 pt-md-5 pt-5 wow fadeInDown" data-wow-delay="0.3s">
-              <strong>7 x 1</strong></h1>
-            <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
-            <h3 class="text-uppercase mb-4 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>
-                A confirmation email has been sent</strong></h3>
-            <h5 class="text-uppercase mb-4 white-text wow fadeInDown" data-wow-delay="0.5s">
-              Check out the spam
-            </h5>
+<div class="view">
+  <div class="mask blue-seven-one d-flex justify-content-center align-items-center">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-7 text-center">
+
+          <div class="card z-depth-5">
+            <div class="card-body">
+              <img src="assets/images/emailConfirm.svg" class="rounded mx-auto d-block wow fadeInDown"
+                alt="Email confirm" style="width:30%; left: 2%;" data-wow-delay="0.3s">
+              <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
+              <h3 class="mb-4 green-dark-seven-one-text wow fadeInDown" data-wow-delay="0.4s">
+                <strong>A confirmation email has been sent!</strong>
+              </h3>
+
+              <h4 class="gray-heading mb-4 wow fadeInDown" data-wow-delay="0.4s">
+                Check out the spam
+              </h4>
+
+              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown" data-wow-delay="0.4s"
+                (click)="checkOut()" mdbWavesEffect>Login</button>
+
+            </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
