@@ -1,82 +1,77 @@
-<section class="view">
+<div class="view blue-gradient">
 
-  <div class="row wrap">
+  <div class="row h-100 justify-content-center align-items-center">
 
-    <particles [params]="myParams" [style]="myStyle" [width]="width" [height]="height"></particles>
-
-    <div class="col-lg-7 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center"
-      id="bg-hide">
-
-      <img src="assets/images/MacBookPro.png" class="img-fluid animated fadeIn" alt="login">
-      <div class="mask flex-center hm-gradient">
-      </div>
-
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+      <img src="assets/images/logo.svg" class="rounded mx-auto logo">
     </div>
 
-    <div class="col-lg-5 col-md-7" style="height: 100vh; overflow: auto;">
+    <div class="col-11 col-sm-10 col-md-10 col-lg-5 col-xl-5">
 
-      <div class="d-flex justify-content-center align-items-center">
+      <mdb-card cascade="true" narrower="true">
 
-        <div class="container-fluid">
-          <div class="row p-a">
-
-            <div class="col-md-12 text-center mb-5 mt-5 wow fadeInDownBig" data-wow-delay="0.5s">
-              <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo"
-                style="width: 30em;">
-            </div>
-
-            <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12 mt-1">
-              <div class="wow fadeInUp" data-wow-delay="0.8s">
-
-                <!-- Username -->
-                <div class="md-form md-outline">
-                  <i class="fas fa-user prefix"></i>
-                  <input type="text" id="user" class="form-control" name="user" autocomplete="off"
-                    formControlName="user" mdbInput>
-                  <label for="user">User</label>
-                  <show-errors [control]="userForm.controls['user']"></show-errors>
-                </div>
-
-                <!-- Password -->
-                <div class="md-form md-outline">
-                  <i class="fas fa-lock prefix"></i>
-                  <input type="password" id="password" class="form-control" name="user" autocomplete="off"
-                    formControlName="password" mdbInput>
-                  <label for="password">Password</label>
-                  <show-errors [control]="userForm.controls['password']"></show-errors>
-                </div>
-
-                <div class="mt-3">
-                  <!-- Sign in button -->
-                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2"
-                    type="submit" [disabled]="userForm.invalid || disabledButton">Sign
-                    in</button>
-                </div>
-
-                <div class="text-center mt-5">
-                  <!-- Forgot password -->
-                  <a (click)="forgotPassword()" class="green-seven-one-text">Forgot password?</a>
-
-                  <div class="or mt-3">
-                    <hr class="bar">
-                    <span>OR</span>
-                    <hr class="bar">
-                  </div>
-
-                  <button mdbBtn type="button" class="btn-seven-one outline-seven-one" mdbWavesEffect
-                    (click)="createUser()">Create
-                    an account</button>
-
-                </div>
-              </div>
-            </form>
-
-          </div>
+        <div class="view view-cascade  gradient-card-header green-seven-one"
+          style="background-image: url('assets/images/intro-bg.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+          <h2 class="card-header-title">Login</h2>
         </div>
 
-      </div>
+        <mdb-card-body cascade="true"
+          style="background-image: url('assets/images/intro-bg.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+          <div class="container-fluid">
+
+            <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12 mt-1">
+
+              <!-- Username -->
+              <div class="md-form md-outline form-lg">
+                <i class="fas fa-user prefix"></i>
+                <input type="text" id="user" class="form-control form-control-lg" name="user" autocomplete="off"
+                  formControlName="user" mdbInput>
+                <label for="user">User</label>
+                <show-errors [control]="userForm.controls['user']"></show-errors>
+              </div>
+
+              <!-- Password -->
+              <div class="md-form md-outline form-lg">
+                <i class="fas fa-lock prefix"></i>
+                <input type="password" id="password" class="form-control form-control-lg" name="user" autocomplete="off"
+                  formControlName="password" mdbInput>
+                <label for="password">Password</label>
+                <show-errors [control]="userForm.controls['password']"></show-errors>
+              </div>
+
+              <div class="mt-3">
+                <!-- Sign in button -->
+                <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2"
+                  type="submit" [disabled]="userForm.invalid || disabledButton">Sign
+                  in</button>
+              </div>
+
+              <div class="text-center mt-5">
+                <!-- Forgot password -->
+                <a (click)="forgotPassword()" class="green-seven-one-text">Forgot password?</a>
+
+                <div class="or mt-3">
+                  <hr class="bar">
+                  <span>OR</span>
+                  <hr class="bar">
+                </div>
+
+                <button mdbBtn type="button" class="btn-seven-one outline-seven-one" mdbWavesEffect
+                  (click)="createUser()">Create
+                  an account</button>
+
+              </div>
+
+            </form>
+          </div>
+
+        </mdb-card-body>
+      </mdb-card>
+
 
     </div>
 
   </div>
-</section>
+
+</div>

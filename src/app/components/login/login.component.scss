@@ -31,8 +31,18 @@
   color: #42d583;
 }
 
+.logo {
+  width:25%;
+}
+
+@media only screen and (max-width: 991px) {
+  .logo {
+    width:40%;
+  }
+}
+
 @media only screen and (max-width: 767px) {
-  #bg-hide {
-    display: none !important;
+  .logo {
+    width:60%;
   }
 }

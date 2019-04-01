@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 					value: 100
 				},
 				color: {
-					value: "#397EF5"
+					value: "#fff"
 				},
 				shape: {
 					type: "circle"

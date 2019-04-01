@@ -1,43 +1,167 @@
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-dark-seven-one ie-nav" [containerInside]="false">
-  <mdb-navbar-brand>
-    <a class="navbar-brand">
-      <img src="assets/images/logo.svg" height="30" alt="">
-    </a>
-  </mdb-navbar-brand>
-  <links>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active waves-light" mdbWavesEffect>
-        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <ul class="navbar-nav nav-flex-icons">
-      <li class="nav-item avatar dropdown btn-group" dropdown>
-        <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          <img src="assets/images/user.svg" class="img-fluid rounded-circle z-depth-0">
-        </a>
-        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
-          <!-- <a class="dropdown-item">Profile</a>
-          <a class="dropdown-item">Settings</a> -->
-          <a class="dropdown-item" (click)="mdlLogout.show()">Logout</a>
-        </div>
-      </li>
-    </ul>
-  </links>
-</mdb-navbar>
+<section>
 
-<!-- Purple Header -->
-<div class="edge-header blue-seven-one"></div>
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav" [containerInside]="false">
+        <mdb-navbar-brand>
+            <a class="navbar-brand">
+                <img src="assets/images/logo.svg" height="30" alt="">
+            </a>
+        </mdb-navbar-brand>
+        <links>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active waves-light" mdbWavesEffect>
+                    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item avatar dropdown btn-group" dropdown>
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        <img src="assets/images/rick.png" class="img-fluid rounded-circle z-depth-0">
+                    </a>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                        <!-- <a class="dropdown-item">Profile</a>
+          <a class="dropdown-item">Settings</a> -->
+                        <a class="dropdown-item">Edit Profile</a>
+                        <a class="dropdown-item" (click)="mdlLogout.show()">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </links>
+    </mdb-navbar>
+
+    <div class="container-fluid mt-5">
+        <div class="row">
+
+            <div class="col-md-12 mb-5">
+
+                <!-- Nav Tabs -->
+                <mdb-tabset #staticTabs [vertical]="true" [buttonClass]="'md-pills test pills-green-seven-one text-center white rounded'" [contentClass]="'card'">
+                    <!--Panel 1-->
+                    <mdb-tab [disabled]="true" heading="
+
+                        <div class='row justify-content-center'>
+                            <div class='col-12'>
+                                <img src='assets/images/rick.png' alt='avatar' class='rounded-circle img-fluid green-seven-one' width='50%' height='50%'>
+                            </div>                            
+                            <div class='col-12 mt-3'>
+                                <h2 class='text-uppercase green-seven-one-text'>
+                                    {{userActual.userName}}
+                                </h2>                                
+                            </div>
+                            <div class='col-12'>
+                                <h5 class='text-uppercase text-muted'>
+                                    Male, 30 Years
+                                </h5>                                
+                            </div>
+                            <div class='col-12 col-12 col-md-6 col-lg-6 border-right border-left'>
+                                <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
+                                    Invested
+                                </h6>
+                                <h5 class='text-uppercase green-seven-one-text'>
+                                    $100
+                                </h5>                                
+                            </div>
+                            <div class='col-12 col-12 col-md-6 col-lg-6 border-right border-left'>
+                                <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
+                                    Earned
+                                </h6>
+                                <h5 class='text-uppercase green-seven-one-text'>
+                                    $200
+                                </h5>                               
+                            </div>
+                          </div>                        
+                    ">
+                    </mdb-tab>
+                    <!--Panel 2-->
+                    <mdb-tab heading="<i class='fas fa-home mr-2'></i> Home">
+                        <div class="row mb-5">
+
+                            <div class="col-12">
+                                <h1 class="h1-responsive font-weight-bold green-seven-one-text">Positions </h1>
+                                <mdb-carousel [isControls]="true" [interval]="'0'" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'" [animation]="'slide'">
+                                    <mdb-carousel-item *ngFor="let item of slides; let i = index">
+                                        <div class="col-md-4" *ngFor="let card of item; let cardIndex = index">
+
+                                            <mdb-card class="mt-3 mb-3">
+                                                <mdb-card-body class="blue-seven-one">
+                                                    <mdb-card-title>
+                                                        <h5 class="white-text">{{card.title}}</h5>
+                                                    </mdb-card-title>
+
+                                                    <div class="row white-text mt-4">
+                                                        <div class="col-lg-5 show-lg">
+                                                            <mdb-icon fas icon="dollar-sign" size="5x"></mdb-icon>
+                                                            <h3 class="mt-2">{{card.description}}</h3>
+                                                        </div>
+
+                                                        <div class="col-12 show-sm mb-5 text-center">
+                                                            <mdb-icon fas icon="dollar-sign" size="2x"></mdb-icon>
+                                                            <span class="card-description-sm"> {{card.description}}</span>
+                                                        </div>
+
+                                                        <div class="col-7">
+                                                            <div class="c100 p42 green-circle circle">
+                                                                <span>5/7</span>
+                                                                <div class="slice">
+                                                                    <div class="bar"></div>
+                                                                    <div class="fill"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <small class="text-muted white-text">Last seen: 3 mins ago</small>
+                                                    <a href="#" mdbBtn size="sm" class="waves-light mt-3 green-dark-seven-one" mdbWavesEffect>{{card.buttonText}}</a>
+                                                </mdb-card-body>
+                                            </mdb-card>
+
+
+                                            <!-- <mdb-card class="my-1">
+                                                <mdb-card-img [src]="card.img" alt="Card image cap"></mdb-card-img>
+                                                <mdb-card-body>
+                                                    <mdb-card-title>
+                                                        <h4>{{card.title}}</h4>
+                                                    </mdb-card-title>
+                                                    <p>{{card.description}}</p>
+                                                    <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>{{card.buttonText}}</a>
+                                                </mdb-card-body>
+                                            </mdb-card> -->
+                                        </div>
+                                    </mdb-carousel-item>
+                                </mdb-carousel>
+                            </div>
+
+                        </div>
+                    </mdb-tab>
+                    <!--Panel 3-->
+                    <mdb-tab heading="<i class='fas fa-hand-holding-usd mr-2'></i> Game">
+                        <div class="row">
+                            <div class="col-12">
+                                <br>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
+                                    odit minima.</p>
+                            </div>
+                        </div>
+                    </mdb-tab>
+                </mdb-tabset>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
 
 <!-- Main Container -->
-<div class="container free-bird">
+<!-- <div class="container free-bird">
   <div class="row">
-    <div class="col-md-8 col-lg-7 mx-auto float-none white z-depth-1 py-2 px-2" id="pattern">
+    <div class="col-md-8 col-lg-7 mx-auto float-none white z-depth-1 py-2 px-2" id="pattern"> -->
 
-      <!--Naked Form-->
-      <div class="card-body" *ngIf="userActual.userName === 'admin'">
 
-        <!-- En caso que no sea admin -->
-        <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
+<!-- <div class="card-body" *ngIf="userActual.userName === 'admin'"> -->
+
+<!-- En caso que no sea admin -->
+<!-- <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
 
         <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
 
@@ -67,10 +191,10 @@
 
       </div>
 
-      <div class="card-body" *ngIf="userActual.userName !== 'admin'">
+      <div class="card-body" *ngIf="userActual.userName !== 'admin'"> -->
 
-        <!-- En caso que no sea admin -->
-        <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
+<!-- En caso que no sea admin -->
+<!-- <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
 
         <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
 
@@ -98,41 +222,38 @@
 
         </div>
 
-      </div>
-      <!--Naked Form-->
+      </div> -->
 
-    </div>
+<!-- </div>
   </div>
-</div>
+</div> -->
 
 
-<div mdbModal #mdlLogout="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-  aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog cascading-modal" role="document">
-    <!--Content-->
-    <div class="modal-content text-center">
-      <!--Header-->
-      <div class="modal-header green-seven-one white-text">
-        <h4 class="title">Logout</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlLogout.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+<div mdbModal #mdlLogout="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header green-seven-one white-text">
+                <h4 class="title">Logout</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlLogout.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
 
-      <!--Body-->
-      <div class="modal-body">
-        <i class="fas fa-times fa-4x animated rotateIn"></i>
-        <p>Are you sure that you want to logout now?</p>
-      </div>
+            <!--Body-->
+            <div class="modal-body">
+                <i class="fas fa-times fa-4x animated rotateIn"></i>
+                <p>Are you sure that you want to logout now?</p>
+            </div>
 
-      <!--Footer-->
-      <div class="modal-footer justify-content-center">
-        <a (click)="logout()" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect>Yes</a>
-        <a type="button" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect data-dismiss="modal"
-          (click)="mdlLogout.hide()">No</a>
-      </div>
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a (click)="logout()" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect>Yes</a>
+                <a type="button" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect data-dismiss="modal" (click)="mdlLogout.hide()">No</a>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
-    <!--/.Content-->
-  </div>
 </div>
