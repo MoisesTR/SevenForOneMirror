@@ -25,6 +25,10 @@ export class MenuComponent implements OnInit {
 	ngOnInit() {
 		this.getParams();
 
+		$(document).ready(() => {
+			$(".dropify").dropify();
+		});
+
 		function fixNavDropdown() {
 			if ($(window).width() <= 575) {
 				$(".navbar .dropdown-menu").removeClass("dropdown-menu-right");
@@ -55,6 +59,10 @@ export class MenuComponent implements OnInit {
 
 	groups() {
 		this.router.navigate(["/groups"]);
+	}
+
+	updateProfile() {
+		this.router.navigate(["/profile"]);
 	}
 
 	logout() {

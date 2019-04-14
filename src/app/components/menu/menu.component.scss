@@ -1,0 +1,56 @@
+.card-description-sm {
+    font-size: 30px;
+}
+
+.card-description-md {
+    font-size: 70px;
+}
+
+.card-description-sm-button {
+    font-size: 15px;
+}
+
+.carousel-indicators {
+    display: none !important;
+}
+
+@media only screen and (min-width: 1233px) {
+    .show-sm {
+        display: none !important;
+    }
+}
+
+.circle {
+    bottom: 15%;
+    left: calc(65% - 105px);
+}
+
+#background-circle {
+    background-image: url("/assets/images/circle.svg");
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 1232px) {
+    .show-lg {
+        display: none !important;
+    }
+    .circle {
+        left: 20%;
+    }
+    .c100 {
+        font-size: 140px !important;
+    }
+}
+
+@media only screen and (max-width: 1020px) {
+    .circle {
+        left: 10%;
+    }
+    .c100 {
+        font-size: 120px !important;
+    }
+}

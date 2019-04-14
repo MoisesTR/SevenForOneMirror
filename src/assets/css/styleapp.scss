@@ -70,6 +70,14 @@
 }
 
 
+/* Width select gender*/
+
+.width-select {
+    margin-left: 2rem !important;
+    width: calc(100% - 2rem) !important;
+}
+
+
 /* Full Height screen */
 
 #full-height {
@@ -89,6 +97,22 @@
 
 .background-blue-space {
     background: url("/assets/images/intro-bg.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.background-card {
+    background: url("/assets/images/intro-bg.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.background-modal {
+    background: url("/assets/images/footer.svg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
