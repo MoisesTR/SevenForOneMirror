@@ -1,0 +1,57 @@
+.circle-text {
+    width: 70%;
+}
+
+.circle-text:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    background: #397ef5;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)!important;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)!important;
+}
+
+.circle-text div {
+    float: left;
+    width: 100%;
+    padding-top: 5%;
+    line-height: 1em;
+    margin-top: -0.5em;
+    text-align: center;
+    color: white;
+}
+
+.img-circle {
+    border-radius: 0;
+}
+
+.ratio {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+    .circle-text div {
+        padding-top: 8%;
+    }
+}
