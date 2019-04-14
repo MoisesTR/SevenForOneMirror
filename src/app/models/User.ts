@@ -5,6 +5,7 @@ export class User {
 	public userName: string;
 	public email: string;
 	public phones: string[];
+	public image: string;
 	public birthDate: string;
 	public gender: string;
 	public secretToken: string;
@@ -15,6 +16,7 @@ export class User {
 	public enabled: number;
 	public createdAt: string;
 	public updatedAt: string;
+	public tokenGoogle: string;
 	public getUserInfo: boolean;
 
 	constructor() {}

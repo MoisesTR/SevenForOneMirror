@@ -16,13 +16,21 @@ export class UsuarioService {
 
 	login(usuario: User): Observable<any> {
 		const headers = new HttpHeaders({
-			"Content-Type": "application/json",
-			Authorization: ""
+			"Content-Type": "application/json"
 		});
 		const options = { headers: headers };
 
 		return this.http.post(this.url + "login", usuario, options);
 	}
+
+	loginGoogle(usuario: User) : Observable<any> {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    const options = { headers: headers };
+
+    return this.http.post(this.url + "loginGoogle", usuario, options);
+  }
 
 	getUsuarios() {
 		return this.http.get<User[]>(this.url + "users").pipe(map(data => data));
@@ -30,8 +38,7 @@ export class UsuarioService {
 
 	createUsuario(usuario: User) {
 		const headers = new HttpHeaders({
-			"Content-Type": "application/json",
-			Authorization: ""
+			"Content-Type": "application/json"
 		});
 		const options = { headers: headers };
 

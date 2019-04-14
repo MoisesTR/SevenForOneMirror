@@ -11,14 +11,12 @@ declare var $: any;
 })
 export class MenuComponent implements OnInit {
 	public token: Token;
-	public user: User;
 	public userActual: User;
 	public usuarios: User[] = [];
 	private username: string;
 	private password: string;
 
 	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, private router: Router) {
-		this.user = new User();
 		this.token = new Token();
 	}
 

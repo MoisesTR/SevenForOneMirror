@@ -4,6 +4,7 @@ import { User } from "../../models/User";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import { Router } from "@angular/router";
 import { Token } from "../../models/models.index";
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider } from "angular-6-social-login";
 
 declare var $: any;
 
@@ -17,7 +18,12 @@ export class LoginComponent implements OnInit {
 	public user: User;
 	public disabledButton = false;
 	public telefonos: string[] = [];
-	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
+	constructor(
+		private usuarioService: UsuarioService,
+		private formBuilder: FormBuilder,
+		private router: Router,
+		private socialAuthService: AuthService
+	) {
 		this.user = new User();
 	}
 
@@ -52,6 +58,27 @@ export class LoginComponent implements OnInit {
 				}
 			}
 		};
+	}
+
+	socialSignIn(socialPlatform: string) {
+		let socialPlatformProvider;
+		if (socialPlatform === "google") {
+			socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+		}
+
+		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
+			this.user.tokenGoogle = userData.idToken;
+			this.user.role = '5c5de2211d65b81ce0497480';
+
+			this.usuarioService.loginGoogle(this.user).subscribe(
+			  response => {
+          this.usuarioService.identity = response.user;
+          localStorage.setItem("token", response.token);
+          localStorage.setItem("identity", JSON.stringify(response.user));
+          this.router.navigate(["/dashboard"]);
+        }
+      )
+		});
 	}
 
 	inituser() {

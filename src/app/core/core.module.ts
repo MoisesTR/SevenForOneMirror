@@ -7,6 +7,7 @@ import { LoginGuardService } from "./services/auth/login.guard.service";
 import { HttpInterceptorService } from "./services/auth/http-interceptor.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { SharedModule } from "../shared-module/shared.module";
+import {GroupService} from './services/shared/group.service';
 
 @NgModule({
 	imports: [],
@@ -17,6 +18,7 @@ import { SharedModule } from "../shared-module/shared.module";
 		AuthGuardService,
 		LoginGuardService,
 		UsuarioService,
+    GroupService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: HttpInterceptorService,
