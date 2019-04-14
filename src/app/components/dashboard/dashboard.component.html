@@ -28,121 +28,78 @@
         </links>
     </mdb-navbar>
 
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5 mb-5">
         <div class="row">
 
-            <div class="col-md-12 mb-5">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 mb-5">
 
-                <!-- Nav Tabs -->
-                <mdb-tabset #staticTabs [vertical]="true" [buttonClass]="'md-pills test pills-green-seven-one text-center white rounded'" [contentClass]="'card'">
-                    <!--Panel 1-->
-                    <mdb-tab [disabled]="true" heading="
+                <mdb-card>
+                    <mdb-card-body class="background-card">
+                        <mdb-card-text>
 
-                        <div class='row justify-content-center'>
-                            <div class='col-12'>
-                                <img src='assets/images/rick.png' alt='avatar' class='rounded-circle img-fluid green-seven-one' width='50%' height='50%'>
-                            </div>                            
-                            <div class='col-12 mt-3'>
-                                <h2 class='text-uppercase green-seven-one-text'>
-                                    {{userActual.userName}}
-                                </h2>                                
-                            </div>
-                            <div class='col-12'>
-                                <h5 class='text-uppercase text-muted'>
-                                    Male, 30 Years
-                                </h5>                                
-                            </div>
-                            <div class='col-12 col-12 col-md-6 col-lg-6 border-right border-left'>
-                                <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
-                                    Invested
-                                </h6>
-                                <h5 class='text-uppercase green-seven-one-text'>
-                                    $100
-                                </h5>                                
-                            </div>
-                            <div class='col-12 col-12 col-md-6 col-lg-6 border-right border-left'>
-                                <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
-                                    Earned
-                                </h6>
-                                <h5 class='text-uppercase green-seven-one-text'>
-                                    $200
-                                </h5>                               
-                            </div>
-                          </div>                        
-                    ">
-                    </mdb-tab>
-                    <!--Panel 2-->
-                    <mdb-tab heading="<i class='fas fa-home mr-2'></i> Home">
-                        <div class="row mb-5">
+                            <div class="row justify-content-center text-center">
 
-                            <div class="col-12">
-                                <h1 class="h1-responsive font-weight-bold green-seven-one-text">Positions </h1>
-                                <mdb-carousel [isControls]="true" [interval]="'0'" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'" [animation]="'slide'">
-                                    <mdb-carousel-item *ngFor="let item of slides; let i = index">
-                                        <div class="col-md-4" *ngFor="let card of item; let cardIndex = index">
+                                <div class="col-7" id="background-circle" style="padding: 10% 13% 13% 13%;">
+                                    <img src="assets/images/rick.png" class="img-fluid" alt="logo" style="border-radius: 15%;">
+                                </div>
 
-                                            <mdb-card class="mt-3 mb-3">
-                                                <mdb-card-body class="blue-seven-one">
-                                                    <mdb-card-title>
-                                                        <h5 class="white-text">{{card.title}}</h5>
-                                                    </mdb-card-title>
+                                <div class='col-12'>
+                                    <h2 class='text-uppercase green-seven-one-text'>
+                                        {{userActual.userName}}
+                                    </h2>
+                                </div>
 
-                                                    <div class="row white-text mt-4">
-                                                        <div class="col-lg-5 show-lg">
-                                                            <mdb-icon fas icon="dollar-sign" size="5x"></mdb-icon>
-                                                            <h3 class="mt-2">{{card.description}}</h3>
-                                                        </div>
+                                <div class='col-12'>
+                                    <h5 class='text-uppercase text-muted'>
+                                        Male, 30 Years
+                                    </h5>
+                                </div>
 
-                                                        <div class="col-12 show-sm mb-5 text-center">
-                                                            <mdb-icon fas icon="dollar-sign" size="2x"></mdb-icon>
-                                                            <span class="card-description-sm"> {{card.description}}</span>
-                                                        </div>
+                                <div class='col-8 col-8 col-md-8 col-lg-8 border-bottom mt-2'>
+                                    <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
+                                        Invested
+                                    </h6>
+                                    <h5 class='text-uppercase green-seven-one-text'>
+                                        $100
+                                    </h5>
+                                </div>
 
-                                                        <div class="col-7">
-                                                            <div class="c100 p42 green-circle circle">
-                                                                <span>5/7</span>
-                                                                <div class="slice">
-                                                                    <div class="bar"></div>
-                                                                    <div class="fill"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                <div class='col-8 col-8 col-md-8 col-lg-8 mt-2'>
+                                    <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
+                                        Earned
+                                    </h6>
+                                    <h5 class='text-uppercase green-seven-one-text'>
+                                        $200
+                                    </h5>
+                                </div>
 
-                                                    <small class="text-muted white-text">Last seen: 3 mins ago</small>
-                                                    <a href="#" mdbBtn size="sm" class="waves-light mt-3 green-dark-seven-one" mdbWavesEffect>{{card.buttonText}}</a>
-                                                </mdb-card-body>
-                                            </mdb-card>
-
-
-                                            <!-- <mdb-card class="my-1">
-                                                <mdb-card-img [src]="card.img" alt="Card image cap"></mdb-card-img>
-                                                <mdb-card-body>
-                                                    <mdb-card-title>
-                                                        <h4>{{card.title}}</h4>
-                                                    </mdb-card-title>
-                                                    <p>{{card.description}}</p>
-                                                    <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>{{card.buttonText}}</a>
-                                                </mdb-card-body>
-                                            </mdb-card> -->
-                                        </div>
-                                    </mdb-carousel-item>
-                                </mdb-carousel>
+                                <div class="col-8 text-center">
+                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2">Home</button>
+                                </div>
+                                <div class="col-8 mt-2 text-center">
+                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2">Game</button>
+                                </div>
                             </div>
 
-                        </div>
-                    </mdb-tab>
-                    <!--Panel 3-->
-                    <mdb-tab heading="<i class='fas fa-hand-holding-usd mr-2'></i> Game">
-                        <div class="row">
-                            <div class="col-12">
-                                <br>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                    odit minima.</p>
-                            </div>
-                        </div>
-                    </mdb-tab>
-                </mdb-tabset>
+                        </mdb-card-text>
+                    </mdb-card-body>
+                </mdb-card>
+
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+
+                <mdb-card>
+                    <mdb-card-body class="background-card">
+                        <mdb-card-text>
+
+                            <h1>
+                                Roting outlet Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro omnis libero nostrum perferendis doloremque, ut rem ipsum quae quam quasi odio accusantium obcaecati? Itaque sunt vitae numquam, laudantium laboriosam suscipit.
+                            </h1>
+
+                        </mdb-card-text>
+                    </mdb-card-body>
+                </mdb-card>
 
             </div>
 
@@ -150,83 +107,6 @@
     </div>
 
 </section>
-
-
-<!-- Main Container -->
-<!-- <div class="container free-bird">
-  <div class="row">
-    <div class="col-md-8 col-lg-7 mx-auto float-none white z-depth-1 py-2 px-2" id="pattern"> -->
-
-
-<!-- <div class="card-body" *ngIf="userActual.userName === 'admin'"> -->
-
-<!-- En caso que no sea admin -->
-<!-- <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
-
-        <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
-
-        <div class="container mt-5">
-          <table class="table table-striped table-hover table-sm">
-            <thead>
-              <tr>
-                <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr mdbTableCol *ngFor="let usuario of usuarios; let i = index">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{usuario.firstName}}</td>
-                <td>{{usuario.lastName}}</td>
-                <td>{{usuario.email}}</td>
-              </tr>
-            </tbody>
-          </table>
-
-
-          <div class="text-center">
-            <button class=" btn btn-rounded green-seven-one white-text mt-2" (click)="logout()">Log out</button>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card-body" *ngIf="userActual.userName !== 'admin'"> -->
-
-<!-- En caso que no sea admin -->
-<!-- <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
-
-        <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
-
-        <div class="container mt-5">
-          <table class="table table-striped table-hover table-sm">
-            <thead>
-              <tr>
-                <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr mdbTableCol>
-                <th scope="row">1</th>
-                <td>{{userActual.firstName}}</td>
-                <td>{{userActual.lastName}}</td>
-                <td>{{userActual.email}}</td>
-              </tr>
-            </tbody>
-          </table>
-
-
-          <div class="text-center">
-            <button class=" btn btn-rounded green-seven-one white-text mt-2" (click)="logout()">Log out</button>
-          </div>
-
-        </div>
-
-      </div> -->
-
-<!-- </div>
-  </div>
-</div> -->
 
 
 <div mdbModal #mdlLogout="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

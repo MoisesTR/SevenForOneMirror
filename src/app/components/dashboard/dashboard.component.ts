@@ -21,46 +21,23 @@ export class DashboardComponent implements OnInit {
 		this.user = new User();
 		this.token = new Token();
 	}
-	cards = [
-		{
-		  title: 'Category 1',
-		  description: '10 dollar',
-		  buttonText: 'Show',
-		  img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-		},
-		{
-		  title: 'Category 2',
-		  description: '20 dollar',
-		  buttonText: 'Show',
-		  img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-		},
-		{
-		  title: 'Category 3',
-		  description: '30 dollar',
-		  buttonText: 'Show',
-		  img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-		},
-		{
-		  title: 'Category 4',
-		  description: '40 dollar',
-		  buttonText: 'Show',
-		  img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-		}
-	  ];
-	  slides: any = [[]];
-	  chunk(arr, chunkSize) {
-		let R = [];
-		for (let i = 0, len = arr.length; i < len; i += chunkSize) {
-		  R.push(arr.slice(i, i + chunkSize));
-		}
-		return R;
-	  }
-
-	headElements = ["ID", "First", "Last", "Handle"];
 
 	ngOnInit() {
 		this.getParams();
-		this.slides = this.chunk(this.cards, 3);
+
+			function fixNavDropdown() {
+					if($( window ).width() <= 575) {
+									$('.navbar .dropdown-menu').removeClass('dropdown-menu-right');
+					} else {
+									$('.navbar .dropdown-menu').addClass('dropdown-menu-right');
+					}
+			}
+
+			$(window).resize(function() {
+					fixNavDropdown();
+			});
+
+			fixNavDropdown();
 	}
 
 	getUsuarios() {
@@ -80,5 +57,9 @@ export class DashboardComponent implements OnInit {
 		this.password = localStorage.getItem("password");
 		this.userActual = JSON.parse(localStorage.getItem("identity"));
 		this.getUsuarios();
+	}
+
+	groups() {
+		this.router.navigate(["/groups"]);
 	}
 }
