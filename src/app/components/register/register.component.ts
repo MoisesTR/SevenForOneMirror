@@ -17,34 +17,20 @@ declare var $: any;
 export class RegisterComponent implements OnInit {
 	public user: User;
 	public telefonos: string[] = [];
-	public compare: boolean;
 	public disabledButton = false;
-	public fechaActual = new Date();
+	public width: number = 100;
+	public height: number = 100;
+
 	formRegisterUser: FormGroup;
 
 	firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-
+	secondFormGroup: FormGroup;
 
 	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
 		this.user = new User();
 	}
 
-	colorSelect: Array<any>;
-	myStyle: object = {};
-	myParams: object = {};
-	width: number = 100;
-	height: number = 100;
-
 	ngOnInit() {
-
-		this.firstFormGroup = new FormGroup({
-			email: new FormControl('', [Validators.required, Validators.email])
-		  });
-		  this.secondFormGroup = new FormGroup({
-			password: new FormControl('', Validators.required)
-		  }); 
-
 		$(document).ready(() => {
 			$(".letras").keypress(function(key) {
 				if (
@@ -69,18 +55,28 @@ export class RegisterComponent implements OnInit {
 			});
 		});
 
-		this.initFormRegisterUser();
+		this.initFirstFormGroup();
+		this.initSecondFormGroup();
 	}
 
-	private initFormRegisterUser() {
-		this.formRegisterUser = this.formBuilder.group(
+	private initFirstFormGroup() {
+		this.firstFormGroup = this.formBuilder.group({
+			user: new FormControl("", [
+				Validators.required,
+				Validators.minLength(4),
+				Validators.maxLength(40),
+				CustomValidators.nospaceValidator
+			]),
+			firstName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+			lastName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+			gender: new FormControl("", [Validators.required]),
+			birthday: new FormControl("", [Validators.required])
+		});
+	}
+
+	private initSecondFormGroup() {
+		this.secondFormGroup = this.formBuilder.group(
 			{
-				user: new FormControl("", [
-					Validators.required,
-					Validators.minLength(4),
-					Validators.maxLength(40),
-					CustomValidators.nospaceValidator
-				]),
 				password: new FormControl("", [
 					Validators.required,
 					Validators.minLength(5),
@@ -92,13 +88,7 @@ export class RegisterComponent implements OnInit {
 
 				email: new FormControl("", [Validators.required]),
 
-				firstNames: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
-
-				lastName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
-
-				phone: new FormControl("", [Validators.required, Validators.minLength(7), Validators.maxLength(25)]),
-				gender: new FormControl("", [Validators.required]),
-				birthday: new FormControl("", [Validators.required])
+				phone: new FormControl("", [Validators.required, Validators.minLength(7), Validators.maxLength(25)])
 			},
 			{
 				validator: CustomValidators.passwordMatchValidator
@@ -106,24 +96,25 @@ export class RegisterComponent implements OnInit {
 		);
 	}
 
-	get email() { return this.firstFormGroup.get('email'); }
-	get password() { return this.secondFormGroup.get('password'); }
+	getValuesForm() {
+		// FIRST FORM
+		this.user.userName = this.firstFormGroup.value.user;
+		this.user.firstName = this.firstFormGroup.value.firstName;
+		this.user.lastName = this.firstFormGroup.value.lastName;
+		this.user.gender = this.firstFormGroup.value.gender;
+		this.user.birthDate = Utils.formatDateYYYYMMDD(this.firstFormGroup.value.birthday);
 
-	getValueForm() {
-		this.user.userName = this.formRegisterUser.value.user;
-		this.user.password = this.formRegisterUser.value.password;
-		this.user.firstName = this.formRegisterUser.value.firstNames;
-		this.user.lastName = this.formRegisterUser.value.lastName;
-		this.telefonos.push(this.formRegisterUser.value.phone);
+		// SECOND FORM
+		this.telefonos.push(this.secondFormGroup.value.phone);
 		this.user.phones = this.telefonos;
-		this.user.gender = this.formRegisterUser.value.gender;
-		this.user.email = this.formRegisterUser.value.email;
-		this.user.birthDate = Utils.formatDateYYYYMMDD(this.formRegisterUser.value.birthday);
+		this.user.password = this.secondFormGroup.value.password;
+		this.user.email = this.secondFormGroup.value.email;
+
 		this.user.role = "5c5de2211d65b81ce0497480";
 	}
 
 	createUser() {
-		this.getValueForm();
+		this.getValuesForm();
 		this.disabledButton = true;
 
 		this.usuarioService.createUsuario(this.user).subscribe(
