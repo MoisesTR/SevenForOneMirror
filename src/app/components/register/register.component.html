@@ -2,142 +2,191 @@
 
     <div class="row wrap">
 
-        <particles [params]="myParams" [style]="myStyle" [width]="width" [height]="height"></particles>
+        <div class="col-lg-6 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center white-text background-blue-space" id="bg-hide">
 
-        <div class="col-lg-7 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center" id="bg-hide">
+            <h1 class="display-4 text-center font-weight-bold">Welcome Back!</h1>
 
-            <img src="assets/images/MacBookPro.png" class="img-fluid animated fadeIn" alt="register">
-            <div class="mask flex-center hm-gradient">
-            </div>
+            <h3 class="mt-2 text-center">To keep connected with us please login with your personal info</h3>
+
+            <button mdbBtn type="button" color="white" rounded="true" outline="true" class="mt-3" mdbWavesEffect (click)="login()">Sign in</button>
 
         </div>
 
-        <div class="col-lg-5 col-md-7" style="height: 100vh; overflow: auto;">
+        <div class="col-lg-6 col-md-7 d-flex flex-column justify-content-center align-items-center background-white-space" style="height: 100vh; overflow: auto;">
 
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="container-fluid">
 
-                <div class="container-fluid">
-                    <div class="row p-a-r" id="top-section">
+                <div class="row justify-content-center">
 
-                        <div class="col-md-12 text-center mb-5 mt-5 wow fadeInDownBig" data-wow-delay="0.5s">
-                            <a (click)="login()" mdbTooltip="Click to go to login">
-                                <img placement="top" src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 30em;">
-                            </a>
-                        </div>
+                    <!-- <div class="col-md-12 text-center mb-5">
+                                    <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 20em;">
+                                </div> -->
 
-                        <form [formGroup]="formRegisterUser" (ngSubmit)="createUser()" class="col-md-12">
-                            <div class="wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="col-10 col-md-9 col-lg-9">
 
-                                <div class="row">
+                        <mdb-card>
+                            <mdb-card-body>
 
-                                    <!-- User -->
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-user prefix"></i>
-                                            <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput AlphanumericDirective>
-                                            <label for="user">User</label>
-                                            <show-errors [control]="formRegisterUser.controls['user']"></show-errors>
-                                        </div>
-                                    </div>
+                                <mdb-card-title>
+                                    <h1 class="display-4 text-center font-weight-bold">Create Account</h1>
 
-                                    <!-- Name -->
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-user prefix"></i>
-                                            <input type="text" id="firstNames" class="form-control" name="firstNames" autocomplete="off" formControlName="firstNames" mdbInput>
-                                            <label for="firstNames">First Name</label>
-                                            <show-errors [control]="formRegisterUser.controls['firstNames']"></show-errors>
-                                        </div>
-                                    </div>
-
-                                    <!-- LastName -->
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-user prefix"></i>
-                                            <input type="text" id="lastName" class="form-control" name="lastName" autocomplete="off" formControlName="lastName" mdbInput>
-                                            <label for="lastName">Last Name</label>
-                                            <show-errors [control]="formRegisterUser.controls['lastName']"></show-errors>
-                                        </div>
-                                    </div>
-
-                                    <!-- Password -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-lock prefix"></i>
-                                            <input type="password" id="pass" class="form-control" name="pass" autocomplete="off" formControlName="password" mdbInput>
-                                            <label for="pass">Password</label>
-                                            <show-errors [control]="formRegisterUser.controls['password']"></show-errors>
-                                        </div>
-                                    </div>
-
-                                    <!-- Confirm Password -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-lock prefix"></i>
-                                            <input type="password" id="confpass" class="form-control" name="pass" autocomplete="off" formControlName="confirmPassword" mdbInput>
-                                            <label for="confpass">Confirm</label>
-                                            <div *ngIf="formRegisterUser.controls['confirmPassword'].hasError('noPasswordMatch')">
-                                                <span class="error-message" style="left: 2.5rem;">Password do not match</span>
+                                    <div class="col-12 text-center mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a type="button" mdbBtn floating="true" size="lg" class="btn-fb waves-light" mdbTooltip="Facebook" placement="left" mdbWavesEffect><i class="fab fa-facebook-f"></i></a>
+                                                <a type="button" mdbBtn floating="true" size="lg" class=" btn-gplus waves-light" mdbTooltip="Gmail" placement="right" mdbWavesEffect><i class="fab fa-google"></i></a>
                                             </div>
                                         </div>
                                     </div>
+                                </mdb-card-title>
 
-                                    <!-- Email -->
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-envelope prefix"></i>
-                                            <input type="text" id="email" class="form-control" name="email" autocomplete="off" formControlName="email" mdbInput>
-                                            <label for="email">Email</label>
-                                            <show-errors [control]="formRegisterUser.controls['email']"></show-errors>
-                                        </div>
+                                <mdb-card-text>
+
+                                    <div class=" text-center  mt-1">
+                                        <h6>or use your information for registration</h6>
                                     </div>
 
-                                    <!-- Phone -->
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-phone prefix"></i>
-                                            <input type="text" id="phone" class="form-control" name="phone" (keypress)="keyPress($event)" autocomplete="off" formControlName="phone" mdbInput>
-                                            <label for="phone">Phone</label>
-                                            <show-errors [control]="formRegisterUser.controls['phone']"></show-errors>
-                                        </div>
-                                    </div>
 
-                                    <!-- Gender -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline form">
-                                            <mdb-icon fas icon="users"></mdb-icon>
-                                            <select class="browser-default custom-select width-select" formControlName="gender">
-                        <!-- <option selected>Gender</option> -->
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                      </select>
-                                            <show-errors [control]="formRegisterUser.controls['gender']"></show-errors>
-                                        </div>
-                                    </div>
+                                    <mdb-stepper #stepper>
 
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <i class="fas fa-birthday-cake prefix"></i>
-                                            <input type="text" id="birthday" [max]="fechaActual" class="form-control" autocomplete="off" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" formControlName="birthday" readonly mdbInput>
-                                            <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
-                                            <label for="birthday">Birthday</label>
-                                            <show-errors [control]="formRegisterUser.controls['birthday']"></show-errors>
-                                        </div>
-                                    </div>
+                                        <mdb-step name="Personal" [stepForm]="firstFormGroup">
+                                            <form [formGroup]="firstFormGroup">
 
-                                    <div class="col-12">
-                                        <div class="mt-3">
-                                            <!-- Sign in button -->
-                                            <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2" type="submit" [disabled]="!formRegisterUser.valid || disabledButton">Sign
-                        up</button>
-                                        </div>
-                                    </div>
+                                                <div class="row">
 
-                                </div>
-                            </div>
-                        </form>
+                                                    <!-- User -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-user prefix"></i>
+                                                            <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput AlphanumericDirective>
+                                                            <label for="user">User</label>
+                                                            <!-- <show-errors [control]="formRegisterUser.controls['user']"></show-errors> -->
+                                                        </div>
+                                                    </div>
 
+                                                    <!-- Name -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-user prefix"></i>
+                                                            <input type="text" id="firstNames" class="form-control" autocomplete="off" mdbInput>
+                                                            <label for="firstNames">First Name</label>
+                                                            <!-- <show-errors [control]="formRegisterUser.controls['firstNames']"></show-errors> -->
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- LastName -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-user prefix"></i>
+                                                            <input type="text" id="lastName" class="form-control" autocomplete="off" mdbInput>
+                                                            <label for="lastName">Last Name</label>
+                                                            <!-- <show-errors [control]="formRegisterUser.controls['lastName']"></show-errors> -->
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Gender -->
+                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                        <div class="md-form md-outline form">
+                                                            <mdb-icon fas icon="users"></mdb-icon>
+                                                            <select class="browser-default custom-select width-select" formControlName="gender">
+                                                            <option value="1">Male</option>
+                                                            <option value="2">Female</option>
+                                                        </select>
+                                                            <!-- <show-errors [control]="formRegisterUser.controls['gender']"></show-errors> -->
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Birthday -->
+                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-birthday-cake prefix"></i>
+                                                            <input type="text" id="birthday" class="form-control" autocomplete="off" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" readonly mdbInput>
+                                                            <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+                                                            <label for="birthday">Birthday</label>
+                                                            <!-- <show-errors [control]="formRegisterUser.controls['birthday']"></show-errors> -->
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </form>
+                                            <button mdbBtn size="sm" rounded="true" class="green-seven-one" (click)="stepper.next()">CONTINUE</button>
+                                        </mdb-step>
+
+                                        <mdb-step name="Contact" [stepForm]="secondFormGroup">
+                                            <form [formGroup]="secondFormGroup">
+
+                                                <div class="row">
+
+                                                    <!-- Email -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-envelope prefix"></i>
+                                                            <input type="text" id="email" class="form-control" autocomplete="off" mdbInput>
+                                                            <label for="email">Email</label>
+                                                            <!-- <show-errors [control]="formRegisterUser.controls['email']"></show-errors> -->
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Password -->
+                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-lock prefix"></i>
+                                                            <input type="password" id="pass" class="form-control" autocomplete="off" mdbInput>
+                                                            <label for="pass">Password</label>
+                                                            <show-errors [control]="formRegisterUser.controls['password']"></show-errors>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Confirm Password -->
+                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-lock prefix"></i>
+                                                            <input type="password" id="confpass" class="form-control" autocomplete="off" mdbInput>
+                                                            <label for="confpass">Confirm</label>
+                                                            <!-- <div *ngIf="formRegisterUser.controls['confirmPassword'].hasError('noPasswordMatch')">
+                                                        <span class="error-message" style="left: 2.5rem;">Password do not match</span>
+                                                    </div> -->
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Phone -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="md-form md-outline">
+                                                            <i class="fas fa-phone prefix"></i>
+                                                            <input type="text" id="phone" class="form-control" (keypress)="keyPress($event)" autocomplete="off" mdbInput>
+                                                            <label for="phone">Phone</label>
+                                                            <!-- <show-errors [control]="formRegisterUser.controls['phone']"></show-errors> -->
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </form>
+                                            <button mdbBtn size="sm" rounded="true" class="green-seven-one" (click)="stepper.next()">CONTINUE</button>
+                                            <button mdbBtn size="sm" rounded="true" color="red" (click)="stepper.previous()">BACK</button>
+                                        </mdb-step>
+
+                                        <mdb-step name="Sign up">
+                                            <h5>Finish!</h5>
+                                            <div class="step-actions">
+                                                <div class="text-center">
+                                                    <!-- Sign in button -->
+                                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2" type="submit" [disabled]="!formRegisterUser.valid || disabledButton">Sign up</button>
+                                                </div>
+                                            </div>
+                                        </mdb-step>
+
+                                    </mdb-stepper>
+
+
+                                </mdb-card-text>
+                            </mdb-card-body>
+                        </mdb-card>
                     </div>
+
                 </div>
 
             </div>
@@ -147,3 +196,11 @@
     </div>
 
 </section>
+
+<div class="fixed-action-btn d-sm-block d-md-none" style="bottom: 45px; right: 24px;" mdbTooltip="Sign in" placement="left">
+
+    <a class="btn-floating btn-large blue-seven-one waves-light" mdbWavesEffect (click)="login()">
+        <i class="fas fa-user-alt"></i>
+    </a>
+
+</div>

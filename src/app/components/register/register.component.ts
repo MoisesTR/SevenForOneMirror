@@ -22,6 +22,10 @@ export class RegisterComponent implements OnInit {
 	public fechaActual = new Date();
 	formRegisterUser: FormGroup;
 
+	firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
+
 	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
 		this.user = new User();
 	}
@@ -33,30 +37,13 @@ export class RegisterComponent implements OnInit {
 	height: number = 100;
 
 	ngOnInit() {
-		this.myStyle = {
-			position: "fixed",
-			width: "100%",
-			height: "100%",
-			"z-index": -1,
-			top: 0,
-			left: 0,
-			right: 0,
-			bottom: 0
-		};
 
-		this.myParams = {
-			particles: {
-				number: {
-					value: 100
-				},
-				color: {
-					value: "#397EF5"
-				},
-				shape: {
-					type: "polygon"
-				}
-			}
-		};
+		this.firstFormGroup = new FormGroup({
+			email: new FormControl('', [Validators.required, Validators.email])
+		  });
+		  this.secondFormGroup = new FormGroup({
+			password: new FormControl('', Validators.required)
+		  }); 
 
 		$(document).ready(() => {
 			$(".letras").keypress(function(key) {
@@ -118,6 +105,9 @@ export class RegisterComponent implements OnInit {
 			}
 		);
 	}
+
+	get email() { return this.firstFormGroup.get('email'); }
+	get password() { return this.secondFormGroup.get('password'); }
 
 	getValueForm() {
 		this.user.userName = this.formRegisterUser.value.user;

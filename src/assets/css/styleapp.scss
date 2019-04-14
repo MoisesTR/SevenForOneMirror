@@ -69,9 +69,30 @@
     display: flex;
 }
 
-// Full Height screen
+
+/* Full Height screen */
+
 #full-height {
     height: 100vh !important;
+}
+
+
+/* Background white space login and register */
+
+.background-white-space {
+    background: url("/assets/images/background.svg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.background-blue-space {
+    background: url("/assets/images/intro-bg.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 
