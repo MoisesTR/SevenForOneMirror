@@ -57,6 +57,14 @@ export function getAuthServiceConfigs() {
 		SocialLoginModule,
 		ParticlesModule
 	],
+	imports: [
+		BrowserModule.withServerTransition({ appId: "serverApp" }),
+		BrowserAnimationsModule,
+		CoreModule,
+		MDBBootstrapModulesPro.forRoot(),
+		AppRoutingModule,
+		ParticlesModule
+	],
 	schemas: [NO_ERRORS_SCHEMA],
 	providers: [
 		MDBSpinningPreloader,
