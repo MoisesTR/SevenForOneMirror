@@ -6,24 +6,27 @@ import { Component, OnInit } from "@angular/core";
 	styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
+	
+	// Chart
+	
 	public chartType: string = 'line';
 
 	public chartDatasets: Array<any> = [
-	  { data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset' },
-	  { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
+	  { data: [200, 220], label: '$10' },
+	  { data: [150, 50], label: '$50' }
 	];
   
-	public chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+	public chartLabels: Array<any> = ['April', 'May'];
   
 	public chartColors: Array<any> = [
 	  {
-		backgroundColor: 'rgba(105, 0, 132, .2)',
-		borderColor: 'rgba(200, 99, 132, .7)',
+		backgroundColor: 'rgba(57, 126, 245, .2)',
+		borderColor: 'rgba(33, 111, 206, .7)',
 		borderWidth: 2,
 	  },
 	  {
-		backgroundColor: 'rgba(0, 137, 132, .2)',
-		borderColor: 'rgba(0, 10, 130, .7)',
+		backgroundColor: 'rgba(66, 213, 131, .2)',
+		borderColor: 'rgba(52, 191, 108, .7)',
 		borderWidth: 2,
 	  }
 	];
@@ -33,6 +36,8 @@ export class DashboardComponent implements OnInit {
 	};
 	public chartClicked(e: any): void { }
 	public chartHovered(e: any): void { }
+
+// End chart	
 
 	elements: any = [];
     headElements = ['ID', 'First', 'Last', 'Handle'];
