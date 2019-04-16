@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
+import { UserService } from "../../core/services/shared/user.service";
 import { Router } from "@angular/router";
 import { Role, Token } from "../../models/models.index";
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider } from "angular-6-social-login";
+import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
 
 declare var $: any;
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 	public idRolUser: string;
 
 	constructor(
-		private usuarioService: UsuarioService,
+		private usuarioService: UserService,
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private rolService: RolService,
@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
 		this.rolService.getRoles().subscribe(roles => {
 			this.roles = roles;
 			this.idRolUser = this.rolService.filterIdRolUser(this.roles);
+			console.log(this.idRolUser)
 		});
 	}
 

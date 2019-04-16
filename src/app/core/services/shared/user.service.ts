@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 @Injectable()
-export class UsuarioService {
+export class UserService {
 	public url: string;
 	public identity: User;
 	public userUrl = "users";
@@ -33,7 +33,7 @@ export class UsuarioService {
 		return this.http.post(this.url + "loginGoogle", usuario, options);
 	}
 
-	getUsuarios() {
+	getUsers() {
 		return this.http.get<User[]>(this.url + this.userUrl).pipe(map(data => data));
 	}
 

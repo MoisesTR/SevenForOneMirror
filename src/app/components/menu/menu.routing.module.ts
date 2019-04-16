@@ -12,7 +12,7 @@ const menuRoutes = [
 	, { path: "profile", component: ProfileComponent, data: { titulo: "Profile" } }
 	, { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
 	, { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
-	, { path: "game", component: GameComponent, data: { titulo: "game"}}
+	, { path: "game/:idGroup", component: GameComponent, data: { titulo: "game"}}
 ];
 
 @NgModule({

@@ -18,14 +18,14 @@
 
                                 <div class="row justify-content-center">
 
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3" *ngFor="let user of users">
+                                    <div *ngFor="let member of members; let i = index" class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3" >
 
                                         <div class="circle-text">
                                             <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style = 'background-color: white;' [ngStyle]="{'background-image': 'url(' + (this.user.image ? this.user.image : 'assets/images/user.png')  + ')'}"></div>
+                                                <div class="ratio img-responsive img-circle" style = 'background-color: white;' [ngStyle]="{'background-image': 'url(' + (this.member.image ? this.member.image : 'assets/images/user.png')  + ')'}"></div>
                                                 <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
                                                     <h5>
-                                                        #{{user.Position}} <br> {{user.UserName}}
+                                                        #{{i+1}} <br> {{member.userName}}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -33,7 +33,6 @@
 
                                     </div>
 
-                                  <button > Jugar</button>
                                     <div class="col-12 col-lg-12 mt-5 text-center">
                                         <table class="table table-responsive-md table-hover text-center">
                                             <thead>
@@ -45,10 +44,10 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr [ngClass]="[userActual._id == user.IdUser ? 'green-seven-one white-text' : '']" *ngFor="let user of users;let i = index">
-                                                    <th scope="row">{{user.Position}}</th>
-                                                    <td>{{user.UserName}}</td>
-                                                    <td>${{totalMount - (user.Position * montoInvertir)}}</td>
+                                                <tr [ngClass]="[userActual._id == member.userId ? 'green-seven-one white-text' : '']" *ngFor="let member of members;let i = index">
+                                                    <th scope="row">{{(i+1)}}</th>
+                                                    <td>{{member.userName}}</td>
+                                                    <td>${{totalMount - ((i+1) * montoInvertir)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

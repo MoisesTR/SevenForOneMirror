@@ -47,14 +47,4 @@ export class GroupService {
 
 		return this.http.delete(this.url + this.gameUrl + "/members/" + groupId, options);
 	}
-
-	getPurchaseHistory(): Observable<any> {
-		return this.http.get(this.url + this.purchaseUrl);
-	}
-
-	getPurchaseHistoryByIdUser(userId): Observable<any> {
-		const params = new HttpParams().set("userId", userId);
-
-		return this.http.get(this.url + this.purchaseUrl + "/me");
-	}
 }

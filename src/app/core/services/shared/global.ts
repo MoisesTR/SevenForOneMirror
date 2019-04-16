@@ -9,3 +9,8 @@ export const Global = {
 	urlAuth: apiEndpointAuth,
   url: apiEndpoint
 };
+
+export const validRoles = {
+  adminRol: 'ADMIN',
+  userRol: 'USER'
+};

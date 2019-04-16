@@ -1,8 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
+import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Role, Token, User } from "../../models/models.index";
+import { Token, User } from "../../models/models.index";
 import { RolService } from "../../core/services/shared/rol.service";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { PurchaseService } from "../../core/services/shared/purchase.service";
+import { PurchaseHistory } from "../../models/PurchaseHistory";
+import { GroupService } from "../../core/services/shared/group.service";
+
 declare var $: any;
 
 @Component({
@@ -14,33 +19,39 @@ export class MenuComponent implements OnInit {
 	public token: Token;
 	public userActual: User;
 	public usuarios: User[] = [];
-	private username: string;
-	private password: string;
-	private roles: Role[] = [];
+	public purchaseHistory: PurchaseHistory[] = [];
+	public totalEarned = 0;
+	public totalInvested = 0;
+	public idRolUserNormal: string;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private rolService: RolService,
-		private usuarioService: UsuarioService,
+		private usuarioService: UserService,
+		private authService: AuthService,
+		private purchaseHistoryService: PurchaseService,
+		private groupService: GroupService,
 		private router: Router
 	) {
 		this.token = new Token();
 	}
 
 	ngOnInit() {
-		this.getCredentialsUser();
+		this.dropdownAndScroll();
 		this.getRoles();
+		this.getCredentialsUser();
+    this.getTotalEarned();
+	}
 
+	dropdownAndScroll() {
 		$(document).ready(() => {
 			$(".dropify").dropify();
 
 			$(document).scroll(function() {
 				if ($(this).scrollTop() >= 20) {
-					
-					$('#return-to-top').fadeIn(200);
+					$("#return-to-top").fadeIn(200);
 				} else {
-					
-					$('#return-to-top').fadeOut(200);
+					$("#return-to-top").fadeOut(200);
 				}
 			});
 		});
@@ -60,24 +71,51 @@ export class MenuComponent implements OnInit {
 		fixNavDropdown();
 	}
 
+	getRoles() {
+		this.rolService.getRoles().subscribe(roles => {
+			this.idRolUserNormal = this.rolService.filterIdRol("User", roles);
+		});
+	}
+
 	getCredentialsUser() {
-		this.username = localStorage.getItem("username");
-		this.password = localStorage.getItem("password");
-		this.userActual = JSON.parse(localStorage.getItem("identity"));
+		this.userActual = this.authService.getUser();
 		this.getUsuarios();
 	}
 
-  getRoles() {
-   this.rolService.getRoles().subscribe(
-     response => {
-       console.log(response);
-     }
-   );
-  }
-
 	getUsuarios() {
-		this.usuarioService.getUsuarios().subscribe(usuarios => {
+		this.usuarioService.getUsers().subscribe(usuarios => {
 			this.usuarios = usuarios;
+		});
+	}
+
+	getTotalEarned() {
+		if (this.idRolUserNormal === this.userActual.role) {
+			this.getPurchaseHistory();
+		} else {
+			this.getTotalEarnedGlobalGroups();
+		}
+	}
+
+	getPurchaseHistory() {
+		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.authService.getUser()._id).subscribe(history => {
+			this.purchaseHistory = history;
+			for (const item of this.purchaseHistory) {
+				if (item.moneyDirection) {
+					this.totalInvested += +item.quantity["$numberDecimal"];
+				} else {
+					this.totalEarned += +item.quantity["$numberDecimal"];
+				}
+			}
+		});
+	}
+
+	getTotalEarnedGlobalGroups() {
+		this.groupService.getGroups().subscribe(groups => {
+			groups.forEach((group, index) => {
+				if (group.enabled) {
+					this.totalEarned += group.totalInvested;
+				}
+			});
 		});
 	}
 

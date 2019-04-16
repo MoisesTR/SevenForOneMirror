@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { GroupGame } from "../../models/GroupGame";
-import { Router } from "@angular/router";
-import swal from "sweetalert2";
+import {Component, OnInit} from '@angular/core';
+import {GroupService} from '../../core/services/shared/group.service';
+import {GroupGame} from '../../models/GroupGame';
+import {Router} from '@angular/router';
+import swal from 'sweetalert2';
 import {MemberGroup} from '../../models/MemberGroup';
+import {User} from '../../models/User';
+import {AuthService} from '../../core/services/auth/auth.service';
 
 @Component({
 	selector: "app-groups",
@@ -12,11 +14,12 @@ import {MemberGroup} from '../../models/MemberGroup';
 })
 export class GroupsComponent implements OnInit {
 	public groups: GroupGame[] = [];
-
-	constructor(private groupService: GroupService, private router: Router) {}
+	public user: User;
+	constructor(private groupService: GroupService, private authService: AuthService, private router: Router) {}
 
 	ngOnInit() {
 		this.getGroups();
+		this.user = this.authService.getUser();
 	}
 
 	getGroups() {
@@ -26,10 +29,14 @@ export class GroupsComponent implements OnInit {
 	}
 
 	addMemberToGroup(groupId) {
-	  const member = new MemberGroup();
-
-	  this.groupService.addMemberToGroup(member, groupId)
-  }
+		const member = new MemberGroup();
+		member.payReference = "payreferenceuser";
+		this.groupService.addMemberToGroup(member, groupId).subscribe(response => {
+			swal.fire("Info", "The registration has been successful!", "success").then(() => {
+				this.router.navigate(["/game", groupId]);
+			});
+		});
+	}
 
 	goButton(index, groupId) {
 		swal
@@ -44,8 +51,7 @@ export class GroupsComponent implements OnInit {
 			})
 			.then(result => {
 				if (result.value) {
-				  this.addMemberToGroup(groupId);
-					this.router.navigate(["/game"]);
+					this.addMemberToGroup(groupId);
 				}
 			});
 	}

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
 import { CustomValidators } from "../../validators/CustomValidators";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
+import { UserService } from "../../core/services/shared/user.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { Utils } from "../../infraestructura/Utils";
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 	secondFormGroup: FormGroup;
 
 	constructor(
-		private usuarioService: UsuarioService,
+		private usuarioService: UserService,
 		private rolService: RolService,
 		private formBuilder: FormBuilder,
 		private router: Router,

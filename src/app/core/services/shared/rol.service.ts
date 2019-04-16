@@ -26,6 +26,12 @@ export class RolService {
 	filterIdRolUser(roles: Role[]) {
 		// Rol desginado para los usuarios normales
 		const idRol = roles.find(rol => rol.name === "User")._id;
-		return idRol ? idRol : '0';
+		return idRol ? idRol : "0000000000";
+	}
+
+	filterIdRol(rolName, roles) {
+		let idRol;
+    idRol = roles.find(rol => rol.name === rolName)._id;
+		return idRol ? idRol : null;
 	}
 }

@@ -4,10 +4,7 @@ export class User {
 	public lastName: string;
 	public userName: string;
 	public email: string;
-	public phones: string[];
-	public image: string;
-	public birthDate: string;
-	public gender: string;
+	public rolName: string;
 	public secretToken: string;
 	public isVerified: boolean;
 	public role: string;
@@ -18,6 +15,10 @@ export class User {
 	public updatedAt: string;
 	public tokenGoogle: string;
 	public getUserInfo: boolean;
+	public phones?: string[];
+	public birthDate?: string;
+	public gender?: string;
+	public image?: string;
 
 	constructor() {}
 }

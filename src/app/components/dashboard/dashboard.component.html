@@ -1,57 +1,19 @@
-<section>
+<section *ngIf="!idRolAdmin; else userContent" >
     <div class="container-fluid">
         <div class="row justify-content-center">
 
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5" *ngFor="let group of groups">
                 <div class="card card-cascade cascading-admin-card text-muted">
                     <div class="admin-up">
                         <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
                         <div class="data mb-3">
-                            <h3><strong>$10</strong></h3>
-                            <h4 class="mt-2">Total Users: 13</h4>
+                            <h3><strong>$ {{group.initialInvertion}}</strong></h3>
+                            <h4 class="mt-2">Total users active: {{group.totalMembers}}</h4>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
-                <div class="card card-cascade cascading-admin-card text-muted">
-                    <div class="admin-up">
-                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
-                        <div class="data mb-3">
-
-                            <h3><strong>$50</strong></h3>
-                            <h4 class="mt-2">Total Users: 4</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
-                <div class="card card-cascade cascading-admin-card text-muted">
-                    <div class="admin-up">
-                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
-                        <div class="data mb-3">
-                            <h3><strong>$100</strong></h3>
-                            <h4 class="mt-2">Total Users: 2</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
-                <div class="card card-cascade cascading-admin-card text-muted">
-                    <div class="admin-up">
-                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
-                        <div class="data mb-3">
-                            <h3><strong>$500</strong></h3>
-                            <h4 class="mt-2">Total Users: 5</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
 
@@ -75,11 +37,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let el of elements; let i = index">
-                                            <th scope="row">{{el.id}}</th>
-                                            <td>{{el.first}}</td>
-                                            <td>{{el.last}}</td>
-                                            <td>{{el.handle}}</td>
+                                        <tr *ngFor="let user of users; let i = index">
+                                            <th scope="row"> {{i + 1}}</th>
+                                            <td>{{user.userName}}</td>
+                                            <td>{{user.firstName}}</td>
+                                            <td>{{user.lastName}}</td>
+                                            <td>{{user.email}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -104,7 +67,7 @@
                 <mdb-card cascade="true" narrower="true">
 
                     <div class="view view-cascade gradient-card-header green-seven-one">
-                        <h2 class="card-header-title mb-2">Historical Earnings</h2>
+                        <h2 class="card-header-title mb-2">Historical Invested</h2>
                     </div>
 
                     <mdb-card-body cascade="true">
@@ -116,15 +79,15 @@
                                 <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
                                     <thead>
                                         <tr>
-                                            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+                                            <th *ngFor="let head of headElementsGroupsEarning; let i = index" scope="col">{{head}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let el of elements; let i = index">
-                                            <th scope="row">{{el.id}}</th>
-                                            <td>{{el.first}}</td>
-                                            <td>{{el.last}}</td>
-                                            <td>{{el.handle}}</td>
+                                        <tr *ngFor="let group of groups; let i = index">
+                                            <th scope="row">{{ i + 1}}</th>
+                                            <td>$ {{group.initialInvertion}}</td>
+                                            <td>$ {{group.totalInvested}}</td>
+                                            <td>{{group.winners}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -225,3 +188,5 @@
     </div>
 
 </section>
+
+<ng-template #userContent></ng-template>
