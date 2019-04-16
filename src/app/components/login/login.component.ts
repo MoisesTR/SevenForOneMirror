@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/User";
-import { UserService } from "../../core/services/shared/user.service";
-import { Router } from "@angular/router";
-import { Role, Token } from "../../models/models.index";
-import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
-import { RolService } from "../../core/services/shared/rol.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../models/User';
+import {UserService} from '../../core/services/shared/user.service';
+import {Router} from '@angular/router';
+import {AuthService, GoogleLoginProvider} from 'angular-6-social-login';
+import {RolService} from '../../core/services/shared/rol.service';
+import {RoleEnum} from '../enums/RoleEnum';
 
 declare var $: any;
 
@@ -17,8 +17,8 @@ declare var $: any;
 export class LoginComponent implements OnInit {
 	userForm: FormGroup;
 	public user: User;
+	public roles: RoleEnum[] = [];
 	public disabledButton = false;
-	public roles: Role[] = [];
 	public idRolUser: string;
 
 	constructor(
@@ -71,9 +71,7 @@ export class LoginComponent implements OnInit {
 
 	getRoles() {
 		this.rolService.getRoles().subscribe(roles => {
-			this.roles = roles;
-			this.idRolUser = this.rolService.filterIdRolUser(this.roles);
-			console.log(this.idRolUser)
+			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
 		});
 	}
 
@@ -85,7 +83,7 @@ export class LoginComponent implements OnInit {
 
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.tokenGoogle = userData.idToken;
-			this.user.role = this.idRolUser;
+			this.user.role._id = this.idRolUser;
 
 			this.usuarioService.loginGoogle(this.user).subscribe(response => {
 				this.usuarioService.identity = response.user;
@@ -109,22 +107,12 @@ export class LoginComponent implements OnInit {
 		this.disabledButton = true;
 
 		this.usuarioService.login(this.user).subscribe(
-			res => {
-				const token: Token = res;
-				localStorage.setItem("token", token.token);
-				this.user.getUserInfo = true;
-
-				this.usuarioService.login(this.user).subscribe(
-					resuser => {
-						this.disabledButton = false;
-						this.usuarioService.identity = resuser;
-						localStorage.setItem("identity", JSON.stringify(resuser));
-						this.router.navigate(["/dashboard"]);
-					},
-					() => {
-						this.disabledButton = false;
-					}
-				);
+			response => {
+				const token = response.token;
+				this.usuarioService.identity = response.user;
+				localStorage.setItem("token", token);
+				localStorage.setItem("identity", JSON.stringify(this.usuarioService.identity));
+				this.router.navigate(["/dashboard"]);
 			},
 			() => {
 				this.disabledButton = false;

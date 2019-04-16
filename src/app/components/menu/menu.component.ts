@@ -7,6 +7,7 @@ import { AuthService } from "../../core/services/auth/auth.service";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
 import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
+import { RoleEnum } from "../enums/RoleEnum";
 
 declare var $: any;
 
@@ -22,7 +23,7 @@ export class MenuComponent implements OnInit {
 	public purchaseHistory: PurchaseHistory[] = [];
 	public totalEarned = 0;
 	public totalInvested = 0;
-	public idRolUserNormal: string;
+	public isUserAdmin = false;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -38,9 +39,8 @@ export class MenuComponent implements OnInit {
 
 	ngOnInit() {
 		this.dropdownAndScroll();
-		this.getRoles();
 		this.getCredentialsUser();
-    this.getTotalEarned();
+		this.getTotalEarned();
 	}
 
 	dropdownAndScroll() {
@@ -71,25 +71,13 @@ export class MenuComponent implements OnInit {
 		fixNavDropdown();
 	}
 
-	getRoles() {
-		this.rolService.getRoles().subscribe(roles => {
-			this.idRolUserNormal = this.rolService.filterIdRol("User", roles);
-		});
-	}
-
 	getCredentialsUser() {
 		this.userActual = this.authService.getUser();
-		this.getUsuarios();
-	}
-
-	getUsuarios() {
-		this.usuarioService.getUsers().subscribe(usuarios => {
-			this.usuarios = usuarios;
-		});
+		this.isUserAdmin = this.userActual.role.name === RoleEnum.Admin;
 	}
 
 	getTotalEarned() {
-		if (this.idRolUserNormal === this.userActual.role) {
+		if (this.userActual.role.name === RoleEnum.User) {
 			this.getPurchaseHistory();
 		} else {
 			this.getTotalEarnedGlobalGroups();

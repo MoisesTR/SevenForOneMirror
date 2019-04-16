@@ -30,8 +30,8 @@ export class RolService {
 	}
 
 	filterIdRol(rolName, roles) {
-		let idRol;
-    idRol = roles.find(rol => rol.name === rolName)._id;
-		return idRol ? idRol : null;
+		const rolFiltered = roles.find(rol => rol.name === rolName);
+
+		return rolFiltered ? rolFiltered._id : null;
 	}
 }

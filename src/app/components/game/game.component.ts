@@ -5,6 +5,7 @@ import { User } from "../../models/User";
 import { GroupGame } from "../../models/GroupGame";
 import { ActivatedRoute, Params } from "@angular/router";
 import { MemberGroup } from "../../models/MemberGroup";
+import {RoleEnum} from '../enums/RoleEnum';
 
 @Component({
 	selector: "app-game",
@@ -20,6 +21,7 @@ export class GameComponent implements OnInit {
 	public userActual: User;
 	public idGroup: number;
 	public limitePersonas = 7;
+	public isUserAdmin = false;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -28,13 +30,14 @@ export class GameComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-    this.getUser();
-	  this.getParams();
+		this.getUser();
+		this.getParams();
 	}
 
 	getParams() {
 		this.activatedRoute.params.subscribe((params: Params) => {
 			this.idGroup = params["idGroup"];
+
 			this.getMembersGroup(this.idGroup);
 			this.getGroup(this.idGroup);
 		});
@@ -42,6 +45,7 @@ export class GameComponent implements OnInit {
 
 	getUser() {
 		this.userActual = this.authService.getUser();
+		this.isUserAdmin = this.userActual.role.name === RoleEnum.Admin;
 	}
 
 	getMembersGroup(idGroup) {

@@ -9,6 +9,7 @@ import { Utils } from "../../infraestructura/Utils";
 import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
 import { Role } from "../../models/Role";
+import { RoleEnum } from "../enums/RoleEnum";
 
 declare var $: any;
 
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
 	public width: number = 100;
 	public height: number = 100;
 	public idRolUser: string;
+	public idRolAdmin: string;
 
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
@@ -109,7 +111,8 @@ export class RegisterComponent implements OnInit {
 	getRoles() {
 		this.rolService.getRoles().subscribe(roles => {
 			this.roles = roles;
-			this.idRolUser = this.rolService.filterIdRolUser(this.roles);
+			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, this.roles);
+			this.idRolAdmin = this.rolService.filterIdRol(RoleEnum.Admin, this.roles);
 		});
 	}
 
@@ -118,7 +121,12 @@ export class RegisterComponent implements OnInit {
 		this.user.userName = this.firstFormGroup.value.user;
 		this.user.firstName = this.firstFormGroup.value.firstName;
 		this.user.lastName = this.firstFormGroup.value.lastName;
-		this.user.gender = this.firstFormGroup.value.gender;
+
+		const gender = this.firstFormGroup.value.gender;
+
+		if (gender) {
+			this.user.gender = this.firstFormGroup.value.gender === 1 ? "M" : "F";
+		}
 
 		// SECOND FORM
 		if (this.firstFormGroup.value.birthday) {
@@ -134,7 +142,12 @@ export class RegisterComponent implements OnInit {
 		this.user.password = this.secondFormGroup.value.password;
 		this.user.email = this.secondFormGroup.value.email;
 
-		this.user.role = this.idRolUser;
+		// Validacion temporal para crear un usuario administrador unico
+		if (this.user.userName === 'Admin') {
+      this.user.role._id = this.idRolAdmin;
+    } else {
+      this.user.role._id = this.idRolUser;
+    }
 	}
 
 	createUser() {
@@ -177,7 +190,7 @@ export class RegisterComponent implements OnInit {
 
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.tokenGoogle = userData.idToken;
-			this.user.role = "5c5de2211d65b81ce0497480";
+			this.user.role._id = this.idRolUser;
 
 			this.usuarioService.loginGoogle(this.user).subscribe(response => {
 				this.usuarioService.identity = response.user;

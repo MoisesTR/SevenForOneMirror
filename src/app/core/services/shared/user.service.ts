@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from '../../../models/User';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import {RoleEnum} from '../../../components/enums/RoleEnum';
 
 @Injectable()
 export class UserService {
@@ -64,4 +65,9 @@ export class UserService {
 
 		return this.http.post(this.url + "verifyemail/" + token, options);
 	}
+
+	filterUsersByRol(users: User[], rol) {
+	  return users.filter( user => user.role.name === rol);
+  }
+
 }

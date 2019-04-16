@@ -1,3 +1,5 @@
+import {Role} from './Role';
+
 export class User {
 	public _id: number;
 	public firstName: string;
@@ -7,7 +9,7 @@ export class User {
 	public rolName: string;
 	public secretToken: string;
 	public isVerified: boolean;
-	public role: string;
+	public role: Role = new Role();
 	public passwordHash: string;
 	public password: string;
 	public enabled: number;

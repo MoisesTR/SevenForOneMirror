@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {GroupService} from '../../core/services/shared/group.service';
-import {GroupGame} from '../../models/GroupGame';
-import {Router} from '@angular/router';
-import swal from 'sweetalert2';
-import {MemberGroup} from '../../models/MemberGroup';
-import {User} from '../../models/User';
-import {AuthService} from '../../core/services/auth/auth.service';
+import { Component, OnInit } from "@angular/core";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { Router } from "@angular/router";
+import swal from "sweetalert2";
+import { MemberGroup } from "../../models/MemberGroup";
+import { User } from "../../models/User";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { RoleEnum } from "../enums/RoleEnum";
 
 @Component({
 	selector: "app-groups",
@@ -28,6 +29,28 @@ export class GroupsComponent implements OnInit {
 		});
 	}
 
+	goButton(index, groupId) {
+		if (this.user.role.name === RoleEnum.User) {
+			swal
+				.fire({
+					title: "Confirmation",
+					text: "Do you want to come in?",
+					type: "info",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Yes, i do!"
+				})
+				.then(result => {
+					if (result.value) {
+						this.addMemberToGroup(groupId);
+					}
+				});
+		} else {
+			this.router.navigate(["/game", groupId]);
+		}
+	}
+
 	addMemberToGroup(groupId) {
 		const member = new MemberGroup();
 		member.payReference = "payreferenceuser";
@@ -36,23 +59,5 @@ export class GroupsComponent implements OnInit {
 				this.router.navigate(["/game", groupId]);
 			});
 		});
-	}
-
-	goButton(index, groupId) {
-		swal
-			.fire({
-				title: "Confirmation",
-				text: "Do you want to come in?",
-				type: "info",
-				showCancelButton: true,
-				confirmButtonColor: "#3085d6",
-				cancelButtonColor: "#d33",
-				confirmButtonText: "Yes, i do!"
-			})
-			.then(result => {
-				if (result.value) {
-					this.addMemberToGroup(groupId);
-				}
-			});
 	}
 }

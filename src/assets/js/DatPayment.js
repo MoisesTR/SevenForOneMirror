@@ -111,12 +111,10 @@ var card =
 					var toInitialize;
 					this.options = extend(true, this.defaults, opts);
 					if (!this.options.form) {
-						console.log("Please provide a form");
 						return;
 					}
 					this.$el = QJ(this.options.form);
 					if (!this.options.container) {
-						console.log("Please provide a container");
 						return;
 					}
 					this.$container = QJ(this.options.container);

@@ -1,4 +1,4 @@
-<section *ngIf="!idRolAdmin; else userContent" >
+<section *ngIf="userIsAdmin; else userContent" >
     <div class="container-fluid">
         <div class="row justify-content-center">
 
@@ -103,84 +103,6 @@
                 </mdb-card>
                 <!--/.Card-->
 
-
-            </div>
-
-            <div class="col-12 col-sm-12 col-md-6 colg-lg-4 mb-5">
-
-                <!--Card-->
-                <mdb-card cascade="true" narrower="true">
-
-                    <div class="view view-cascade gradient-card-header green-seven-one">
-                        <h2 class="card-header-title mb-2">Winners per Groups</h2>
-                    </div>
-
-                    <mdb-card-body cascade="true">
-
-                        <mdb-card-text>
-
-                            <div class="container-fluid mt-3">
-
-                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
-                                    <thead>
-                                        <tr>
-                                            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let el of elements; let i = index">
-                                            <th scope="row">{{el.id}}</th>
-                                            <td>{{el.first}}</td>
-                                            <td>{{el.last}}</td>
-                                            <td>{{el.handle}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-
-                        </mdb-card-text>
-
-                    </mdb-card-body>
-                    <!--/.Card content-->
-
-                </mdb-card>
-                <!--/.Card-->
-
-
-            </div>
-
-            <div class="col-12 colsm-12 col-md-12 col-lg-12">
-
-                <!--Card-->
-                <mdb-card cascade="true" narrower="true">
-
-                    <div class="view view-cascade gradient-card-header green-seven-one">
-                        <h2 class="card-header-title mb-2">Groups</h2>
-                    </div>
-
-                    <mdb-card-body cascade="true">
-
-                        <mdb-card-text>
-
-                            <div class="container-fluid mt-3">
-
-                                <div style="display: block">
-                                    <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                                          </canvas>
-                                </div>
-
-                            </div>
-
-
-                        </mdb-card-text>
-
-                    </mdb-card-body>
-                    <!--/.Card content-->
-
-                </mdb-card>
-                <!--/.Card-->
 
             </div>
 

@@ -20,7 +20,16 @@
 
                                     <div *ngFor="let member of members; let i = index" class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3 background-first wow bounceInRight" data-wow-delay="0.6s">
 
-                                        <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (this.userActual.image ? this.userActual.image : 'assets/images/user.png')  + ')'}"></div>
+                                        <div *ngIf="userIsAdmin; else userContentGame" class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+
+                                        <ng-template #userContentGame>
+                                          <div *ngIf="userActual._id !== member.userId; else userActualGame" class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+
+                                          <!--USUARIO ACTUAL LOGUEADO-->
+                                          <ng-template #userActualGame>
+                                            <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+                                          </ng-template>
+                                        </ng-template>
 
                                     </div>
 
@@ -30,17 +39,28 @@
                                                 <tr>
                                                     <th>Position</th>
                                                     <th>Username</th>
-                                                    <th>Earned</th>
+                                                    <th>Accumulated</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody>
-                                                <tr [ngClass]="[userActual._id == member.userId ? 'green-seven-one white-text' : '']" *ngFor="let member of members;let i = index">
+                                            <tbody *ngIf="!userIsAdmin; else userBody">
+                                                <tr [ngClass]="[userActual._id == member.userId && userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']" *ngFor="let member of members;let i = index">
                                                     <th scope="row">{{(i+1)}}</th>
                                                     <td>{{member.userName}}</td>
                                                     <td>${{totalMount - ((i+1) * montoInvertir)}}</td>
                                                 </tr>
                                             </tbody>
+
+                                          <ng-template #userBody>
+                                            <tbody >
+                                            <tr *ngFor="let member of members;let i = index">
+                                              <th scope="row">{{(i+1)}}</th>
+                                              <td>{{member.userName}}</td>
+                                              <td>${{totalMount - ((i+1) * montoInvertir)}}</td>
+                                            </tr>
+                                            </tbody>
+                                          </ng-template>
+
                                         </table>
                                     </div>
 
