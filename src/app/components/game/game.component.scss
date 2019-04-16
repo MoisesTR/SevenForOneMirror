@@ -50,8 +50,64 @@
     max-width: 100%;
 }
 
+.background-first {
+    background-image: url("/assets/images/first.svg");
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30%;
+    padding-top: 3%;
+    padding-left: 6%;
+    padding-right: 6%;
+    padding-bottom: 0;
+}
+
 @media only screen and (max-width: 767px) {
     .circle-text div {
         padding-top: 8%;
+    }
+    .background-first {
+        padding-top: 5%;
+        padding-left: 15%;
+        padding-right: 15%;
+        padding-bottom: 0;
+    }
+    .img-responsive {
+        left: -25%;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .background-first {
+        padding-top: 5%;
+        padding-left: 14%;
+        padding-right: 14%;
+        padding-bottom: 0;
+    }
+    .img-responsive {
+        left: calc(-20% + 10px);
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .background-first {
+        padding-top: 6%;
+        padding-left: 12%;
+        padding-right: 12%;
+        padding-bottom: 0;
+    }
+    .img-responsive {
+        left: 0%;
+    }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    .background-first {
+        padding-top: 6%;
+        padding-left: 12%;
+        padding-right: 12%;
+        padding-bottom: 0;
     }
 }
