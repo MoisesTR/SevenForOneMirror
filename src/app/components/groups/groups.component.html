@@ -18,35 +18,13 @@
 
                                 <div class="row justify-content-center">
 
-                                    <!--<div class="col-12 col-sm-12 col-md-4 col-lg-3">-->
-                                        <!--<mdb-card>-->
-                                            <!--<mdb-card-body class="blue-seven-one white-text">-->
-
-                                                <!--<div class="row d-flex justify-content-between">-->
-                                                    <!--<div class="col-9">-->
-                                                        <!--<h4><strong>$10</strong></h4>-->
-                                                    <!--</div>-->
-                                                    <!--<div class="col-3">-->
-                                                        <!--<mdb-icon fas icon="money-bill-alt" size="2x"></mdb-icon>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-
-                                                <!--<p>Number of people playing: 4</p>-->
-
-                                                <!--<div class="text-center">-->
-                                                    <!--<button mdbBtn rounded="true" class="green-seven-one white-text mt-2">Go</button>-->
-                                                <!--</div>-->
-                                            <!--</mdb-card-body>-->
-                                        <!--</mdb-card>-->
-                                    <!--</div>-->
-
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3 mb-5" *ngFor="let group of groups; let i = index">
-                                        <mdb-card >
+                                        <mdb-card>
                                             <mdb-card-body class="blue-seven-one white-text">
 
                                                 <div class="row d-flex justify-content-between">
                                                     <div class="col-9">
-                                                        <h4><strong>{{group.initialInvertion}} $</strong></h4>
+                                                        <h4><strong>${{group.initialInvertion}}</strong></h4>
                                                     </div>
                                                     <div class="col-3">
                                                         <mdb-icon fas icon="money-bill-alt" size="2x"></mdb-icon>
@@ -61,52 +39,6 @@
                                             </mdb-card-body>
                                         </mdb-card>
                                     </div>
-
-
-                                    <!--<div class="col-12 col-sm-12 col-md-4 col-lg-3">-->
-                                        <!--<mdb-card>-->
-                                            <!--<mdb-card-body class="blue-seven-one white-text">-->
-
-                                                <!--<div class="row d-flex justify-content-between">-->
-                                                    <!--<div class="col-9">-->
-                                                        <!--<h4><strong>$100</strong></h4>-->
-                                                    <!--</div>-->
-                                                    <!--<div class="col-3">-->
-                                                        <!--<mdb-icon fas icon="money-bill-alt" size="2x"></mdb-icon>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-
-                                                <!--<p>Number of people playing: 4</p>-->
-
-                                                <!--<div class="text-center">-->
-                                                    <!--<button mdbBtn rounded="true" class="green-seven-one white-text mt-2">Go</button>-->
-                                                <!--</div>-->
-                                            <!--</mdb-card-body>-->
-                                        <!--</mdb-card>-->
-                                    <!--</div>-->
-
-
-                                    <!--<div class="col-12 col-sm-12 col-md-4 col-lg-3">-->
-                                        <!--<mdb-card>-->
-                                            <!--<mdb-card-body class="blue-seven-one white-text">-->
-
-                                                <!--<div class="row d-flex justify-content-between">-->
-                                                    <!--<div class="col-9">-->
-                                                        <!--<h4><strong>$500</strong></h4>-->
-                                                    <!--</div>-->
-                                                    <!--<div class="col-3">-->
-                                                        <!--<mdb-icon fas icon="money-bill-alt" size="2x"></mdb-icon>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-
-                                                <!--<p>Number of people playing: 1</p>-->
-
-                                                <!--<div class="text-center">-->
-                                                    <!--<button mdbBtn rounded="true" class="green-seven-one white-text mt-2">Go</button>-->
-                                                <!--</div>-->
-                                            <!--</mdb-card-body>-->
-                                        <!--</mdb-card>-->
-                                    <!--</div>-->
 
                                 </div>
 
