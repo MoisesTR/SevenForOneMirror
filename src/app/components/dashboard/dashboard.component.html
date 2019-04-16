@@ -1,3 +1,227 @@
-<p>
-  dashboard works!
-</p>
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
+                <div class="card card-cascade cascading-admin-card text-muted">
+                    <div class="admin-up">
+                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
+                        <div class="data mb-3">
+                            <h3><strong>$10</strong></h3>
+                            <h4 class="mt-2">Users Total: 13</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
+                <div class="card card-cascade cascading-admin-card text-muted">
+                    <div class="admin-up">
+                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
+                        <div class="data mb-3">
+
+                            <h3><strong>$50</strong></h3>
+                            <h4 class="mt-2">Users Total: 4</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
+                <div class="card card-cascade cascading-admin-card text-muted">
+                    <div class="admin-up">
+                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
+                        <div class="data mb-3">
+                            <h3><strong>$100</strong></h3>
+                            <h4 class="mt-2">Users Total: 2</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5">
+                <div class="card card-cascade cascading-admin-card text-muted">
+                    <div class="admin-up">
+                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
+                        <div class="data mb-3">
+                            <h3><strong>$500</strong></h3>
+                            <h4 class="mt-2">Users Total: 5</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Registered Users</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <div class="container-fluid mt-3">
+
+                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
+                                    <thead>
+                                        <tr>
+                                            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let el of elements; let i = index">
+                                            <th scope="row">{{el.id}}</th>
+                                            <td>{{el.first}}</td>
+                                            <td>{{el.last}}</td>
+                                            <td>{{el.handle}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-6 colg-lg-4 mb-5">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Historical Earnings</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <div class="container-fluid mt-3">
+
+                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
+                                    <thead>
+                                        <tr>
+                                            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let el of elements; let i = index">
+                                            <th scope="row">{{el.id}}</th>
+                                            <td>{{el.first}}</td>
+                                            <td>{{el.last}}</td>
+                                            <td>{{el.handle}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-6 colg-lg-4 mb-5">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Winners per Groups</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <div class="container-fluid mt-3">
+
+                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
+                                    <thead>
+                                        <tr>
+                                            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let el of elements; let i = index">
+                                            <th scope="row">{{el.id}}</th>
+                                            <td>{{el.first}}</td>
+                                            <td>{{el.last}}</td>
+                                            <td>{{el.handle}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+
+            </div>
+
+            <div class="col-12 colsm-12 col-md-12 col-lg-12">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Groups</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <div class="container-fluid mt-3">
+
+                                <div style="display: block">
+                                    <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                                          </canvas>
+                                </div>
+
+                            </div>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
