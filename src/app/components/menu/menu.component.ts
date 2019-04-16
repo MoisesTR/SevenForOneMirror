@@ -33,6 +33,16 @@ export class MenuComponent implements OnInit {
 
 		$(document).ready(() => {
 			$(".dropify").dropify();
+
+			$(document).scroll(function() {
+				if ($(this).scrollTop() >= 20) {
+					
+					$('#return-to-top').fadeIn(200);
+				} else {
+					
+					$('#return-to-top').fadeOut(200);
+				}
+			});
 		});
 
 		function fixNavDropdown() {
