@@ -49,20 +49,12 @@ export function getAuthServiceConfigs() {
 		ComponentsComponent
 	],
 	imports: [
-		BrowserModule,
+		BrowserModule.withServerTransition({ appId: "serverApp" }),
 		BrowserAnimationsModule,
 		CoreModule,
 		AppRoutingModule,
 		MDBBootstrapModulesPro.forRoot(),
 		SocialLoginModule,
-		ParticlesModule
-	],
-	imports: [
-		BrowserModule.withServerTransition({ appId: "serverApp" }),
-		BrowserAnimationsModule,
-		CoreModule,
-		MDBBootstrapModulesPro.forRoot(),
-		AppRoutingModule,
 		ParticlesModule
 	],
 	schemas: [NO_ERRORS_SCHEMA],
