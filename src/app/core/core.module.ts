@@ -8,6 +8,7 @@ import { HttpInterceptorService } from "./services/auth/http-interceptor.service
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { SharedModule } from "../shared-module/shared.module";
 import {GroupService} from './services/shared/group.service';
+import {RolService} from './services/shared/rol.service';
 
 @NgModule({
 	imports: [],
@@ -18,6 +19,7 @@ import {GroupService} from './services/shared/group.service';
 		AuthGuardService,
 		LoginGuardService,
 		UsuarioService,
+    RolService,
     GroupService,
 		{
 			provide: HTTP_INTERCEPTORS,

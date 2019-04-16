@@ -3,8 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { User } from "../../models/User";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import { Router } from "@angular/router";
-import { Token } from "../../models/models.index";
+import { Role, Token } from "../../models/models.index";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedinLoginProvider } from "angular-6-social-login";
+import { RolService } from "../../core/services/shared/rol.service";
 
 declare var $: any;
 
@@ -17,11 +18,14 @@ export class LoginComponent implements OnInit {
 	userForm: FormGroup;
 	public user: User;
 	public disabledButton = false;
-	public telefonos: string[] = [];
+	public roles: Role[] = [];
+	public idRolUser: string;
+
 	constructor(
 		private usuarioService: UsuarioService,
 		private formBuilder: FormBuilder,
 		private router: Router,
+		private rolService: RolService,
 		private socialAuthService: AuthService
 	) {
 		this.user = new User();
@@ -33,7 +37,12 @@ export class LoginComponent implements OnInit {
 	height: number = 100;
 
 	ngOnInit() {
+		this.styleParticles();
 		this.inituser();
+		this.getRoles();
+	}
+
+	styleParticles() {
 		this.myStyle = {
 			position: "fixed",
 			width: "100%",
@@ -60,6 +69,13 @@ export class LoginComponent implements OnInit {
 		};
 	}
 
+	getRoles() {
+		this.rolService.getRoles().subscribe(roles => {
+			this.roles = roles;
+			this.idRolUser = this.rolService.filterIdRolUser(this.roles);
+		});
+	}
+
 	socialSignIn(socialPlatform: string) {
 		let socialPlatformProvider;
 		if (socialPlatform === "google") {
@@ -68,16 +84,14 @@ export class LoginComponent implements OnInit {
 
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.tokenGoogle = userData.idToken;
-			this.user.role = '5c5de2211d65b81ce0497480';
+			this.user.role = this.idRolUser;
 
-			this.usuarioService.loginGoogle(this.user).subscribe(
-			  response => {
-          this.usuarioService.identity = response.user;
-          localStorage.setItem("token", response.token);
-          localStorage.setItem("identity", JSON.stringify(response.user));
-          this.router.navigate(["/dashboard"]);
-        }
-      )
+			this.usuarioService.loginGoogle(this.user).subscribe(response => {
+				this.usuarioService.identity = response.user;
+				localStorage.setItem("token", response.token);
+				localStorage.setItem("identity", JSON.stringify(response.user));
+				this.router.navigate(["/dashboard"]);
+			});
 		});
 	}
 

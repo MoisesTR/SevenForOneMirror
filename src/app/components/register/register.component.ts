@@ -1,12 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/models.index";
+import { User } from "../../models/User";
 import { CustomValidators } from "../../validators/CustomValidators";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { Utils } from "../../infraestructura/Utils";
 import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
+import { RolService } from "../../core/services/shared/rol.service";
+import { Role } from "../../models/Role";
 
 declare var $: any;
 
@@ -18,17 +20,18 @@ declare var $: any;
 export class RegisterComponent implements OnInit {
 	public user: User;
 	public telefonos: string[] = [];
+	public roles: Role[];
 	public disabledButton = false;
 	public width: number = 100;
 	public height: number = 100;
-
-	formRegisterUser: FormGroup;
+	public idRolUser: string;
 
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
 
 	constructor(
 		private usuarioService: UsuarioService,
+		private rolService: RolService,
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private socialAuthService: AuthService
@@ -63,6 +66,7 @@ export class RegisterComponent implements OnInit {
 
 		this.initFirstFormGroup();
 		this.initSecondFormGroup();
+		this.getRoles();
 	}
 
 	private initFirstFormGroup() {
@@ -102,6 +106,13 @@ export class RegisterComponent implements OnInit {
 		);
 	}
 
+	getRoles() {
+		this.rolService.getRoles().subscribe(roles => {
+			this.roles = roles;
+			this.idRolUser = this.rolService.filterIdRolUser(this.roles);
+		});
+	}
+
 	getValuesForm() {
 		// FIRST FORM
 		this.user.userName = this.firstFormGroup.value.user;
@@ -123,9 +134,7 @@ export class RegisterComponent implements OnInit {
 		this.user.password = this.secondFormGroup.value.password;
 		this.user.email = this.secondFormGroup.value.email;
 
-		this.user.role = "5c5de2211d65b81ce0497480";
-
-		console.log(this.user);
+		this.user.role = this.idRolUser;
 	}
 
 	createUser() {

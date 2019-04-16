@@ -1,12 +1,9 @@
-export class Role{
+export class Role {
+	public _id: string;
+	public name: string;
+	public description: string;
+	public createdAt: string;
+	public updateAt: string;
 
-    public Name: string;
-    public Description: string;
-    public CreatedAt: string;
-    public UpdateAt: string;
-
-    constructor(){
-        
-    }
-
+	constructor() {}
 }

@@ -2,8 +2,10 @@
 
 import { environment } from "../../../../environments/environment";
 
+const apiEndpointAuth: string = environment.apiEndpointAuth;
 const apiEndpoint: string = environment.apiEndpoint;
 
 export const Global = {
-	url: apiEndpoint
+	urlAuth: apiEndpointAuth,
+  url: apiEndpoint
 };

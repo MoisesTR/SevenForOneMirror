@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UsuarioService } from "../../core/services/shared/usuario.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Token, User } from "../../models/models.index";
+import { Role, Token, User } from "../../models/models.index";
+import { RolService } from "../../core/services/shared/rol.service";
 declare var $: any;
 
 @Component({
@@ -15,13 +16,20 @@ export class MenuComponent implements OnInit {
 	public usuarios: User[] = [];
 	private username: string;
 	private password: string;
+	private roles: Role[] = [];
 
-	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, private router: Router) {
+	constructor(
+		private activatedRoute: ActivatedRoute,
+		private rolService: RolService,
+		private usuarioService: UsuarioService,
+		private router: Router
+	) {
 		this.token = new Token();
 	}
 
 	ngOnInit() {
-		this.getParams();
+		this.getCredentialsUser();
+		this.getRoles();
 
 		$(document).ready(() => {
 			$(".dropify").dropify();
@@ -42,21 +50,33 @@ export class MenuComponent implements OnInit {
 		fixNavDropdown();
 	}
 
-	getUsuarios() {
-		this.usuarioService.getUsuarios().subscribe(usuarios => {
-			this.usuarios = usuarios;
-		});
-	}
-
-	getParams() {
+	getCredentialsUser() {
 		this.username = localStorage.getItem("username");
 		this.password = localStorage.getItem("password");
 		this.userActual = JSON.parse(localStorage.getItem("identity"));
 		this.getUsuarios();
 	}
 
+  getRoles() {
+   this.rolService.getRoles().subscribe(
+     response => {
+       console.log(response);
+     }
+   );
+  }
+
+	getUsuarios() {
+		this.usuarioService.getUsuarios().subscribe(usuarios => {
+			this.usuarios = usuarios;
+		});
+	}
+
 	groups() {
 		this.router.navigate(["/groups"]);
+	}
+
+	dashBoard() {
+		this.router.navigate(["/dashboard"]);
 	}
 
 	updateProfile() {

@@ -18,14 +18,14 @@
 
                                 <div class="row justify-content-center">
 
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3">
+                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3" *ngFor="let user of users">
 
                                         <div class="circle-text">
                                             <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style="background-image: url(assets/images/admin.png);"></div>
+                                                <div class="ratio img-responsive img-circle" style = 'background-color: white;' [ngStyle]="{'background-image': 'url(' + (this.user.image ? this.user.image : 'assets/images/user.png')  + ')'}"></div>
                                                 <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
                                                     <h5>
-                                                        #1 <br> Username
+                                                        #{{user.Position}} <br> {{user.UserName}}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -33,127 +33,22 @@
 
                                     </div>
 
-
-
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3">
-
-                                        <div class="circle-text">
-                                            <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style="background-image: url(assets/images/admin.png);"></div>
-                                                <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
-                                                    <h5>
-                                                        #2 <br> Username
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3">
-
-                                        <div class="circle-text">
-                                            <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style="background-image: url(assets/images/user.png); background-color: white;"></div>
-                                                <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
-                                                    <h5>
-                                                        #3 <br> Username
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3">
-
-                                        <div class="circle-text">
-                                            <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style="background-image: url(assets/images/user.png); background-color: white;"></div>
-                                                <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
-                                                    <h5>
-                                                        #4 <br> Username
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3">
-
-                                        <div class="circle-text">
-                                            <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style="background-image: url(assets/images/user.png); background-color: white;"></div>
-                                                <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
-                                                    <h5>
-                                                        #5 <br> Username
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3">
-
-                                        <div class="circle-text">
-                                            <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style="background-image: url(assets/images/user.png); background-color: white;"></div>
-                                                <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
-                                                    <h5>
-                                                        #6 <br> Username
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-3">
-
-                                        <div class="circle-text">
-                                            <div class="view overlay">
-                                                <div class="ratio img-responsive img-circle" style="background-image: url(assets/images/user.png); background-color: white;"></div>
-                                                <div class="mask flex-center rgba-green-strong text-center" style="border-radius: 50%;margin-top: 1%;">
-                                                    <h5>
-                                                        #6 <br> Username
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
+                                  <button > Jugar</button>
                                     <div class="col-12 col-lg-12 mt-5 text-center">
                                         <table class="table table-responsive-md table-hover text-center">
                                             <thead>
                                                 <tr>
                                                     <th>Position</th>
                                                     <th>Username</th>
-                                                    <th>Invested</th>
                                                     <th>Earned</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Test</td>
-                                                    <td>$ 10</td>
-                                                    <td>$ 60</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>$ 10</td>
-                                                    <td>$ 60</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>$ 10</td>
-                                                    <td>$ 60</td>
+                                                <tr [ngClass]="[userActual._id == user.IdUser ? 'green-seven-one white-text' : '']" *ngFor="let user of users;let i = index">
+                                                    <th scope="row">{{user.Position}}</th>
+                                                    <td>{{user.UserName}}</td>
+                                                    <td>${{totalMount - (user.Position * montoInvertir)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
