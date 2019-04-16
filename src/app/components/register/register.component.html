@@ -12,20 +12,20 @@
 
         </div>
 
-        <div class="col-lg-6 col-md-7 d-flex flex-column justify-content-center align-items-center background-white-space" style="height: 100vh; overflow: auto;">
+        <div class="col-lg-6 col-md-7 flex-column justify-content-center align-items-center background-white-space h-100" style="overflow: auto;">
 
             <div class="container-fluid">
 
                 <div class="row justify-content-center">
 
-                    <!-- <div class="col-md-12 text-center mb-5">
-                                    <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 20em;">
-                                </div> -->
+                    <div class="col-md-12 text-center mb-4" style="margin-top:5%;">
+                        <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 20em;">
+                    </div>
 
                     <div class="col-10 col-md-9 col-lg-9">
 
                         <mdb-card>
-                            <mdb-card-body>
+                            <mdb-card-body style="margin-bottom: -12%;">
 
                                 <mdb-card-title>
                                     <h1 class="display-4 text-center font-weight-bold">Create Account</h1>
@@ -60,7 +60,7 @@
                                                             <i class="fas fa-user prefix"></i>
                                                             <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput AlphanumericDirective>
                                                             <label for="user">User</label>
-                                                             <show-errors [control]="firstFormGroup.controls['user']"></show-errors>
+                                                            <show-errors [control]="firstFormGroup.controls['user']"></show-errors>
                                                         </div>
                                                     </div>
 
@@ -70,7 +70,7 @@
                                                             <i class="fas fa-user prefix"></i>
                                                             <input type="text" id="firstNames" class="form-control" autocomplete="off" formControlName="firstName" mdbInput>
                                                             <label for="firstNames">First Name</label>
-                                                             <show-errors [control]="firstFormGroup.controls['firstName']"></show-errors>
+                                                            <show-errors [control]="firstFormGroup.controls['firstName']"></show-errors>
                                                         </div>
                                                     </div>
 
@@ -80,30 +80,30 @@
                                                             <i class="fas fa-user prefix"></i>
                                                             <input type="text" id="lastName" class="form-control" autocomplete="off" formControlName="lastName" mdbInput>
                                                             <label for="lastName">Last Name</label>
-                                                             <show-errors [control]="firstFormGroup.controls['lastName']"></show-errors>
+                                                            <show-errors [control]="firstFormGroup.controls['lastName']"></show-errors>
                                                         </div>
                                                     </div>
 
                                                     <!-- Gender -->
-                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                                         <div class="md-form md-outline form">
                                                             <mdb-icon fas icon="users"></mdb-icon>
                                                             <select class="browser-default custom-select width-select" formControlName="gender">
                                                             <option value="1">Male</option>
                                                             <option value="2">Female</option>
                                                         </select>
-                                                             <show-errors [control]="firstFormGroup.controls['gender']"></show-errors>
+                                                            <show-errors [control]="firstFormGroup.controls['gender']"></show-errors>
                                                         </div>
                                                     </div>
 
                                                     <!-- Birthday -->
-                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                                         <div class="md-form md-outline">
                                                             <i class="fas fa-birthday-cake prefix"></i>
                                                             <input type="text" id="birthday" class="form-control" autocomplete="off" formControlName="birthday" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" readonly mdbInput>
                                                             <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
                                                             <label for="birthday">Birthday</label>
-                                                             <show-errors [control]="firstFormGroup.controls['birthday']"></show-errors>
+                                                            <show-errors [control]="firstFormGroup.controls['birthday']"></show-errors>
                                                         </div>
                                                     </div>
 
@@ -125,12 +125,12 @@
                                                             <i class="fas fa-envelope prefix"></i>
                                                             <input type="text" id="email" class="form-control" autocomplete="off" mdbInput formControlName="email">
                                                             <label for="email">Email</label>
-                                                             <show-errors [control]="secondFormGroup.controls['email']"></show-errors>
+                                                            <show-errors [control]="secondFormGroup.controls['email']"></show-errors>
                                                         </div>
                                                     </div>
 
                                                     <!-- Password -->
-                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                                         <div class="md-form md-outline">
                                                             <i class="fas fa-lock prefix"></i>
                                                             <input type="password" id="pass" class="form-control" autocomplete="off" mdbInput formControlName="password">
@@ -140,14 +140,14 @@
                                                     </div>
 
                                                     <!-- Confirm Password -->
-                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                                         <div class="md-form md-outline">
                                                             <i class="fas fa-lock prefix"></i>
                                                             <input type="password" id="confpass" class="form-control" autocomplete="off" mdbInput formControlName="confirmPassword">
                                                             <label for="confpass">Confirm</label>
                                                             <div *ngIf="secondFormGroup.controls['confirmPassword'].hasError('noPasswordMatch')">
-                                                        <span class="error-message" style="left: 2.5rem;">Password do not match</span>
-                                                    </div>
+                                                                <span class="error-message" style="left: 2.5rem;">Password do not match</span>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -157,7 +157,7 @@
                                                             <i class="fas fa-phone prefix"></i>
                                                             <input type="text" id="phone" class="form-control" (keypress)="keyPress($event)" autocomplete="off" mdbInput formControlName="phone">
                                                             <label for="phone">Phone</label>
-                                                             <show-errors [control]="secondFormGroup.controls['phone']"></show-errors>
+                                                            <show-errors [control]="secondFormGroup.controls['phone']"></show-errors>
                                                         </div>
                                                     </div>
 
@@ -174,7 +174,7 @@
                                             <div class="step-actions">
                                                 <div class="text-center">
                                                     <!-- Sign in button -->
-                                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2" [disabled]="disabledButton" (click)="createUser()" type="submit" >Sign up</button>
+                                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2" [disabled]="disabledButton" (click)="createUser()" type="submit">Sign up</button>
                                                 </div>
                                             </div>
                                         </mdb-step>

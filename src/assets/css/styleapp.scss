@@ -78,14 +78,7 @@
 }
 
 
-/* Full Height screen */
-
-#full-height {
-    height: 100vh !important;
-}
-
-
-/* Background white space login and register */
+/* Background login, card and register */
 
 .background-white-space {
     background: url("/assets/images/background.svg");
@@ -105,14 +98,6 @@
 
 .background-card {
     background: url("/assets/images/intro-bg.png");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-.background-modal {
-    background: url("/assets/images/footer.svg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
