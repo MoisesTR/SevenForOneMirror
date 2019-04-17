@@ -36,7 +36,7 @@
                                                 <tr [ngClass]="[userActual._id == member.userId && userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']" *ngFor="let member of members;let i = index">
                                                     <th scope="row">{{(i+1)}}</th>
                                                     <td>{{member.userName}}</td>
-                                                    <td  *ngIf="groupSeleccionado">$ {{ (members.length - (i + 1)) * groupSeleccionado.initialInvertion}}</td>
+                                                    <td  *ngIf="groupSeleccionado">$ {{ (members.length - (i)) * groupSeleccionado.initialInvertion}}</td>
                                                 </tr>
                                             </tbody>
 
@@ -45,7 +45,7 @@
                                                     <tr *ngFor="let member of members;let i = index">
                                                         <th scope="row">{{(i+1)}}</th>
                                                         <td>{{member.userName}}</td>
-                                                        <td *ngIf="groupSeleccionado">$ {{ (members.length - (i + 1)) * groupSeleccionado.initialInvertion}}</td>
+                                                        <td *ngIf="groupSeleccionado">$ {{ (members.length - (i)) * groupSeleccionado.initialInvertion}}</td>
                                                     </tr>
                                                 </tbody>
                                             </ng-template>
