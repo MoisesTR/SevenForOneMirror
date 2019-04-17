@@ -18,19 +18,8 @@
 
                                 <div class="row justify-content-center">
 
-                                    <div *ngFor="let member of members; let i = index" class="col-6 col-sm-6 col-md-6 col-lg-3 mt-3 background-first wow bounceInRight" data-wow-delay="0.3s">
-
-                                        <div *ngIf="userIsAdmin; else userContentGame" class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
-
-                                        <ng-template #userContentGame>
-                                            <div *ngIf="userActual._id !== member.userId; else userActualGame" class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
-
-                                            <!--USUARIO ACTUAL LOGUEADO-->
-                                            <ng-template #userActualGame>
-                                                <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
-                                            </ng-template>
-                                        </ng-template>
-
+                                    <div *ngFor="let member of members; let i = index" [ngClass]="(i === 0) ? 'col-6 col-sm-6 col-md-6 col-lg-3 mt-3 background-first wow bounceInRight' : 'col-6 col-sm-6 col-md-6 col-lg-3 mt-3 wow bounceInRight'" data-wow-delay="0.3s">
+                                      <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
                                     </div>
 
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-5 text-center">
