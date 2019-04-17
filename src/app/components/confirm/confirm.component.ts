@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { UserService } from "../../core/services/shared/user.service";
 import { Token } from "../../models/models.index";
+import {AuthService} from '../../core/services/auth/auth.service';
 
 @Component({
 	selector: "app-confirm",
@@ -14,7 +15,7 @@ export class ConfirmComponent implements OnInit {
 	public token: Token;
 	private username = "";
 
-	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UserService, private router: Router) {
+	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UserService, private router: Router, private authService: AuthService) {
 		this.token = new Token();
 	}
 
@@ -26,7 +27,7 @@ export class ConfirmComponent implements OnInit {
 	getParams() {
 		this.activatedRoute.params.subscribe((params: Params) => {
 			this.tokenConfirmacion = params["token"];
-			this.username = localStorage.getItem("username");
+			this.username = this.authService.getUser().userName;
 		});
 	}
 
@@ -34,7 +35,6 @@ export class ConfirmComponent implements OnInit {
 		this.usuarioService.verifyEmail(this.tokenConfirmacion).subscribe(
 			() => {
 				this.verified = true;
-				localStorage.removeItem("username");
 			},
 			() => {
 				this.router.navigate(["/login"]);
