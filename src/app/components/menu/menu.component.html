@@ -15,7 +15,7 @@
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item avatar dropdown btn-group" dropdown>
                     <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                        <img [src]="this.userActual.image ? this.userActual.image : 'assets/images/rick.png'" class="img-fluid rounded-circle z-depth-0">
+                        <img [src]="this.userActual.image ? this.userActual.image : 'assets/images/user.png'" class="img-fluid rounded-circle z-depth-0">
                     </a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Edit Profile</a>
@@ -40,7 +40,7 @@
                                 <div class="col-7" id="background-circle" style="padding: 8%;">
 
                                     <div class="view overlay" (click)="mdlAvatar.show()">
-                                        <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (this.userActual.image ? this.userActual.image : 'assets/images/user.png')  + ')'}"></div>
+                                        <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (this.userActual.image ? this.userActual.image : 'assets/images/main-user.png')  + ')'}"></div>
                                         <div class="mask flex-center waves-effect waves-light rgba-blue-strong" style="border-radius: 50%;">
                                             <p class="white-text">Change Image</p>
                                         </div>
@@ -59,7 +59,7 @@
                                     </h5>
                                 </div>
 
-                                <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 border-bottom mt-2' >
+                                <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 border-bottom mt-2'>
                                     <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
                                         Invested
                                     </h6>

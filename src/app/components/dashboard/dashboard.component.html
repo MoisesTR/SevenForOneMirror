@@ -1,4 +1,4 @@
-<section *ngIf="userIsAdmin; else userContent" >
+<section *ngIf="userIsAdmin; else userContent">
     <div class="container-fluid">
         <div class="row justify-content-center">
 
@@ -30,7 +30,7 @@
 
                             <div class="container-fluid mt-3">
 
-                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
+                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
                                     <thead>
                                         <tr>
                                             <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
@@ -61,7 +61,7 @@
 
             </div>
 
-            <div class="col-12 col-sm-12 col-md-6 colg-lg-4 mb-5">
+            <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
 
                 <!--Card-->
                 <mdb-card cascade="true" narrower="true">
@@ -76,7 +76,7 @@
 
                             <div class="container-fluid mt-3">
 
-                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
+                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
                                     <thead>
                                         <tr>
                                             <th *ngFor="let head of headElementsGroupsEarning; let i = index" scope="col">{{head}}</th>
@@ -111,4 +111,51 @@
 
 </section>
 
-<ng-template #userContent></ng-template>
+<ng-template #userContent>
+
+    <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
+
+        <!--Card-->
+        <mdb-card cascade="true" narrower="true">
+
+            <div class="view view-cascade gradient-card-header green-seven-one">
+                <h2 class="card-header-title mb-2">Historical Invested</h2>
+            </div>
+
+            <mdb-card-body cascade="true">
+
+                <mdb-card-text>
+
+                    <div class="container-fluid mt-3">
+
+                        <table mdbTable mdbTableScroll scrollY="true" maxHeight="350" bordered="true">
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let head of headElementsGroupsEarning; let i = index" scope="col">{{head}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let group of groups; let i = index">
+                                    <th scope="row">{{ i + 1}}</th>
+                                    <td>$ {{group.initialInvertion}}</td>
+                                    <td>$ {{group.totalInvested}}</td>
+                                    <td>{{group.winners}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </mdb-card-text>
+
+            </mdb-card-body>
+            <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+
+
+    </div>
+
+</ng-template>
