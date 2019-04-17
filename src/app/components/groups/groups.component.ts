@@ -16,11 +16,13 @@ import { RoleEnum } from "../enums/RoleEnum";
 export class GroupsComponent implements OnInit {
 	public groups: GroupGame[] = [];
 	public user: User;
+	public userIsAdmin = false;
 	constructor(private groupService: GroupService, private authService: AuthService, private router: Router) {}
 
 	ngOnInit() {
 		this.getGroups();
 		this.user = this.authService.getUser();
+		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 	}
 
 	getGroups() {
@@ -29,25 +31,42 @@ export class GroupsComponent implements OnInit {
 		});
 	}
 
-	goButton(index, groupId) {
-		if (this.user.role.name === RoleEnum.User) {
-			swal
-				.fire({
-					title: "Confirmation",
-					text: "Do you want to come in?",
-					type: "info",
-					showCancelButton: true,
-					confirmButtonColor: "#3085d6",
-					cancelButtonColor: "#d33",
-					confirmButtonText: "Yes, i do!"
-				})
-				.then(result => {
-					if (result.value) {
-						this.addMemberToGroup(groupId);
-					}
-				});
-		} else {
+	// esta validacion esta por mientras , por que el usuario puede ser sacado desde la base por otros usuarios, y ya no tendria lugar la validacion, consultar oportunamente a la base mejor
+	goButtonUser(groupId) {
+		this.validateMemberIsNotAlreadyRegistered(groupId);
+	}
+
+	validateMemberIsNotAlreadyRegistered(groupId) {
+		this.groupService.getGroup(groupId).subscribe(group => {
+			console.log(group.members);
+			const userIsAlreadyInGroup = this.groupService.filterMemberByGroup(group, this.user._id);
+			this.actionGroup(userIsAlreadyInGroup, groupId);
+		});
+	}
+
+	actionGroup(already, groupId) {
+		if (this.userIsAdmin) {
 			this.router.navigate(["/game", groupId]);
+		} else {
+			if (already) {
+        this.router.navigate(["/game", groupId]);
+			} else {
+				swal
+					.fire({
+						title: "Confirmation",
+						text: "Do you want to come in?",
+						type: "info",
+						showCancelButton: true,
+						confirmButtonColor: "#3085d6",
+						cancelButtonColor: "#d33",
+						confirmButtonText: "Yes, i do!"
+					})
+					.then(result => {
+						if (result.value) {
+							this.addMemberToGroup(groupId);
+						}
+					});
+			}
 		}
 	}
 

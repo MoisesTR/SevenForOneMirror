@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Global } from "./global";
 import { Observable } from "rxjs";
-import {GroupGame} from '../../../models/GroupGame';
-import {MemberGroup} from '../../../models/MemberGroup';
+import { GroupGame } from "../../../models/GroupGame";
+import { MemberGroup } from "../../../models/MemberGroup";
 
 @Injectable({
 	providedIn: "root"
@@ -17,7 +17,7 @@ export class GroupService {
 		this.url = Global.url;
 	}
 
-	createGroup(group : GroupGame): Observable<any> {
+	createGroup(group: GroupGame): Observable<any> {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
 		});
@@ -33,7 +33,7 @@ export class GroupService {
 		return this.http.get(this.url + this.gameUrl);
 	}
 
-	addMemberToGroup(member : MemberGroup, groupId): Observable<any> {
+	addMemberToGroup(member: MemberGroup, groupId): Observable<any> {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
 		});
@@ -46,5 +46,18 @@ export class GroupService {
 		const options = { params: params };
 
 		return this.http.delete(this.url + this.gameUrl + "/members/" + groupId, options);
+	}
+
+	filterMemberByGroup(group: GroupGame, userId) {
+		if (group) {
+			let memberFiltered;
+			let members: MemberGroup[] = [];
+			members = group.members;
+			memberFiltered = members.find(member => member.userId === userId);
+
+			return memberFiltered ? memberFiltered : null;
+		} else {
+			return null;
+		}
 	}
 }
