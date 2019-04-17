@@ -32,7 +32,7 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody *ngIf="!userIsAdmin; else adminContent">
+                                            <tbody *ngIf="!isUserAdmin; else adminContent">
                                                 <tr [ngClass]="[userActual._id == member.userId && userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']" *ngFor="let member of members;let i = index">
                                                     <th scope="row">{{(i+1)}}</th>
                                                     <td>{{member.userName}}</td>
