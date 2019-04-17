@@ -1,82 +1,95 @@
-<section class="view">
+<section class="view white">
 
-  <div class="row wrap">
+    <div class="row wrap">
 
-    <particles [params]="myParams" [style]="myStyle" [width]="width" [height]="height"></particles>
+        <div class="col-lg-6 col-md-7 d-flex flex-column justify-content-center align-items-center background-white-space" style="height: 100vh; overflow: auto;">
 
-    <div class="col-lg-7 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center"
-      id="bg-hide">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
 
-      <img src="assets/images/MacBookPro.png" class="img-fluid animated fadeIn" alt="login">
-      <div class="mask flex-center hm-gradient">
-      </div>
+                    <div class="col-md-12 text-center mb-4">
+                        <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 20em;">
+                    </div>
 
-    </div>
+                    <div class="col-10 col-md-9 col-lg-9">
 
-    <div class="col-lg-5 col-md-7" style="height: 100vh; overflow: auto;">
+                        <mdb-card>
+                            <mdb-card-body>
 
-      <div class="d-flex justify-content-center align-items-center">
+                                <mdb-card-title>
+                                    <h1 class="display-4 text-center font-weight-bold">Sign in</h1>
 
-        <div class="container-fluid">
-          <div class="row p-a">
+                                    <div class="col-12 text-center mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a type="button" mdbBtn floating="true" size="lg" class="btn-fb waves-light" mdbTooltip="Facebook" placement="left" mdbWavesEffect><i class="fab fa-facebook-f"></i></a>
+                                                <a type="button" mdbBtn floating="true" size="lg" class=" btn-gplus waves-light" mdbTooltip="Gmail" placement="right" (click)="socialSignIn('google')" mdbWavesEffect><i class="fab fa-google"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mdb-card-title>
 
-            <div class="col-md-12 text-center mb-5 mt-5 wow fadeInDownBig" data-wow-delay="0.5s">
-              <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo"
-                style="width: 30em;">
+                                <mdb-card-text>
+
+                                    <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12">
+
+                                        <div class="text-center mt-1">
+                                            <h6>or use your account</h6>
+                                        </div>
+
+                                        <!-- Username -->
+                                        <div class="md-form md-outline">
+                                            <i class="fas fa-user prefix"></i>
+                                            <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput>
+                                            <label for="user">User or Email</label>
+                                            <show-errors [control]="userForm.controls['user']"></show-errors>
+                                        </div>
+
+                                        <!-- Password -->
+                                        <div class="md-form md-outline">
+                                            <i class="fas fa-lock prefix"></i>
+                                            <input type="password" id="password" class="form-control" name="user" autocomplete="off" formControlName="password" mdbInput>
+                                            <label for="password">Password</label>
+                                            <show-errors [control]="userForm.controls['password']"></show-errors>
+                                        </div>
+
+                                        <div class="text-center mt-3">
+                                            <!-- Forgot password -->
+                                            <a (click)="forgotPassword()" class="green-seven-one-text">
+                                                <h5>Forgot password?</h5>
+                                            </a>
+
+                                        </div>
+
+                                        <div class="mt-3 text-center">
+                                            <!-- Sign in button -->
+                                            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" type="submit" [disabled]="userForm.invalid || disabledButton">Sign in</button>
+                                        </div>
+                                    </form>
+
+                                </mdb-card-text>
+                            </mdb-card-body>
+                        </mdb-card>
+                    </div>
+
+                </div>
             </div>
 
-            <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12 mt-1">
-              <div class="wow fadeInUp" data-wow-delay="0.8s">
-
-                <!-- Username -->
-                <div class="md-form md-outline">
-                  <i class="fas fa-user prefix"></i>
-                  <input type="text" id="user" class="form-control" name="user" autocomplete="off"
-                    formControlName="user" mdbInput>
-                  <label for="user">User</label>
-                  <show-errors [control]="userForm.controls['user']"></show-errors>
-                </div>
-
-                <!-- Password -->
-                <div class="md-form md-outline">
-                  <i class="fas fa-lock prefix"></i>
-                  <input type="password" id="password" class="form-control" name="user" autocomplete="off"
-                    formControlName="password" mdbInput>
-                  <label for="password">Password</label>
-                  <show-errors [control]="userForm.controls['password']"></show-errors>
-                </div>
-
-                <div class="mt-3">
-                  <!-- Sign in button -->
-                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text input-center mt-2"
-                    type="submit" [disabled]="userForm.invalid || disabledButton">Sign
-                    in</button>
-                </div>
-
-                <div class="text-center mt-5">
-                  <!-- Forgot password -->
-                  <a (click)="forgotPassword()" class="green-seven-one-text">Forgot password?</a>
-
-                  <div class="or mt-3">
-                    <hr class="bar">
-                    <span>OR</span>
-                    <hr class="bar">
-                  </div>
-
-                  <button mdbBtn type="button" class="btn-seven-one outline-seven-one" mdbWavesEffect
-                    (click)="createUser()">Create
-                    an account</button>
-
-                </div>
-              </div>
-            </form>
-
-          </div>
         </div>
 
-      </div>
+        <div class="col-lg-6 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center white-text background-blue-space" id="bg-hide">
+            <h1 class="display-4 text-center font-weight-bold">Hello, Friend!</h1>
+            <h3 class="mt-2 text-center">Enter your personal details and start journey with us</h3>
+            <button mdbBtn type="button" color="white" rounded="true" outline="true" class="mt-3" mdbWavesEffect (click)="createUser()">Create an account</button>
+        </div>
 
     </div>
-
-  </div>
 </section>
+
+<div class="fixed-action-btn d-sm-block d-md-none" style="bottom: 45px; right: 24px;" mdbTooltip="Create an account" placement="left">
+
+    <a class="btn-floating btn-large blue-seven-one waves-light" mdbWavesEffect (click)="createUser()">
+        <i class="fas fa-user-alt"></i>
+    </a>
+
+</div>

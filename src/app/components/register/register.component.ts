@@ -1,11 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/models.index";
+import { User } from "../../models/User";
 import { CustomValidators } from "../../validators/CustomValidators";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
+import { UserService } from "../../core/services/shared/user.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { Utils } from "../../infraestructura/Utils";
+import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
+import { RolService } from "../../core/services/shared/rol.service";
+import { Role } from "../../models/Role";
+import { RoleEnum } from "../enums/RoleEnum";
 
 declare var $: any;
 
@@ -17,47 +21,27 @@ declare var $: any;
 export class RegisterComponent implements OnInit {
 	public user: User;
 	public telefonos: string[] = [];
-	public compare: boolean;
+	public roles: Role[];
 	public disabledButton = false;
-	public fechaActual = new Date();
-	formRegisterUser: FormGroup;
+	public width: number = 100;
+	public height: number = 100;
+	public idRolUser: string;
+	public idRolAdmin: string;
 
-	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
+	firstFormGroup: FormGroup;
+	secondFormGroup: FormGroup;
+
+	constructor(
+		private usuarioService: UserService,
+		private rolService: RolService,
+		private formBuilder: FormBuilder,
+		private router: Router,
+		private socialAuthService: AuthService
+	) {
 		this.user = new User();
 	}
 
-	colorSelect: Array<any>;
-	myStyle: object = {};
-	myParams: object = {};
-	width: number = 100;
-	height: number = 100;
-
 	ngOnInit() {
-		this.myStyle = {
-			position: "fixed",
-			width: "100%",
-			height: "100%",
-			"z-index": -1,
-			top: 0,
-			left: 0,
-			right: 0,
-			bottom: 0
-		};
-
-		this.myParams = {
-			particles: {
-				number: {
-					value: 100
-				},
-				color: {
-					value: "#397EF5"
-				},
-				shape: {
-					type: "polygon"
-				}
-			}
-		};
-
 		$(document).ready(() => {
 			$(".letras").keypress(function(key) {
 				if (
@@ -82,18 +66,29 @@ export class RegisterComponent implements OnInit {
 			});
 		});
 
-		this.initFormRegisterUser();
+		this.initFirstFormGroup();
+		this.initSecondFormGroup();
+		this.getRoles();
 	}
 
-	private initFormRegisterUser() {
-		this.formRegisterUser = this.formBuilder.group(
+	private initFirstFormGroup() {
+		this.firstFormGroup = this.formBuilder.group({
+			user: new FormControl("", [
+				Validators.required,
+				Validators.minLength(4),
+				Validators.maxLength(40),
+				CustomValidators.nospaceValidator
+			]),
+			firstName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+			lastName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+			gender: new FormControl(""),
+			birthday: new FormControl("")
+		});
+	}
+
+	private initSecondFormGroup() {
+		this.secondFormGroup = this.formBuilder.group(
 			{
-				user: new FormControl("", [
-					Validators.required,
-					Validators.minLength(4),
-					Validators.maxLength(40),
-					CustomValidators.nospaceValidator
-				]),
 				password: new FormControl("", [
 					Validators.required,
 					Validators.minLength(5),
@@ -105,13 +100,7 @@ export class RegisterComponent implements OnInit {
 
 				email: new FormControl("", [Validators.required]),
 
-				firstNames: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
-
-				lastName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
-
-				phone: new FormControl("", [Validators.required, Validators.minLength(7), Validators.maxLength(25)]),
-				gender: new FormControl("", [Validators.required]),
-				birthday: new FormControl("", [Validators.required])
+				phone: new FormControl("", [Validators.minLength(7), Validators.maxLength(25)])
 			},
 			{
 				validator: CustomValidators.passwordMatchValidator
@@ -119,21 +108,50 @@ export class RegisterComponent implements OnInit {
 		);
 	}
 
-	getValueForm() {
-		this.user.userName = this.formRegisterUser.value.user;
-		this.user.password = this.formRegisterUser.value.password;
-		this.user.firstName = this.formRegisterUser.value.firstNames;
-		this.user.lastName = this.formRegisterUser.value.lastName;
-		this.telefonos.push(this.formRegisterUser.value.phone);
+	getRoles() {
+		this.rolService.getRoles().subscribe(roles => {
+			this.roles = roles;
+			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, this.roles);
+			this.idRolAdmin = this.rolService.filterIdRol(RoleEnum.Admin, this.roles);
+		});
+	}
+
+	getValuesForm() {
+		// FIRST FORM
+		this.user.userName = this.firstFormGroup.value.user;
+		this.user.firstName = this.firstFormGroup.value.firstName;
+		this.user.lastName = this.firstFormGroup.value.lastName;
+
+		const gender = this.firstFormGroup.value.gender;
+
+		if (gender) {
+			this.user.gender = this.firstFormGroup.value.gender === 1 ? "M" : "F";
+		}
+
+		// SECOND FORM
+		if (this.firstFormGroup.value.birthday) {
+			this.user.birthDate = Utils.formatDateYYYYMMDD(this.firstFormGroup.value.birthday);
+		}
+
+		if (this.secondFormGroup.value.phone) {
+			this.telefonos = [];
+			this.telefonos.push(this.secondFormGroup.value.phone);
+		}
+
 		this.user.phones = this.telefonos;
-		this.user.gender = this.formRegisterUser.value.gender;
-		this.user.email = this.formRegisterUser.value.email;
-		this.user.birthDate = Utils.formatDateYYYYMMDD(this.formRegisterUser.value.birthday);
-		this.user.role = "5c5de2211d65b81ce0497480";
+		this.user.password = this.secondFormGroup.value.password;
+		this.user.email = this.secondFormGroup.value.email;
+
+		// Validacion temporal para crear un usuario administrador unico
+		if (this.user.userName === 'Admin') {
+      this.user.role._id = this.idRolAdmin;
+    } else {
+      this.user.role._id = this.idRolUser;
+    }
 	}
 
 	createUser() {
-		this.getValueForm();
+		this.getValuesForm();
 		this.disabledButton = true;
 
 		this.usuarioService.createUsuario(this.user).subscribe(
@@ -162,5 +180,24 @@ export class RegisterComponent implements OnInit {
 		if (event.keyCode !== 8 && !pattern.test(inputChar)) {
 			event.preventDefault();
 		}
+	}
+
+	socialSignUp(socialPlatform: string) {
+		let socialPlatformProvider;
+		if (socialPlatform === "google") {
+			socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+		}
+
+		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
+			this.user.tokenGoogle = userData.idToken;
+			this.user.role._id = this.idRolUser;
+
+			this.usuarioService.loginGoogle(this.user).subscribe(response => {
+				this.usuarioService.identity = response.user;
+				localStorage.setItem("token", response.token);
+				localStorage.setItem("identity", JSON.stringify(response.user));
+				this.router.navigate(["/dashboard"]);
+			});
+		});
 	}
 }

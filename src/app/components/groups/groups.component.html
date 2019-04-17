@@ -1,3 +1,62 @@
-<p>
-  groups works!
-</p>
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 colsm-12 col-md-10 col-lg-10">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Groups</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <div class="container-fluid mt-3">
+
+                                <div class="row justify-content-center">
+
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3 mb-5" *ngFor="let group of groups; let i = index">
+                                        <mdb-card>
+                                            <mdb-card-body class="blue-seven-one white-text">
+
+                                                <div class="row d-flex justify-content-between">
+                                                    <div class="col-12">
+                                                        <h4><strong>${{group.initialInvertion}}</strong></h4>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <mdb-icon fas icon="money-bill-alt" size="2x"></mdb-icon>
+                                                    </div>
+                                                </div>
+
+                                                <p>Number of people playing: {{group.totalMembers}}</p>
+
+                                                <div class="text-center">
+                                                    <button mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2" (click)="goButtonUser(group._id)">Go</button>
+                                                </div>
+
+                                            </mdb-card-body>
+                                        </mdb-card>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+            </div>
+
+        </div>
+    </div>
+
+</section>

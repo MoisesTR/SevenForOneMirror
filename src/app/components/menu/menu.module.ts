@@ -6,11 +6,12 @@ import { MDBBootstrapModulesPro } from "ng-uikit-pro-standard";
 import { UsersComponent } from "../users/users.component";
 import { ProfileComponent } from "../profile/profile.component";
 import { GroupsComponent } from "../groups/groups.component";
+import {GameComponent} from "../game/game.component";
 
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro],
 	exports: [MDBBootstrapModulesPro],
-	declarations: [DashboardComponent, UsersComponent, ProfileComponent, GroupsComponent],
+	declarations: [DashboardComponent, UsersComponent, ProfileComponent, GroupsComponent, GameComponent],
 	schemas: [NO_ERRORS_SCHEMA]
 })
 export class MenuModule {}

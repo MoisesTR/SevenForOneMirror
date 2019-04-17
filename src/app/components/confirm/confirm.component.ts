@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
+import { UserService } from "../../core/services/shared/user.service";
 import { Token } from "../../models/models.index";
 
 @Component({
@@ -14,7 +14,7 @@ export class ConfirmComponent implements OnInit {
 	public token: Token;
 	private username = "";
 
-	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, private router: Router) {
+	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UserService, private router: Router) {
 		this.token = new Token();
 	}
 

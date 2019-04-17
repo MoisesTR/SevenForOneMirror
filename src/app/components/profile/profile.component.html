@@ -1,3 +1,129 @@
-<p>
-  profile works!
-</p>
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 colsm-12 col-md-10 col-lg-10">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Edit Profile</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <form>
+
+                                <div class="container-fluid">
+                                    <div class="row">
+
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-user prefix"></i>
+                                                <input type="text" id="user" class="form-control" name="user" autocomplete="off" mdbInput>
+                                                <label for="user">User</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Name -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-user prefix"></i>
+                                                <input type="text" id="firstNames" class="form-control" autocomplete="off" mdbInput>
+                                                <label for="firstNames">First Name</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- LastName -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-user prefix"></i>
+                                                <input type="text" id="lastName" class="form-control" autocomplete="off" mdbInput>
+                                                <label for="lastName">Last Name</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gender -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="md-form md-outline form">
+                                                <mdb-icon fas icon="users"></mdb-icon>
+                                                <select class="browser-default custom-select width-select">                                              
+                                              <option value="1">Male</option>
+                                              <option value="2">Female</option>
+                                            </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Birthday -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-birthday-cake prefix"></i>
+                                                <input type="text" id="birthday" class="form-control" autocomplete="off" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" readonly mdbInput>
+                                                <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+                                                <label for="birthday">Birthday</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Email -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-envelope prefix"></i>
+                                                <input type="text" id="email" class="form-control" autocomplete="off" mdbInput>
+                                                <label for="email">Email</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Phone -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-phone prefix"></i>
+                                                <input type="text" id="phone" class="form-control" autocomplete="off" mdbInput>
+                                                <label for="phone">Phone</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Password -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-lock prefix"></i>
+                                                <input type="password" id="pass" class="form-control" autocomplete="off" mdbInput>
+                                                <label for="pass">Password</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Confirm Password -->
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="md-form md-outline">
+                                                <i class="fas fa-lock prefix"></i>
+                                                <input type="password" id="confpass" class="form-control" autocomplete="off" mdbInput>
+                                                <label for="confpass">Confirm</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="mt-3 text-center">
+                                    <!-- Update button -->
+                                    <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" type="submit">Update</button>
+                                </div>
+
+                            </form>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+            </div>
+
+        </div>
+    </div>
+
+</section>

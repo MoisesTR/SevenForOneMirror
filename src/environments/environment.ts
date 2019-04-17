@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:3000/auth/'
+  apiEndpoint: 'http://localhost:3000/',
+  apiEndpointAuth: 'http://localhost:3000/auth/'
 };
 
 /*

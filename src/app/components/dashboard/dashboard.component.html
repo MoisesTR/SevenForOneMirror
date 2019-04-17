@@ -1,138 +1,151 @@
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-dark-seven-one ie-nav" [containerInside]="false">
-  <mdb-navbar-brand>
-    <a class="navbar-brand">
-      <img src="assets/images/logo.svg" height="30" alt="">
-    </a>
-  </mdb-navbar-brand>
-  <links>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active waves-light" mdbWavesEffect>
-        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <ul class="navbar-nav nav-flex-icons">
-      <li class="nav-item avatar dropdown btn-group" dropdown>
-        <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          <img src="assets/images/user.svg" class="img-fluid rounded-circle z-depth-0">
-        </a>
-        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
-          <!-- <a class="dropdown-item">Profile</a>
-          <a class="dropdown-item">Settings</a> -->
-          <a class="dropdown-item" (click)="mdlLogout.show()">Logout</a>
+<section *ngIf="userIsAdmin; else userContent">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5" *ngFor="let group of groups">
+                <div class="card card-cascade cascading-admin-card text-muted">
+                    <div class="admin-up">
+                        <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
+                        <div class="data mb-3">
+                            <h3><strong>$ {{group.initialInvertion}}</strong></h3>
+                            <h4 class="mt-2">Total users active: {{group.totalMembers}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Registered Users</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <div class="container-fluid mt-3">
+
+                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
+                                    <thead>
+                                        <tr>
+                                            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let user of users; let i = index">
+                                            <th scope="row"> {{i + 1}}</th>
+                                            <td>{{user.userName}}</td>
+                                            <td>{{user.firstName}}</td>
+                                            <td>{{user.lastName}}</td>
+                                            <td>{{user.email}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
+
+                <!--Card-->
+                <mdb-card cascade="true" narrower="true">
+
+                    <div class="view view-cascade gradient-card-header green-seven-one">
+                        <h2 class="card-header-title mb-2">Historical Invested</h2>
+                    </div>
+
+                    <mdb-card-body cascade="true">
+
+                        <mdb-card-text>
+
+                            <div class="container-fluid mt-3">
+
+                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
+                                    <thead>
+                                        <tr>
+                                            <th *ngFor="let head of headElementsGroupsEarning; let i = index" scope="col">{{head}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let group of groups; let i = index">
+                                            <th scope="row">{{ i + 1}}</th>
+                                            <td>$ {{group.initialInvertion}}</td>
+                                            <td>$ {{group.totalInvested}}</td>
+                                            <td>{{group.winners}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </mdb-card-text>
+
+                    </mdb-card-body>
+                    <!--/.Card content-->
+
+                </mdb-card>
+                <!--/.Card-->
+
+
+            </div>
+
         </div>
-      </li>
-    </ul>
-  </links>
-</mdb-navbar>
+    </div>
 
-<!-- Purple Header -->
-<div class="edge-header blue-seven-one"></div>
+</section>
 
-<!-- Main Container -->
-<div class="container free-bird">
-  <div class="row">
-    <div class="col-md-8 col-lg-7 mx-auto float-none white z-depth-1 py-2 px-2" id="pattern">
+<ng-template #userContent>
 
-      <!--Naked Form-->
-      <div class="card-body" *ngIf="userActual.userName === 'admin'">
+    <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
 
-        <!-- En caso que no sea admin -->
-        <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
+        <!--Card-->
+        <mdb-card cascade="true" narrower="true">
 
-        <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
+            <div class="view view-cascade gradient-card-header green-seven-one">
+                <h2 class="card-header-title mb-2">Welcome</h2>
+            </div>
 
-        <div class="container mt-5">
-          <table class="table table-striped table-hover table-sm">
-            <thead>
-              <tr>
-                <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr mdbTableCol *ngFor="let usuario of usuarios; let i = index">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{usuario.firstName}}</td>
-                <td>{{usuario.lastName}}</td>
-                <td>{{usuario.email}}</td>
-              </tr>
-            </tbody>
-          </table>
+            <mdb-card-body cascade="true">
+
+                <mdb-card-text>
+
+                    <div class="container-fluid mt-3">
+
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="assets/images/home.svg" class="img-fluid" alt="home">
+                        </div>
 
 
-          <div class="text-center">
-            <button class=" btn btn-rounded green-seven-one white-text mt-2" (click)="logout()">Log out</button>
-          </div>
 
-        </div>
-
-      </div>
-
-      <div class="card-body" *ngIf="userActual.userName !== 'admin'">
-
-        <!-- En caso que no sea admin -->
-        <h2 class="h2-responsive text-center"><strong>{{userActual.userName}}</strong></h2>
-
-        <h2 class="h2-responsive text-center"><strong>Registered users</strong></h2>
-
-        <div class="container mt-5">
-          <table class="table table-striped table-hover table-sm">
-            <thead>
-              <tr>
-                <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr mdbTableCol>
-                <th scope="row">1</th>
-                <td>{{userActual.firstName}}</td>
-                <td>{{userActual.lastName}}</td>
-                <td>{{userActual.email}}</td>
-              </tr>
-            </tbody>
-          </table>
+                    </div>
 
 
-          <div class="text-center">
-            <button class=" btn btn-rounded green-seven-one white-text mt-2" (click)="logout()">Log out</button>
-          </div>
+                </mdb-card-text>
 
-        </div>
+            </mdb-card-body>
+            <!--/.Card content-->
 
-      </div>
-      <!--Naked Form-->
+        </mdb-card>
+        <!--/.Card-->
+
 
     </div>
-  </div>
-</div>
 
-
-<div mdbModal #mdlLogout="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-  aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog cascading-modal" role="document">
-    <!--Content-->
-    <div class="modal-content text-center">
-      <!--Header-->
-      <div class="modal-header green-seven-one white-text">
-        <h4 class="title">Logout</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlLogout.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-
-      <!--Body-->
-      <div class="modal-body">
-        <i class="fas fa-times fa-4x animated rotateIn"></i>
-        <p>Are you sure that you want to logout now?</p>
-      </div>
-
-      <!--Footer-->
-      <div class="modal-footer justify-content-center">
-        <a (click)="logout()" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect>Yes</a>
-        <a type="button" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect data-dismiss="modal"
-          (click)="mdlLogout.hide()">No</a>
-      </div>
-    </div>
-    <!--/.Content-->
-  </div>
-</div>
+</ng-template>

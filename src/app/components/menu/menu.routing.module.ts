@@ -4,13 +4,15 @@ import { DashboardComponent } from "../dashboard/dashboard.component";
 import {UsersComponent} from "../users/users.component";
 import {ProfileComponent} from "../profile/profile.component";
 import {GroupsComponent} from "../groups/groups.component";
+import {GameComponent} from "../game/game.component";
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } }
 	, { path: "users", component: UsersComponent, data: { titulo: "Users" } }
 	, { path: "profile", component: ProfileComponent, data: { titulo: "Profile" } }
-  , { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
-  , { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
+	, { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
+	, { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
+	, { path: "game/:idGroup", component: GameComponent, data: { titulo: "game"}}
 ];
 
 @NgModule({

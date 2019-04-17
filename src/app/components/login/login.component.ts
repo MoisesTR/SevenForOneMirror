@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/User";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
-import { Router } from "@angular/router";
-import { Token } from "../../models/models.index";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../models/User';
+import {UserService} from '../../core/services/shared/user.service';
+import {Router} from '@angular/router';
+import {AuthService, GoogleLoginProvider} from 'angular-6-social-login';
+import {RolService} from '../../core/services/shared/rol.service';
+import {RoleEnum} from '../enums/RoleEnum';
 
 declare var $: any;
 
@@ -15,9 +17,17 @@ declare var $: any;
 export class LoginComponent implements OnInit {
 	userForm: FormGroup;
 	public user: User;
+	public roles: RoleEnum[] = [];
 	public disabledButton = false;
-	public telefonos: string[] = [];
-	constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private router: Router) {
+	public idRolUser: string;
+
+	constructor(
+		private usuarioService: UserService,
+		private formBuilder: FormBuilder,
+		private router: Router,
+		private rolService: RolService,
+		private socialAuthService: AuthService
+	) {
 		this.user = new User();
 	}
 
@@ -27,7 +37,12 @@ export class LoginComponent implements OnInit {
 	height: number = 100;
 
 	ngOnInit() {
+		this.styleParticles();
 		this.inituser();
+		this.getRoles();
+	}
+
+	styleParticles() {
 		this.myStyle = {
 			position: "fixed",
 			width: "100%",
@@ -54,6 +69,30 @@ export class LoginComponent implements OnInit {
 		};
 	}
 
+	getRoles() {
+		this.rolService.getRoles().subscribe(roles => {
+			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
+		});
+	}
+
+	socialSignIn(socialPlatform: string) {
+		let socialPlatformProvider;
+		if (socialPlatform === "google") {
+			socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+		}
+
+		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
+			this.user.tokenGoogle = userData.idToken;
+			this.user.role._id = this.idRolUser;
+			this.usuarioService.loginGoogle(this.user).subscribe(response => {
+				this.usuarioService.identity = response.user;
+				localStorage.setItem("token", response.token);
+				localStorage.setItem("identity", JSON.stringify(response.user));
+				this.router.navigate(["/dashboard"]);
+			});
+		});
+	}
+
 	inituser() {
 		this.userForm = this.formBuilder.group({
 			user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
@@ -67,22 +106,12 @@ export class LoginComponent implements OnInit {
 		this.disabledButton = true;
 
 		this.usuarioService.login(this.user).subscribe(
-			res => {
-				const token: Token = res;
-				localStorage.setItem("token", token.token);
-				this.user.getUserInfo = true;
-
-				this.usuarioService.login(this.user).subscribe(
-					resuser => {
-						this.disabledButton = false;
-						this.usuarioService.identity = resuser;
-						localStorage.setItem("identity", JSON.stringify(resuser));
-						this.router.navigate(["/dashboard"]);
-					},
-					() => {
-						this.disabledButton = false;
-					}
-				);
+			response => {
+				const token = response.token;
+				this.usuarioService.identity = response.user;
+				localStorage.setItem("token", token);
+				localStorage.setItem("identity", JSON.stringify(this.usuarioService.identity));
+				this.router.navigate(["/dashboard"]);
 			},
 			() => {
 				this.disabledButton = false;

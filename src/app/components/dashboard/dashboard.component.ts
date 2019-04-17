@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { UsuarioService } from "../../core/services/shared/usuario.service";
-
-import { Token, User } from "../../models/models.index";
-import { ActivatedRoute, Router } from "@angular/router";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { UserService } from "../../core/services/shared/user.service";
+import { User } from "../../models/User";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { RoleEnum } from "../enums/RoleEnum";
 
 @Component({
 	selector: "app-dashboard",
@@ -10,40 +12,43 @@ import { ActivatedRoute, Router } from "@angular/router";
 	styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-	public token: Token;
+	public groups: GroupGame[] = [];
+	public users: User[] = [];
 	public user: User;
-	public userActual: User;
-	public usuarios: User[] = [];
-	private username: string;
-	private password: string;
+	public userIsAdmin = false;
 
-	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, private router: Router) {
-		this.user = new User();
-		this.token = new Token();
-	}
+	elements: any = [];
+	headElements = ["#", "Username", "First name", "Last name", "Email"];
+	headElementsGroupsEarning = ["#", "Group", "Total invested", "Total winners"];
 
-	headElements = ["ID", "First", "Last", "Handle"];
+	constructor(private groupService: GroupService, private userService: UserService, private authService: AuthService) {}
 
-	ngOnInit() {
-		this.getParams();
-	}
-
-	getUsuarios() {
-		this.usuarioService.getUsuarios().subscribe(usuarios => {
-			this.usuarios = usuarios;
+	getGroups() {
+		this.groupService.getGroups().subscribe(groups => {
+			this.groups = groups;
 		});
 	}
 
-	logout() {
-		localStorage.clear();
-		this.usuarioService.identity = null;
-		this.router.navigate(["/login"]);
+	getUsersNormal() {
+		this.userService.getUsers().subscribe(users => {
+			this.users = users;
+			this.users = this.userService.filterUsersByRol(users, RoleEnum.User);
+		});
 	}
 
-	getParams() {
-		this.username = localStorage.getItem("username");
-		this.password = localStorage.getItem("password");
-		this.userActual = JSON.parse(localStorage.getItem("identity"));
-		this.getUsuarios();
+	ngOnInit() {
+		this.user = this.authService.getUser();
+		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
+		this.getGroups();
+		this.getUsersNormal();
+
+		for (let i = 1; i <= 15; i++) {
+			this.elements.push({
+				id: i,
+				first: "User " + i,
+				last: "Name " + i,
+				handle: "Handle " + i
+			});
+		}
 	}
 }
