@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
 	public totalEarned = 0;
 	public totalInvested = 0;
 	public isUserAdmin = false;
+	public disableUpdateAmounts = false;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -77,8 +78,9 @@ export class MenuComponent implements OnInit {
 	}
 
 	getTotalEarned() {
-    this.totalEarned = 0;
-    this.totalInvested = 0;
+		this.disableUpdateAmounts = true;
+		this.totalEarned = 0;
+		this.totalInvested = 0;
 		if (this.userActual.role.name === RoleEnum.User) {
 			this.getPurchaseHistory();
 		} else {
@@ -87,31 +89,39 @@ export class MenuComponent implements OnInit {
 	}
 
 	getPurchaseHistory() {
-		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.authService.getUser()._id).subscribe(history => {
-			this.purchaseHistory = history;
-			for (const item of this.purchaseHistory) {
-				if (item.moneyDirection) {
-					this.totalInvested += +item.quantity["$numberDecimal"];
-				} else {
-					this.totalEarned += +item.quantity["$numberDecimal"];
+		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.authService.getUser()._id).subscribe(
+			history => {
+				this.purchaseHistory = history;
+				for (const item of this.purchaseHistory) {
+					if (item.moneyDirection) {
+						this.totalInvested += +item.quantity["$numberDecimal"];
+					} else {
+						this.totalEarned += +item.quantity["$numberDecimal"];
+					}
 				}
+				this.disableUpdateAmounts = false;
+			},
+			() => {
+				this.disableUpdateAmounts = false;
 			}
-		});
+		);
 	}
 
 	getTotalEarnedGlobalGroups() {
-		this.groupService.getGroups().subscribe(groups => {
-			groups.forEach((group, index) => {
-				if (group.enabled) {
-					this.totalEarned += group.totalInvested;
-				}
-			});
-		});
+		this.groupService.getGroups().subscribe(
+			groups => {
+				groups.forEach((group, index) => {
+					if (group.enabled) {
+						this.totalEarned += group.totalInvested;
+					}
+				});
+				this.disableUpdateAmounts = false;
+			},
+			() => {
+				this.disableUpdateAmounts = false;
+			}
+		);
 	}
-
-  updateAmounts() {
-	  this.getTotalEarned();
-  }
 
 	groups() {
 		this.router.navigate(["/groups"]);

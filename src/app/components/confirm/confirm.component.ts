@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { UserService } from "../../core/services/shared/user.service";
 import { Token } from "../../models/models.index";
-import {AuthService} from '../../core/services/auth/auth.service';
+import { AuthService } from "../../core/services/auth/auth.service";
 
 @Component({
 	selector: "app-confirm",
@@ -12,34 +12,29 @@ import {AuthService} from '../../core/services/auth/auth.service';
 export class ConfirmComponent implements OnInit {
 	public verified = false;
 	public tokenConfirmacion: string;
-	public token: Token;
 	private username = "";
 
-	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UserService, private router: Router, private authService: AuthService) {
-		this.token = new Token();
-	}
+	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UserService, private router: Router) {}
 
 	ngOnInit() {
-		this.getParams();
-		this.verificarUsuario();
+		this.verifyTokenUser();
 	}
 
-	getParams() {
+	verifyTokenUser() {
 		this.activatedRoute.params.subscribe((params: Params) => {
 			this.tokenConfirmacion = params["token"];
-			this.username = this.authService.getUser().userName;
-		});
-	}
+			this.username = params["userName"];
 
-	verificarUsuario() {
-		this.usuarioService.verifyEmail(this.tokenConfirmacion).subscribe(
-			() => {
-				this.verified = true;
-			},
-			() => {
-				this.router.navigate(["/login"]);
-			}
-		);
+      this.usuarioService.verifyEmail(this.tokenConfirmacion).subscribe(
+        () => {
+          this.verified = true;
+        },
+        () => {
+          this.router.navigate(["/login"]);
+        }
+      );
+
+		});
 	}
 
 	login() {

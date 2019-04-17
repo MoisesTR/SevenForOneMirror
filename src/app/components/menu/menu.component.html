@@ -78,7 +78,7 @@
                                 </div>
 
                                 <div class="col-8 text-center">
-                                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-1" mdbTooltip="update the amount invested and earned" (click)="updateAmounts()">Update amounts
+                                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-1" mdbTooltip="update the amount invested and earned" [disabled]="disableUpdateAmounts" (click)="getTotalEarned()">Update amounts
                                     <mdb-icon fas icon="money-bill" class="ml-1">
 
                                     </mdb-icon>
