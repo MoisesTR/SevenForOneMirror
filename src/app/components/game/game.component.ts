@@ -58,13 +58,7 @@ export class GameComponent implements OnInit {
 	getGroup(groupId) {
 		this.groupService.getGroup(groupId).subscribe(group => {
 			this.groupSeleccionado = group;
-			this.calcularTotalMonto(group.initialInvertion);
 		});
 	}
 
-	calcularTotalMonto(initialInvertion) {
-		this.montoInvertir = initialInvertion;
-
-		this.totalMount = this.montoInvertir * this.limitePersonas;
-	}
 }

@@ -7,6 +7,7 @@ import { MemberGroup } from "../../models/MemberGroup";
 import { User } from "../../models/User";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { RoleEnum } from "../enums/RoleEnum";
+import { PurchaseService } from "../../core/services/shared/purchase.service";
 
 @Component({
 	selector: "app-groups",
@@ -17,7 +18,12 @@ export class GroupsComponent implements OnInit {
 	public groups: GroupGame[] = [];
 	public user: User;
 	public userIsAdmin = false;
-	constructor(private groupService: GroupService, private authService: AuthService, private router: Router) {}
+	constructor(
+		private groupService: GroupService,
+		private authService: AuthService,
+		private purchaseService: PurchaseService,
+		private router: Router
+	) {}
 
 	ngOnInit() {
 		this.getGroups();
@@ -38,7 +44,6 @@ export class GroupsComponent implements OnInit {
 
 	validateMemberIsNotAlreadyRegistered(groupId) {
 		this.groupService.getGroup(groupId).subscribe(group => {
-			console.log(group.members);
 			const userIsAlreadyInGroup = this.groupService.filterMemberByGroup(group, this.user._id);
 			this.actionGroup(userIsAlreadyInGroup, groupId);
 		});
@@ -49,7 +54,7 @@ export class GroupsComponent implements OnInit {
 			this.router.navigate(["/game", groupId]);
 		} else {
 			if (already) {
-        this.router.navigate(["/game", groupId]);
+				this.router.navigate(["/game", groupId]);
 			} else {
 				swal
 					.fire({

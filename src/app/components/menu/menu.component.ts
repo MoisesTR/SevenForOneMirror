@@ -77,6 +77,8 @@ export class MenuComponent implements OnInit {
 	}
 
 	getTotalEarned() {
+    this.totalEarned = 0;
+    this.totalInvested = 0;
 		if (this.userActual.role.name === RoleEnum.User) {
 			this.getPurchaseHistory();
 		} else {
@@ -106,6 +108,10 @@ export class MenuComponent implements OnInit {
 			});
 		});
 	}
+
+  updateAmounts() {
+	  this.getTotalEarned();
+  }
 
 	groups() {
 		this.router.navigate(["/groups"]);
