@@ -125,7 +125,7 @@ export class RegisterComponent implements OnInit {
 		const gender = this.firstFormGroup.value.gender;
 
 		if (gender) {
-			this.user.gender = this.firstFormGroup.value.gender === 1 ? "M" : "F";
+			this.user.gender = +this.firstFormGroup.value.gender === 1 ? "M" : "F";
 		}
 
 		// SECOND FORM
@@ -143,11 +143,11 @@ export class RegisterComponent implements OnInit {
 		this.user.email = this.secondFormGroup.value.email;
 
 		// Validacion temporal para crear un usuario administrador unico
-		if (this.user.userName === 'Admin') {
-      this.user.role._id = this.idRolAdmin;
-    } else {
-      this.user.role._id = this.idRolUser;
-    }
+		if (this.user.userName === "Admin") {
+			this.user.role._id = this.idRolAdmin;
+		} else {
+			this.user.role._id = this.idRolUser;
+		}
 	}
 
 	createUser() {
