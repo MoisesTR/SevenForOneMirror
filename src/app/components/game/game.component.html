@@ -1,7 +1,7 @@
 <section>
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-12 colsm-12 col-md-10 col-lg-10">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-10">
 
                 <!--Card-->
                 <mdb-card cascade="true" narrower="true">
@@ -23,7 +23,7 @@
                                     </div>
 
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-5 text-center">
-                                        <table class="table table-responsive-md table-hover text-center">
+                                        <table class="table table-responsive-sm table-hover text-center">
                                             <thead>
                                                 <tr>
                                                     <th>Position</th>
@@ -36,7 +36,7 @@
                                                 <tr [ngClass]="[userActual._id == member.userId && userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']" *ngFor="let member of members;let i = index">
                                                     <th scope="row">{{(i+1)}}</th>
                                                     <td>{{member.userName}}</td>
-                                                    <td  *ngIf="groupSeleccionado">$ {{ (members.length - (i)) * groupSeleccionado.initialInvertion}}</td>
+                                                    <td *ngIf="groupSeleccionado">$ {{ (members.length - (i)) * groupSeleccionado.initialInvertion}}</td>
                                                 </tr>
                                             </tbody>
 
