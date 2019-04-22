@@ -52,75 +52,50 @@
 
 .background-first {
     background-image: url("/assets/images/first.svg");
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+    -webkit-background-size: 60%;
+    -moz-background-size: 60%;
+    -o-background-size: 60%;
+    background-position: center center;
     background-repeat: no-repeat;
-    height: 30%;
-    padding-top: 3%;
-    padding-left: 6%;
-    padding-right: 6%;
-    padding-bottom: 0;
+    background-size: 75%;
+    padding-left: 7.7%;
+    padding-right: 8%;
+    padding-top: 4%;
+    padding-bottom: 9%;
 }
 
 .background-blue {
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+    background-position: center center;
     background-repeat: no-repeat;
-    height: 30%;
-    padding-top: 3%;
-    padding-left: 6%;
-    padding-right: 6%;
-    padding-bottom: 0;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+}
+
+@media only screen and (max-width: 991px) {
+    .background-first {
+        padding-left: 15%;
+        padding-right: 15%;
+        padding-top: 10%;
+        padding-bottom: 0%;
+    }
+    .background-blue {
+        padding: 9%;
+    }
 }
 
 @media only screen and (max-width: 767px) {
     .circle-text div {
         padding-top: 8%;
     }
-    .background-first .background-blue {
-        padding-top: 5%;
+    .background-first {
         padding-left: 15%;
         padding-right: 15%;
-        padding-bottom: 0;
+        padding-top: 10.5%;
+        padding-bottom: 0%;
     }
-    .img-responsive {
-        left: -25%;
-    }
-}
-
-@media only screen and (max-width: 720px) {
-    .background-first .background-blue {
-        padding-top: 5%;
-        padding-left: 14%;
-        padding-right: 14%;
-        padding-bottom: 0;
-    }
-    .img-responsive {
-        left: calc(-20% + 10px);
-    }
-}
-
-@media only screen and (max-width: 650px) {
-    .background-first .background-blue {
-        padding-top: 6%;
-        padding-left: 12%;
-        padding-right: 12%;
-        padding-bottom: 0;
-    }
-    .img-responsive {
-        left: 0%;
-    }
-}
-
-@media only screen and (max-width: 991px) and (min-width: 768px) {
-    .background-first .background-blue {
-        padding-top: 6%;
-        padding-left: 12%;
-        padding-right: 12%;
-        padding-bottom: 0;
+    .background-blue {
+        padding: 8%;
     }
 }
