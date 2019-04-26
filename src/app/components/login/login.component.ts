@@ -6,8 +6,7 @@ import { Router } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
 import { RoleEnum } from "../enums/RoleEnum";
-import {Global, socialPlatFormConst, validRoles} from '../../core/services/shared/global';
-import {SocialPlatFormEnum} from '../enums/SocialPlatFormEnum';
+import { SocialPlatFormEnum } from "../enums/SocialPlatFormEnum";
 
 declare var $: any;
 
@@ -88,7 +87,7 @@ export class LoginComponent implements OnInit {
 		}
 
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ?  userData.idToken : userData.token;
+			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
 			this.user.role._id = this.idRolUser;
 
 			this.usuarioService.loginSocial(this.user, socialPlatformProvider).subscribe(response => {
