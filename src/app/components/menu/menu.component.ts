@@ -58,10 +58,10 @@ export class MenuComponent implements OnInit {
 		});
 
 		function fixNavDropdown() {
-			if ($(window).width() <= 575) {
-				$(".navbar .dropdown-menu").removeClass("dropdown-menu-right");
+			if ($(window).width() >= 992) {
+				$(".navbar .dropdown-menu").addClass("dropdown-menu-right");				
 			} else {
-				$(".navbar .dropdown-menu").addClass("dropdown-menu-right");
+				$(".navbar .dropdown-menu").removeClass("dropdown-menu-right");
 			}
 		}
 

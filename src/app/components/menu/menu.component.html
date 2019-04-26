@@ -59,16 +59,29 @@
                                     </h5>
                                 </div>
 
-                                <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 border-bottom mt-2'>
+                                <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 mt-2'>
                                     <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
-                                        Invested
+                                        Total Invested
                                     </h6>
                                     <h5 class='text-uppercase green-seven-one-text'>
                                         $ {{this.totalInvested}}
                                     </h5>
                                 </div>
 
-                                <div class='col-8 col-8 col-md-8 col-lg-8 mt-2'>
+
+                                <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 mt-2 border-top '>
+                                    <h6 class='text-uppercase font-weight-bold blue-seven-one-text mt-2'>
+                                        Individual Groups
+                                    </h6>
+                                    <h5 class='text-uppercase text-center green-seven-one-text'>
+                                        2 x $ 10
+                                    </h5>
+                                    <h5 class='text-uppercase text-center green-seven-one-text'>
+                                        2 x $ 200
+                                    </h5>
+                                </div>
+
+                                <div *ngIf="isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 mt-2'>
                                     <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
                                         Earned
                                     </h6>
@@ -77,15 +90,13 @@
                                     </h5>
                                 </div>
 
-                                <div class="col-8 text-center">
-                                  <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-1" mdbTooltip="update the amount invested and earned" [disabled]="disableUpdateAmounts" (click)="getTotalEarned()">Update amounts
-                                    <mdb-icon fas icon="money-bill" class="ml-1">
-
-                                    </mdb-icon>
-                                  </button>
+                                <div class="col-8 mt-2 text-center">
+                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" mdbTooltip="update the amount invested and earned" [disabled]="disableUpdateAmounts" (click)="getTotalEarned()">
+                                        <mdb-icon fas icon="money-bill" class="ml-1"></mdb-icon> Update Amounts                                    
+                                    </button>
                                 </div>
 
-                                <div class="col-8 text-center">
+                                <div class="col-8 mt-2 text-center">
                                     <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" (click)="dashBoard()">Dashboard</button>
                                 </div>
                                 <div class="col-8 mt-2 text-center">
