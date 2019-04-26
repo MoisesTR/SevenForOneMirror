@@ -12,6 +12,7 @@ export class User {
 	public role: Role = new Role();
 	public passwordHash: string;
 	public password: string;
+	public passwordConfirm: string;
 	public enabled: number;
 	public createdAt: string;
 	public updatedAt: string;
