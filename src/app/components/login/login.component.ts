@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../models/User';
-import {UserService} from '../../core/services/shared/user.service';
-import {Router} from '@angular/router';
-import {AuthService, GoogleLoginProvider} from 'angular-6-social-login';
-import {RolService} from '../../core/services/shared/rol.service';
-import {RoleEnum} from '../enums/RoleEnum';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { User } from "../../models/User";
+import { UserService } from "../../core/services/shared/user.service";
+import { Router } from "@angular/router";
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
+import { RolService } from "../../core/services/shared/rol.service";
+import { RoleEnum } from "../enums/RoleEnum";
+import {Global, socialPlatFormConst, validRoles} from '../../core/services/shared/global';
+import {SocialPlatFormEnum} from '../enums/SocialPlatFormEnum';
 
 declare var $: any;
 
@@ -77,14 +79,19 @@ export class LoginComponent implements OnInit {
 
 	socialSignIn(socialPlatform: string) {
 		let socialPlatformProvider;
-		if (socialPlatform === "google") {
+		if (socialPlatform === SocialPlatFormEnum.Google) {
 			socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
 		}
 
+		if (socialPlatform === SocialPlatFormEnum.Facebook) {
+			socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+		}
+
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-			this.user.tokenGoogle = userData.idToken;
+			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ?  userData.idToken : userData.token;
 			this.user.role._id = this.idRolUser;
-			this.usuarioService.loginGoogle(this.user).subscribe(response => {
+
+			this.usuarioService.loginSocial(this.user, socialPlatformProvider).subscribe(response => {
 				this.usuarioService.identity = response.user;
 				localStorage.setItem("token", response.token);
 				localStorage.setItem("identity", JSON.stringify(response.user));
@@ -101,7 +108,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		this.getDatoUser();
+		this.getCredentialsUser();
 		this.user.getUserInfo = false;
 		this.disabledButton = true;
 
@@ -119,7 +126,7 @@ export class LoginComponent implements OnInit {
 		);
 	}
 
-	getDatoUser() {
+	getCredentialsUser() {
 		this.user.userName = this.userForm.value.user;
 		this.user.password = this.userForm.value.password;
 	}

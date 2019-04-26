@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Global } from "./global";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { User } from '../../../models/User';
+import { User } from "../../../models/User";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import {RoleEnum} from '../../../components/enums/RoleEnum';
+import { RoleEnum } from "../../../components/enums/RoleEnum";
 
 @Injectable()
 export class UserService {
@@ -25,13 +25,17 @@ export class UserService {
 		return this.http.post(this.url + "login", usuario, options);
 	}
 
-	loginGoogle(usuario: User): Observable<any> {
+	loginSocial(usuario: User, socialPlatformProvider): Observable<any> {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
 		});
 		const options = { headers: headers };
 
-		return this.http.post(this.url + "loginGoogle", usuario, options);
+		return this.http.post(this.url + this.getUrlSocial(socialPlatformProvider) , usuario, options);
+	}
+
+	private getUrlSocial(socialPlatformProvider) {
+		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
 	}
 
 	getUsers() {
@@ -67,7 +71,6 @@ export class UserService {
 	}
 
 	filterUsersByRol(users: User[], rol) {
-	  return users.filter( user => user.role.name === rol);
-  }
-
+		return users.filter(user => user.role.name === rol);
+	}
 }

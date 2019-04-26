@@ -6,10 +6,11 @@ import { UserService } from "../../core/services/shared/user.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { Utils } from "../../infraestructura/Utils";
-import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular-6-social-login';
 import { RolService } from "../../core/services/shared/rol.service";
 import { Role } from "../../models/Role";
 import { RoleEnum } from "../enums/RoleEnum";
+import {SocialPlatFormEnum} from '../enums/SocialPlatFormEnum';
 
 declare var $: any;
 
@@ -182,22 +183,26 @@ export class RegisterComponent implements OnInit {
 		}
 	}
 
-	socialSignUp(socialPlatform: string) {
-		let socialPlatformProvider;
-		if (socialPlatform === "google") {
-			socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-		}
+  socialSignUp(socialPlatform: string) {
+    let socialPlatformProvider;
+    if (socialPlatform === SocialPlatFormEnum.Google) {
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
 
-		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-			this.user.tokenGoogle = userData.idToken;
-			this.user.role._id = this.idRolUser;
+    if (socialPlatform === SocialPlatFormEnum.Facebook) {
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    }
 
-			this.usuarioService.loginGoogle(this.user).subscribe(response => {
-				this.usuarioService.identity = response.user;
-				localStorage.setItem("token", response.token);
-				localStorage.setItem("identity", JSON.stringify(response.user));
-				this.router.navigate(["/dashboard"]);
-			});
-		});
-	}
+    this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
+      this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ?  userData.idToken : userData.token;
+      this.user.role._id = this.idRolUser;
+
+      this.usuarioService.loginSocial(this.user, socialPlatformProvider).subscribe(response => {
+        this.usuarioService.identity = response.user;
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("identity", JSON.stringify(response.user));
+        this.router.navigate(["/dashboard"]);
+      });
+    });
+  }
 }
