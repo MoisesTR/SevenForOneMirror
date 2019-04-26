@@ -175,6 +175,14 @@ export class RegisterComponent implements OnInit {
 		this.router.navigate(["/login"]);
 	}
 
+	openNav() {
+		document.getElementById("myNav").style.width = "100%";
+	}
+
+	closeNav() {
+		document.getElementById("myNav").style.width = "0%";
+	}
+
 	keyPress(event: any) {
 		const pattern = /[0-9\+\-\ ]/;
 

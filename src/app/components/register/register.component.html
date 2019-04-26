@@ -197,10 +197,17 @@
 
 </section>
 
+<div id="myNav" class="overlay">
+    <a class="closebtn" (click)="closeNav()">&times;</a>
+    <div class="overlay-content">
+        <a (click)="login()">Login</a>
+    </div>
+</div>
+
 <div class="fixed-action-btn d-sm-block d-md-none" style="bottom: 45px; right: 24px;" mdbTooltip="Sign in" placement="left">
 
-    <a class="btn-floating btn-large blue-seven-one waves-light" mdbWavesEffect (click)="login()">
-        <i class="fas fa-user-alt"></i>
+    <a class="btn-floating btn-large blue-seven-one waves-light" mdbWavesEffect (click)="openNav()">
+        <i class="fas fa-bars"></i>
     </a>
 
 </div>

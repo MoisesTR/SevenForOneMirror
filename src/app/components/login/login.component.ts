@@ -134,5 +134,13 @@ export class LoginComponent implements OnInit {
 		this.router.navigate(["/register"]);
 	}
 
+	openNav() {
+  		document.getElementById("myNav").style.width = "100%";
+	}
+
+	closeNav() {
+		document.getElementById("myNav").style.width = "0%";
+	}
+
 	forgotPassword() {}
 }
