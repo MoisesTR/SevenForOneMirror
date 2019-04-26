@@ -141,6 +141,7 @@ export class RegisterComponent implements OnInit {
 
 		this.user.phones = this.telefonos;
 		this.user.password = this.secondFormGroup.value.password;
+		this.user.passwordConfirm = this.secondFormGroup.value.confirmPassword;
 		this.user.email = this.secondFormGroup.value.email;
 
 		// Validacion temporal para crear un usuario administrador unico
