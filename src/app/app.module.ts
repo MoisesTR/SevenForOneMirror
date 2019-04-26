@@ -14,15 +14,15 @@ import { ConfirmComponent } from "./components/confirm/confirm.component";
 import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.component";
 import { ParticlesModule } from "angular-particle";
 import { ComponentsComponent } from "./components/components.component";
-import { AuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from "angular-6-social-login";
+import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 
 // Configs
 export function getAuthServiceConfigs() {
 	const config = new AuthServiceConfig([
-		// {
-		// 	id: FacebookLoginProvider.PROVIDER_ID,
-		// 	provider: new FacebookLoginProvider("Your-Facebook-app-id")
-		// },
+		{
+			id: FacebookLoginProvider.PROVIDER_ID,
+			provider: new FacebookLoginProvider("425265861601261")
+		},
 		{
 			id: GoogleLoginProvider.PROVIDER_ID,
 			provider: new GoogleLoginProvider("380320064033-9vbj0mhvke1meolivgcun4kesjiequq8.apps.googleusercontent.com")

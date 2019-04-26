@@ -1,4 +1,4 @@
-import {Role} from './Role';
+import { Role } from "./Role";
 
 export class User {
 	public _id: number;
@@ -15,7 +15,7 @@ export class User {
 	public enabled: number;
 	public createdAt: string;
 	public updatedAt: string;
-	public tokenGoogle: string;
+	public accessToken: string;
 	public getUserInfo: boolean;
 	public phones?: string[];
 	public birthDate?: string;
