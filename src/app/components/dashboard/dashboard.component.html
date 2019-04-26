@@ -1,4 +1,4 @@
-<section *ngIf="userIsAdmin; else userContent">
+<section *ngIf="isUserAdmin; else userContent">
     <div class="container-fluid">
         <div class="row justify-content-center">
 
@@ -124,20 +124,27 @@
 
             <mdb-card-body cascade="true">
 
-                <mdb-card-text>
 
-                    <div class="container-fluid mt-3">
+              <app-game  *ngFor="let group of groups" [members]="members"
+                         [groupSeleccionado]="groupSeleccionado"
+                         [userActual]="user"
+                         [isUserAdmin]="isUserAdmin">
+              </app-game>
 
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="assets/images/home.svg" class="img-fluid" alt="home">
-                        </div>
+                <!--<mdb-card-text>-->
+
+                    <!--<div class="container-fluid mt-3">-->
+
+                        <!--<div class="d-flex flex-column justify-content-center align-items-center">-->
+                            <!--<img src="assets/images/home.svg" class="img-fluid" alt="home">-->
+                        <!--</div>-->
 
 
 
-                    </div>
+                    <!--</div>-->
 
 
-                </mdb-card-text>
+                <!--</mdb-card-text>-->
 
             </mdb-card-body>
             <!--/.Card content-->
