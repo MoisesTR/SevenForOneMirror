@@ -49,7 +49,7 @@ export function getAuthServiceConfigs() {
 		ComponentsComponent
 	],
 	imports: [
-		BrowserModule,
+		BrowserModule.withServerTransition({ appId: "serverApp" }),
 		BrowserAnimationsModule,
 		CoreModule,
 		AppRoutingModule,
