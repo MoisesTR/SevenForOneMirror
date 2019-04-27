@@ -22,6 +22,7 @@ export class User {
 	public birthDate?: string;
 	public gender?: string;
 	public image?: string;
+	public roleId?: string;
 
 	constructor() {}
 }
