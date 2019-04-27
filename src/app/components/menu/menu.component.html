@@ -49,17 +49,17 @@
 
                                 <div class='col-12 mt-3'>
                                     <h2 class='text-uppercase green-seven-one-text'>
-                                      {{user.userName}}
+                                        {{user.userName}}
                                     </h2>
                                 </div>
 
                                 <div class='col-12'>
                                     <h5 class='text-muted'>
-                                      {{user.email}}
+                                        {{user.email}}
                                     </h5>
                                 </div>
 
-                                <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 mt-2'>
+                                <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 mt-2 border-bottom'>
                                     <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
                                         Total Invested
                                     </h6>
@@ -68,22 +68,21 @@
                                     </h5>
                                 </div>
 
+                                <div class='col-8 col-8 col-md-8 col-lg-8 mt-2'>
+                                    <h6 class='text-uppercase font-weight-bold blue-seven-one-text mt-2'>
+                                        Earned
+                                    </h6>
+                                    <h5 class='text-uppercase green-seven-one-text'>
+                                        $ {{this.totalEarned}}
+                                    </h5>
+                                </div>
 
                                 <div *ngIf="!isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 mt-2 border-top '>
                                     <h6 class='text-uppercase font-weight-bold blue-seven-one-text mt-2'>
                                         Individual Groups
                                     </h6>
                                     <h5 *ngFor="let currentGroupUser of currentGroupsUser" class='text-uppercase text-center green-seven-one-text'>
-                                      {{currentGroupUser.timesPlayUser}} X ${{currentGroupUser.initialInvertion}}
-                                    </h5>
-                                </div>
-
-                                <div *ngIf="isUserAdmin" class='col-8 col-8 col-md-8 col-lg-8 mt-2'>
-                                    <h6 class='text-uppercase font-weight-bold blue-seven-one-text'>
-                                        Earned
-                                    </h6>
-                                    <h5 class='text-uppercase green-seven-one-text'>
-                                        $ {{this.totalEarned}}
+                                        {{currentGroupUser.timesPlayUser}} X ${{currentGroupUser.initialInvertion}}
                                     </h5>
                                 </div>
 

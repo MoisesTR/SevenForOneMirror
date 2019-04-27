@@ -113,14 +113,45 @@
 
 <ng-template #userContent>
 
+    <div class="row justify-content-center" *ngIf="groups.length <= 0">
+
+        <div class="col-12 col-sm-12 col-md-10 colg-lg-10 mb-5">
+
+            <!--Card-->
+            <mdb-card cascade="true" narrower="true">
+
+                <div class="view view-cascade gradient-card-header green-seven-one">
+                    <h1 class="card-header-title mb-2">Welcome</h1>
+                </div>
+
+                <mdb-card-body cascade="true">
+
+                    <mdb-card-text>
+
+                        <div class="container-fluid mt-3">
+
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+
+                                <h1 class="font-weight-bold blue-seven-one-text mb-0 wow fadeInDown" data-wow-delay="0.2s">We are waiting for you to play</h1>
+                                <img src="assets/images/dashboard.png" class="img-fluid wow fadeIn" data-wow-delay="0.2s" alt="dashboard user" style="height: 55%;">
+                            </div>
+
+                        </div>
+
+                    </mdb-card-text>
+
+                </mdb-card-body>
+                <!--/.Card content-->
+
+            </mdb-card>
+            <!--/.Card-->
+
+        </div>
+    </div>
+
     <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
 
-        <app-game *ngFor="let group of groups"
-                  [circleUsers]="group.circleUsers"
-                  [circleUsersPlaying]="group.circleUsersPlaying"
-                  [groupSeleccionado]="group"
-                  [userActual]="user"
-                  [isUserAdmin]="isUserAdmin">
+        <app-game *ngFor="let group of groups" [circleUsers]="group.circleUsers" [circleUsersPlaying]="group.circleUsersPlaying" [groupSeleccionado]="group" [userActual]="user" [isUserAdmin]="isUserAdmin">
         </app-game>
 
     </div>
