@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "../../../models/User";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { RoleEnum } from "../../../components/enums/RoleEnum";
+import { RoleEnum } from "../../../enums/RoleEnum";
 
 @Injectable()
 export class UserService {

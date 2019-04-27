@@ -14,7 +14,12 @@ import { ConfirmComponent } from "./components/confirm/confirm.component";
 import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.component";
 import { ParticlesModule } from "angular-particle";
 import { ComponentsComponent } from "./components/components.component";
-import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
+import {
+	AuthServiceConfig,
+	FacebookLoginProvider,
+	GoogleLoginProvider,
+	SocialLoginModule
+} from "angular-6-social-login";
 
 // Configs
 export function getAuthServiceConfigs() {

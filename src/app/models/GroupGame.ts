@@ -1,8 +1,9 @@
 import {MemberGroup} from './MemberGroup';
+import {CircleUser} from './CircleUser';
 
 export class GroupGame {
 
-    public _id: number;
+    public _id: string;
     public totalMembers: number;
     public Name: string;
     public initialInvertion: number;
@@ -12,6 +13,9 @@ export class GroupGame {
     public createAt: string;
     public updateAt: string;
     public enabled: boolean;
+    public lastWinner?: MemberGroup;
+    public circleUsers?: CircleUser[];
+    public circleUsersPlaying?: CircleUser[];
 
     public GroupGame() {}
 

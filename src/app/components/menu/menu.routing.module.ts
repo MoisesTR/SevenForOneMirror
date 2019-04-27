@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
-import { DashboardComponent } from "../dashboard/dashboard.component";
-import {UsersComponent} from "../users/users.component";
-import {ProfileComponent} from "../profile/profile.component";
-import {GroupsComponent} from "../groups/groups.component";
-import {GameComponent} from "../game/game.component";
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {DashboardComponent} from '../dashboard/dashboard.component';
+import {UsersComponent} from '../users/users.component';
+import {ProfileComponent} from '../profile/profile.component';
+import {GroupsComponent} from '../groups/groups.component';
+import {GamecontainerComponent} from '../gamecontainer/gamecontainer.component';
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } }
@@ -12,7 +12,7 @@ const menuRoutes = [
 	, { path: "profile", component: ProfileComponent, data: { titulo: "Profile" } }
 	, { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
 	, { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
-	, { path: "game/:idGroup", component: GameComponent, data: { titulo: "game"}}
+	, { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "game"}}
 ];
 
 @NgModule({

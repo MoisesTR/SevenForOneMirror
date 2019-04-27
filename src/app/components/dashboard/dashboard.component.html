@@ -1,4 +1,4 @@
-<section *ngIf="userIsAdmin; else userContent">
+<section *ngIf="isUserAdmin; else userContent">
     <div class="container-fluid">
         <div class="row justify-content-center">
 
@@ -115,36 +115,13 @@
 
     <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
 
-        <!--Card-->
-        <mdb-card cascade="true" narrower="true">
-
-            <div class="view view-cascade gradient-card-header green-seven-one">
-                <h2 class="card-header-title mb-2">Welcome</h2>
-            </div>
-
-            <mdb-card-body cascade="true">
-
-                <mdb-card-text>
-
-                    <div class="container-fluid mt-3">
-
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="assets/images/home.svg" class="img-fluid" alt="home">
-                        </div>
-
-
-
-                    </div>
-
-
-                </mdb-card-text>
-
-            </mdb-card-body>
-            <!--/.Card content-->
-
-        </mdb-card>
-        <!--/.Card-->
-
+        <app-game *ngFor="let group of groups"
+                  [circleUsers]="group.circleUsers"
+                  [circleUsersPlaying]="group.circleUsersPlaying"
+                  [groupSeleccionado]="group"
+                  [userActual]="user"
+                  [isUserAdmin]="isUserAdmin">
+        </app-game>
 
     </div>
 

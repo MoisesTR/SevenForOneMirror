@@ -9,8 +9,8 @@ import { Utils } from "../../infraestructura/Utils";
 import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular-6-social-login';
 import { RolService } from "../../core/services/shared/rol.service";
 import { Role } from "../../models/Role";
-import { RoleEnum } from "../enums/RoleEnum";
-import {SocialPlatFormEnum} from '../enums/SocialPlatFormEnum';
+import { RoleEnum } from "../../enums/RoleEnum";
+import {SocialPlatFormEnum} from '../../enums/SocialPlatFormEnum';
 
 declare var $: any;
 

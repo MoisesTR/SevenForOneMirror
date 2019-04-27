@@ -5,8 +5,8 @@ import { UserService } from "../../core/services/shared/user.service";
 import { Router } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
-import { RoleEnum } from "../enums/RoleEnum";
-import { SocialPlatFormEnum } from "../enums/SocialPlatFormEnum";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 
 declare var $: any;
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {
 		this.styleParticles();
-		this.inituser();
+		this.initFormUser();
 		this.getRoles();
 	}
 
@@ -70,6 +70,13 @@ export class LoginComponent implements OnInit {
 		};
 	}
 
+  initFormUser() {
+    this.userForm = this.formBuilder.group({
+      user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
+      password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
+    });
+  }
+
 	getRoles() {
 		this.rolService.getRoles().subscribe(roles => {
 			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
@@ -96,13 +103,6 @@ export class LoginComponent implements OnInit {
 				localStorage.setItem("identity", JSON.stringify(response.user));
 				this.router.navigate(["/dashboard"]);
 			});
-		});
-	}
-
-	inituser() {
-		this.userForm = this.formBuilder.group({
-			user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
-			password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
 		});
 	}
 

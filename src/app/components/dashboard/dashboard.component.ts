@@ -4,7 +4,10 @@ import { GroupGame } from "../../models/GroupGame";
 import { UserService } from "../../core/services/shared/user.service";
 import { User } from "../../models/User";
 import { AuthService } from "../../core/services/auth/auth.service";
-import { RoleEnum } from "../enums/RoleEnum";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { MemberGroup } from "../../models/MemberGroup";
+import { GameService } from "../../core/services/shared/game.service";
+import { IndividualGroup } from "../../models/IndividualGroup";
 
 @Component({
 	selector: "app-dashboard",
@@ -15,18 +18,28 @@ export class DashboardComponent implements OnInit {
 	public groups: GroupGame[] = [];
 	public users: User[] = [];
 	public user: User;
-	public userIsAdmin = false;
+	public isUserAdmin = false;
+	public group: GroupGame;
+	public groupSeleccionado: GroupGame;
+	public members: MemberGroup[] = [];
+	public userActual: User;
+	public individualGroups: IndividualGroup[] = [];
 
 	elements: any = [];
 	headElements = ["#", "Username", "First name", "Last name", "Email"];
 	headElementsGroupsEarning = ["#", "Group", "Total invested", "Total winners"];
 
-	constructor(private groupService: GroupService, private userService: UserService, private authService: AuthService) {}
+	constructor(
+		private groupService: GroupService,
+		private userService: UserService,
+		private gameService: GameService,
+		private authService: AuthService
+	) {}
 
-	getGroups() {
-		this.groupService.getGroups().subscribe(groups => {
-			this.groups = groups;
-		});
+	ngOnInit() {
+		this.user = this.authService.getUser();
+		this.isUserAdmin = this.user.role.name === RoleEnum.Admin;
+		this.createContentDashboard(this.isUserAdmin);
 	}
 
 	getUsersNormal() {
@@ -36,19 +49,38 @@ export class DashboardComponent implements OnInit {
 		});
 	}
 
-	ngOnInit() {
-		this.user = this.authService.getUser();
-		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
-		this.getGroups();
-		this.getUsersNormal();
-
-		for (let i = 1; i <= 15; i++) {
-			this.elements.push({
-				id: i,
-				first: "User " + i,
-				last: "Name " + i,
-				handle: "Handle " + i
-			});
+	createContentDashboard(userIsAdmin) {
+		if (userIsAdmin) {
+			this.getGroups();
+			this.getUsersNormal();
+			for (let i = 1; i <= 15; i++) {
+				this.elements.push({
+					id: i,
+					first: "User " + i,
+					last: "Name " + i,
+					handle: "Handle " + i
+				});
+			}
+		} else {
+			this.getGroupsCurrentUser();
 		}
+	}
+
+	getGroups() {
+		this.groupService.getGroups().subscribe(groups => {
+			this.groups = groups;
+		});
+	}
+
+	getGroupsCurrentUser() {
+		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(response => {
+			this.groups = response;
+
+			this.groups.forEach((group, index) => {
+				group.circleUsers = this.gameService.generateCirclesUser(group.members, group.lastWinner, this.user);
+        group.circleUsersPlaying = this.gameService.getCircleUserPlaying(group.circleUsers);
+        group.circleUsersPlaying = group.circleUsersPlaying.reverse();
+			});
+		});
 	}
 }

@@ -4,6 +4,9 @@ import { Global } from "./global";
 import { Observable } from "rxjs";
 import { GroupGame } from "../../../models/GroupGame";
 import { MemberGroup } from "../../../models/MemberGroup";
+import { IndividualGroup } from "../../../models/IndividualGroup";
+import { AuthService } from "../auth/auth.service";
+import { User } from "../../../models/User";
 
 @Injectable({
 	providedIn: "root"
@@ -33,6 +36,10 @@ export class GroupService {
 		return this.http.get(this.url + this.gameUrl);
 	}
 
+	getGroupsCurrentUser(userId): Observable<any> {
+		return this.http.get(this.url + this.gameUrl + "/current/" + userId);
+	}
+
 	addMemberToGroup(member: MemberGroup, groupId): Observable<any> {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
@@ -59,5 +66,24 @@ export class GroupService {
 		} else {
 			return null;
 		}
+	}
+
+	getIndividualGroups(groups: GroupGame[], userId) {
+		const individualGroups: IndividualGroup[] = [];
+		groups.forEach((group: GroupGame, index) => {
+			const individualGroup = new IndividualGroup();
+
+			group.members.forEach((member: MemberGroup, index2) => {
+				if (member.userId === userId) {
+					individualGroup.groupId = group._id;
+					individualGroup.initialInvertion = group.initialInvertion;
+					individualGroup.timesPlayUser += 1;
+				}
+			});
+
+			individualGroups.push(individualGroup);
+		});
+
+		return individualGroups;
 	}
 }
