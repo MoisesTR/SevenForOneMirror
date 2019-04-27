@@ -15,21 +15,21 @@
 
                         <div class="container-fluid">
 
-                            <h3 class="blue-seven-one-text text-left text-uppercase font-weight-bold mt-3 wow fadeInDown mb-3" data-wow-delay="0.2s"><strong>Group $10</strong></h3>
+                            <h3 class="blue-seven-one-text text-left text-uppercase font-weight-bold mt-3 wow fadeInDown mb-3" data-wow-delay="0.2s"><strong>Group ${{groupSeleccionado ? groupSeleccionado.initialInvertion : ''}}</strong></h3>
 
                             <div class="row">
 
                                 <!-- Primer lugar -->
-                                <div *ngFor="let member of members; let i = index" [ngClass]="(i === 0) ? 'col-sm-6 col-md-4 col-lg-2' : ''">
+                                <div *ngFor="let circleUser of circleUsers; let i = index" [ngClass]="(i === 0) ? 'col-sm-6 col-md-4 col-lg-2' : ''">
                                     <div *ngIf="i === 0">
                                         <div class="col-12  background-blue wow bounceInRight" data-wow-delay="{{ i / 10}}s">
-
                                             <div class="view">
-                                                <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
-                                                <div class="mask flex-center rgba-black-strong" style="border-radius: 50%;">
-                                                    <p class="white-text">Username</p>
+                                                <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'" [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : 'assets/images/user.png')  + ')'}"></div>
+                                                <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong" style="border-radius: 50%;">
+                                                    <p class="white-text">{{circleUser.member.userName}}</p>
                                                 </div>
                                             </div>
+
                                             <h5 class='blue-seven-one-text mt-2 text-center'>{{i+1}}</h5>
                                         </div>
                                     </div>
@@ -37,14 +37,15 @@
 
                                 <div class="col-sm-6 col-md-8 col-lg-10">
                                     <div class="row">
-                                        <div *ngFor="let member of members | slice:1; let i = index;" class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
+                                        <div *ngFor="let circleUser of circleUsers | slice:1; let i = index;" class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
 
                                             <div class="view wow bounceInRight" data-wow-delay="{{ i / 10}}s">
-                                                <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
-                                                <div class="mask flex-center rgba-black-strong" style="border-radius: 50%;">
-                                                    <p class="white-text">Username</p>
+                                                <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'" class="ratio img-responsive img-circle gray-circle" [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : 'assets/images/user.png')  + ')'}"></div>
+                                                <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong" style="border-radius: 50%;">
+                                                    <p class="white-text">{{circleUser.member.userName}}</p>
                                                 </div>
                                             </div>
+
                                             <h5 class='blue-seven-one-text mt-2 text-center wow bounceInRight' data-wow-delay="{{ i / 10}}s">{{i+2}}</h5>
                                         </div>
                                     </div>
@@ -53,7 +54,7 @@
 
                                 <!-- <div class="col-sm-6 col-md-8 col-lg-10">
                                         <div *ngFor="let member of members; let i = index" class="col-6 col-sm-6 col-md-6 col-lg-2 mt-3   background-blue wow bounceInRight" data-wow-delay="0.4s">
-                                            <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+                                            <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/member.png')  + ')'}"></div>
                                         </div>
                                     </div> -->
 
@@ -69,29 +70,29 @@
                                         </thead>
 
                                         <tbody *ngIf="!isUserAdmin; else adminContent">
-                                            <tr *ngFor="let circleUser of members;let i = index" [ngClass]="[ userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']">
-                                                <th scope="row">{{(i+1)}}</th>
-                                                <td>{{circleUser.userName}}</td>
-                                                <td *ngIf="groupSeleccionado">$ {{ (circleUsers.length - (i)) * groupSeleccionado.initialInvertion}}</td>
-                                                <td>
-                                                    <h5>
-                                                        <mdb-badge color="blue">Winner</mdb-badge>
-                                                    </h5>
-                                                </td>
+                                            <tr *ngFor="let circleUserPlaying of circleUsersPlaying" [ngClass]="[ circleUserPlaying.isUserLogged && userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']">
+                                                <th scope="row">{{(circleUserPlaying.position)}}</th>
+                                                <td>{{circleUserPlaying.member.userName}}</td>
+                                                <td *ngIf="groupSeleccionado">$ {{ (7 - (circleUserPlaying.position)) * groupSeleccionado.initialInvertion}}</td>
+                                              <td>
+                                                <h5 *ngIf="circleUserPlaying.position === 1">
+                                                  <mdb-badge color="blue">Winner</mdb-badge>
+                                                </h5>
+                                              </td>
                                             </tr>
                                         </tbody>
 
                                         <ng-template #adminContent>
                                             <tbody>
-                                                <tr *ngFor="let circleUser of members;let i = index">
-                                                    <th scope="row">{{(i+1)}}</th>
-                                                    <td>{{circleUser.userName}}</td>
-                                                    <td *ngIf="groupSeleccionado">$ {{ (members.length - (i)) * groupSeleccionado.initialInvertion}}</td>
-                                                    <td>
-                                                        <h5>
-                                                            <mdb-badge color="blue">Winner</mdb-badge>
-                                                        </h5>
-                                                    </td>
+                                                <tr *ngFor="let circleUserPlaying of circleUsersPlaying">
+                                                    <th scope="row">{{(circleUserPlaying.position)}}</th>
+                                                    <td>{{circleUserPlaying.member.userName}}</td>
+                                                    <td *ngIf="groupSeleccionado">$ {{ (7 - (circleUserPlaying.position)) * groupSeleccionado.initialInvertion}}</td>
+                                                  <td>
+                                                    <h5 *ngIf="circleUserPlaying.position === 1">
+                                                      <mdb-badge color="blue">Winner</mdb-badge>
+                                                    </h5>
+                                                  </td>
                                                 </tr>
                                             </tbody>
                                         </ng-template>

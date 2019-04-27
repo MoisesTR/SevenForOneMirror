@@ -23,6 +23,9 @@ export class GameComponent implements OnInit {
 	@Input()
 	circleUsers: CircleUser[] = [];
 
+  @Input()
+  circleUsersPlaying: CircleUser[] = [];
+
 	@Input()
   members: MemberGroup[] = [];
 

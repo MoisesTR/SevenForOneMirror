@@ -9,6 +9,7 @@ import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
+import {IndividualGroup} from '../../models/IndividualGroup';
 
 declare var $: any;
 
@@ -19,13 +20,14 @@ declare var $: any;
 })
 export class MenuComponent implements OnInit {
 	public token: Token;
-	public userActual: User;
+	public user: User;
 	public usuarios: User[] = [];
 	public purchaseHistory: PurchaseHistory[] = [];
 	public totalEarned = 0;
 	public totalInvested = 0;
 	public isUserAdmin = false;
 	public disableUpdateAmounts = false;
+	public currentGroupsUser: IndividualGroup[] = [];
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -44,11 +46,13 @@ export class MenuComponent implements OnInit {
 		this.dropdownAndScroll();
 		this.getCredentialsUser();
 		this.getTotalEarned();
+
 		this.updateMoneyService.updateMount$.subscribe(update => {
 			if (update) {
 				this.getTotalEarned();
 			}
 		});
+
 	}
 
 	dropdownAndScroll() {
@@ -80,23 +84,24 @@ export class MenuComponent implements OnInit {
 	}
 
 	getCredentialsUser() {
-		this.userActual = this.authService.getUser();
-		this.isUserAdmin = this.userActual.role.name === RoleEnum.Admin;
+		this.user = this.authService.getUser();
+		this.isUserAdmin = this.user.role.name === RoleEnum.Admin;
 	}
 
 	getTotalEarned() {
 		this.disableUpdateAmounts = true;
 		this.totalEarned = 0;
 		this.totalInvested = 0;
-		if (this.userActual.role.name === RoleEnum.User) {
-			this.getPurchaseHistory();
-		} else {
+		if (this.isUserAdmin) {
 			this.getTotalEarnedGlobalGroups();
+		} else {
+			this.getPurchaseHistory();
+			this.getGroupsCurrentUser();
 		}
 	}
 
 	getPurchaseHistory() {
-		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.authService.getUser()._id).subscribe(
+		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.user._id).subscribe(
 			history => {
 				this.purchaseHistory = history;
 				for (const item of this.purchaseHistory) {
@@ -128,6 +133,12 @@ export class MenuComponent implements OnInit {
 				this.disableUpdateAmounts = false;
 			}
 		);
+	}
+
+	getGroupsCurrentUser() {
+		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(groups => {
+			this.currentGroupsUser = this.groupService.getIndividualGroups(groups, this.user._id);
+		});
 	}
 
 	groups() {

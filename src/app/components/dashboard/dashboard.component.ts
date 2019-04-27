@@ -6,6 +6,8 @@ import { User } from "../../models/User";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { MemberGroup } from "../../models/MemberGroup";
+import { GameService } from "../../core/services/shared/game.service";
+import { IndividualGroup } from "../../models/IndividualGroup";
 
 @Component({
 	selector: "app-dashboard",
@@ -21,24 +23,23 @@ export class DashboardComponent implements OnInit {
 	public groupSeleccionado: GroupGame;
 	public members: MemberGroup[] = [];
 	public userActual: User;
-	public array: number[] = [];
+	public individualGroups: IndividualGroup[] = [];
 
 	elements: any = [];
 	headElements = ["#", "Username", "First name", "Last name", "Email"];
 	headElementsGroupsEarning = ["#", "Group", "Total invested", "Total winners"];
 
-	constructor(private groupService: GroupService, private userService: UserService, private authService: AuthService) {}
+	constructor(
+		private groupService: GroupService,
+		private userService: UserService,
+		private gameService: GameService,
+		private authService: AuthService
+	) {}
 
 	ngOnInit() {
 		this.user = this.authService.getUser();
 		this.isUserAdmin = this.user.role.name === RoleEnum.Admin;
 		this.createContentDashboard(this.isUserAdmin);
-	}
-
-	getGroups() {
-		this.groupService.getGroups().subscribe(groups => {
-			this.groups = groups;
-		});
 	}
 
 	getUsersNormal() {
@@ -61,18 +62,25 @@ export class DashboardComponent implements OnInit {
 				});
 			}
 		} else {
-			// SIMULANDO GRUPO DONDE ESTA INSCRITO EL USUARIO
-			this.getGroups();
-
-			// TEMPORAL COLOCAR UN ID ESTATICO DE UN GRUPO DE JUEGO REGISTRADO
-			this.getMembersGroup("5cc2a4638963ca1eb0a76b42");
+			this.getGroupsCurrentUser();
 		}
 	}
 
-	getMembersGroup(idGroup) {
-		this.groupService.getGroup(idGroup).subscribe(group => {
-			this.groupSeleccionado = group;
-			this.members = this.groupSeleccionado.members;
+	getGroups() {
+		this.groupService.getGroups().subscribe(groups => {
+			this.groups = groups;
+		});
+	}
+
+	getGroupsCurrentUser() {
+		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(response => {
+			this.groups = response;
+
+			this.groups.forEach((group, index) => {
+				group.circleUsers = this.gameService.generateCirclesUser(group.members, group.lastWinner, this.user);
+        group.circleUsersPlaying = this.gameService.getCircleUserPlaying(group.circleUsers);
+        group.circleUsersPlaying = group.circleUsersPlaying.reverse();
+			});
 		});
 	}
 }

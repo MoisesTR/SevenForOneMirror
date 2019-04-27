@@ -15,7 +15,7 @@
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item avatar dropdown btn-group" dropdown>
                     <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                        <img [src]="this.userActual.image ? this.userActual.image : 'assets/images/user.png'" class="img-fluid rounded-circle z-depth-0">
+                        <img [src]="this.user.image ? this.user.image : 'assets/images/user.png'" class="img-fluid rounded-circle z-depth-0">
                     </a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Edit Profile</a>
@@ -40,7 +40,7 @@
                                 <div class="col-7" id="background-circle" style="padding: 8%;">
 
                                     <div class="view overlay" (click)="mdlAvatar.show()">
-                                        <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (this.userActual.image ? this.userActual.image : 'assets/images/main-user.png')  + ')'}"></div>
+                                        <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (this.user.image ? this.user.image : 'assets/images/main-user.png')  + ')'}"></div>
                                         <div class="mask flex-center waves-effect waves-light rgba-blue-strong" style="border-radius: 50%;">
                                             <p class="white-text">Change Image</p>
                                         </div>
@@ -49,13 +49,13 @@
 
                                 <div class='col-12 mt-3'>
                                     <h2 class='text-uppercase green-seven-one-text'>
-                                        {{userActual.userName}}
+                                      {{user.userName}}
                                     </h2>
                                 </div>
 
                                 <div class='col-12'>
                                     <h5 class='text-muted'>
-                                        {{userActual.email}}
+                                      {{user.email}}
                                     </h5>
                                 </div>
 
@@ -73,11 +73,8 @@
                                     <h6 class='text-uppercase font-weight-bold blue-seven-one-text mt-2'>
                                         Individual Groups
                                     </h6>
-                                    <h5 class='text-uppercase text-center green-seven-one-text'>
-                                        2 x $ 10
-                                    </h5>
-                                    <h5 class='text-uppercase text-center green-seven-one-text'>
-                                        2 x $ 200
+                                    <h5 *ngFor="let currentGroupUser of currentGroupsUser" class='text-uppercase text-center green-seven-one-text'>
+                                      {{currentGroupUser.timesPlayUser}} X ${{currentGroupUser.initialInvertion}}
                                     </h5>
                                 </div>
 
@@ -92,7 +89,7 @@
 
                                 <div class="col-8 mt-2 text-center">
                                     <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" mdbTooltip="update the amount invested and earned" [disabled]="disableUpdateAmounts" (click)="getTotalEarned()">
-                                        <mdb-icon fas icon="money-bill" class="ml-1"></mdb-icon> Update Amounts                                    
+                                        <mdb-icon fas icon="money-bill" class="ml-1"></mdb-icon> Update Amounts
                                     </button>
                                 </div>
 

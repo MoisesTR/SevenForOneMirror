@@ -115,7 +115,12 @@
 
     <div class="col-12 col-sm-12 col-md-12 colg-lg-12 mb-5">
 
-        <app-game *ngFor="let group of groups" [members]="members" [groupSeleccionado]="groupSeleccionado" [userActual]="user" [isUserAdmin]="isUserAdmin">
+        <app-game *ngFor="let group of groups"
+                  [circleUsers]="group.circleUsers"
+                  [circleUsersPlaying]="group.circleUsersPlaying"
+                  [groupSeleccionado]="group"
+                  [userActual]="user"
+                  [isUserAdmin]="isUserAdmin">
         </app-game>
 
     </div>
