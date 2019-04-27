@@ -16,11 +16,35 @@
 
                             <div class="container-fluid">
 
-                                <div class="row justify-content-center">
+                                <div class="row">
 
-                                    <div *ngFor="let member of members; let i = index" [ngClass]="(i === 0) ? 'col-6 col-sm-6 col-md-6 col-lg-3 mt-3 background-first wow bounceInRight' : 'col-6 col-sm-6 col-md-6 col-lg-3 mt-3 background-blue wow bounceInRight'" data-wow-delay="0.3s">
-                                        <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+
+                                    <!-- Primer lugar -->
+                                    <div *ngFor="let member of members; let i = index" [ngClass]="(i === 0) ? 'col-sm-6 col-md-4 col-lg-2' : ''">
+                                        <div *ngIf="i === 0">
+                                            <div class="col-12  background-blue wow bounceInRight" data-wow-delay="{{ i / 10}}s">
+                                                <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+                                                <h5 class='blue-seven-one-text mt-2 text-center'>{{i+1}}</h5>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <div class="col-sm-6 col-md-8 col-lg-10">
+                                        <div class="row">
+
+                                            <div *ngFor="let member of members | slice:1; let i = index;" class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
+                                                <div class="ratio img-responsive img-circle blue-seven-one wow bounceInRight" data-wow-delay="{{ i / 10}}s" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+                                                <h5 class='blue-seven-one-text mt-2 text-center wow bounceInRight' data-wow-delay="{{ i / 10}}s">{{i+2}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="col-sm-6 col-md-8 col-lg-10">
+                                        <div *ngFor="let member of members; let i = index" class="col-6 col-sm-6 col-md-6 col-lg-2 mt-3   background-blue wow bounceInRight" data-wow-delay="0.4s">
+                                            <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
+                                        </div>
+                                    </div> -->
 
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-5 text-center">
                                         <table class="table table-responsive-sm table-hover text-center">
