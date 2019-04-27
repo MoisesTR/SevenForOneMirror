@@ -5,8 +5,8 @@ import { UserService } from "../../core/services/shared/user.service";
 import { Router } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
-import { RoleEnum } from "../enums/RoleEnum";
-import { SocialPlatFormEnum } from "../enums/SocialPlatFormEnum";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 
 declare var $: any;
 

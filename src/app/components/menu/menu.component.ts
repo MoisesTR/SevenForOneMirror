@@ -7,7 +7,7 @@ import { AuthService } from "../../core/services/auth/auth.service";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
 import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
-import { RoleEnum } from "../enums/RoleEnum";
+import { RoleEnum } from "../../enums/RoleEnum";
 
 declare var $: any;
 

@@ -1,11 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { AuthService } from "../../core/services/auth/auth.service";
+import { Component, Input, OnInit } from "@angular/core";
 import { User } from "../../models/User";
 import { GroupGame } from "../../models/GroupGame";
-import { ActivatedRoute, Params } from "@angular/router";
 import { MemberGroup } from "../../models/MemberGroup";
-import {RoleEnum} from '../enums/RoleEnum';
 
 @Component({
 	selector: "app-game",
@@ -13,52 +9,19 @@ import {RoleEnum} from '../enums/RoleEnum';
 	styleUrls: ["./game.component.scss"]
 })
 export class GameComponent implements OnInit {
-	public group: GroupGame;
-	public groupSeleccionado: GroupGame;
-	public members: MemberGroup[] = [];
-	public totalMount: number;
-	public montoInvertir: number;
+	@Input()
+	members: MemberGroup[] = [];
+
+	@Input()
+	groupSeleccionado: GroupGame;
+
+	@Input()
 	public userActual: User;
-	public idGroup: number;
-	public limitePersonas = 7;
-	public isUserAdmin = false;
 
-	constructor(
-		private activatedRoute: ActivatedRoute,
-		private groupService: GroupService,
-		private authService: AuthService
-	) {}
+	@Input()
+	isUserAdmin = false;
 
-	ngOnInit() {
-		this.getUser();
-		this.getParams();
-	}
+	constructor() {}
 
-	getParams() {
-		this.activatedRoute.params.subscribe((params: Params) => {
-			this.idGroup = params["idGroup"];
-
-			this.getMembersGroup(this.idGroup);
-			this.getGroup(this.idGroup);
-		});
-	}
-
-	getUser() {
-		this.userActual = this.authService.getUser();
-		this.isUserAdmin = this.userActual.role.name === RoleEnum.Admin;
-	}
-
-	getMembersGroup(idGroup) {
-		this.groupService.getGroup(idGroup).subscribe(group => {
-			this.group = group;
-			this.members = this.group.members;
-		});
-	}
-
-	getGroup(groupId) {
-		this.groupService.getGroup(groupId).subscribe(group => {
-			this.groupSeleccionado = group;
-		});
-	}
-
+	ngOnInit() {}
 }

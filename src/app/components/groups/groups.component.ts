@@ -6,7 +6,7 @@ import swal from "sweetalert2";
 import { MemberGroup } from "../../models/MemberGroup";
 import { User } from "../../models/User";
 import { AuthService } from "../../core/services/auth/auth.service";
-import { RoleEnum } from "../enums/RoleEnum";
+import { RoleEnum } from "../../enums/RoleEnum";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
 
 @Component({
