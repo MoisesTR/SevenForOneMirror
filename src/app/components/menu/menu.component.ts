@@ -8,6 +8,7 @@ import { PurchaseService } from "../../core/services/shared/purchase.service";
 import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
+import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 
 declare var $: any;
 
@@ -33,6 +34,7 @@ export class MenuComponent implements OnInit {
 		private authService: AuthService,
 		private purchaseHistoryService: PurchaseService,
 		private groupService: GroupService,
+		private updateMoneyService: UpdateMoneyService,
 		private router: Router
 	) {
 		this.token = new Token();
@@ -42,6 +44,11 @@ export class MenuComponent implements OnInit {
 		this.dropdownAndScroll();
 		this.getCredentialsUser();
 		this.getTotalEarned();
+		this.updateMoneyService.updateMount$.subscribe(update => {
+			if (update) {
+				this.getTotalEarned();
+			}
+		});
 	}
 
 	dropdownAndScroll() {
@@ -59,7 +66,7 @@ export class MenuComponent implements OnInit {
 
 		function fixNavDropdown() {
 			if ($(window).width() >= 992) {
-				$(".navbar .dropdown-menu").addClass("dropdown-menu-right");				
+				$(".navbar .dropdown-menu").addClass("dropdown-menu-right");
 			} else {
 				$(".navbar .dropdown-menu").removeClass("dropdown-menu-right");
 			}

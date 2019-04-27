@@ -10,6 +10,7 @@ import { SharedModule } from "../shared-module/shared.module";
 import {GroupService} from './services/shared/group.service';
 import {RolService} from './services/shared/rol.service';
 import {PurchaseService} from './services/shared/purchase.service';
+import {UpdateMoneyService} from './services/shared/update-money.service';
 
 @NgModule({
 	imports: [],
@@ -23,6 +24,7 @@ import {PurchaseService} from './services/shared/purchase.service';
     RolService,
     GroupService,
     PurchaseService,
+    UpdateMoneyService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: HttpInterceptorService,

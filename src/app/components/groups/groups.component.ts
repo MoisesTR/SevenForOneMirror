@@ -8,6 +8,7 @@ import { User } from "../../models/User";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
+import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 
 @Component({
 	selector: "app-groups",
@@ -22,6 +23,7 @@ export class GroupsComponent implements OnInit {
 		private groupService: GroupService,
 		private authService: AuthService,
 		private purchaseService: PurchaseService,
+		private updateMoneyService: UpdateMoneyService,
 		private router: Router
 	) {}
 
@@ -39,7 +41,8 @@ export class GroupsComponent implements OnInit {
 
 	// esta validacion esta por mientras , por que el usuario puede ser sacado desde la base por otros usuarios, y ya no tendria lugar la validacion, consultar oportunamente a la base mejor
 	goButtonUser(groupId) {
-		this.validateMemberIsNotAlreadyRegistered(groupId);
+    this.actionGroup(false, groupId);
+		// this.validateMemberIsNotAlreadyRegistered(groupId);
 	}
 
 	validateMemberIsNotAlreadyRegistered(groupId) {
@@ -78,8 +81,9 @@ export class GroupsComponent implements OnInit {
 	addMemberToGroup(groupId) {
 		const member = new MemberGroup();
 		member.payReference = "payreferenceuser";
-		this.groupService.addMemberToGroup(member, groupId).subscribe(response => {
+		this.groupService.addMemberToGroup(member, groupId).subscribe(() => {
 			swal.fire("Info", "The registration has been successful!", "success").then(() => {
+				this.updateMoneyService.update(true);
 				this.router.navigate(["/game", groupId]);
 			});
 		});
