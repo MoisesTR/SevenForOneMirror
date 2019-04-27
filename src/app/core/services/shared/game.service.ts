@@ -15,10 +15,8 @@ export class GameService {
   }
 
 	generateCirclesUser(cantCirculosVacios: number, members: MemberGroup[], winner: MemberGroup) {
-    console.log('invocacion')
 		const circleUsers: CircleUser[] = [];
 		cantCirculosVacios = members.length - (winner ? 1 : 0);
-
 		if (winner) {
 			const circleUser = this.createCircleUser(winner, 1);
 			circleUsers.push(circleUser);

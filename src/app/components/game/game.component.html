@@ -20,10 +20,10 @@
                             <div class="row">
 
                                 <!-- Primer lugar -->
-                                <div *ngFor="let member of circleUsers; let i = index" [ngClass]="(i === 0) ? 'col-sm-6 col-md-4 col-lg-2' : ''">
+                                <div *ngFor="let member of members; let i = index" [ngClass]="(i === 0) ? 'col-sm-6 col-md-4 col-lg-2' : ''">
                                     <div *ngIf="i === 0">
                                         <div class="col-12  background-blue wow bounceInRight" data-wow-delay="{{ i / 10}}s">
-                                            <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.user.image ? member.user.image : 'assets/images/user.png')  + ')'}"></div>
+                                            <div class="ratio img-responsive img-circle blue-seven-one" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
                                             <h5 class='blue-seven-one-text mt-2 text-center'>{{i+1}}</h5>
                                         </div>
                                     </div>
@@ -32,8 +32,8 @@
                                 <div class="col-sm-6 col-md-8 col-lg-10">
                                     <div class="row">
 
-                                        <div *ngFor="let member of circleUsers | slice:1; let i = index;" class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
-                                            <div class="ratio img-responsive img-circle blue-seven-one wow bounceInRight" data-wow-delay="{{ i / 10}}s" [ngStyle]="{'background-image': 'url(' + (member.user.image ? member.user.image : 'assets/images/user.png')  + ')'}"></div>
+                                        <div *ngFor="let member of members | slice:1; let i = index;" class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
+                                            <div class="ratio img-responsive img-circle blue-seven-one wow bounceInRight" data-wow-delay="{{ i / 10}}s" [ngStyle]="{'background-image': 'url(' + (member.image ? member.image : 'assets/images/user.png')  + ')'}"></div>
                                             <h5 class='blue-seven-one-text mt-2 text-center wow bounceInRight' data-wow-delay="{{ i / 10}}s">{{i+2}}</h5>
                                         </div>
                                     </div>
@@ -57,19 +57,19 @@
                                         </thead>
 
                                         <tbody *ngIf="!isUserAdmin; else adminContent">
-                                            <tr *ngFor="let circleUser of circleUsers;let i = index" [ngClass]="[ circleUser.isUserLogged && userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']">
+                                            <tr *ngFor="let circleUser of members;let i = index" [ngClass]="[ userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']">
                                                 <th scope="row">{{(i+1)}}</th>
-                                                <td>{{circleUser.user.userName}}</td>
+                                                <td>{{circleUser.userName}}</td>
                                                 <td *ngIf="groupSeleccionado">$ {{ (circleUsers.length - (i)) * groupSeleccionado.initialInvertion}}</td>
                                             </tr>
                                         </tbody>
 
                                         <ng-template #adminContent>
                                             <tbody>
-                                                <tr *ngFor="let circleUser of circleUsers;let i = index">
+                                                <tr *ngFor="let circleUser of members;let i = index">
                                                     <th scope="row">{{(i+1)}}</th>
-                                                    <td>{{circleUser.user.userName}}</td>
-                                                    <td *ngIf="groupSeleccionado">$ {{ (circleUsers.length - (i)) * groupSeleccionado.initialInvertion}}</td>
+                                                    <td>{{circleUser.userName}}</td>
+                                                    <td *ngIf="groupSeleccionado">$ {{ (members.length - (i)) * groupSeleccionado.initialInvertion}}</td>
                                                 </tr>
                                             </tbody>
                                         </ng-template>
