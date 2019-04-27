@@ -34,7 +34,8 @@
                                                 <p>Number of people playing: {{group.totalMembers}}</p>
 
                                                 <div class="text-center">
-                                                    <button mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2" (click)="goButtonUser(group._id)">Go</button>
+                                                    <button mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2">View</button>
+                                                    <button mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2" (click)="paymentModal.show()">Go</button>
                                                 </div>
 
                                             </mdb-card-body>
@@ -60,3 +61,57 @@
     </div>
 
 </section>
+
+<div mdbModal #paymentModal="mdbModal" class="modal fade" id="paymentModalModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body background-footer">
+
+                <div class="row">
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 white">
+
+                        <mdb-card>
+                            <mdb-card-body>
+                                <mdb-card-title>
+                                    <h2 class="h2-responsive product-name mb-3">
+                                        <strong>Nombre Completo</strong>
+                                    </h2>
+                                </mdb-card-title>
+                                <mdb-card-text>
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Product name</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td><strong> Game 7 x 1 </strong></td>
+                                                <td><strong> $10 </strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </mdb-card-text>
+                            </mdb-card-body>
+                        </mdb-card>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <h3 class="text-muted">Pay With</h3>
+                            <img src="/assets/images/paypal.svg" class="rounded mx-auto d-block img-fluid" alt="paypal" style="width: 20em;">
+                            <button mdbBtn type="button" color="primary" class="mt-3" rounded="true" (click)="goButtonUser(group._id)" mdbWavesEffect>Pay</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
