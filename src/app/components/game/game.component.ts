@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from "@angular/core";
 import { User } from "../../models/User";
 import { GroupGame } from "../../models/GroupGame";
 import { MemberGroup } from "../../models/MemberGroup";
+import { CircleUser } from "../../models/CircleUser";
+import { CircleStatusEnum } from "../../enums/CircleStatusEnum";
 
 @Component({
 	selector: "app-game",
@@ -10,16 +12,16 @@ import { MemberGroup } from "../../models/MemberGroup";
 })
 export class GameComponent implements OnInit {
 	@Input()
-	members: MemberGroup[] = [];
-
-	@Input()
 	groupSeleccionado: GroupGame;
 
 	@Input()
-	public userActual: User;
+	userActual: User;
 
 	@Input()
 	isUserAdmin = false;
+
+	@Input()
+	circleUsers: CircleUser[] = [];
 
 	constructor() {}
 

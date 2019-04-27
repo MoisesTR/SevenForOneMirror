@@ -6,6 +6,8 @@ import { AuthService } from "../../core/services/auth/auth.service";
 import { ActivatedRoute, Params } from "@angular/router";
 import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
+import {GameService} from '../../core/services/shared/game.service';
+import {CircleUser} from '../../models/CircleUser';
 
 @Component({
 	selector: "app-gamecontainer",
@@ -20,11 +22,13 @@ export class GamecontainerComponent implements OnInit {
 	public idGroup: number;
 	public isUserAdmin = false;
 	public array: number[] = [];
+	public circlesUser: CircleUser[] = [];
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private groupService: GroupService,
-		private authService: AuthService
+		private authService: AuthService,
+    private gameService: GameService
 	) {}
 
 	ngOnInit() {
@@ -47,8 +51,10 @@ export class GamecontainerComponent implements OnInit {
 
 	getMembersGroup(idGroup) {
 		this.groupService.getGroup(idGroup).subscribe(group => {
+		  console.log('TEst')
 			this.groupSeleccionado = group;
 			this.members = this.groupSeleccionado.members;
+			this.circlesUser = this.gameService.generateCirclesUser(7, this.members, null);
 		});
 	}
 }
