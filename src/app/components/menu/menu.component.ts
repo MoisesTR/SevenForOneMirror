@@ -158,4 +158,8 @@ export class MenuComponent implements OnInit {
 		this.usuarioService.identity = null;
 		this.router.navigate(["/login"]);
 	}
+
+	onActivate(edvent) {
+		window.scroll(0, 0);
+	}
 }
