@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {GroupService} from '../../core/services/shared/group.service';
-import {GroupGame} from '../../models/GroupGame';
-import {UserService} from '../../core/services/shared/user.service';
-import {User} from '../../models/User';
-import {AuthService} from '../../core/services/auth/auth.service';
-import {RoleEnum} from '../../enums/RoleEnum';
-import {MemberGroup} from '../../models/MemberGroup';
-import {GameService} from '../../core/services/shared/game.service';
-import {IndividualGroup} from '../../models/IndividualGroup';
-import {Router} from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { UserService } from "../../core/services/shared/user.service";
+import { User } from "../../models/User";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { MemberGroup } from "../../models/MemberGroup";
+import { GameService } from "../../core/services/shared/game.service";
+import { IndividualGroup } from "../../models/IndividualGroup";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-dashboard",
@@ -21,10 +21,7 @@ export class DashboardComponent implements OnInit {
 	public user: User;
 	public isUserAdmin = false;
 	public group: GroupGame;
-	public groupSeleccionado: GroupGame;
-	public members: MemberGroup[] = [];
-	public userActual: User;
-	public individualGroups: IndividualGroup[] = [];
+	public showWelcomeUser = true;
 
 	elements: any = [];
 	headElements = ["#", "Username", "First name", "Last name", "Email"];
@@ -35,7 +32,7 @@ export class DashboardComponent implements OnInit {
 		private userService: UserService,
 		private gameService: GameService,
 		private authService: AuthService,
-    private router: Router
+		private router: Router
 	) {}
 
 	ngOnInit() {
@@ -78,15 +75,17 @@ export class DashboardComponent implements OnInit {
 		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(response => {
 			this.groups = response;
 
+			if (this.groups.length > 0) this.showWelcomeUser = false;
+
 			this.groups.forEach((group, index) => {
 				group.circleUsers = this.gameService.generateCirclesUser(group.members, group.lastWinner, this.user);
-        group.circleUsersPlaying = this.gameService.getCircleUserPlaying(group.circleUsers);
-        // group.circleUsersPlaying = group.circleUsersPlaying.reverse();
+				group.circleUsersPlaying = this.gameService.getCircleUserPlaying(group.circleUsers);
+				// group.circleUsersPlaying = group.circleUsersPlaying.reverse();
 			});
 		});
 	}
 
-  viewGroupUsers(groupId) {
-    this.router.navigate(["/game", groupId]);
-  }
+	viewGroupUsers(groupId) {
+		this.router.navigate(["/game", groupId]);
+	}
 }

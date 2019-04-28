@@ -88,8 +88,6 @@ export class MenuComponent implements OnInit {
 
 	getTotalEarned() {
 		this.disableUpdateAmounts = true;
-		this.totalEarned = 0;
-		this.totalInvested = 0;
 		if (this.isUserAdmin) {
 			this.getTotalEarnedGlobalGroups();
 		} else {
@@ -99,14 +97,17 @@ export class MenuComponent implements OnInit {
 	}
 
 	getPurchaseHistory() {
+		this.totalEarned = 0;
+		this.totalInvested = 0;
 		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.user._id).subscribe(
 			history => {
 				this.purchaseHistory = history;
 				for (const item of this.purchaseHistory) {
+					const quantity = (+item.quantity["$numberDecimal"]);
 					if (item.moneyDirection) {
-						this.totalInvested += +item.quantity["$numberDecimal"];
+						this.totalInvested += quantity;
 					} else {
-						this.totalEarned += +item.quantity["$numberDecimal"];
+						this.totalEarned += quantity;
 					}
 				}
 				this.disableUpdateAmounts = false;
@@ -118,6 +119,8 @@ export class MenuComponent implements OnInit {
 	}
 
 	getTotalEarnedGlobalGroups() {
+		this.totalEarned = 0;
+		this.totalInvested = 0;
 		this.groupService.getGroups().subscribe(
 			groups => {
 				groups.forEach((group, index) => {
