@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
 
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
-			this.user.role._id = this.idRolUser;
+			this.user.roleId = this.idRolUser;
 
 			this.usuarioService.loginSocial(this.user, socialPlatformProvider).subscribe(response => {
 				this.usuarioService.identity = response.user;

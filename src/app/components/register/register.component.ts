@@ -146,9 +146,9 @@ export class RegisterComponent implements OnInit {
 
 		// Validacion temporal para crear un usuario administrador unico
 		if (this.user.userName === "Admin") {
-			this.user.role._id = this.idRolAdmin;
+			this.user.roleId = this.idRolAdmin;
 		} else {
-			this.user.role._id = this.idRolUser;
+			this.user.roleId = this.idRolUser;
 		}
 	}
 
@@ -204,7 +204,7 @@ export class RegisterComponent implements OnInit {
 
     this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
       this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ?  userData.idToken : userData.token;
-      this.user.role._id = this.idRolUser;
+      this.user.roleId = this.idRolUser;
 
       this.usuarioService.loginSocial(this.user, socialPlatformProvider).subscribe(response => {
         this.usuarioService.identity = response.user;

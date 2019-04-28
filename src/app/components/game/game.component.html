@@ -22,15 +22,15 @@
                                 <!-- Primer lugar -->
                                 <div *ngFor="let circleUser of circleUsers; let i = index" [ngClass]="(i === 0) ? 'col-sm-6 col-md-4 col-lg-2' : ''">
                                     <div *ngIf="i === 0">
-                                        <div class="col-12  background-blue wow bounceInRight" data-wow-delay="{{ i / 10}}s">
+                                        <div class="col-12  background-blue wow bounceInRight" data-wow-delay="{{(i+1)/10}}s">
+                                            <h5 class='blue-seven-one-text mt-2 text-center'>{{i+1}}</h5>
                                             <div class="view">
-                                                <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'" [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : 'assets/images/user.png')  + ')'}"></div>
+                                                <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'" [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : (circleUser.status === 'AC') ? 'assets/images/user.png' : '')  + ')'}"></div>
                                                 <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong" style="border-radius: 50%;">
-                                                    <p class="white-text">{{circleUser.member.userName}}</p>
+                                                    <p class="white-text">You</p>
                                                 </div>
                                             </div>
-
-                                            <h5 class='blue-seven-one-text mt-2 text-center'>{{i+1}}</h5>
+                                            <p class="blue-seven-one-text mt-2 text-center wow bounceInRight" data-wow-delay="{{(i+1)/10}}s">{{circleUser.member.userName}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -39,14 +39,14 @@
                                     <div class="row">
                                         <div *ngFor="let circleUser of circleUsers | slice:1; let i = index;" class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
 
-                                            <div class="view wow bounceInRight" data-wow-delay="{{ i / 10}}s">
-                                                <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'" class="ratio img-responsive img-circle gray-circle" [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : 'assets/images/user.png')  + ')'}"></div>
+                                            <h5 class="blue-seven-one-text mt-2 text-center wow bounceInRight" data-wow-delay="{{(i+1)/10}}s">{{i+2}}</h5>
+                                            <div class="view wow bounceInRight" data-wow-delay="{{(i+1)/10}}s">
+                                                <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'" class="ratio img-responsive img-circle gray-circle" [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : (circleUser.status === 'AC') ? 'assets/images/user.png' : '')  + ')'}"></div>
                                                 <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong" style="border-radius: 50%;">
-                                                    <p class="white-text">{{circleUser.member.userName}}</p>
+                                                    <p class="white-text">You</p>
                                                 </div>
                                             </div>
-
-                                            <h5 class='blue-seven-one-text mt-2 text-center wow bounceInRight' data-wow-delay="{{ i / 10}}s">{{i+2}}</h5>
+                                            <p class="blue-seven-one-text mt-2 text-center wow bounceInRight" data-wow-delay="{{(i+1)/10}}s">{{circleUser.member.userName}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -74,11 +74,11 @@
                                                 <th scope="row">{{(circleUserPlaying.position)}}</th>
                                                 <td>{{circleUserPlaying.member.userName}}</td>
                                                 <td *ngIf="groupSeleccionado">$ {{ (7 - (circleUserPlaying.position)) * groupSeleccionado.initialInvertion}}</td>
-                                              <td>
-                                                <h5 *ngIf="circleUserPlaying.position === 1">
-                                                  <mdb-badge color="blue">Winner</mdb-badge>
-                                                </h5>
-                                              </td>
+                                                <td>
+                                                    <h5 *ngIf="circleUserPlaying.position === 1">
+                                                        <mdb-badge color="blue">Winner</mdb-badge>
+                                                    </h5>
+                                                </td>
                                             </tr>
                                         </tbody>
 
@@ -88,11 +88,11 @@
                                                     <th scope="row">{{(circleUserPlaying.position)}}</th>
                                                     <td>{{circleUserPlaying.member.userName}}</td>
                                                     <td *ngIf="groupSeleccionado">$ {{ (7 - (circleUserPlaying.position)) * groupSeleccionado.initialInvertion}}</td>
-                                                  <td>
-                                                    <h5 *ngIf="circleUserPlaying.position === 1">
-                                                      <mdb-badge color="blue">Winner</mdb-badge>
-                                                    </h5>
-                                                  </td>
+                                                    <td>
+                                                        <h5 *ngIf="circleUserPlaying.position === 1">
+                                                            <mdb-badge color="blue">Winner</mdb-badge>
+                                                        </h5>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </ng-template>

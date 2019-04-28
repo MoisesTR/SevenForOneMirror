@@ -14,7 +14,7 @@
 
                         <mdb-card-text>
 
-                            <form>
+                            <form [formGroup]="updateFormGroup">
 
                                 <div class="container-fluid">
                                     <div class="row">
@@ -22,7 +22,7 @@
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-user prefix"></i>
-                                                <input type="text" id="user" class="form-control" name="user" autocomplete="off" mdbInput>
+                                                <input type="text" id="user" class="form-control" name="user" formControlName="user" autocomplete="off" mdbInput>
                                                 <label for="user">User</label>
                                             </div>
                                         </div>
@@ -31,7 +31,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-user prefix"></i>
-                                                <input type="text" id="firstNames" class="form-control" autocomplete="off" mdbInput>
+                                                <input type="text" id="firstNames" class="form-control" formControlName="firstName" autocomplete="off" mdbInput>
                                                 <label for="firstNames">First Name</label>
                                             </div>
                                         </div>
@@ -40,7 +40,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-user prefix"></i>
-                                                <input type="text" id="lastName" class="form-control" autocomplete="off" mdbInput>
+                                                <input type="text" id="lastName" class="form-control" formControlName="lastName" autocomplete="off" mdbInput>
                                                 <label for="lastName">Last Name</label>
                                             </div>
                                         </div>
@@ -49,7 +49,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="md-form md-outline form">
                                                 <mdb-icon fas icon="users"></mdb-icon>
-                                                <select class="browser-default custom-select width-select">                                              
+                                                <select class="browser-default custom-select width-select" formControlName="gender">
                                               <option value="1">Male</option>
                                               <option value="2">Female</option>
                                             </select>
@@ -60,7 +60,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-birthday-cake prefix"></i>
-                                                <input type="text" id="birthday" class="form-control" autocomplete="off" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" readonly mdbInput>
+                                                <input type="text" id="birthday" class="form-control" formControlName="birthDay" autocomplete="off" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" readonly mdbInput>
                                                 <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
                                                 <label for="birthday">Birthday</label>
                                             </div>
@@ -70,7 +70,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-envelope prefix"></i>
-                                                <input type="text" id="email" class="form-control" autocomplete="off" mdbInput>
+                                                <input type="text" id="email" class="form-control" formControlName="email" autocomplete="off" mdbInput>
                                                 <label for="email">Email</label>
                                             </div>
                                         </div>
@@ -79,7 +79,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-phone prefix"></i>
-                                                <input type="text" id="phone" class="form-control" autocomplete="off" mdbInput>
+                                                <input type="text" id="phone" class="form-control" formControlName="phone" autocomplete="off" mdbInput>
                                                 <label for="phone">Phone</label>
                                             </div>
                                         </div>
@@ -88,7 +88,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-lock prefix"></i>
-                                                <input type="password" id="pass" class="form-control" autocomplete="off" mdbInput>
+                                                <input type="password" id="pass" class="form-control" formControlName="password" autocomplete="off" mdbInput>
                                                 <label for="pass">Password</label>
                                             </div>
                                         </div>
@@ -97,7 +97,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                             <div class="md-form md-outline">
                                                 <i class="fas fa-lock prefix"></i>
-                                                <input type="password" id="confpass" class="form-control" autocomplete="off" mdbInput>
+                                                <input type="password" id="confpass" class="form-control" formControlName="passwordConfirm" autocomplete="off" mdbInput>
                                                 <label for="confpass">Confirm</label>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
 
                                 <div class="mt-3 text-center">
                                     <!-- Update button -->
-                                    <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" type="submit">Update</button>
+                                    <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" type="submit" [disabled]="true">Update</button>
                                 </div>
 
                             </form>

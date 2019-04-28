@@ -9,7 +9,7 @@ import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
-import {IndividualGroup} from '../../models/IndividualGroup';
+import { IndividualGroup } from "../../models/IndividualGroup";
 
 declare var $: any;
 
@@ -21,7 +21,6 @@ declare var $: any;
 export class MenuComponent implements OnInit {
 	public token: Token;
 	public user: User;
-	public usuarios: User[] = [];
 	public purchaseHistory: PurchaseHistory[] = [];
 	public totalEarned = 0;
 	public totalInvested = 0;
@@ -52,7 +51,6 @@ export class MenuComponent implements OnInit {
 				this.getTotalEarned();
 			}
 		});
-
 	}
 
 	dropdownAndScroll() {
@@ -157,5 +155,9 @@ export class MenuComponent implements OnInit {
 		localStorage.clear();
 		this.usuarioService.identity = null;
 		this.router.navigate(["/login"]);
+	}
+
+	onActivate(edvent) {
+		window.scroll(0, 0);
 	}
 }
