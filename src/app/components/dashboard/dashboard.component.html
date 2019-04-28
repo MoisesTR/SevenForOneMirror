@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
 
             <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5" *ngFor="let group of groups">
-                <div class="card card-cascade cascading-admin-card text-muted">
+                <div class="card card-cascade cascading-admin-card text-muted" (click)="viewGroupUsers(group._id)">
                     <div class="admin-up">
                         <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
                         <div class="data mb-3">

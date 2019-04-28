@@ -1,13 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { GroupGame } from "../../models/GroupGame";
-import { UserService } from "../../core/services/shared/user.service";
-import { User } from "../../models/User";
-import { AuthService } from "../../core/services/auth/auth.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { MemberGroup } from "../../models/MemberGroup";
-import { GameService } from "../../core/services/shared/game.service";
-import { IndividualGroup } from "../../models/IndividualGroup";
+import {Component, OnInit} from '@angular/core';
+import {GroupService} from '../../core/services/shared/group.service';
+import {GroupGame} from '../../models/GroupGame';
+import {UserService} from '../../core/services/shared/user.service';
+import {User} from '../../models/User';
+import {AuthService} from '../../core/services/auth/auth.service';
+import {RoleEnum} from '../../enums/RoleEnum';
+import {MemberGroup} from '../../models/MemberGroup';
+import {GameService} from '../../core/services/shared/game.service';
+import {IndividualGroup} from '../../models/IndividualGroup';
+import {Router} from '@angular/router';
 
 @Component({
 	selector: "app-dashboard",
@@ -33,7 +34,8 @@ export class DashboardComponent implements OnInit {
 		private groupService: GroupService,
 		private userService: UserService,
 		private gameService: GameService,
-		private authService: AuthService
+		private authService: AuthService,
+    private router: Router
 	) {}
 
 	ngOnInit() {
@@ -79,8 +81,12 @@ export class DashboardComponent implements OnInit {
 			this.groups.forEach((group, index) => {
 				group.circleUsers = this.gameService.generateCirclesUser(group.members, group.lastWinner, this.user);
         group.circleUsersPlaying = this.gameService.getCircleUserPlaying(group.circleUsers);
-        group.circleUsersPlaying = group.circleUsersPlaying.reverse();
+        // group.circleUsersPlaying = group.circleUsersPlaying.reverse();
 			});
 		});
 	}
+
+  viewGroupUsers(groupId) {
+    this.router.navigate(["/game", groupId]);
+  }
 }

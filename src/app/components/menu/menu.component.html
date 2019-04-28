@@ -3,7 +3,7 @@
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav" [containerInside]="false" id="top-section">
         <mdb-navbar-brand>
             <a class="navbar-brand">
-                <img src="assets/images/logo.svg" height="30" alt="">
+                <img src="assets/images/logo.svg" height="30" alt="" (click)="dashBoard()">
             </a>
         </mdb-navbar-brand>
         <links>
@@ -95,7 +95,7 @@
                                 <div class="col-8 mt-2 text-center">
                                     <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" (click)="dashBoard()">Dashboard</button>
                                 </div>
-                                <div class="col-8 mt-2 text-center">
+                                <div *ngIf="!isUserAdmin" class="col-8 mt-2 text-center">
                                     <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" (click)="groups()">Groups</button>
                                 </div>
                             </div>

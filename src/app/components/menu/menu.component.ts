@@ -49,8 +49,6 @@ export class MenuComponent implements OnInit {
 		this.updateMoneyService.updateMount$.subscribe(update => {
 			if (update) {
 				this.getTotalEarned();
-				console.log("Usuario Actuals");
-				console.log(this.user);
 			}
 		});
 	}

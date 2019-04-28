@@ -59,7 +59,7 @@ export class GamecontainerComponent implements OnInit {
 				this.userActual
 			);
 			this.circleUserPlaying = this.gameService.getCircleUserPlaying(this.circleUsers);
-			this.circleUserPlaying = this.circleUserPlaying.reverse();
+			// this.circleUserPlaying = this.circleUserPlaying.reverse();
 		});
 	}
 }
