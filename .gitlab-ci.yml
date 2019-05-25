@@ -1,0 +1,66 @@
+stages:
+  - build
+  - deploy
+
+# build prod:
+#   image: node:10.15.3
+#   stage: build
+#   cache:
+#     paths:
+#     - node_modules/
+#     - .yarn
+#   only:
+#     - tags
+#   # before_script:
+#   #   - yarn install
+#   script:
+#     # Install angular
+#     - yarn add @angular/cli
+#     # Install dependencies
+#     - npm install
+#     # Build App
+#     - ng build --prod
+#   artifacts:
+#     paths:
+#       # Build folder
+#       - dist/
+#     expire_in: 1 hour
+
+# deploy prod:
+#   image: python:latest
+#   stage: deploy
+#   only:
+#     - tags
+#   script:
+#     - pip install awscli
+#     - aws s3 sync ./dist s3://sevenforone
+
+build stage:
+  image: node:10.15.3
+  stage: build
+  cache:
+    paths:
+    - node_modules/
+  only:
+    - master
+  script:
+    # Install angular
+    - yarn add @angular/cli --ignore-scripts
+    # Install dependencies
+    - yarn install --ignore-scripts
+    # # Build App
+    - npm run build:prerender
+  artifacts:
+    paths:
+      # Build folder
+      - dist/browser/
+    expire_in: 1 hour
+
+deploy stage:
+  image: python:latest
+  stage: deploy
+  only:
+    - master
+  script:
+    - pip install awscli
+    - aws s3 sync ./dist/browser s3://sevenforone
