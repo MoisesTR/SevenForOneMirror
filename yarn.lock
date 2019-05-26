@@ -5176,6 +5176,13 @@ ng-pick-datetime@^6.0.16:
   dependencies:
     tslib "^1.9.0"
 
+ngx-paypal@^5.0.0-beta.11:
+  version "5.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/ngx-paypal/-/ngx-paypal-5.0.0-beta.11.tgz#e416ab87e5fa2966ff204b40d96ad0b2f369d603"
+  integrity sha512-DRogorPKT708l4IKJ3jf+I40mf+CGPTjjijBBINfFeMWJdbdbnBAaFZ2Eu/bSrMJwtNrGfbtvh3PclwJW5A1PQ==
+  dependencies:
+    tslib "^1.9.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

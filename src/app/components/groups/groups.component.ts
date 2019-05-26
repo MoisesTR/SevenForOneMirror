@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { GroupService } from "../../core/services/shared/group.service";
 import { GroupGame } from "../../models/GroupGame";
 import { Router } from "@angular/router";
-import swal from "sweetalert2";
 import { MemberGroup } from "../../models/MemberGroup";
 import { User } from "../../models/User";
 import { AuthService } from "../../core/services/auth/auth.service";
@@ -10,7 +9,10 @@ import { RoleEnum } from "../../enums/RoleEnum";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 import { Utils } from "../../infraestructura/Utils";
-import {ModalDirective} from 'ng-uikit-pro-standard';
+import { ModalDirective } from "ng-uikit-pro-standard";
+import { IPayPalConfig } from "ngx-paypal";
+import { Global } from "../../core/services/shared/global";
+import swal from "sweetalert2";
 
 @Component({
 	selector: "app-groups",
@@ -25,6 +27,9 @@ export class GroupsComponent implements OnInit {
 	public userIsAdmin = false;
 	public groupSelectedPayModal: GroupGame;
 
+	public payPalConfig?: IPayPalConfig;
+	private finalPrice = 0;
+
 	constructor(
 		private groupService: GroupService,
 		private authService: AuthService,
@@ -32,11 +37,12 @@ export class GroupsComponent implements OnInit {
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router
 	) {
-	  this.groupSelectedPayModal = new GroupGame();
-  }
+		this.groupSelectedPayModal = new GroupGame();
+	}
 
 	ngOnInit() {
 		this.getGroups();
+		this.initConfig();
 		this.user = this.authService.getUser();
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 	}
@@ -47,15 +53,71 @@ export class GroupsComponent implements OnInit {
 		});
 	}
 
-	buyEntranceGroup() {
-		const member = new MemberGroup();
-		member.payReference = "payreferenceuser";
-		this.groupService.addMemberToGroup(member, this.groupSelectedPayModal._id).subscribe(() => {
-			swal.fire("Info", "The registration has been successful!", "success").then(() => {
-				this.updateMoneyService.update(true);
-				this.router.navigate(["/game", this.groupSelectedPayModal._id]);
-			});
-		});
+	private initConfig(): void {
+		this.payPalConfig = {
+			clientId: "AfDe_RWKoxHwsgbPRCXsuvZDXnIys9hUN56brSbuxZVHdHWHXihW-0IbBeyiTJ7I1aSzYKE_NiRGKI01",
+			// for creating orders (transactions) on server see
+			// https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
+			createOrderOnServer: data =>
+				fetch(Global.url + "create-paypal-transaction", {
+					method: "post",
+					headers: {
+						"content-type": "application/json",
+						Authorization: `Bearer ${this.authService.getToken()}`
+					},
+					body: JSON.stringify({
+						finalPrice: this.finalPrice
+					})
+				})
+					.then(res => {
+						return res.json();
+					})
+					.then(order => {
+						if (!order.error) {
+							return order.orderID;
+						} else {
+							Utils.showMsgError(order.error, "Paypal Transaction");
+							throw new Error(order.error);
+						}
+					}),
+			onApprove: (data, actions) => {
+				// console.log("onApprove - transaction was approved, but not authorized", data, actions);
+
+				actions.order.get().then(details => {
+					// console.log("onApprove - you can get full order details inside onApprove: ", details);
+				});
+			},
+			onClientAuthorization: data => {
+				// console.log(
+				// 	"onClientAuthorization - you should probably inform your server about completed transaction at this point",
+				// 	data
+				// );
+				const member = new MemberGroup();
+				member.payReference = data.id;
+				this.groupService.addMemberToGroup(member, this.groupSelectedPayModal._id).subscribe(() => {
+					swal.fire("Info", "The registration has been successful!", "success").then(() => {
+						this.updateMoneyService.update(true);
+						this.router.navigate(["/game", this.groupSelectedPayModal._id]);
+					});
+				});
+			},
+			onCancel: (data, actions) => {
+				// console.log("OnCancel", actions);
+			},
+			onClick: () => {
+				// console.log("onClick");
+			},
+			advanced: {
+				commit: "true"
+			},
+			style: {
+				size: "medium",
+				label: "paypal",
+				layout: "vertical",
+				color: "blue",
+				shape: "pill"
+			}
+		};
 	}
 
 	validateMemberIsNotAlreadyRegistered(groupId) {
@@ -77,8 +139,9 @@ export class GroupsComponent implements OnInit {
 		}
 	}
 
-  showPaymentModal(group: GroupGame) {
-	  this.groupSelectedPayModal = group;
-	  this.paymentModal.show();
-  }
+	showPaymentModal(group: GroupGame) {
+		this.groupSelectedPayModal = group;
+		this.finalPrice = this.groupSelectedPayModal.initialInvertion;
+		this.paymentModal.show();
+	}
 }

@@ -86,4 +86,15 @@ export class GroupService {
 
 		return individualGroups;
 	}
+
+  refund(authorizationID) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    const options = { headers: headers };
+    const body = JSON.stringify({ authorizationID: authorizationID });
+
+    return this.http.post(this.url + "capture-authorization", body, options);
+  }
+
 }
