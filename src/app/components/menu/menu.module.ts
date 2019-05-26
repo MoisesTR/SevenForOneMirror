@@ -8,9 +8,10 @@ import { ProfileComponent } from "../profile/profile.component";
 import { GroupsComponent } from "../groups/groups.component";
 import { GameComponent } from "../game/game.component";
 import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
+import {NgxPayPalModule} from 'ngx-paypal';
 
 @NgModule({
-	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro],
+	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro,  NgxPayPalModule],
 	exports: [MDBBootstrapModulesPro],
 	declarations: [
 		DashboardComponent,

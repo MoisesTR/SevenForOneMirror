@@ -3,6 +3,7 @@ import { MemberGroup } from "../../../models/MemberGroup";
 import { CircleStatusEnum } from "../../../enums/CircleStatusEnum";
 import { CircleUser } from "../../../models/CircleUser";
 import { User } from "../../../models/User";
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable({
 	providedIn: "root"
