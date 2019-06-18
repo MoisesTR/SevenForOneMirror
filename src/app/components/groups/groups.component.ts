@@ -55,7 +55,7 @@ export class GroupsComponent implements OnInit {
 
 	private initConfig(): void {
 		this.payPalConfig = {
-			clientId: "AfDe_RWKoxHwsgbPRCXsuvZDXnIys9hUN56brSbuxZVHdHWHXihW-0IbBeyiTJ7I1aSzYKE_NiRGKI01",
+			clientId: "AesFU7Gm3IQFQTtJ_T9KW_a6DQIDebT7FBXizSgYhRaeiHxfyv6WoENa1dcbthiFyidViSkzevyTuauh",
 			// for creating orders (transactions) on server see
 			// https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
 			createOrderOnServer: data =>

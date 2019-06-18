@@ -163,7 +163,7 @@
             <!--Body-->
             <div class="modal-body mb-0 text-center">
 
-                <input type="file" class="dropify" data-height="300" data-allowed-file-extensions="png jpg" />
+              <mdb-file-upload #uploader (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>
 
             </div>
 

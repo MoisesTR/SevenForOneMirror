@@ -3,8 +3,6 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { User } from "../../models/User";
 
-declare var $: any;
-
 @Component({
 	selector: "app-profile",
 	templateUrl: "./profile.component.html",
@@ -17,10 +15,6 @@ export class ProfileComponent implements OnInit {
 	constructor(private authService: AuthService, private formBuilder: FormBuilder) {}
 
 	ngOnInit() {
-		$(document).ready(() => {
-			$(".dropify").dropify();
-		});
-
 		this.initFormUpdate();
 		this.user = this.authService.getUser();
 		this.setValueUser();
