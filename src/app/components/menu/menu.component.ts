@@ -55,8 +55,6 @@ export class MenuComponent implements OnInit {
 
 	dropdownAndScroll() {
 		$(document).ready(() => {
-			$(".dropify").dropify();
-
 			$(document).scroll(function() {
 				if ($(this).scrollTop() >= 20) {
 					$("#return-to-top").fadeIn(200);
@@ -163,4 +161,12 @@ export class MenuComponent implements OnInit {
 	onActivate(edvent) {
 		window.scroll(0, 0);
 	}
+
+  onFileRemove() {
+
+  }
+
+  onFileAdd(event) {
+
+  }
 }
