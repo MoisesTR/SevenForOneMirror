@@ -20,6 +20,7 @@ import {
 	GoogleLoginProvider,
 	SocialLoginModule
 } from "angular-6-social-login";
+import {MdbFileUploadModule} from 'mdb-file-upload';
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -30,7 +31,7 @@ export function getAuthServiceConfigs() {
 		},
 		{
 			id: GoogleLoginProvider.PROVIDER_ID,
-			provider: new GoogleLoginProvider("380320064033-9vbj0mhvke1meolivgcun4kesjiequq8.apps.googleusercontent.com")
+			provider: new GoogleLoginProvider("380320064033-bs2uivmdsj2fs5v68h2kg57p5k9kgtv7.apps.googleusercontent.com")
 		}
 	]);
 	return config;
