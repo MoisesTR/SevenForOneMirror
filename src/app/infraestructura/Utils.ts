@@ -2,6 +2,7 @@ import swal from "sweetalert2";
 import * as moment from "moment";
 import { environment } from "../../environments/environment";
 
+
 export class Utils {
 	static msgError(mensaje) {
 		if (!environment.production) {

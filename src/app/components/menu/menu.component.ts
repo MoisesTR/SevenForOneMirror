@@ -10,6 +10,7 @@ import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 import { IndividualGroup } from "../../models/IndividualGroup";
+import confetti from 'canvas-confetti'; 
 
 declare var $: any;
 
@@ -51,8 +52,36 @@ export class MenuComponent implements OnInit {
 				this.getTotalEarned();
 			}
 		});
+
+		
 	}
 
+	celebration(){
+		var end = Date.now() + (5000);
+
+		var colors = ['#42d583', '#448aff'];
+
+		var interval = setInterval(function() {
+			if (Date.now() > end) {
+				return clearInterval(interval);
+			}
+		
+			confetti({
+				startVelocity: 30,
+				spread: 360,
+				ticks: 60,
+				particleCount: 220,
+				origin: {
+					x: Math.random(),
+					// since they fall down, start a bit higher than random
+					y: Math.random() - 0.2
+				},
+				colors: colors
+			});
+		}, 200);
+	}
+
+	
 	dropdownAndScroll() {
 		$(document).ready(() => {
 			$(document).scroll(function() {
