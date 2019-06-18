@@ -13,6 +13,7 @@ import { ModalDirective } from "ng-uikit-pro-standard";
 import { IPayPalConfig } from "ngx-paypal";
 import { Global } from "../../core/services/shared/global";
 import swal from "sweetalert2";
+import {environment} from '../../../environments/environment';
 
 @Component({
 	selector: "app-groups",
@@ -55,7 +56,7 @@ export class GroupsComponent implements OnInit {
 
 	private initConfig(): void {
 		this.payPalConfig = {
-			clientId: "AesFU7Gm3IQFQTtJ_T9KW_a6DQIDebT7FBXizSgYhRaeiHxfyv6WoENa1dcbthiFyidViSkzevyTuauh",
+			clientId: environment.paypalClienttId,
 			// for creating orders (transactions) on server see
 			// https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
 			createOrderOnServer: data =>
