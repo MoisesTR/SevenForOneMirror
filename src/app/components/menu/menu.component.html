@@ -1,6 +1,7 @@
 <section>
 
-    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav" [containerInside]="false" id="top-section">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav" [containerInside]="false"
+        id="top-section">
         <mdb-navbar-brand>
             <a class="navbar-brand">
                 <img src="assets/images/logo.svg" height="30" alt="" (click)="dashBoard()">
@@ -15,7 +16,8 @@
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item avatar dropdown btn-group" dropdown>
                     <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                        <img [src]="this.user.image ? this.user.image : 'assets/images/user.png'" class="img-fluid rounded-circle z-depth-0">
+                        <img [src]="this.user.image ? this.user.image : 'assets/images/user.png'"
+                            class="img-fluid rounded-circle z-depth-0">
                     </a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Edit Profile</a>
@@ -40,8 +42,11 @@
                                 <div class="col-7" id="background-circle" style="padding: 8%;">
 
                                     <div class="view overlay" (click)="mdlAvatar.show()">
-                                        <div class="ratio img-responsive img-circle" [ngStyle]="{'background-image': 'url(' + (this.user.image ? this.user.image : 'assets/images/main-user.png')  + ')'}"></div>
-                                        <div class="mask flex-center waves-effect waves-light rgba-blue-strong" style="border-radius: 50%;">
+                                        <div class="ratio img-responsive img-circle"
+                                            [ngStyle]="{'background-image': 'url(' + (this.user.image ? this.user.image : 'assets/images/main-user.png')  + ')'}">
+                                        </div>
+                                        <div class="mask flex-center waves-effect waves-light rgba-blue-strong"
+                                            style="border-radius: 50%;">
                                             <p class="white-text">Change Image</p>
                                         </div>
                                     </div>
@@ -81,22 +86,33 @@
                                     <h6 class='text-uppercase font-weight-bold blue-seven-one-text mt-2'>
                                         Individual Groups
                                     </h6>
-                                    <h5 *ngFor="let currentGroupUser of currentGroupsUser" class='text-uppercase text-center green-seven-one-text'>
+                                    <h5 *ngFor="let currentGroupUser of currentGroupsUser"
+                                        class='text-uppercase text-center green-seven-one-text'>
                                         {{currentGroupUser.timesPlayUser}} X ${{currentGroupUser.initialInvertion}}
                                     </h5>
                                 </div>
 
                                 <div class="col-8 mt-2 text-center">
-                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" mdbTooltip="update the amount invested and earned" [disabled]="disableUpdateAmounts" (click)="getTotalEarned()">
+                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2"
+                                        mdbTooltip="update the amount invested and earned"
+                                        [disabled]="disableUpdateAmounts" (click)="getTotalEarned()">
                                         <mdb-icon fas icon="money-bill" class="ml-1"></mdb-icon> Update Amounts
+                                    </button>
+                                </div>
+                                <div class="col-8 mt-2 text-center">
+                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2"
+                                        (click)="basicModal.show(); celebration();" mdbTooltip="Modal celebration">
+                                        <mdb-icon fas icon="trophy"></mdb-icon> Celebration
                                     </button>
                                 </div>
 
                                 <div class="col-8 mt-2 text-center">
-                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" (click)="dashBoard()">Dashboard</button>
+                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2"
+                                        (click)="dashBoard()">Dashboard</button>
                                 </div>
                                 <div *ngIf="!isUserAdmin" class="col-8 mt-2 text-center">
-                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2" (click)="groups()">Groups</button>
+                                    <button mdbBtn rounded="true" block="true" class="green-seven-one white-text mt-2"
+                                        (click)="groups()">Groups</button>
                                 </div>
                             </div>
 
@@ -117,7 +133,8 @@
 
 </section>
 
-<div mdbModal #mdlLogout="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div mdbModal #mdlLogout="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
         <!--Content-->
         <div class="modal-content text-center">
@@ -125,8 +142,8 @@
             <div class="modal-header green-seven-one white-text">
                 <h4 class="title">Logout</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlLogout.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
 
@@ -139,14 +156,16 @@
             <!--Footer-->
             <div class="modal-footer justify-content-center">
                 <a (click)="logout()" mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect>Yes</a>
-                <a type="button" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect data-dismiss="modal" (click)="mdlLogout.hide()">No</a>
+                <a type="button" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect
+                    data-dismiss="modal" (click)="mdlLogout.hide()">No</a>
             </div>
         </div>
         <!--/.Content-->
     </div>
 </div>
 
-<div mdbModal #mdlAvatar="mdbModal" class="modal fade top" id="mdlAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div mdbModal #mdlAvatar="mdbModal" class="modal fade top" id="mdlAvatar" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
 
         <!--Content-->
@@ -157,7 +176,7 @@
                 <h4 class="title"><i class="fas fa-user"></i> Upload new avatar</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlAvatar.hide()">
                     <span aria-hidden="true">&times;</span>
-                  </button>
+                </button>
             </div>
 
             <!--Body-->
@@ -178,6 +197,43 @@
 </div>
 
 <!-- Back to top button -->
-<button id="return-to-top" class="btn btn-floating btn-large blue-seven-one waves-light" mdbPageScroll href="#top-section" mdbWavesEffect style="right:35px; bottom:35px;" [pageScrollDuration]="750">
-  <i class="fas fa-arrow-up"></i>
+<button id="return-to-top" class="btn btn-floating btn-large blue-seven-one waves-light" mdbPageScroll
+    href="#top-section" mdbWavesEffect style="right:35px; bottom:35px;" [pageScrollDuration]="750">
+    <i class="fas fa-arrow-up"></i>
 </button>
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" [config]="{backdrop: false}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content blue-dark-seven-one">
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown"
+                        data-wow-delay="0.3s">
+                        <div class="ratio img-responsive img-circle green-seven-one"
+                            style="background-image: url(https://lh3.googleusercontent.com/-UM0Tss7wgPg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reVCnhvENK3MJUYYUR1pvQIyQcqmA/mo/photo.jpg?sz=46);">
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h2 class="mb-4 white-text mt-3 wow bounceInDown" data-wow-delay="0.2s">
+                            <strong>Congratulations!</strong>
+                            <br>
+                            Username
+                        </h2>
+                        <h4 class="white-text mt-3 wow bounceInDown" data-wow-delay="0.1s">
+                            You have earned in the next groups:
+                            <br>
+                            $1, $10, $50
+                        </h4>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
+                            (click)="basicModal.hide();" mdbTooltip="Claim prize">
+                            <mdb-icon fas icon="trophy"></mdb-icon> Clain
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
