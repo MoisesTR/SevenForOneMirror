@@ -9,6 +9,7 @@ import { GroupsComponent } from "../groups/groups.component";
 import { GameComponent } from "../game/game.component";
 import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
 import {NgxPayPalModule} from 'ngx-paypal';
+import { AddGroupsComponent } from '../add-groups/add-groups.component';
 
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro,  NgxPayPalModule],
@@ -19,7 +20,8 @@ import {NgxPayPalModule} from 'ngx-paypal';
 		ProfileComponent,
 		GroupsComponent,
 		GameComponent,
-		GamecontainerComponent
+		GamecontainerComponent,
+		AddGroupsComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

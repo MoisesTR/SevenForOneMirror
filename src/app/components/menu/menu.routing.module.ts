@@ -5,6 +5,7 @@ import {UsersComponent} from '../users/users.component';
 import {ProfileComponent} from '../profile/profile.component';
 import {GroupsComponent} from '../groups/groups.component';
 import {GamecontainerComponent} from '../gamecontainer/gamecontainer.component';
+import { AddGroupsComponent } from '../add-groups/add-groups.component';
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } }
@@ -13,6 +14,7 @@ const menuRoutes = [
 	, { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
 	, { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 	, { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "game"}}
+	, { path: "add-group", component: AddGroupsComponent, data: { titulo: "Add-group" } }
 ];
 
 @NgModule({
