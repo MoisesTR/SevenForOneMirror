@@ -49,7 +49,7 @@ build stage:
     # Install dependencies
     - yarn install --ignore-scripts
     # # Build App
-    - npm run build:prerender
+    - npm run build:ssr
   artifacts:
     paths:
       # Build folder
