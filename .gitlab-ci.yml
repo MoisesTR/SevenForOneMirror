@@ -45,9 +45,11 @@ build stage:
     - master
   script:
     # Install angular
-    - yarn add @angular/cli --ignore-scripts
+    - yarn add @angular/cli@7.2.3 --ignore-scripts
     # Install dependencies
     - yarn install --ignore-scripts
+    # Rebuild SASS
+    - npm rebuild node-sass
     # # Build App
     - npm run build:ssr
   artifacts:
