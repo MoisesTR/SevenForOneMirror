@@ -1,10 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Global } from "./global";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { User } from "../../../models/User";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { RoleEnum } from "../../../enums/RoleEnum";
+import {Injectable} from '@angular/core';
+import {Global} from './global';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {User} from '../../../models/User';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -42,7 +41,7 @@ export class UserService {
 		return this.http.get<User[]>(this.url + this.userUrl).pipe(map(data => data));
 	}
 
-	createUsuario(usuario: User) {
+	createUser(usuario: User) {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
 		});

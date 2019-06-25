@@ -1,5 +1,5 @@
 export enum CircleStatusEnum {
-  Activo = 'AC'
-  , Inactivo = 'IN'
+  Active = 'AC'
+  , Inactive = 'IN'
 
 }

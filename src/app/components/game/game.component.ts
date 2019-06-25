@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { User } from "../../models/User";
-import { GroupGame } from "../../models/GroupGame";
-import { MemberGroup } from "../../models/MemberGroup";
-import { CircleUser } from "../../models/CircleUser";
-import { CircleStatusEnum } from "../../enums/CircleStatusEnum";
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from '../../models/User';
+import {GroupGame} from '../../models/GroupGame';
+import {MemberGroup} from '../../models/MemberGroup';
+import {CircleUser} from '../../models/CircleUser';
 
 @Component({
 	selector: "app-game",
@@ -12,10 +11,10 @@ import { CircleStatusEnum } from "../../enums/CircleStatusEnum";
 })
 export class GameComponent implements OnInit {
 	@Input()
-	groupSeleccionado: GroupGame;
+	groupSelected: GroupGame;
 
 	@Input()
-	userActual: User;
+	actualUser: User;
 
 	@Input()
 	isUserAdmin = false;

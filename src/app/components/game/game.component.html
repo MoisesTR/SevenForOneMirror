@@ -17,7 +17,7 @@
 
                             <h3 class="blue-seven-one-text text-left text-uppercase font-weight-bold mt-3 wow fadeInDown mb-3"
                                 data-wow-delay="0.2s"><strong>Group
-                                    ${{groupSeleccionado ? groupSeleccionado.initialInvertion : ''}}</strong></h3>
+                                    ${{groupSelected ? groupSelected.initialInvertion : ''}}</strong></h3>
 
                             <div class="row justify-content-center">
 
@@ -91,11 +91,11 @@
 
                                             <tbody *ngIf="!isUserAdmin; else adminContent">
                                                 <tr *ngFor="let circleUserPlaying of circleUsersPlaying"
-                                                    [ngClass]="[ circleUserPlaying.isUserLogged && userActual.role.name === 'USER' ? 'green-seven-one white-text' : '']">
+                                                    [ngClass]="[ circleUserPlaying.isUserLogged && actualUser.role.name === 'USER' ? 'green-seven-one white-text' : '']">
                                                     <th scope="row">{{(circleUserPlaying.position)}}</th>
                                                     <td>{{circleUserPlaying.member.userName}}</td>
-                                                    <td *ngIf="groupSeleccionado">$
-                                                        {{ (7 - (circleUserPlaying.position)) * groupSeleccionado.initialInvertion}}
+                                                    <td *ngIf="groupSelected">$
+                                                        {{ (7 - (circleUserPlaying.position)) * groupSelected.initialInvertion}}
                                                     </td>
                                                     <td>
                                                         <h5 *ngIf="circleUserPlaying.position === 1">
@@ -110,8 +110,8 @@
                                                     <tr *ngFor="let circleUserPlaying of circleUsersPlaying">
                                                         <th scope="row">{{(circleUserPlaying.position)}}</th>
                                                         <td>{{circleUserPlaying.member.userName}}</td>
-                                                        <td *ngIf="groupSeleccionado">$
-                                                            {{ (7 - (circleUserPlaying.position)) * groupSeleccionado.initialInvertion}}
+                                                        <td *ngIf="groupSelected">$
+                                                            {{ (7 - (circleUserPlaying.position)) * groupSelected.initialInvertion}}
                                                         </td>
                                                         <td>
                                                             <h5 *ngIf="circleUserPlaying.position === 1">

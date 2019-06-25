@@ -1,14 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/User";
-import { UserService } from "../../core/services/shared/user.service";
-import { Router } from "@angular/router";
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
-import { RolService } from "../../core/services/shared/rol.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
-
-declare var $: any;
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../models/User';
+import {UserService} from '../../core/services/shared/user.service';
+import {Router} from '@angular/router';
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular-6-social-login';
+import {RolService} from '../../core/services/shared/rol.service';
+import {RoleEnum} from '../../enums/RoleEnum';
+import {SocialPlatFormEnum} from '../../enums/SocialPlatFormEnum';
+import {Utils} from '../../infraestructura/Utils';
 
 @Component({
 	selector: "app-login",
@@ -34,8 +33,8 @@ export class LoginComponent implements OnInit {
 
 	myStyle: object = {};
 	myParams: object = {};
-	width: number = 100;
-	height: number = 100;
+	width = 100;
+	height = 100;
 
 	ngOnInit() {
 		this.styleParticles();
@@ -80,7 +79,14 @@ export class LoginComponent implements OnInit {
 	getRoles() {
 		this.rolService.getRoles().subscribe(roles => {
 			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
-		});
+
+			if (!this.idRolUser) {
+			  Utils.showMsgError('El rol de usuario no fue encontrado');
+      }
+
+		}, () => {
+		  Utils.showMsgError('Ocurrio un error al cargar los roles de usuario!');
+    });
 	}
 
 	socialSignIn(socialPlatform: string) {

@@ -1,4 +1,6 @@
-
+/**
+ * Entity represent the history invested and earned by user
+ */
 export class PurchaseHistory {
   public _id: string;
   public userId: string;

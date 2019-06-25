@@ -1,8 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { UserService } from "../../core/services/shared/user.service";
-import { Token } from "../../models/models.index";
-import { AuthService } from "../../core/services/auth/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {UserService} from '../../core/services/shared/user.service';
 
 @Component({
 	selector: "app-confirm",

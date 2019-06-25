@@ -53,7 +53,7 @@ export class GamecontainerComponent implements OnInit {
 		this.groupService.getGroup(idGroup).subscribe(group => {
 			this.groupSeleccionado = group;
 			this.members = this.groupSeleccionado.members;
-			this.circleUsers = this.gameService.generateCirclesUser(
+			this.circleUsers = this.gameService.generateCircles(
 				this.members,
 				this.groupSeleccionado.lastWinner,
 				this.userActual

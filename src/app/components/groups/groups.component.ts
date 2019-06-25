@@ -43,7 +43,7 @@ export class GroupsComponent implements OnInit {
 
 	ngOnInit() {
 		this.getGroups();
-		this.initConfig();
+		this.initConfigPaypal();
 		this.user = this.authService.getUser();
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 	}
@@ -54,7 +54,7 @@ export class GroupsComponent implements OnInit {
 		});
 	}
 
-	private initConfig(): void {
+	private initConfigPaypal(): void {
 		this.payPalConfig = {
 			clientId: environment.paypalClienttId,
 			// for creating orders (transactions) on server see
@@ -123,20 +123,20 @@ export class GroupsComponent implements OnInit {
 
 	validateMemberIsNotAlreadyRegistered(groupId) {
 		this.groupService.getGroup(groupId).subscribe(group => {
-			const userIsAlreadyInGroup = this.groupService.filterMemberByGroup(group, this.user._id);
-			this.actionViewGroup(userIsAlreadyInGroup, groupId);
+			const member = this.groupService.filterMemberByGroup(group, this.user._id);
+			this.actionViewGroup(member, groupId);
 		});
 	}
 
-	actionViewGroup(already, groupId) {
-		if (this.userIsAdmin) {
-			this.router.navigate(["/game", groupId]);
+	actionViewGroup(member, groupId) {
+		if (!this.userIsAdmin) {
+      if (member) {
+        this.router.navigate(["/game", groupId]);
+      } else {
+        Utils.showMsgInfo("You need buy a entrance to the group!");
+      }
 		} else {
-			if (already) {
-				this.router.navigate(["/game", groupId]);
-			} else {
-				Utils.showMsgInfo("You need buy  a entrance to the group!");
-			}
+      this.router.navigate(["/game", groupId]);
 		}
 	}
 

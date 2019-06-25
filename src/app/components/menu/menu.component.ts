@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Token, User } from "../../models/models.index";
+import { GroupGame, Token, User } from "../../models/models.index";
 import { RolService } from "../../core/services/shared/rol.service";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
@@ -9,8 +9,7 @@ import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
-import { IndividualGroup } from "../../models/IndividualGroup";
-import confetti from 'canvas-confetti'; 
+import confetti from "canvas-confetti";
 
 declare var $: any;
 
@@ -20,14 +19,13 @@ declare var $: any;
 	styleUrls: ["./menu.component.scss"]
 })
 export class MenuComponent implements OnInit {
-	public token: Token;
 	public user: User;
 	public purchaseHistory: PurchaseHistory[] = [];
 	public totalEarned = 0;
 	public totalInvested = 0;
 	public isUserAdmin = false;
 	public disableUpdateAmounts = false;
-	public currentGroupsUser: IndividualGroup[] = [];
+	public currentGroupsUser: GroupGame[] = [];
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -38,9 +36,7 @@ export class MenuComponent implements OnInit {
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router
-	) {
-		this.token = new Token();
-	}
+	) {}
 
 	ngOnInit() {
 		this.dropdownAndScroll();
@@ -52,20 +48,18 @@ export class MenuComponent implements OnInit {
 				this.getTotalEarned();
 			}
 		});
-
-		
 	}
 
-	celebration(){
-		var end = Date.now() + (5000);
+	celebration() {
+		const end = Date.now() + 5000;
 
-		var colors = ['#42d583', '#448aff'];
+		const colors = ["#42d583", "#448aff"];
 
-		var interval = setInterval(function() {
+		const interval = setInterval(function() {
 			if (Date.now() > end) {
 				return clearInterval(interval);
 			}
-		
+
 			confetti({
 				startVelocity: 30,
 				spread: 360,
@@ -81,7 +75,6 @@ export class MenuComponent implements OnInit {
 		}, 200);
 	}
 
-	
 	dropdownAndScroll() {
 		$(document).ready(() => {
 			$(document).scroll(function() {
@@ -130,7 +123,7 @@ export class MenuComponent implements OnInit {
 			history => {
 				this.purchaseHistory = history;
 				for (const item of this.purchaseHistory) {
-					const quantity = (+item.quantity["$numberDecimal"]);
+					const quantity = +item.quantity["$numberDecimal"];
 					if (item.moneyDirection) {
 						this.totalInvested += quantity;
 					} else {
@@ -150,7 +143,7 @@ export class MenuComponent implements OnInit {
 		this.totalInvested = 0;
 		this.groupService.getGroups().subscribe(
 			groups => {
-				groups.forEach((group, index) => {
+				groups.forEach(group => {
 					if (group.enabled) {
 						this.totalEarned += group.totalInvested;
 					}
@@ -165,7 +158,7 @@ export class MenuComponent implements OnInit {
 
 	getGroupsCurrentUser() {
 		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(groups => {
-			this.currentGroupsUser = this.groupService.getIndividualGroups(groups, this.user._id);
+			this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
 		});
 	}
 
@@ -191,11 +184,7 @@ export class MenuComponent implements OnInit {
 		window.scroll(0, 0);
 	}
 
-  onFileRemove() {
+	onFileRemove() {}
 
-  }
-
-  onFileAdd(event) {
-
-  }
+	onFileAdd(event) {}
 }
