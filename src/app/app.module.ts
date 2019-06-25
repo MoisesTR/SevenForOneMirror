@@ -13,7 +13,6 @@ import {NotFound404Component} from './components/not-found404/not-found404.compo
 import {ConfirmComponent} from './components/confirm/confirm.component';
 import {EmailConfirmComponent} from './components/email-confirm/email-confirm.component';
 import {ParticlesModule} from 'angular-particle';
-import {ComponentsComponent} from './components/components.component';
 import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import {environment} from '../environments/environment';
 
@@ -41,8 +40,7 @@ export function getAuthServiceConfigs() {
 		NotFound404Component,
 		MenuComponent,
 		NotFound404Component,
-		EmailConfirmComponent,
-		ComponentsComponent
+		EmailConfirmComponent
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: "serverApp" }),

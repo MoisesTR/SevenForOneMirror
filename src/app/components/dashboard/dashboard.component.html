@@ -39,7 +39,7 @@
                                 <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
                                     <thead>
                                         <tr>
-                                            <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+                                            <th *ngFor="let head of headElementsUsers; let i = index" scope="col">{{head}}
                                             </th>
                                         </tr>
                                     </thead>
@@ -159,9 +159,12 @@
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
 
-        <app-game *ngFor="let group of groups" [circleUsers]="group.circleUsers"
-            [circleUsersPlaying]="group.circleUsersPlaying" [groupSeleccionado]="group" [userActual]="user"
-            [isUserAdmin]="isUserAdmin">
+        <app-game *ngFor="let group of groups"
+                  [circleUsers]="group.circleUsers"
+                  [circleUsersPlaying]="group.circleUsersPlaying"
+                  [groupSelected]="group"
+                  [actualUser]="user"
+                  [isUserAdmin]="isUserAdmin">
         </app-game>
 
     </div>

@@ -24,10 +24,9 @@ export class RegisterComponent implements OnInit {
 	public telefonos: string[] = [];
 	public roles: Role[];
 	public disabledButton = false;
-	public width: number = 100;
-	public height: number = 100;
+	public width = 100;
+	public height = 100;
 	public idRolUser: string;
-	public idRolAdmin: string;
 
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
@@ -113,7 +112,6 @@ export class RegisterComponent implements OnInit {
 		this.rolService.getRoles().subscribe(roles => {
 			this.roles = roles;
 			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, this.roles);
-			this.idRolAdmin = this.rolService.filterIdRol(RoleEnum.Admin, this.roles);
 		});
 	}
 
@@ -143,20 +141,14 @@ export class RegisterComponent implements OnInit {
 		this.user.password = this.secondFormGroup.value.password;
 		this.user.passwordConfirm = this.secondFormGroup.value.confirmPassword;
 		this.user.email = this.secondFormGroup.value.email;
-
-		// Validacion temporal para crear un usuario administrador unico
-		if (this.user.userName === "Admin") {
-			this.user.roleId = this.idRolAdmin;
-		} else {
-			this.user.roleId = this.idRolUser;
-		}
+		this.user.roleId = this.idRolUser;
 	}
 
 	createUser() {
 		this.getValuesForm();
 		this.disabledButton = true;
 
-		this.usuarioService.createUsuario(this.user).subscribe(
+		this.usuarioService.createUser(this.user).subscribe(
 			res => {
 				this.disabledButton = false;
 				localStorage.setItem("username", this.user.userName);

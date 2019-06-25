@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { User } from "../../models/User";
+import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 
 @Component({
 	selector: "app-profile",
@@ -30,12 +31,12 @@ export class ProfileComponent implements OnInit {
 			email: new FormControl("", []),
 			phone: new FormControl("", []),
 			password: new FormControl("", []),
-      passwordConfirm: new FormControl("", [])
+			passwordConfirm: new FormControl("", [])
 		});
 	}
 
 	setValueUser() {
-		this.updateFormGroup.controls["user"].setValue(this.user.userName);
+		this.updateFormGroup.controls["username"].setValue(this.user.userName);
 		this.updateFormGroup.controls["firstName"].setValue(this.user.firstName);
 		this.updateFormGroup.controls["lastName"].setValue(this.user.lastName);
 		this.updateFormGroup.controls["gender"].setValue(this.getGender());
@@ -43,9 +44,7 @@ export class ProfileComponent implements OnInit {
 		this.updateFormGroup.controls["email"].setValue(this.user.email);
 		this.updateFormGroup.controls["phone"].setValue(this.user.phones[0]);
 
-		Object.keys(this.updateFormGroup.controls).forEach((value, index) => {
-			this.updateFormGroup.controls[value].disable();
-		});
+		this.disableInputs();
 	}
 
 	getGender() {
@@ -54,5 +53,15 @@ export class ProfileComponent implements OnInit {
 		if (this.user.gender === "F") return 2;
 
 		if (!this.user.gender) return 3;
+	}
+
+	disableInputs() {
+    this.updateFormGroup.controls["email"].disable();
+    this.updateFormGroup.controls["username"].disable();
+
+		if (this.user.provider === SocialPlatFormEnum.Facebook || this.user.provider === SocialPlatFormEnum.Google) {
+			this.updateFormGroup.controls["password"].disable();
+			this.updateFormGroup.controls["passwordConfirm"].disable();
+		}
 	}
 }

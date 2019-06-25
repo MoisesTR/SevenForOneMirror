@@ -21,6 +21,7 @@ export class User {
 	public phones?: string[];
 	public birthDate?: string;
 	public gender?: string;
+	public provider: string;
 	public image?: string;
 	public roleId?: string;
 
