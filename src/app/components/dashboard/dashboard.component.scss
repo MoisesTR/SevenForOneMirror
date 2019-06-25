@@ -73,6 +73,15 @@
 
 .cascading-admin-card .admin-up .data {
     float: right;
-    margin-top: 2rem;
+    margin-top: -2rem;
     text-align: right;
+}
+
+.rounded-card {
+    border-radius: .75rem !important;
+}
+
+.rounded-card:hover{
+    background-color: #017BFF;
+    color: white !important;
 }

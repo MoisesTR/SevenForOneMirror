@@ -5,17 +5,20 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="row justify-content-center">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-5" *ngFor="let group of groups">
-                        <div class="card card-cascade cascading-admin-card text-muted"
-                            (click)="viewGroupUsers(group._id)">
-                            <div class="admin-up">
-                                <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i
-                                        class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
-                                <div class="data mb-3">
-                                    <h3><strong>$ {{group.initialInvertion}}</strong></h3>
-                                    <h4 class="mt-2">Total users active: {{group.totalMembers}}</h4>
+
+                        <a (click)="viewGroupUsers(group._id)">
+                            <div class="card card-cascade cascading-admin-card text-muted hoverable rounded-card">
+                                <div class="admin-up">
+                                    <mdb-icon class="green-seven-one fas" fas="" icon="money-bill-alt"><i
+                                            class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
+                                    <div class="data mb-3">
+                                        <h3><strong>$ {{group.initialInvertion}}</strong></h3>
+                                        <h4 class="mt-2">Number of players: {{group.totalMembers}}</h4>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -39,7 +42,8 @@
                                 <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
                                     <thead>
                                         <tr>
-                                            <th *ngFor="let head of headElementsUsers; let i = index" scope="col">{{head}}
+                                            <th *ngFor="let head of headElementsUsers; let i = index" scope="col">
+                                                {{head}}
                                             </th>
                                         </tr>
                                     </thead>
@@ -140,8 +144,10 @@
 
                             <div class="d-flex flex-column justify-content-center align-items-center">
 
-                                <h1 class="h1-responsive font-weight-bold blue-seven-one-text mb-0 wow fadeInDown" data-wow-delay="0.2s">We are waiting for you to play</h1>
-                                <img src="assets/images/dashboard.png" class="img-fluid wow fadeIn" data-wow-delay="0.2s" alt="dashboard user">
+                                <h1 class="h1-responsive font-weight-bold blue-seven-one-text mb-0 wow fadeInDown"
+                                    data-wow-delay="0.2s">We are waiting for you to play</h1>
+                                <img src="assets/images/dashboard.png" class="img-fluid wow fadeIn"
+                                    data-wow-delay="0.2s" alt="dashboard user">
                             </div>
 
                         </div>
@@ -159,12 +165,9 @@
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
 
-        <app-game *ngFor="let group of groups"
-                  [circleUsers]="group.circleUsers"
-                  [circleUsersPlaying]="group.circleUsersPlaying"
-                  [groupSelected]="group"
-                  [actualUser]="user"
-                  [isUserAdmin]="isUserAdmin">
+        <app-game *ngFor="let group of groups" [circleUsers]="group.circleUsers"
+            [circleUsersPlaying]="group.circleUsersPlaying" [groupSelected]="group" [actualUser]="user"
+            [isUserAdmin]="isUserAdmin">
         </app-game>
 
     </div>
