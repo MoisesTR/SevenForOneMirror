@@ -1,7 +1,7 @@
 /*Colores*/
 
 .blue-seven-one {
-    background-color: rgba(57, 126, 245, 0.9) !important;
+    background-color: #017BFF !important;
 }
 
 .blue-dark-seven-one {
@@ -16,8 +16,8 @@
     background-color: #34BF6C !important;
 }
 
-.bg-form-login {
-    background: linear-gradient(0deg, rgba(57, 126, 245, 0.8), rgba(57, 126, 245, 0.8));
+.bg-form-login-register {
+    background-color: rgba(1, 123, 255, 0.9) !important;
 }
 
 .gray-circle {
@@ -25,7 +25,7 @@
 }
 
 .blue-seven-one-text {
-    color: #448aff !important;
+    color: #017BFF !important;
 }
 
 .blue-dark-seven-one-text {
@@ -154,8 +154,8 @@
 .md-form textarea[type="number"]:focus:not([readonly]),
 .md-form textarea[type="email"]:focus:not([readonly]),
 .md-form textarea[type="search"]:focus:not([readonly]) {
-    border-bottom: 0.2px solid rgba(59, 122, 237, 0.8) !important;
-    box-shadow: 0 1px 0 0 rgba(59, 122, 237, 0.8) !important;
+    border-bottom: 0.2px solid rgba(1, 123, 255, 0.8) !important;
+    box-shadow: 0 1px 0 0 rgba(1, 123, 255, 0.8) !important;
 }
 
 .md-form input[type="text"]:focus:not([readonly])+label,
@@ -168,7 +168,7 @@
 .md-form textarea[type="number"]:focus:not([readonly])+label,
 .md-form textarea[type="email"]:focus:not([readonly])+label,
 .md-form textarea[type="search"]:focus:not([readonly])+label {
-    color: rgba(59, 122, 237, 0.8) !important;
+    color: rgba(1, 123, 255, 0.8) !important;
 }
 
 
@@ -184,11 +184,11 @@
 .md-form.md-outline textarea[type="number"]:focus:not([readonly]),
 .md-form.md-outline textarea[type="email"]:focus:not([readonly]),
 .md-form.md-outline textarea[type="search"]:focus:not([readonly]) {
-    border-bottom: 0.2px solid rgba(59, 122, 237, 0.8) !important;
-    border-top: 1px solid rgba(59, 122, 237, 0.8) !important;
-    border-right: 1px solid rgba(59, 122, 237, 0.8) !important;
-    border-left: 1px solid rgba(59, 122, 237, 0.8) !important;
-    box-shadow: 0 1px 0 0 rgba(59, 122, 237, 0.8) !important;
+    border-bottom: 0.2px solid rgba(1, 123, 255, 0.8) !important;
+    border-top: 1px solid rgba(1, 123, 255, 0.8) !important;
+    border-right: 1px solid rgba(1, 123, 255, 0.8) !important;
+    border-left: 1px solid rgba(1, 123, 255, 0.8) !important;
+    box-shadow: 0 1px 0 0 rgba(1, 123, 255, 0.8) !important;
 }
 
 
