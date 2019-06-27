@@ -198,6 +198,19 @@
     display: none !important;
 }
 
+/*Rounded cards*/
+.rounded-card {
+    border-radius: .75rem !important;
+}
+
+.rounded-table-card {
+    border-radius: .75rem !important;
+}
+
+.rounded-card:hover{
+    background-color: #017BFF;
+    color: white !important;
+}
 
 .hr-light {
     border-top: 3px solid #42d583 !important;
