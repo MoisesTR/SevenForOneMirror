@@ -13,9 +13,10 @@
                                             class="fa-money-bill-alt primary-color fas"></i></mdb-icon>
                                     <div class="data mb-3">
                                         <h3><strong>$ {{group.initialInvertion}}</strong></h3>
-                                        <h4 class="mt-2">Number of players: {{group.totalMembers}}</h4>
+                                        <h4 class="mt-2">Players: {{group.totalMembers}}</h4>
                                     </div>
                                 </div>
+
                             </div>
                         </a>
 
@@ -26,49 +27,45 @@
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
 
-                <!--Card-->
-                <mdb-card cascade="true" narrower="true">
+                <div class="card card-cascade narrower rounded-table-card">
 
+                    <!-- Card image -->
                     <div class="view view-cascade gradient-card-header green-seven-one">
-                        <h2 class="card-header-title mb-2">Registered Users</h2>
+
+                        <!-- Title -->
+                        <h2 class="card-header-title">Registered Users</h2>
+
                     </div>
 
-                    <mdb-card-body cascade="true">
+                    <!-- Card content -->
+                    <div class="card-body card-body-cascade text-center">
 
-                        <mdb-card-text>
+                        <div class="container-fluid mt-3">
 
-                            <div class="container-fluid mt-3">
+                            <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let head of headElementsUsers; let i = index" scope="col">
+                                            {{head}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of users; let i = index">
+                                        <th scope="row"> {{i + 1}}</th>
+                                        <td>{{user.userName}}</td>
+                                        <td>{{user.firstName}}</td>
+                                        <td>{{user.lastName}}</td>
+                                        <td>{{user.email}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
-                                    <thead>
-                                        <tr>
-                                            <th *ngFor="let head of headElementsUsers; let i = index" scope="col">
-                                                {{head}}
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let user of users; let i = index">
-                                            <th scope="row"> {{i + 1}}</th>
-                                            <td>{{user.userName}}</td>
-                                            <td>{{user.firstName}}</td>
-                                            <td>{{user.lastName}}</td>
-                                            <td>{{user.email}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </div>
 
-                            </div>
+                    </div>
 
-
-                        </mdb-card-text>
-
-                    </mdb-card-body>
-                    <!--/.Card content-->
-
-                </mdb-card>
-                <!--/.Card-->
-
+                </div>
 
             </div>
 
