@@ -15,6 +15,7 @@ import {EmailConfirmComponent} from './components/email-confirm/email-confirm.co
 import {ParticlesModule} from 'angular-particle';
 import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import {environment} from '../environments/environment';
+import {MdbFileUploadModule} from "mdb-file-upload";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -42,15 +43,16 @@ export function getAuthServiceConfigs() {
 		NotFound404Component,
 		EmailConfirmComponent
 	],
-	imports: [
-		BrowserModule.withServerTransition({ appId: "serverApp" }),
-		BrowserAnimationsModule,
-		CoreModule,
-		AppRoutingModule,
-		MDBBootstrapModulesPro.forRoot(),
-		SocialLoginModule,
-		ParticlesModule
-	],
+  imports: [
+    BrowserModule.withServerTransition({appId: "serverApp"}),
+    BrowserAnimationsModule,
+    CoreModule,
+    AppRoutingModule,
+    MDBBootstrapModulesPro.forRoot(),
+    SocialLoginModule,
+    ParticlesModule,
+    MdbFileUploadModule
+  ],
 	schemas: [NO_ERRORS_SCHEMA],
 	providers: [
 		MDBSpinningPreloader,
