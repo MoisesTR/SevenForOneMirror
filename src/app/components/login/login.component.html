@@ -2,13 +2,15 @@
 
     <div class="row wrap">
 
-        <div class="col-lg-6 col-md-7 d-flex flex-column justify-content-center align-items-center background-white-space" style="height: 100vh; overflow: auto;">
+        <div class="col-lg-6 col-md-7 d-flex flex-column justify-content-center align-items-center background-white-space"
+            style="height: 100vh; overflow: auto;">
 
             <div class="container-fluid">
                 <div class="row justify-content-center">
 
                     <div class="col-md-12 text-center mb-4">
-                        <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo" style="width: 20em;">
+                        <img src="/assets/images/logo.png" class="rounded mx-auto d-block img-fluid" alt="logo"
+                            style="width: 20em;">
                     </div>
 
                     <div class="col-10 col-md-9 col-lg-9">
@@ -22,8 +24,14 @@
                                     <div class="col-12 text-center mb-3">
                                         <div class="row">
                                             <div class="col-12">
-                                                <a type="button" mdbBtn floating="true" size="lg" class="btn-fb waves-light" mdbTooltip="Facebook" placement="left" (click)="socialSignIn('facebook')" mdbWavesEffect><i class="fab fa-facebook-f"></i></a>
-                                                <a type="button" mdbBtn floating="true" size="lg" class=" btn-gplus waves-light" mdbTooltip="Gmail" placement="right" (click)="socialSignIn('google')" mdbWavesEffect><i class="fab fa-google"></i></a>
+                                                <a type="button" mdbBtn floating="true" size="lg"
+                                                    class="btn-fb waves-light" mdbTooltip="Facebook" placement="left"
+                                                    (click)="socialSignIn('facebook')" mdbWavesEffect><i
+                                                        class="fab fa-facebook-f"></i></a>
+                                                <a type="button" mdbBtn floating="true" size="lg"
+                                                    class=" btn-gplus waves-light" mdbTooltip="Gmail" placement="right"
+                                                    (click)="socialSignIn('google')" mdbWavesEffect><i
+                                                        class="fab fa-google"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -39,23 +47,25 @@
 
                                         <!-- Username -->
                                         <div class="md-form md-outline">
-                                            <i class="fas fa-user prefix"></i>
-                                            <input type="text" id="user" class="form-control" name="user" autocomplete="off" formControlName="user" mdbInput>
+                                            <mdb-icon fas icon="user"></mdb-icon>
+                                            <input type="text" id="user" class="form-control" name="user"
+                                                autocomplete="off" formControlName="user" mdbInput>
                                             <label for="user">Username or Email</label>
                                             <show-errors [control]="userForm.controls['user']"></show-errors>
                                         </div>
 
                                         <!-- Password -->
                                         <div class="md-form md-outline">
-                                            <i class="fas fa-lock prefix"></i>
-                                            <input type="password" id="password" class="form-control" name="user" autocomplete="off" formControlName="password" mdbInput>
+                                            <mdb-icon fas icon="lock"></mdb-icon>
+                                            <input type="password" id="password" class="form-control" name="user"
+                                                autocomplete="off" formControlName="password" mdbInput>
                                             <label for="password">Password</label>
                                             <show-errors [control]="userForm.controls['password']"></show-errors>
                                         </div>
 
                                         <div class="text-center mt-3">
                                             <!-- Forgot password -->
-                                            <a (click)="forgotPassword()" class="green-seven-one-text">
+                                            <a (click)="forgotPassword.show()" class="green-seven-one-text">
                                                 <h5>Forgot password?</h5>
                                             </a>
 
@@ -63,7 +73,9 @@
 
                                         <div class="mt-3 text-center">
                                             <!-- Sign in button -->
-                                            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" type="submit" [disabled]="userForm.invalid || disabledButton">Sign in</button>
+                                            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
+                                                type="submit" [disabled]="userForm.invalid || disabledButton">Sign
+                                                in</button>
                                         </div>
                                     </form>
 
@@ -77,10 +89,12 @@
 
         </div>
 
-        <div class="col-lg-6 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center white-text background-blue-space" id="bg-hide">
+        <div class="col-lg-6 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center white-text background-blue-space"
+            id="bg-hide">
             <h1 class="display-4 text-center font-weight-bold">Hello, Friend!</h1>
             <h3 class="mt-2 text-center">Enter your personal details and start journey with us</h3>
-            <button mdbBtn type="button" color="white" rounded="true" outline="true" class="mt-3" mdbWavesEffect (click)="createUser()">Create an account</button>
+            <button mdbBtn type="button" color="white" rounded="true" outline="true" class="mt-3" mdbWavesEffect
+                (click)="createUser()">Create an account</button>
         </div>
 
     </div>
@@ -94,10 +108,47 @@
     </div>
 </div>
 
-<div class="fixed-action-btn d-sm-block d-md-none" style="bottom: 45px; right: 24px;" mdbTooltip="Create an account" placement="left">
-
+<div class="fixed-action-btn d-sm-block d-md-none" style="bottom: 45px; right: 24px;" mdbTooltip="Create an account"
+    placement="left">
     <a class="btn-floating btn-large blue-seven-one waves-light" mdbWavesEffect (click)="openNav()">
         <i class="fas fa-bars"></i>
     </a>
+</div>
 
+<div mdbModal #forgotPassword="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- <div class="">
+                
+                 <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+            </div> -->
+            <div class="modal-body">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="forgotPassword.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+                <div class="text-center">
+                    <mdb-icon fas icon="lock" size="4x"></mdb-icon>
+                    <h2 class="mt-2 font-weight-bold">Forgot Password?</h2>
+                    <h6>You can reset your password here.</h6>
+                </div>
+                <form action="">
+
+                    <div class="md-form md-outline">
+                        <mdb-icon fas icon="envelope"></mdb-icon>
+                        <input type="text" id="emailPasswordForgot" class="form-control" mdbInput>
+                        <label for="emailPasswordForgot">Email address</label>
+                    </div>
+
+                </form>
+
+                <div class="text-center">
+                    <button type="button" rounded="true" mdbBtn color="primary" class="relative waves-light"
+                        mdbWavesEffect>Reset
+                        password</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
