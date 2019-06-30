@@ -13,7 +13,8 @@ import { ModalDirective } from "ng-uikit-pro-standard";
 import { IPayPalConfig } from "ngx-paypal";
 import { Global } from "../../core/services/shared/global";
 import swal from "sweetalert2";
-import {environment} from '../../../environments/environment';
+import { environment } from "../../../environments/environment";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 
 @Component({
 	selector: "app-groups",
@@ -36,17 +37,21 @@ export class GroupsComponent implements OnInit {
 		private authService: AuthService,
 		private purchaseService: PurchaseService,
 		private updateMoneyService: UpdateMoneyService,
-		private router: Router
+		private router: Router,
+		private socketGroupGame: SocketGroupGameService
 	) {
 		this.groupSelectedPayModal = new GroupGame();
 	}
 
 	ngOnInit() {
+		this.initSocket();
 		this.getGroups();
 		this.initConfigPaypal();
 		this.user = this.authService.getUser();
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 	}
+
+	initSocket() {}
 
 	getGroups() {
 		this.groupService.getGroups().subscribe(groups => {
@@ -130,13 +135,13 @@ export class GroupsComponent implements OnInit {
 
 	actionViewGroup(member, groupId) {
 		if (!this.userIsAdmin) {
-      if (member) {
-        this.router.navigate(["/game", groupId]);
-      } else {
-        Utils.showMsgInfo("You need buy a entrance to the group!");
-      }
+			if (member) {
+				this.router.navigate(["/game", groupId]);
+			} else {
+				Utils.showMsgInfo("You need buy a entrance to the group!");
+			}
 		} else {
-      this.router.navigate(["/game", groupId]);
+			this.router.navigate(["/game", groupId]);
 		}
 	}
 

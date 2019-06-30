@@ -10,6 +10,8 @@ import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 import confetti from "canvas-confetti";
+import { MainSocketService } from "../../core/services/shared/main-socket.service";
+import { EventEnum } from "../../enums/EventEnum";
 
 declare var $: any;
 
@@ -35,10 +37,12 @@ export class MenuComponent implements OnInit {
 		private purchaseHistoryService: PurchaseService,
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
-		private router: Router
+		private router: Router,
+		private socketService: MainSocketService
 	) {}
 
 	ngOnInit() {
+		// this.initSocket();
 		this.dropdownAndScroll();
 		this.getCredentialsUser();
 		this.getTotalEarned();
@@ -48,6 +52,27 @@ export class MenuComponent implements OnInit {
 				this.getTotalEarned();
 			}
 		});
+	}
+
+	initSocket() {
+		this.socketService.onEvent(EventEnum.CONNECT).subscribe(() => {
+			console.log("Evento de conexion");
+
+			// Obtener el nombre del usuario
+			this.socketService.send(EventEnum.REGISTER_USER, "mtrigueros");
+		});
+
+		this.socketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
+			console.log("Evento de desconexion");
+		});
+
+		this.socketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
+			console.log("Close session");
+		});
+
+    this.socketService.onEvent(EventEnum.GROUP_ACTIVITY).subscribe(() => {
+      console.log("Close session");
+    });
 	}
 
 	celebration() {

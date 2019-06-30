@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../models/User';
-import {UserService} from '../../core/services/shared/user.service';
-import {Router} from '@angular/router';
-import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular-6-social-login';
-import {RolService} from '../../core/services/shared/rol.service';
-import {RoleEnum} from '../../enums/RoleEnum';
-import {SocialPlatFormEnum} from '../../enums/SocialPlatFormEnum';
-import {Utils} from '../../infraestructura/Utils';
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../models/User";
+import {UserService} from "../../core/services/shared/user.service";
+import {Router} from "@angular/router";
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from "angular-6-social-login";
+import {RolService} from "../../core/services/shared/rol.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {SocialPlatFormEnum} from "../../enums/SocialPlatFormEnum";
+import {Utils} from "../../infraestructura/Utils";
 
 @Component({
 	selector: "app-login",
@@ -69,24 +69,26 @@ export class LoginComponent implements OnInit {
 		};
 	}
 
-  initFormUser() {
-    this.userForm = this.formBuilder.group({
-      user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
-      password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
-    });
-  }
+	initFormUser() {
+		this.userForm = this.formBuilder.group({
+			user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
+			password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
+		});
+	}
 
 	getRoles() {
-		this.rolService.getRoles().subscribe(roles => {
-			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
+		this.rolService.getRoles().subscribe(
+			roles => {
+				this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
 
-			if (!this.idRolUser) {
-			  Utils.showMsgError('El rol de usuario no fue encontrado');
-      }
-
-		}, () => {
-		  Utils.showMsgError('Ocurrio un error al cargar los roles de usuario!');
-    });
+				if (!this.idRolUser) {
+					Utils.showMsgError("El rol de usuario no fue encontrado");
+				}
+			},
+			() => {
+				Utils.showMsgError("Ocurrio un error al cargar los roles de usuario!");
+			}
+		);
 	}
 
 	socialSignIn(socialPlatform: string) {
@@ -141,7 +143,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	openNav() {
-  		document.getElementById("myNav").style.width = "100%";
+		document.getElementById("myNav").style.width = "100%";
 	}
 
 	closeNav() {
