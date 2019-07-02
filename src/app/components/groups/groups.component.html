@@ -21,7 +21,7 @@
                                     *ngFor="let group of groups; let i = index">
 
                                     <div class="card rounded-all">
-                                        <div class="card-body blue-seven-one white-text rounded-all hoverable">
+                                        <div class="card-body blue-seven-one white-text rounded-all">
 
                                             <div class="row d-flex justify-content-between">
                                                 <div class="col-12">
@@ -32,15 +32,15 @@
                                                 </div>
                                             </div>
 
-                                            <p>Number of people playing: {{group.totalMembers}}</p>
+                                            <p>Cantidad de jugadores: {{group.totalMembers}}</p>
 
                                             <div class="text-center">
                                                 <button mdbBtn rounded="true" size="sm"
                                                     class="green-seven-one white-text mt-2"
-                                                    (click)="validateMemberIsNotAlreadyRegistered(group._id)">View</button>
+                                                    (click)="validateMemberIsNotAlreadyRegistered(group._id)">Visualizar</button>
                                                 <button *ngIf="!userIsAdmin" mdbBtn rounded="true" size="sm"
                                                     class="green-seven-one white-text mt-2"
-                                                    (click)="showPaymentModal(group)">Buy</button>
+                                                    (click)="showPaymentModal(group)">Comprar</button>
                                             </div>
 
                                         </div>
