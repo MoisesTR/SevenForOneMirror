@@ -32,6 +32,7 @@
     -o-background-size: contain;
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center; 
 }
 
 @media only screen and (max-width: 1232px) {
@@ -73,3 +74,24 @@
     padding-top: 7%;
     padding-bottom: 20%;
   }
+
+  .v-divider {
+    margin-left:5px;
+    margin-right:5px;
+    width:1px;
+    height:auto;
+    border-left:1px solid white;
+   }
+
+  .edge-header{
+      height: 310px !important;
+  }
+
+.hover-menu {
+    border-radius: .75rem !important;
+}
+
+.hover-menu:hover{
+    background-color: #216FCE;
+    color: white !important;
+}
