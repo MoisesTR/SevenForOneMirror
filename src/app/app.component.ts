@@ -13,16 +13,11 @@ export class AppComponent {
 	nombreApp = "SevenForOne";
 	title = "SevenForOne: Ganar Dinero Facil y Seguro";
 	descripcion =
-		"Ganar dinero extra online de manera facil, en esta pagina web podras duplicar tu dinero con SevenForOne ganas al instante invita a tus amigos para que las oportunidad de ganar sean mayores";
+		"Ganar dinero extra online de manera facil, " +
+		"en esta pagina web podras duplicar tu dinero con SevenForOne ganas al instante invita a tus amigos para que las oportunidad de ganar sean mayores";
 	urlsitio = "";
 
 	constructor(seo: Meta, title: Title) {
-		/* if (isPlatformServer(this.platformid)) {
-      const envJson = this.injector.get('CONFIG') ? this.injector.get('CONFIG') : {};
-      this.state.set(configKey, envJson as any);
-    } else {
-      console.log(this.state.get(configKey, undefined as any));
-    } */
 		//twitter meta datos
 
 		seo.addTags([
