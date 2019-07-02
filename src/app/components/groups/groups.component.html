@@ -3,66 +3,66 @@
         <div class="row justify-content-center">
             <div class="col-12 colsm-12 col-md-12 col-lg-12">
 
-                <!--Card-->
-                <mdb-card cascade="true" narrower="true">
+                <div class="card card-cascade narrower rounded-all z-depth-3">
 
                     <div class="view view-cascade gradient-card-header green-seven-one">
-                        <h2 class="card-header-title mb-2">Groups</h2>
+                        <h2 class="card-header-title mb-2">Grupos</h2>
                     </div>
 
-                    <mdb-card-body cascade="true">
 
-                        <mdb-card-text>
+                    <!-- Card content -->
+                    <div class="card-body card-body-cascade text-center">
 
-                            <div class="container-fluid mt-3">
+                        <div class="container-fluid mt-3">
 
-                                <div class="row justify-content-center">
+                            <div class="row justify-content-center">
 
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3 mb-5" *ngFor="let group of groups; let i = index">
-                                        <mdb-card>
-                                            <mdb-card-body class="blue-seven-one white-text">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3 mb-5"
+                                    *ngFor="let group of groups; let i = index">
 
-                                                <div class="row d-flex justify-content-between">
-                                                    <div class="col-12">
-                                                        <h4><strong>${{group.initialInvertion}}</strong></h4>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <mdb-icon fas icon="money-bill-alt" size="2x"></mdb-icon>
-                                                    </div>
+                                    <div class="card rounded-all">
+                                        <div class="card-body blue-seven-one white-text rounded-all hoverable">
+
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-12">
+                                                    <h4><strong>${{group.initialInvertion}}</strong></h4>
                                                 </div>
-
-                                                <p>Number of people playing: {{group.totalMembers}}</p>
-
-                                                <div class="text-center">
-                                                    <button mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2" (click)="validateMemberIsNotAlreadyRegistered(group._id)">View</button>
-                                                    <button *ngIf="!userIsAdmin" mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2" (click)="showPaymentModal(group)">Buy</button>
+                                                <div class="col-12">
+                                                    <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
                                                 </div>
+                                            </div>
 
-                                            </mdb-card-body>
-                                        </mdb-card>
+                                            <p>Number of people playing: {{group.totalMembers}}</p>
+
+                                            <div class="text-center">
+                                                <button mdbBtn rounded="true" size="sm"
+                                                    class="green-seven-one white-text mt-2"
+                                                    (click)="validateMemberIsNotAlreadyRegistered(group._id)">View</button>
+                                                <button *ngIf="!userIsAdmin" mdbBtn rounded="true" size="sm"
+                                                    class="green-seven-one white-text mt-2"
+                                                    (click)="showPaymentModal(group)">Buy</button>
+                                            </div>
+
+                                        </div>
                                     </div>
-
                                 </div>
 
                             </div>
 
+                        </div>
 
-                        </mdb-card-text>
 
-                    </mdb-card-body>
-                    <!--/.Card content-->
+                    </div>
 
-                </mdb-card>
-                <!--/.Card-->
-
+                </div>
             </div>
-
         </div>
     </div>
 
 </section>
 
-<div mdbModal #paymentModal="mdbModal" class="modal fade" id="paymentModalModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div mdbModal #paymentModal="mdbModal" class="modal fade" id="paymentModalModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body background-footer">
@@ -99,7 +99,7 @@
 
                                 </mdb-card-text>
                             </mdb-card-body>
-                          <ngx-paypal [config]="payPalConfig" class="mb-3 ml-3 mr-3"></ngx-paypal>
+                            <ngx-paypal [config]="payPalConfig" class="mb-3 ml-3 mr-3"></ngx-paypal>
                         </mdb-card>
                     </div>
                 </div>
