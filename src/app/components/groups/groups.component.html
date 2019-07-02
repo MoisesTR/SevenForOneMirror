@@ -69,9 +69,41 @@
 
                 <div class="row justify-content-center">
 
-                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 white">
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 white mt-2">
+                        <h2 class="font-weight-bold blue-seven-one-text product-name mb-3 mt-2">
+                            <strong>{{user.firstName}} {{user.lastName}}</strong>
+                        </h2>
 
-                        <mdb-card>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product name</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><strong> Game 7 x 1 </strong></td>
+                                    <td><strong> ${{groupSelectedPayModal.initialInvertion}} </strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row justify-content-center">
+                            <div class="col-6 mb-2">
+                                <ngx-paypal [config]="payPalConfig" class="mb-3 ml-5 mr-5"></ngx-paypal>
+                            </div>
+                            <div class="col-5 mb-2">
+                                <button mdbBtn type="button" block="true" rounded="true"
+                                    class="mb-3 ml-3 mr-3 blue-paypal z-depth-0" mdbWavesEffect>Créditos 7 x 1</button>
+                            </div>
+                        </div>
+
+
+
+                        <!-- <mdb-card>
                             <mdb-card-body>
                                 <mdb-card-title>
                                     <h2 class="font-weight-bold green-seven-one-text product-name mb-3">
@@ -99,8 +131,8 @@
 
                                 </mdb-card-text>
                             </mdb-card-body>
-                            <ngx-paypal [config]="payPalConfig" class="mb-3 ml-3 mr-3"></ngx-paypal>
-                        </mdb-card>
+                            
+                        </mdb-card> -->
                     </div>
                 </div>
 
