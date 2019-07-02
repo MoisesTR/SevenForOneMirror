@@ -15,17 +15,15 @@
 
                     <div class="col-10 col-md-9 col-lg-9">
 
-                        <mdb-card>
-                            <mdb-card-body>
-
-                                <mdb-card-title>
+                            <div class="card rounded-all z-depth-3">
+                                <div class="card-body">
                                     <h1 class="display-4 text-center font-weight-bold">Sign in</h1>
-
+    
                                     <div class="col-12 text-center mb-3">
                                         <div class="row">
                                             <div class="col-12">
-                                                <a type="button" mdbBtn floating="true" size="lg"
-                                                    class="btn-fb waves-light" mdbTooltip="Facebook" placement="left"
+                                                <a type="button" mdbBtn floating="true" size="lg" class="btn-fb waves-light"
+                                                    mdbTooltip="Facebook" placement="left"
                                                     (click)="socialSignIn('facebook')" mdbWavesEffect><i
                                                         class="fab fa-facebook-f"></i></a>
                                                 <a type="button" mdbBtn floating="true" size="lg"
@@ -35,25 +33,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                </mdb-card-title>
-
-                                <mdb-card-text>
-
+    
+    
                                     <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12">
-
+    
                                         <div class="text-center mt-1">
                                             <h6>or use your account</h6>
                                         </div>
-
+    
                                         <!-- Username -->
                                         <div class="md-form md-outline">
                                             <mdb-icon fas icon="user"></mdb-icon>
-                                            <input type="text" id="user" class="form-control" name="user"
-                                                autocomplete="off" formControlName="user" mdbInput>
+                                            <input type="text" id="user" class="form-control" name="user" autocomplete="off"
+                                                formControlName="user" mdbInput>
                                             <label for="user">Username or Email</label>
                                             <show-errors [control]="userForm.controls['user']"></show-errors>
                                         </div>
-
+    
                                         <!-- Password -->
                                         <div class="md-form md-outline">
                                             <mdb-icon fas icon="lock"></mdb-icon>
@@ -62,15 +58,15 @@
                                             <label for="password">Password</label>
                                             <show-errors [control]="userForm.controls['password']"></show-errors>
                                         </div>
-
+    
                                         <div class="text-center mt-3">
                                             <!-- Forgot password -->
                                             <a (click)="forgotPassword.show()" class="green-seven-one-text">
                                                 <h5>Forgot password?</h5>
                                             </a>
-
+    
                                         </div>
-
+    
                                         <div class="mt-3 text-center">
                                             <!-- Sign in button -->
                                             <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
@@ -78,10 +74,8 @@
                                                 in</button>
                                         </div>
                                     </form>
-
-                                </mdb-card-text>
-                            </mdb-card-body>
-                        </mdb-card>
+                                </div>
+                            </div>
                     </div>
 
                 </div>
