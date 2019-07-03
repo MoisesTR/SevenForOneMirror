@@ -16,6 +16,7 @@ import {ParticlesModule} from 'angular-particle';
 import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import {environment} from '../environments/environment';
 import {MdbFileUploadModule} from "mdb-file-upload";
+import {LockedScreenComponent} from "./components/locked-screen/locked-screen.component";
 
 // Configs
 export function getAuthServiceConfigs() {

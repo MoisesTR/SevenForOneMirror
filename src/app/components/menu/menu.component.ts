@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {UserService} from "../../core/services/shared/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {GroupGame, User} from "../../models/models.index";
@@ -30,6 +30,7 @@ export class MenuComponent implements OnInit {
 	public isUserAdmin = false;
 	public disableUpdateAmounts = false;
 	public currentGroupsUser: GroupGame[] = [];
+	public closeSession = false;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -70,6 +71,7 @@ export class MenuComponent implements OnInit {
 		});
 
 		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
+		  this.closeSession = true;
 			Utils.showMsgInfo('7X1 Esta abierto en otra ventana. Haz click en "USAR AQUI" para abrir 7x1 en esta ventana!');
 			console.log("CLOSE SESSION");
 		});
@@ -229,4 +231,5 @@ export class MenuComponent implements OnInit {
 	onFileRemove() {}
 
 	onFileAdd(event) {}
+
 }
