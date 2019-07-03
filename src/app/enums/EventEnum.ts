@@ -3,6 +3,7 @@ export enum EventEnum {
 	DISCONNECT = "disconnect",
 	REGISTER_USER = "REGISTER_USER",
 	CLOSE_SESSION = "CLOSE_SESSION",
-	GROUP_ACTIVITY = "group-activity",
-  WIN_EVENT = 'win-event'
+	GROUP_ACTIVITY_10 = "group-activity-10",
+  WIN_EVENT = 'WIN-EVENT',
+  PLAYERS_ONLINE = 'PLAYERS_ONLINE'
 }

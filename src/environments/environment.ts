@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiEndpoint: 'http://localhost:3000/api/',
+  socket: 'http://localhost:3000',
   apiEndpointAuth: 'http://localhost:3000/api/auth/',
   paypalClienttId: 'AfDe_RWKoxHwsgbPRCXsuvZDXnIys9hUN56brSbuxZVHdHWHXihW-0IbBeyiTJ7I1aSzYKE_NiRGKI01',
   googleClientId: '380320064033-bs2uivmdsj2fs5v68h2kg57p5k9kgtv7.apps.googleusercontent.com'

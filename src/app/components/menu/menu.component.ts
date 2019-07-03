@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { GroupGame, Token, User } from "../../models/models.index";
+import { GroupGame, User } from "../../models/models.index";
 import { RolService } from "../../core/services/shared/rol.service";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
@@ -12,6 +12,7 @@ import { UpdateMoneyService } from "../../core/services/shared/update-money.serv
 import confetti from "canvas-confetti";
 import { MainSocketService } from "../../core/services/shared/main-socket.service";
 import { EventEnum } from "../../enums/EventEnum";
+import { Utils } from "../../infraestructura/Utils";
 
 declare var $: any;
 
@@ -38,11 +39,11 @@ export class MenuComponent implements OnInit {
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
-		private socketService: MainSocketService
+		private mainSocketService: MainSocketService
 	) {}
 
 	ngOnInit() {
-		// this.initSocket();
+		this.initSocket();
 		this.dropdownAndScroll();
 		this.getCredentialsUser();
 		this.getTotalEarned();
@@ -55,24 +56,30 @@ export class MenuComponent implements OnInit {
 	}
 
 	initSocket() {
-		this.socketService.onEvent(EventEnum.CONNECT).subscribe(() => {
+		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
 			console.log("Evento de conexion");
 
-			// Obtener el nombre del usuario
-			this.socketService.send(EventEnum.REGISTER_USER, "mtrigueros");
+			this.mainSocketService.send(EventEnum.REGISTER_USER, this.authService.getUser().userName);
 		});
 
-		this.socketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
+		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
 			console.log("Evento de desconexion");
 		});
 
-		this.socketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
-			console.log("Close session");
+		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
+			Utils.showMsgInfo('7X1 Esta abierto en otra ventana. Haz click en "USAR AQUI" para abrir 7x1 en esta ventana!');
+			console.log("CLOSE SESSION");
 		});
 
-    this.socketService.onEvent(EventEnum.GROUP_ACTIVITY).subscribe(() => {
-      console.log("Close session");
+    this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe((content) => {
+      Utils.showMsgInfo('Un usuario ha ganado!');
+      console.log(event);
     });
+
+		this.mainSocketService.onEvent(EventEnum.PLAYERS_ONLINE).subscribe(onlineUsers => {
+			console.log("Jugadores en linea");
+			console.log(onlineUsers);
+		});
 	}
 
 	celebration() {

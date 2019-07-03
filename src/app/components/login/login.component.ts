@@ -8,6 +8,8 @@ import {RolService} from "../../core/services/shared/rol.service";
 import {RoleEnum} from "../../enums/RoleEnum";
 import {SocialPlatFormEnum} from "../../enums/SocialPlatFormEnum";
 import {Utils} from "../../infraestructura/Utils";
+import {MainSocketService} from "../../core/services/shared/main-socket.service";
+import {EventEnum} from "../../enums/EventEnum";
 
 @Component({
 	selector: "app-login",
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private rolService: RolService,
-		private socialAuthService: AuthService
+		private socialAuthService: AuthService,
+    private webSocketService: MainSocketService
 	) {
 		this.user = new User();
 	}

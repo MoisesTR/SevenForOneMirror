@@ -12,7 +12,8 @@ export class SocketGroupGameService {
 	private socket;
 
 	constructor() {
-		this.socket = socketIo(environment.apiEndpoint + NameSpaceEnum.groupGame);
+		this.socket = socketIo.connect(environment.socket + '/' + NameSpaceEnum.groupGame);
+
 		this.onEvent(EventEnum.CONNECT).subscribe(() => {
 			console.log("Conectado al namespace de group game");
 		});

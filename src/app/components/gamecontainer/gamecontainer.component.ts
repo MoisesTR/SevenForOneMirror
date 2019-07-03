@@ -8,6 +8,8 @@ import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { GameService } from "../../core/services/shared/game.service";
 import { CircleUser } from "../../models/CircleUser";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { EventEnum } from "../../enums/EventEnum";
 
 @Component({
 	selector: "app-gamecontainer",
@@ -28,12 +30,21 @@ export class GamecontainerComponent implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		private groupService: GroupService,
 		private authService: AuthService,
-		private gameService: GameService
+		private gameService: GameService,
+		private socketGroupGame: SocketGroupGameService
 	) {}
 
 	ngOnInit() {
+		this.initSocketGroupGame();
 		this.getUser();
 		this.getParams();
+	}
+
+	initSocketGroupGame() {
+		this.socketGroupGame.onEvent(EventEnum.GROUP_ACTIVITY_10).subscribe((member) => {
+		  console.log('Actividad grupo 10');
+		  console.log(member);
+    });
 	}
 
 	getParams() {

@@ -1,9 +1,8 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 import * as socketIo from "socket.io-client";
-import { environment } from "../../../../environments/environment";
-import { Observable } from "rxjs";
-import { EventEnum } from "../../../enums/EventEnum";
-import { NameSpaceEnum } from "../../../enums/NameSpaceEnum";
+import {environment} from "../../../../environments/environment";
+import {Observable} from "rxjs";
+import {EventEnum} from "../../../enums/EventEnum";
 
 @Injectable({
 	providedIn: "root"
@@ -12,10 +11,10 @@ export class MainSocketService {
 	private socket;
 
 	constructor() {
-		this.socket = socketIo(environment.apiEndpoint);
+		this.socket = socketIo.connect(environment.socket);
 	}
 
-	public send(evento: EventEnum, payload: string): void {
+	public send(event: EventEnum, payload: string): void {
 		this.socket.emit(event, payload);
 	}
 
@@ -27,11 +26,8 @@ export class MainSocketService {
 
 	public onEvent(event: EventEnum): Observable<any> {
 		return new Observable<EventEnum>(observer => {
-			this.socket.on(event, () => observer.next());
+			this.socket.on(event, (data) => observer.next(data));
 		});
 	}
 
-	public getNameSpace(nameSpace: NameSpaceEnum) {
-		return io(nameSpace);
-	}
 }
