@@ -1,0 +1,10 @@
+.view {
+    min-height: 100vh !important;
+  }
+  
+  @media (max-width: 740px) {
+    .view {
+      height: 100vh;
+    }
+  }
+  
