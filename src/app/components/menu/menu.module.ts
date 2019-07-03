@@ -10,7 +10,7 @@ import { GameComponent } from "../game/game.component";
 import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
 import {NgxPayPalModule} from 'ngx-paypal';
 import { AddGroupsComponent } from '../add-groups/add-groups.component';
-
+import { LockedScreenComponent } from '../locked-screen/locked-screen.component';
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro,  NgxPayPalModule],
 	exports: [MDBBootstrapModulesPro],
@@ -21,7 +21,8 @@ import { AddGroupsComponent } from '../add-groups/add-groups.component';
 		GroupsComponent,
 		GameComponent,
 		GamecontainerComponent,
-		AddGroupsComponent
+		AddGroupsComponent,
+		LockedScreenComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })
