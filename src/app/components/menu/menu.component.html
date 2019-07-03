@@ -9,9 +9,10 @@
         </mdb-navbar-brand>
         <links>
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item active waves-light" mdbWavesEffect>
-                    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-                </li> -->
+                <li class="nav-item active waves-light" mdbWavesEffect>
+                    <a class="nav-link" (click)="basicModal.show(); celebration();">Celebración <span
+                            class="sr-only">(current)</span></a>
+                </li>
             </ul>
             <ul class="navbar-nav nav-flex-icons">
 
@@ -98,21 +99,11 @@
                             <div class="row justify-content-center">
 
                                 <div class="col-5 flex-center align-items-stretch">
-                                    <a (click)="dashBoard()">
+                                    <a (click)="dashBoard()" class="active-menu-dashboard ">
                                         <div class="hover-menu p-4 hoverable">
                                             <mdb-icon fas icon="home" size="2x"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder">
+                                            <div class="mt-1 font-weight-bolder text-wrap">
                                                 Dashboard
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-5 flex-center align-items-stretch">
-                                    <a (click)="basicModal.show(); celebration();">
-                                        <div class="hover-menu p-4 hoverable">
-                                            <mdb-icon fas icon="trophy" size="2x"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder">
-                                                Celebración
                                             </div>
                                         </div>
                                     </a>
@@ -121,14 +112,11 @@
                                     <a (click)="groups()">
                                         <div class="hover-menu p-4 hoverable">
                                             <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder">
+                                            <div class="mt-1 font-weight-bolder text-wrap">
                                                 Grupos
                                             </div>
                                         </div>
                                     </a>
-                                </div>
-                                <div class="col-5">
-                                    <!-- <div class="hover-menu h-100 w-75 p-4 hoverable"> -->
                                 </div>
                             </div>
                         </div>
