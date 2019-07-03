@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private rolService: RolService,
-		private socialAuthService: AuthService,
-    private webSocketService: MainSocketService
+		private socialAuthService: AuthService
 	) {
 		this.user = new User();
 	}
