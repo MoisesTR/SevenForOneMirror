@@ -1,18 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../core/services/shared/user.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { GroupGame, User } from "../../models/models.index";
-import { RolService } from "../../core/services/shared/rol.service";
-import { AuthService } from "../../core/services/auth/auth.service";
-import { PurchaseService } from "../../core/services/shared/purchase.service";
-import { PurchaseHistory } from "../../models/PurchaseHistory";
-import { GroupService } from "../../core/services/shared/group.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
+import {Component, OnInit} from "@angular/core";
+import {UserService} from "../../core/services/shared/user.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {GroupGame, User} from "../../models/models.index";
+import {RolService} from "../../core/services/shared/rol.service";
+import {AuthService} from "../../core/services/auth/auth.service";
+import {PurchaseService} from "../../core/services/shared/purchase.service";
+import {PurchaseHistory} from "../../models/PurchaseHistory";
+import {GroupService} from "../../core/services/shared/group.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {UpdateMoneyService} from "../../core/services/shared/update-money.service";
 import confetti from "canvas-confetti";
-import { MainSocketService } from "../../core/services/shared/main-socket.service";
-import { EventEnum } from "../../enums/EventEnum";
-import { Utils } from "../../infraestructura/Utils";
+import {MainSocketService} from "../../core/services/shared/main-socket.service";
+import {EventEnum} from "../../enums/EventEnum";
+import {Utils} from "../../infraestructura/Utils";
+import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
 
 declare var $: any;
 
@@ -39,11 +40,13 @@ export class MenuComponent implements OnInit {
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
-		private mainSocketService: MainSocketService
+		private mainSocketService: MainSocketService,
+    private gameSocketService: SocketGroupGameService
 	) {}
 
 	ngOnInit() {
 		this.initSocket();
+		this.initSocketGame();
 		this.dropdownAndScroll();
 		this.getCredentialsUser();
 		this.getTotalEarned();
@@ -71,16 +74,23 @@ export class MenuComponent implements OnInit {
 			console.log("CLOSE SESSION");
 		});
 
-    this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe((content) => {
-      Utils.showMsgInfo('Un usuario ha ganado!');
-      console.log(event);
-    });
-
 		this.mainSocketService.onEvent(EventEnum.PLAYERS_ONLINE).subscribe(onlineUsers => {
 			console.log("Jugadores en linea");
 			console.log(onlineUsers);
 		});
 	}
+
+	initSocketGame() {
+    this.gameSocketService.onEvent(EventEnum.WIN_EVENT).subscribe((content) => {
+      Utils.showMsgInfo('Un usuario ha ganado!');
+      console.log(content);
+    });
+
+    this.gameSocketService.onEvent(EventEnum.TOP_WINNER).subscribe((content) => {
+      Utils.showMsgInfo('TOP WINNERS!');
+      console.log(content);
+    });
+  }
 
 	celebration() {
 		const end = Date.now() + 5000;

@@ -15,6 +15,7 @@ import { Global } from "../../core/services/shared/global";
 import swal from "sweetalert2";
 import { environment } from "../../../environments/environment";
 import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { EventEnum } from "../../enums/EventEnum";
 
 @Component({
 	selector: "app-groups",
@@ -102,6 +103,8 @@ export class GroupsComponent implements OnInit {
 				member.payReference = data.id;
 				this.groupService.addMemberToGroup(member, this.groupSelectedPayModal._id).subscribe(() => {
 					swal.fire("Info", "The registration has been successful!", "success").then(() => {
+						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
+
 						this.updateMoneyService.update(true);
 						this.router.navigate(["/game", this.groupSelectedPayModal._id]);
 					});
