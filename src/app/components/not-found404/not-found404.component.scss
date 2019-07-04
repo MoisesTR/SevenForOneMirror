@@ -6,13 +6,15 @@
   overflow: auto !important;
 }
 
-.bg {
-  /* The image used */
-  background-image: url("/assets/images/404.png");
-  /* Full height */
-  height: 100%;
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.btn-seven-one {
+  border: 2px solid black;
+  background-color: transparent;
+  color: black;
+  padding: 14px 28px;
+  cursor: pointer;
+}
+
+.outline-seven-one {
+  border-color: #42d583;
+  color: #42d583;
 }
