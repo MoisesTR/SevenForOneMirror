@@ -3,75 +3,107 @@
         <div class="row justify-content-center">
             <div class="col-12 colsm-12 col-md-12 col-lg-12">
 
-                <!--Card-->
-                <mdb-card cascade="true" narrower="true">
+                <div class="card card-cascade narrower rounded-all z-depth-3">
 
                     <div class="view view-cascade gradient-card-header green-seven-one">
-                        <h2 class="card-header-title mb-2">Groups</h2>
+                        <h2 class="card-header-title mb-2">Grupos</h2>
                     </div>
 
-                    <mdb-card-body cascade="true">
 
-                        <mdb-card-text>
+                    <!-- Card content -->
+                    <div class="card-body card-body-cascade text-center">
 
-                            <div class="container-fluid mt-3">
+                        <div class="container-fluid mt-3">
 
-                                <div class="row justify-content-center">
+                            <div class="row justify-content-center">
 
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3 mb-5" *ngFor="let group of groups; let i = index">
-                                        <mdb-card>
-                                            <mdb-card-body class="blue-seven-one white-text">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3 mb-5"
+                                    *ngFor="let group of groups; let i = index">
 
-                                                <div class="row d-flex justify-content-between">
-                                                    <div class="col-12">
-                                                        <h4><strong>${{group.initialInvertion}}</strong></h4>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <mdb-icon fas icon="money-bill-alt" size="2x"></mdb-icon>
-                                                    </div>
+                                    <div class="card rounded-all">
+                                        <div class="card-body blue-seven-one white-text rounded-all">
+
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-12">
+                                                    <h4><strong>${{group.initialInvertion}}</strong></h4>
                                                 </div>
-
-                                                <p>Number of people playing: {{group.totalMembers}}</p>
-
-                                                <div class="text-center">
-                                                    <button mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2" (click)="validateMemberIsNotAlreadyRegistered(group._id)">View</button>
-                                                    <button *ngIf="!userIsAdmin" mdbBtn rounded="true" size="sm" class="green-seven-one white-text mt-2" (click)="showPaymentModal(group)">Buy</button>
+                                                <div class="col-12">
+                                                    <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
                                                 </div>
+                                            </div>
 
-                                            </mdb-card-body>
-                                        </mdb-card>
+                                            <p>Cantidad de jugadores: {{group.totalMembers}}</p>
+
+                                            <div class="text-center">
+                                                <button mdbBtn rounded="true" size="sm"
+                                                    class="green-seven-one white-text mt-2"
+                                                    (click)="validateMemberIsNotAlreadyRegistered(group._id)">Visualizar</button>
+                                                <button *ngIf="!userIsAdmin" mdbBtn rounded="true" size="sm"
+                                                    class="green-seven-one white-text mt-2"
+                                                    (click)="showPaymentModal(group)">Comprar</button>
+                                            </div>
+
+                                        </div>
                                     </div>
-
                                 </div>
 
                             </div>
 
+                        </div>
 
-                        </mdb-card-text>
 
-                    </mdb-card-body>
-                    <!--/.Card content-->
+                    </div>
 
-                </mdb-card>
-                <!--/.Card-->
-
+                </div>
             </div>
-
         </div>
     </div>
 
 </section>
 
-<div mdbModal #paymentModal="mdbModal" class="modal fade" id="paymentModalModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div mdbModal #paymentModal="mdbModal" class="modal fade" id="paymentModalModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body background-footer">
 
                 <div class="row justify-content-center">
 
-                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 white">
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 white mt-2">
+                        <h2 class="font-weight-bold blue-seven-one-text product-name mb-3 mt-2">
+                            <strong>{{user.firstName}} {{user.lastName}}</strong>
+                        </h2>
 
-                        <mdb-card>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product name</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><strong> Game 7 x 1 </strong></td>
+                                    <td><strong> ${{groupSelectedPayModal.initialInvertion}} </strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row justify-content-center">
+                            <div class="col-6 mb-2">
+                                <ngx-paypal [config]="payPalConfig" class="mb-3 ml-5 mr-5"></ngx-paypal>
+                            </div>
+                            <div class="col-5 mb-2">
+                                <button mdbBtn type="button" block="true" rounded="true"
+                                    class="mb-3 ml-3 mr-3 blue-paypal z-depth-0" mdbWavesEffect>Créditos 7 x 1</button>
+                            </div>
+                        </div>
+
+
+
+                        <!-- <mdb-card>
                             <mdb-card-body>
                                 <mdb-card-title>
                                     <h2 class="font-weight-bold green-seven-one-text product-name mb-3">
@@ -99,8 +131,8 @@
 
                                 </mdb-card-text>
                             </mdb-card-body>
-                          <ngx-paypal [config]="payPalConfig" class="mb-3 ml-3 mr-3"></ngx-paypal>
-                        </mdb-card>
+                            
+                        </mdb-card> -->
                     </div>
                 </div>
 
