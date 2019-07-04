@@ -1,5 +1,5 @@
 <section *ngIf="isUserAdmin; else userContent">
-    <div class="container-fluid">
+    <div class="container-fluid mt-4">
         <div class="row justify-content-center">
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -126,36 +126,35 @@
 
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
 
-            <!--Card-->
-            <mdb-card cascade="true" narrower="true">
+
+            <div class="card card-cascade narrower rounded-all">
 
                 <div class="view view-cascade gradient-card-header green-seven-one">
-                    <h1 class="card-header-title mb-2">Welcome</h1>
+                    <h1 class="card-header-title mb-2">Bienvenidos</h1>
                 </div>
 
-                <mdb-card-body cascade="true">
+                <!-- Card content -->
+                <div class="card-body card-body-cascade text-center">
 
-                    <mdb-card-text>
+                    <div class="container-fluid mt-3">
 
-                        <div class="container-fluid mt-3">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
 
-                            <div class="d-flex flex-column justify-content-center align-items-center">
+                            <h1 class="h1-responsive font-weight-bold blue-seven-one-text mb-0 wow fadeIn text-center"
+                                data-wow-delay="0.2s">¿Y tú, qué esperas para JUGAR Y GANAR?</h1>
 
-                                <h1 class="h1-responsive font-weight-bold blue-seven-one-text mb-0 wow fadeInDown"
-                                    data-wow-delay="0.2s">We are waiting for you to play</h1>
-                                <img src="assets/images/dashboard.png" class="img-fluid wow fadeIn"
-                                    data-wow-delay="0.2s" alt="dashboard user">
-                            </div>
-
+                            <button mdbBtn rounded="true" size="lg"
+                                class="green-seven-one white-text mt-3 wow fadeIn"
+                                (click)="groupsDashboard()">Jugar</button>
+                            <img src="assets/images/dashboard.png" class="img-fluid wow fadeIn"
+                                data-wow-delay="0.2s" alt="dashboard user">
                         </div>
 
-                    </mdb-card-text>
+                    </div>
 
-                </mdb-card-body>
-                <!--/.Card content-->
+                </div>
 
-            </mdb-card>
-            <!--/.Card-->
+            </div>
 
         </div>
     </div>

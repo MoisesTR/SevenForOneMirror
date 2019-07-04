@@ -77,4 +77,8 @@ export class DashboardComponent implements OnInit {
   viewGroupUsers(groupId) {
     this.router.navigate(['/game', groupId]);
   }
+
+  groupsDashboard() {
+		this.router.navigate(["/groups"]);
+	}
 }
