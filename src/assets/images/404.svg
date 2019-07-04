@@ -4,45 +4,45 @@
       <g id="Diamond" opacity="0.5">
         <circle id="Elipse_1" data-name="Elipse 1" cx="22" cy="22" r="22" transform="translate(241.822 344.559)" fill="#42d583"/>
         <circle id="Elipse_2" data-name="Elipse 2" cx="22" cy="22" r="22" transform="translate(335.818 240.557)" fill="#42d583"/>
-        <circle id="Elipse_3" data-name="Elipse 3" cx="16.5" cy="16.5" r="16.5" transform="translate(757.822 278.559)" fill="#fff"/>
+        <circle id="Elipse_3" data-name="Elipse 3" cx="16.5" cy="16.5" r="16.5" transform="translate(757.822 278.559)" fill="#216fce"/>
         <circle id="Elipse_4" data-name="Elipse 4" cx="10" cy="10" r="10" transform="translate(997.822 336.559)" fill="#00a54a"/>
         <circle id="Elipse_5" data-name="Elipse 5" cx="10" cy="10" r="10" transform="translate(477.822 177.559)" fill="#0c4167"/>
-        <g id="Elipse_6" data-name="Elipse 6" transform="translate(475.98 306.391)" fill="none" stroke="#ff3e32" stroke-width="50">
+        <g id="Elipse_6" data-name="Elipse 6" transform="translate(475.98 306.391)" fill="none" stroke="#216fce" stroke-width="50">
           <circle cx="28" cy="28" r="28" stroke="none"/>
           <circle cx="28" cy="28" r="3" fill="none"/>
         </g>
         <circle id="Elipse_7" data-name="Elipse 7" cx="18" cy="18" r="18" transform="translate(868.822 312.559)" fill="#34bf6c"/>
         <circle id="Elipse_8" data-name="Elipse 8" cx="28" cy="28" r="28" transform="translate(601.822 187.559)" fill="#0eb049"/>
-        <circle id="Elipse_9" data-name="Elipse 9" cx="28" cy="28" r="28" transform="translate(935.822 183.559)" fill="#fff"/>
+        <path id="Trazado_12" data-name="Trazado 12" d="M28,0A28,28,0,1,1,0,28,28,28,0,0,1,28,0Z" transform="translate(935.822 183.559)" fill="#216fce"/>
       </g>
-      <path id="Trazado_6" data-name="Trazado 6" d="M3,0H33a3,3,0,0,1,3,3h0a3,3,0,0,1-3,3H3A3,3,0,0,1,0,3H0A3,3,0,0,1,3,0Z" transform="translate(142.509 512.965)" fill="#ff3b2f"/>
+      <path id="Trazado_6" data-name="Trazado 6" d="M3,0H33a3,3,0,0,1,3,3h0a3,3,0,0,1-3,3H3A3,3,0,0,1,0,3H0A3,3,0,0,1,3,0Z" transform="translate(142.509 512.965)" fill="#34bf6c"/>
       <rect id="Rectángulo_2" data-name="Rectángulo 2" width="36" height="6" rx="3" transform="translate(228.509 440.965)" fill="#0eb049"/>
       <rect id="Rectángulo_3" data-name="Rectángulo 3" width="36" height="6" rx="3" transform="translate(1052.509 468.965)" fill="#34bf6c"/>
       <rect id="Rectángulo_4" data-name="Rectángulo 4" width="32" height="6" rx="3" transform="translate(181.509 398.965)" fill="#0eb049"/>
       <rect id="Rectángulo_5" data-name="Rectángulo 5" width="32" height="6" rx="3" transform="translate(408.509 332.965)" fill="#0eb049"/>
       <rect id="Rectángulo_6" data-name="Rectángulo 6" width="32" height="6" rx="3" transform="translate(544.509 306.965)" fill="#0b56af"/>
-      <rect id="Rectángulo_7" data-name="Rectángulo 7" width="32" height="6" rx="3" transform="translate(479.509 241.965)" fill="#ff3b2f"/>
+      <rect id="Rectángulo_7" data-name="Rectángulo 7" width="32" height="6" rx="3" transform="translate(479.509 241.965)" fill="#017bff"/>
       <path id="Trazado_2" data-name="Trazado 2" d="M3,0H29a3,3,0,0,1,3,3h0a3,3,0,0,1-3,3H3A3,3,0,0,1,0,3H0A3,3,0,0,1,3,0Z" transform="translate(727.509 216.965)" fill="#0b56af"/>
       <rect id="Rectángulo_9" data-name="Rectángulo 9" width="32" height="6" rx="3" transform="translate(854.509 265.965)" fill="#0eb049"/>
       <g id="Grupo_1" data-name="Grupo 1">
         <g id="Trazado_1" data-name="Trazado 1" fill="none">
           <path d="M750.259,509.559a126.039,126.039,0,1,1-126-126A126,126,0,0,1,750.259,509.559Z" stroke="none"/>
-          <path d="M 624.2589721679688 433.5589599609375 C 611.3956909179688 433.5589599609375 599.205810546875 436.6426391601563 588.024169921875 442.7262573242188 C 585.1377563476563 444.2963256835938 582.3238525390625 446.073974609375 579.657958984375 448.01171875 C 559.7035522460938 462.5137329101563 548.259033203125 484.9468994140625 548.259033203125 509.5589904785156 C 548.259033203125 551.465576171875 582.3524780273438 585.5589599609375 624.2589721679688 585.5589599609375 C 666.16552734375 585.5589599609375 700.2589721679688 551.465576171875 700.2589721679688 509.5589904785156 C 700.2589721679688 467.6524047851563 666.16552734375 433.5589599609375 624.2589721679688 433.5589599609375 M 624.2589721679688 383.5589599609375 C 693.846923828125 383.5589599609375 750.2589111328125 439.9710083007813 750.2589111328125 509.5589904785156 C 750.2589111328125 579.14697265625 693.846923828125 635.5589599609375 624.2589721679688 635.5589599609375 C 554.6710205078125 635.5589599609375 498.259033203125 579.14697265625 498.259033203125 509.5589904785156 C 498.259033203125 467.6209716796875 518.7490234375 430.468017578125 550.2630615234375 407.5650024414063 C 554.677978515625 404.3560180664063 559.31005859375 401.427001953125 564.1320190429688 398.8040161132813 C 582.0009765625 389.0819702148438 602.4849243164063 383.5589599609375 624.2589721679688 383.5589599609375 Z" stroke="none" fill="#ff3547"/>
+          <path d="M 624.2589721679688 433.5589599609375 C 611.3956909179688 433.5589599609375 599.205810546875 436.6426391601563 588.024169921875 442.7262573242188 C 585.1377563476563 444.2963256835938 582.3238525390625 446.073974609375 579.657958984375 448.01171875 C 559.7035522460938 462.5137329101563 548.259033203125 484.9468994140625 548.259033203125 509.5589904785156 C 548.259033203125 551.465576171875 582.3524780273438 585.5589599609375 624.2589721679688 585.5589599609375 C 666.16552734375 585.5589599609375 700.2589721679688 551.465576171875 700.2589721679688 509.5589904785156 C 700.2589721679688 467.6524047851563 666.16552734375 433.5589599609375 624.2589721679688 433.5589599609375 M 624.2589721679688 383.5589599609375 C 693.846923828125 383.5589599609375 750.2589111328125 439.9710083007813 750.2589111328125 509.5589904785156 C 750.2589111328125 579.14697265625 693.846923828125 635.5589599609375 624.2589721679688 635.5589599609375 C 554.6710205078125 635.5589599609375 498.259033203125 579.14697265625 498.259033203125 509.5589904785156 C 498.259033203125 467.6209716796875 518.7490234375 430.468017578125 550.2630615234375 407.5650024414063 C 554.677978515625 404.3560180664063 559.31005859375 401.427001953125 564.1320190429688 398.8040161132813 C 582.0009765625 389.0819702148438 602.4849243164063 383.5589599609375 624.2589721679688 383.5589599609375 Z" stroke="none" fill="#017bff"/>
         </g>
-        <rect id="Rectángulo_10" data-name="Rectángulo 10" width="75" height="30" rx="14.999" transform="translate(486.509 408.965)" fill="#ff3b2f"/>
-        <rect id="Rectángulo_11" data-name="Rectángulo 11" width="36" height="6" rx="3" transform="translate(695.509 586.965)" fill="#ff3b2f"/>
-        <rect id="Rectángulo_12" data-name="Rectángulo 12" width="36" height="6" rx="3" transform="translate(689.509 597.965)" fill="#ff3b2f"/>
-        <rect id="Rectángulo_13" data-name="Rectángulo 13" width="36" height="6" rx="3" transform="translate(678.509 608.965)" fill="#ff3b2f"/>
+        <rect id="Rectángulo_10" data-name="Rectángulo 10" width="75" height="30" rx="14.999" transform="translate(486.509 408.965)" fill="#017bff"/>
+        <rect id="Rectángulo_11" data-name="Rectángulo 11" width="36" height="6" rx="3" transform="translate(695.509 586.965)" fill="#34bf6c"/>
+        <rect id="Rectángulo_12" data-name="Rectángulo 12" width="36" height="6" rx="3" transform="translate(689.509 597.965)" fill="#34bf6c"/>
+        <rect id="Rectángulo_13" data-name="Rectángulo 13" width="36" height="6" rx="3" transform="translate(678.509 608.965)" fill="#34bf6c"/>
         <rect id="Rectángulo_14" data-name="Rectángulo 14" width="24" height="6" rx="3" transform="translate(740.509 608.965)" fill="#34bf6c"/>
         <rect id="Rectángulo_15" data-name="Rectángulo 15" width="16" height="3" rx="1.5" transform="translate(757.509 591.965)" fill="#34bf6c"/>
-        <rect id="Rectángulo_16" data-name="Rectángulo 16" width="14" height="6" rx="3" transform="translate(718.509 608.965)" fill="#ff3b2f"/>
+        <rect id="Rectángulo_16" data-name="Rectángulo 16" width="14" height="6" rx="3" transform="translate(718.509 608.965)" fill="#34bf6c"/>
       </g>
       <g id="yellow_line" data-name="yellow line">
-        <rect id="Rectángulo_17" data-name="Rectángulo 17" width="42" height="8" rx="4" transform="translate(500.509 584.965)" fill="#ff3b2f"/>
-        <rect id="Rectángulo_18" data-name="Rectángulo 18" width="42" height="8" rx="4" transform="translate(503.509 556.965)" fill="#ff3b2f"/>
+        <rect id="Rectángulo_17" data-name="Rectángulo 17" width="42" height="8" rx="4" transform="translate(500.509 584.965)" fill="#34bf6c"/>
+        <rect id="Rectángulo_18" data-name="Rectángulo 18" width="42" height="8" rx="4" transform="translate(503.509 556.965)" fill="#34bf6c"/>
         <rect id="Rectángulo_19" data-name="Rectángulo 19" width="36" height="6" rx="3" transform="translate(487.509 564.965)" fill="#fff"/>
         <rect id="Rectángulo_20" data-name="Rectángulo 20" width="42" height="6" rx="3" transform="translate(489.509 578.965)" fill="#fff"/>
-        <rect id="Rectángulo_21" data-name="Rectángulo 21" width="73" height="8" rx="4" transform="translate(488.509 570.965)" fill="#ff3b2f"/>
+        <rect id="Rectángulo_21" data-name="Rectángulo 21" width="73" height="8" rx="4" transform="translate(488.509 570.965)" fill="#34bf6c"/>
       </g>
       <g id="_4_Orenge" data-name="4 Orenge">
         <g id="greenlines">
@@ -56,14 +56,14 @@
           </g>
         </g>
         <g id="yellow_line-3" data-name="yellow line">
-          <rect id="Rectángulo_28" data-name="Rectángulo 28" width="28" height="25" transform="translate(407.509 491.965)" fill="#ff3b2f"/>
+          <rect id="Rectángulo_28" data-name="Rectángulo 28" width="28" height="25" transform="translate(407.509 491.965)" fill="#017bff"/>
           <rect id="Rectángulo_29" data-name="Rectángulo 29" width="42" height="8" rx="4" transform="translate(426.509 492.965)" fill="#fff"/>
           <rect id="Rectángulo_30" data-name="Rectángulo 30" width="42" height="9" rx="4.5" transform="translate(421.509 508.965)" fill="#fff"/>
-          <rect id="Rectángulo_31" data-name="Rectángulo 31" width="42" height="8" rx="4" transform="translate(399.509 484.965)" fill="#ff3b2f"/>
-          <rect id="Rectángulo_32" data-name="Rectángulo 32" width="73" height="8" rx="4" transform="translate(377.509 500.965)" fill="#ff3b2f"/>
+          <rect id="Rectángulo_31" data-name="Rectángulo 31" width="42" height="8" rx="4" transform="translate(399.509 484.965)" fill="#017bff"/>
+          <rect id="Rectángulo_32" data-name="Rectángulo 32" width="73" height="8" rx="4" transform="translate(377.509 500.965)" fill="#017bff"/>
         </g>
-        <rect id="Rectángulo_33" data-name="Rectángulo 33" width="75" height="30" rx="14.999" transform="translate(199.509 515.965)" fill="#ff3b2f"/>
-        <rect id="Rectángulo_34" data-name="Rectángulo 34" width="58" height="16" rx="8" transform="translate(331.509 589.965)" fill="#ff3b2f"/>
+        <rect id="Rectángulo_33" data-name="Rectángulo 33" width="75" height="30" rx="14.999" transform="translate(199.509 515.965)" fill="#017bff"/>
+        <rect id="Rectángulo_34" data-name="Rectángulo 34" width="58" height="16" rx="8" transform="translate(331.509 589.965)" fill="#017bff"/>
         <g id="yellow_line-4" data-name="yellow line">
           <rect id="Rectángulo_35" data-name="Rectángulo 35" width="28" height="32" transform="translate(320.509 401.965)" fill="#0b56af"/>
           <rect id="Rectángulo_36" data-name="Rectángulo 36" width="42" height="8" rx="4" transform="translate(339.509 402.965)" fill="#0d993b"/>
@@ -91,14 +91,14 @@
           </g>
         </g>
         <g id="yellow_line-6" data-name="yellow line">
-          <path id="Trazado_5" data-name="Trazado 5" d="M0,0H28V25H0Z" transform="translate(842.509 516.965) rotate(-180)" fill="#ff3547"/>
+          <path id="Trazado_5" data-name="Trazado 5" d="M0,0H28V25H0Z" transform="translate(842.509 516.965) rotate(-180)" fill="#017bff"/>
           <rect id="Rectángulo_52" data-name="Rectángulo 52" width="42" height="8" rx="4" transform="translate(823.509 500.965) rotate(-180)" fill="#fff"/>
           <rect id="Rectángulo_53" data-name="Rectángulo 53" width="42" height="9" rx="4.5" transform="translate(828.509 517.965) rotate(-180)" fill="#fff"/>
-          <rect id="Rectángulo_54" data-name="Rectángulo 54" width="42" height="8" rx="4" transform="translate(850.509 492.965) rotate(-180)" fill="#ff3547"/>
-          <rect id="Rectángulo_55" data-name="Rectángulo 55" width="73" height="8" rx="4" transform="translate(872.509 508.965) rotate(-180)" fill="#ff3547"/>
+          <rect id="Rectángulo_54" data-name="Rectángulo 54" width="42" height="8" rx="4" transform="translate(850.509 492.965) rotate(-180)" fill="#017bff"/>
+          <rect id="Rectángulo_55" data-name="Rectángulo 55" width="73" height="8" rx="4" transform="translate(872.509 508.965) rotate(-180)" fill="#017bff"/>
         </g>
-        <rect id="Rectángulo_56" data-name="Rectángulo 56" width="75" height="30" rx="14.999" transform="translate(1050.509 545.965) rotate(-180)" fill="#ff3b2f"/>
-        <rect id="Rectángulo_57" data-name="Rectángulo 57" width="58" height="16" rx="8" transform="translate(918.509 605.965) rotate(180)" fill="#ff3b2f"/>
+        <rect id="Rectángulo_56" data-name="Rectángulo 56" width="75" height="30" rx="14.999" transform="translate(1050.509 545.965) rotate(-180)" fill="#017bff"/>
+        <rect id="Rectángulo_57" data-name="Rectángulo 57" width="58" height="16" rx="8" transform="translate(918.509 605.965) rotate(180)" fill="#017bff"/>
         <rect id="Rectángulo_58" data-name="Rectángulo 58" width="40" height="12" rx="6" transform="translate(1024.509 405.965) rotate(180)" fill="#216fce"/>
         <g id="yellow_line-7" data-name="yellow line">
           <rect id="Rectángulo_59" data-name="Rectángulo 59" width="28" height="32" transform="translate(929.509 433.965) rotate(-180)" fill="#42d583"/>
@@ -126,7 +126,7 @@
         <rect id="Rectángulo_76" data-name="Rectángulo 76" width="51" height="6" rx="2.793" transform="translate(624.509 323.965)" fill="#34bf6c"/>
         <rect id="Rectángulo_77" data-name="Rectángulo 77" width="29" height="6" rx="2.793" transform="translate(622.509 317.965)" fill="#fff"/>
       </g>
-      <rect id="Rectángulo_78" data-name="Rectángulo 78" width="20" height="8" rx="4" transform="translate(750.509 356.965)" fill="#ff3b2f"/>
+      <rect id="Rectángulo_78" data-name="Rectángulo 78" width="20" height="8" rx="4" transform="translate(750.509 356.965)" fill="#017bff"/>
     </g>
   </g>
 </svg>
