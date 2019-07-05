@@ -34,4 +34,11 @@ export class MainSocketService {
 		});
 	}
 
+	public closeSocket() {
+	  if (this.socket) {
+	    console.log('Cerrando conexion socket principal')
+	    this.socket.close();
+    }
+  }
+
 }

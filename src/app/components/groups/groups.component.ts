@@ -53,6 +53,7 @@ export class GroupsComponent implements OnInit {
 	}
 
 	initSocketGame() {
+	  this.socketGroupGame.connect();
   }
 
 	getGroups() {

@@ -40,7 +40,9 @@ export class GamecontainerComponent implements OnInit {
 		this.getParams();
 	}
 
-	initSocketGroupGame() {}
+	initSocketGroupGame() {
+	  this.socketGroupGame.connect();
+  }
 
 	getParams() {
 		this.activatedRoute.params.subscribe((params: Params) => {

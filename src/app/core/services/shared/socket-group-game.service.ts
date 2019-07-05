@@ -11,8 +11,10 @@ import { NameSpaceEnum } from "../../../enums/NameSpaceEnum";
 export class SocketGroupGameService {
 	private socket;
 
-	constructor() {
-		this.socket = socketIo.connect(environment.socket + '/' + NameSpaceEnum.groupGame);
+	constructor() {}
+
+	public connect() {
+		this.socket = socketIo.connect(environment.socket + "/" + NameSpaceEnum.groupGame);
 
 		this.onEvent(EventEnum.CONNECT).subscribe(() => {
 			console.log("Conectado al namespace de group game");
@@ -26,15 +28,22 @@ export class SocketGroupGameService {
 		this.socket.emit(event, payload);
 	}
 
-	public onEvent(event: EventEnum ): Observable<any> {
+	public onEvent(event: EventEnum): Observable<any> {
 		return new Observable<EventEnum>(observer => {
-			this.socket.on(event, (data) => observer.next(data));
+			this.socket.on(event, data => observer.next(data));
 		});
 	}
 
-  public onEventGroup(event: string): Observable<any> {
-    return new Observable<String>(observer => {
-      this.socket.on(event, (data) => observer.next(data));
-    });
+	public onEventGroup(event: string): Observable<any> {
+		return new Observable<String>(observer => {
+			this.socket.on(event, data => observer.next(data));
+		});
+	}
+
+  public closeSocket() {
+    if (this.socket) {
+      console.log('Cerrando conexion socket secundario')
+      this.socket.close();
+    }
   }
 }

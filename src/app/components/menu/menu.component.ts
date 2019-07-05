@@ -13,6 +13,7 @@ import confetti from "canvas-confetti";
 import { MainSocketService } from "../../core/services/shared/main-socket.service";
 import { EventEnum } from "../../enums/EventEnum";
 import { Utils } from "../../infraestructura/Utils";
+import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
 
 declare var $: any;
 
@@ -40,7 +41,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
-		private mainSocketService: MainSocketService
+		private mainSocketService: MainSocketService,
+    private gameSocketService: SocketGroupGameService
 	) {}
 
 	ngOnInit() {
@@ -223,9 +225,15 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	logout() {
 		localStorage.clear();
+		this.closeSockets();
 		this.usuarioService.identity = null;
 		this.router.navigate(["/login"]);
 	}
+
+	closeSockets() {
+	  this.mainSocketService.closeSocket();
+    this.gameSocketService.closeSocket();
+  }
 
 	onActivate(edvent) {
 		window.scroll(0, 0);
