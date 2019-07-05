@@ -207,6 +207,9 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	getGroupsCurrentUser() {
 		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(groups => {
+		  if (groups) {
+		    this.gameSocketService.connect();
+      }
 			this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
 		});
 	}
