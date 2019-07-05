@@ -31,4 +31,10 @@ export class SocketGroupGameService {
 			this.socket.on(event, (data) => observer.next(data));
 		});
 	}
+
+  public onEventGroup(event: string): Observable<any> {
+    return new Observable<String>(observer => {
+      this.socket.on(event, (data) => observer.next(data));
+    });
+  }
 }

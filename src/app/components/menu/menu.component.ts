@@ -13,7 +13,6 @@ import confetti from "canvas-confetti";
 import { MainSocketService } from "../../core/services/shared/main-socket.service";
 import { EventEnum } from "../../enums/EventEnum";
 import { Utils } from "../../infraestructura/Utils";
-import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 
 declare var $: any;
 
@@ -45,9 +44,9 @@ export class MenuComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
+		this.getCredentialsUser();
 		this.initSocket();
 		this.dropdownAndScroll();
-		this.getCredentialsUser();
 		this.getTotalEarned();
 
 		this.updateMoneyService.updateMount$.subscribe(update => {
@@ -58,12 +57,17 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	initSocket() {
-	  this.mainSocketService.connect();
+		this.mainSocketService.connect();
 
 		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
 			console.log("Evento de conexion");
 
 			this.mainSocketService.send(EventEnum.REGISTER_USER, this.authService.getUser().userName);
+
+			if (this.isUserAdmin) {
+				console.log("JOIN_ADMIN_ROOM");
+				this.mainSocketService.send(EventEnum.JOIN_ADMIN_ROOM, "");
+			}
 		});
 
 		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {

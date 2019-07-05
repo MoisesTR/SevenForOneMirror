@@ -40,18 +40,15 @@ export class GamecontainerComponent implements OnInit {
 		this.getParams();
 	}
 
-	initSocketGroupGame() {
-		this.socketGroupGame.onEvent(EventEnum.GROUP_ACTIVITY_10).subscribe((member) => {
-		  console.log('Actividad grupo 10');
-		  console.log(member);
-    });
-	}
+	initSocketGroupGame() {}
 
 	getParams() {
 		this.activatedRoute.params.subscribe((params: Params) => {
 			this.idGroup = params["idGroup"];
 
-			this.getMembersGroup(this.idGroup);
+			if (this.idGroup) {
+				this.getMembersGroup(this.idGroup);
+			}
 		});
 	}
 
@@ -63,6 +60,9 @@ export class GamecontainerComponent implements OnInit {
 	getMembersGroup(idGroup) {
 		this.groupService.getGroup(idGroup).subscribe(group => {
 			this.groupSeleccionado = group;
+
+			this.initSocketGroupActivity(group);
+
 			this.members = this.groupSeleccionado.members;
 			this.circleUsers = this.gameService.generateCircles(
 				this.members,
@@ -71,6 +71,14 @@ export class GamecontainerComponent implements OnInit {
 			);
 			this.circleUserPlaying = this.gameService.getCircleUserPlaying(this.circleUsers);
 			// this.circleUserPlaying = this.circleUserPlaying.reverse();
+		});
+	}
+
+	initSocketGroupActivity(group: GroupGame) {
+		console.log(EventEnum.GROUP_ACTIVITY + group.initialInvertion);
+		this.socketGroupGame.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(member => {
+			console.log("Actividad grupo: " + this.idGroup);
+			console.log(member);
 		});
 	}
 }
