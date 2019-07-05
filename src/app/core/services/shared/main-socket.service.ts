@@ -11,8 +11,12 @@ export class MainSocketService {
 	private socket;
 
 	constructor() {
-		this.socket = socketIo.connect(environment.socket);
+		// this.socket = socketIo.connect(environment.socket);
 	}
+
+	public connect() {
+    this.socket = socketIo.connect(environment.socket);
+  }
 
 	public send(event: EventEnum, payload: string): void {
 		this.socket.emit(event, payload);

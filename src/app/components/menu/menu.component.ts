@@ -1,19 +1,19 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {UserService} from "../../core/services/shared/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {GroupGame, User} from "../../models/models.index";
-import {RolService} from "../../core/services/shared/rol.service";
-import {AuthService} from "../../core/services/auth/auth.service";
-import {PurchaseService} from "../../core/services/shared/purchase.service";
-import {PurchaseHistory} from "../../models/PurchaseHistory";
-import {GroupService} from "../../core/services/shared/group.service";
-import {RoleEnum} from "../../enums/RoleEnum";
-import {UpdateMoneyService} from "../../core/services/shared/update-money.service";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { UserService } from "../../core/services/shared/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { GroupGame, User } from "../../models/models.index";
+import { RolService } from "../../core/services/shared/rol.service";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { PurchaseService } from "../../core/services/shared/purchase.service";
+import { PurchaseHistory } from "../../models/PurchaseHistory";
+import { GroupService } from "../../core/services/shared/group.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 import confetti from "canvas-confetti";
-import {MainSocketService} from "../../core/services/shared/main-socket.service";
-import {EventEnum} from "../../enums/EventEnum";
-import {Utils} from "../../infraestructura/Utils";
-import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
+import { MainSocketService } from "../../core/services/shared/main-socket.service";
+import { EventEnum } from "../../enums/EventEnum";
+import { Utils } from "../../infraestructura/Utils";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 
 declare var $: any;
 
@@ -22,7 +22,7 @@ declare var $: any;
 	templateUrl: "./menu.component.html",
 	styleUrls: ["./menu.component.scss"]
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 	public user: User;
 	public purchaseHistory: PurchaseHistory[] = [];
 	public totalEarned = 0;
@@ -41,13 +41,11 @@ export class MenuComponent implements OnInit {
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
-		private mainSocketService: MainSocketService,
-    private gameSocketService: SocketGroupGameService
+		private mainSocketService: MainSocketService
 	) {}
 
 	ngOnInit() {
 		this.initSocket();
-		this.initSocketGame();
 		this.dropdownAndScroll();
 		this.getCredentialsUser();
 		this.getTotalEarned();
@@ -60,6 +58,8 @@ export class MenuComponent implements OnInit {
 	}
 
 	initSocket() {
+	  this.mainSocketService.connect();
+
 		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
 			console.log("Evento de conexion");
 
@@ -71,28 +71,27 @@ export class MenuComponent implements OnInit {
 		});
 
 		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
-		  this.closeSession = true;
-			Utils.showMsgInfo('7X1 Esta abierto en otra ventana. Haz click en "USAR AQUI" para abrir 7x1 en esta ventana!');
+			this.closeSession = true;
+			this.router.navigateByUrl("locked-screen");
+			// Utils.showMsgInfo('7X1 Esta abierto en otra ventana. Haz click en "USAR AQUI" para abrir 7x1 en esta ventana!');
 			console.log("CLOSE SESSION");
 		});
 
-		this.mainSocketService.onEvent(EventEnum.PLAYERS_ONLINE).subscribe(onlineUsers => {
+		this.mainSocketService.onEvent(EventEnum.PLAYERS_ONLINE).subscribe(data => {
 			console.log("Jugadores en linea");
-			console.log(onlineUsers);
+			console.log(data.quantity);
+		});
+
+		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
+			Utils.showMsgInfo("Un usuario ha ganado!");
+			console.log(data);
+		});
+
+		this.mainSocketService.onEvent(EventEnum.TOP_WINNER).subscribe(data => {
+			console.log("TOP WINNERS");
+			console.log(data);
 		});
 	}
-
-	initSocketGame() {
-    this.gameSocketService.onEvent(EventEnum.WIN_EVENT).subscribe((content) => {
-      Utils.showMsgInfo('Un usuario ha ganado!');
-      console.log(content);
-    });
-
-    this.gameSocketService.onEvent(EventEnum.TOP_WINNER).subscribe((content) => {
-      Utils.showMsgInfo('TOP WINNERS!');
-      console.log(content);
-    });
-  }
 
 	celebration() {
 		const end = Date.now() + 5000;
@@ -232,4 +231,7 @@ export class MenuComponent implements OnInit {
 
 	onFileAdd(event) {}
 
+	ngOnDestroy(): void {
+		console.log("El componente menu se ha destruido");
+	}
 }

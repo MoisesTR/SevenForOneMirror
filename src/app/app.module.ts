@@ -42,7 +42,8 @@ export function getAuthServiceConfigs() {
 		NotFound404Component,
 		MenuComponent,
 		NotFound404Component,
-		EmailConfirmComponent
+		EmailConfirmComponent,
+    LockedScreenComponent
 	],
   imports: [
     BrowserModule.withServerTransition({appId: "serverApp"}),

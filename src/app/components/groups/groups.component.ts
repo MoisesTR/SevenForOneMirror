@@ -45,14 +45,15 @@ export class GroupsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.initSocket();
+		this.initSocketGame();
 		this.getGroups();
 		this.initConfigPaypal();
 		this.user = this.authService.getUser();
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 	}
 
-	initSocket() {}
+	initSocketGame() {
+  }
 
 	getGroups() {
 		this.groupService.getGroups().subscribe(groups => {

@@ -8,12 +8,14 @@ import { ConfirmComponent } from "./components/confirm/confirm.component";
 import { LoginGuardService } from "./core/services/auth/login.guard.service";
 import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.component";
 import { AuthGuardService } from "./core/services/auth/auth-guard.service";
+import { LockedScreenComponent } from "./components/locked-screen/locked-screen.component";
 
 export const routes: Routes = [
 	{ path: "login", canActivate: [LoginGuardService], component: LoginComponent },
 	{ path: "register", canActivate: [LoginGuardService], component: RegisterComponent },
 	{ path: "confirm/:token/:userName", component: ConfirmComponent, data: { titulo: "Confirm" } },
 	{ path: "emailConfirm", canActivate: [LoginGuardService], component: EmailConfirmComponent },
+	{ path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked-screen" } },
 
 	{
 		path: "",

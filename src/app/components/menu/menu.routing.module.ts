@@ -16,7 +16,6 @@ const menuRoutes = [
 	, { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 	, { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "game"}}
 	, { path: "add-group", component: AddGroupsComponent, data: { titulo: "Add-group" } }
-	, { path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked-screen" } }
 ];
 
 @NgModule({

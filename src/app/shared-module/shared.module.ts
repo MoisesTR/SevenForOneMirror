@@ -8,6 +8,7 @@ import { DateTimeAdapter, OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDate
 import { NativeDateTimeAdapter } from "ng-pick-datetime/date-time/adapter/native-date-time-adapter.class";
 import { Platform } from "@angular/cdk/platform";
 import {LockedScreenComponent} from "../components/locked-screen/locked-screen.component";
+import {MDBBootstrapModulesPro} from "ng-uikit-pro-standard";
 
 @NgModule({
 	imports: [CommonModule],
@@ -19,10 +20,9 @@ import {LockedScreenComponent} from "../components/locked-screen/locked-screen.c
 		ShowErrorsComponent,
 		NgSelectModule,
 		OwlDateTimeModule,
-		OwlNativeDateTimeModule,
-    LockedScreenComponent
+		OwlNativeDateTimeModule
 	],
-	declarations: [ShowErrorsComponent, LockedScreenComponent],
+	declarations: [ShowErrorsComponent],
 	providers: [
 		{
 			provide: NG_SELECT_DEFAULT_CONFIG,

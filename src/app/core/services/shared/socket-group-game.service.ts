@@ -22,13 +22,13 @@ export class SocketGroupGameService {
 		});
 	}
 
-	public send(evento: EventEnum, payload: string): void {
+	public send(event: EventEnum, payload: string): void {
 		this.socket.emit(event, payload);
 	}
 
-	public onEvent(event: EventEnum): Observable<any> {
+	public onEvent(event: EventEnum ): Observable<any> {
 		return new Observable<EventEnum>(observer => {
-			this.socket.on(event, () => observer.next());
+			this.socket.on(event, (data) => observer.next(data));
 		});
 	}
 }
