@@ -47,13 +47,13 @@ export class SocketGroupGameService {
 
 	public closeSocket() {
 		if (this.socket) {
-			this.logger.info("CLOSE MAIN SOCKET");
+			this.logger.info("CLOSE GAME SOCKET");
 			this.socket.close();
 		}
 	}
 
 	public removeAllListeners() {
-		this.logger.info("Remove all listeners game socket");
+		this.logger.info("REMOVE ALL LISTENERS GAME SOCKET");
 		this.socket.removeAllListeners();
 	}
 }

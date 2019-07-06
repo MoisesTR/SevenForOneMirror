@@ -66,7 +66,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.connect();
 
 		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
-			this.logger.info("CONNECT TO MAIN SOCKET");
 
 			this.mainSocketService.send(EventEnum.REGISTER_USER, this.authService.getUser().userName);
 
@@ -77,12 +76,12 @@ export class MenuComponent implements OnInit, OnDestroy {
 		});
 
 		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
-			this.logger.info("DISCONNECT MAIN SOCKET");
+
 		});
 
 		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
 			this.closeSession = true;
-			this.logger.info("CLOSE SESSION");
+			this.logger.info("CLOSE SESSION ANOTHER SCREEN");
 			this.router.navigateByUrl("locked-screen");
 		});
 
@@ -173,7 +172,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	getPurchaseHistory() {
-		this.logger.info("GET PURCHASE HISTORY");
+		this.logger.info("GET PURCHASE HISTORY IN MENU");
 		this.totalEarned = 0;
 		this.totalInvested = 0;
 		this.purchaseHistoryService
@@ -209,7 +208,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	getGroupsCurrentUser() {
-		this.logger.info("GET GROUPS CURRENT USER");
+		this.logger.info("GET GROUPS CURRENT USER IN MENU");
 		this.groupService
 			.getGroupsCurrentUser(this.user._id)
 			.pipe(takeUntil(this.ngUnsubscribe))
