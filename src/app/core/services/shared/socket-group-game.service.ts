@@ -16,12 +16,14 @@ export class SocketGroupGameService {
 	constructor(private logger: NGXLogger, private authService: AuthService) {}
 
 	public connect() {
-		const userName = this.authService.getUser().userName;
-		this.logger.info('CONNECT TO TO SOCKET GAME');
-		this.socket = socketIo.connect(environment.socket + "/" + NameSpaceEnum.groupGame, { query: { userName } });
+	  if (!this.socket) {
+      const userName = this.authService.getUser().userName;
+      this.logger.info('CONNECT TO TO SOCKET GAME');
+      this.socket = socketIo.connect(environment.socket + "/" + NameSpaceEnum.groupGame, { query: { userName } });
 
-		this.onEvent(EventEnum.CONNECT).subscribe(() => {});
-		this.onEvent(EventEnum.DISCONNECT).subscribe(() => {});
+      this.onEvent(EventEnum.CONNECT).subscribe(() => {});
+      this.onEvent(EventEnum.DISCONNECT).subscribe(() => {});
+    }
 	}
 
 	public send(event: EventEnum, payload: string): void {
