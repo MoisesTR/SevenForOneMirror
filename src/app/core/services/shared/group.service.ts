@@ -31,7 +31,7 @@ export class GroupService {
 	getGroups(): Observable<GroupGame[]> {
 		return this.http.get<GroupGame[]>(this.url + this.gameUrl);
 	}
-
+	
 	getGroupsCurrentUser(userId): Observable<any> {
 		return this.http.get(this.url + this.gameUrl + "/current/" + userId);
 	}
