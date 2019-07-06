@@ -38,7 +38,9 @@ export class MainSocketService {
 	}
 
 	public removeAllListeners() {
-		this.logger.info("Remove all listeners main socket");
-		this.socket.removeAllListeners();
+	  if (this.socket) {
+      this.logger.info("REMOVE ALL LISTENERS MAIN SOCKET");
+      this.socket.removeAllListeners();
+    }
 	}
 }

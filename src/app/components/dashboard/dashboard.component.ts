@@ -45,7 +45,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.user = this.authService.getUser();
 		this.isUserAdmin = this.user.role.name === RoleEnum.Admin;
-    this.initSocket();
 		this.createContentDashboard(this.isUserAdmin);
 	}
 
@@ -53,14 +52,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		if (!userIsAdmin) {
 			this.getGroupsOfCurrentUser();
 		} else {
+      this.gameSocketService.connect();
 			this.getGroupsAdmin();
 			this.getUsersNormal();
 		}
 	}
-
-	initSocket() {
-	  this.gameSocketService.connect();
-  }
 
 	getGroupsAdmin() {
 		this.groupsAdmin = this.groupService.getGroups();
@@ -85,7 +81,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 				if (this.groupsUser.length > 0) this.showWelcomeUser = false;
 
-				this.groupsUser.forEach(group => {
+				this.groupsUser.forEach((group, index) => {
+					this.gameSocketService.connect();
 					this.gameSocketService.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(data => {
 						this.logger.info("ACTIVTY-GROUP: " + group.initialInvertion, data);
 					});

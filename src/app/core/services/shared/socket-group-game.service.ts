@@ -53,7 +53,9 @@ export class SocketGroupGameService {
 	}
 
 	public removeAllListeners() {
-		this.logger.info("REMOVE ALL LISTENERS GAME SOCKET");
-		this.socket.removeAllListeners();
+	  if (this.socket) {
+      this.logger.info("REMOVE ALL LISTENERS GAME SOCKET");
+      this.socket.removeAllListeners();
+    }
 	}
 }

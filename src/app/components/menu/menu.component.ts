@@ -44,7 +44,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
 		private mainSocketService: MainSocketService,
-		private gameSocketService: SocketGroupGameService,
+		private gameSocketSevice: SocketGroupGameService,
 		private logger: NGXLogger
 	) {}
 
@@ -66,7 +66,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.connect();
 
 		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
-
 			this.mainSocketService.send(EventEnum.REGISTER_USER, this.authService.getUser().userName);
 
 			if (this.isUserAdmin) {
@@ -75,9 +74,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 			}
 		});
 
-		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
-
-		});
+		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {});
 
 		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
 			this.closeSession = true;
@@ -97,13 +94,13 @@ export class MenuComponent implements OnInit, OnDestroy {
 			this.logger.info("TOP WINNERS", data);
 		});
 
-    this.mainSocketService.onEvent(EventEnum.NOTIFICATION).subscribe(data => {
-      this.logger.info("NOTIFICATION", data);
-    });
+		this.mainSocketService.onEvent(EventEnum.NOTIFICATION).subscribe(data => {
+			this.logger.info("NOTIFICATION", data);
+		});
 
-    this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
-      this.logger.info("UPDATE PURCHASE HISTORY USER", data);
-    });
+		this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
+			this.logger.info("UPDATE PURCHASE HISTORY USER", data);
+		});
 	}
 
 	celebration() {
@@ -213,9 +210,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 			.getGroupsCurrentUser(this.user._id)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(groups => {
-				if (groups) {
-					this.gameSocketService.connect();
-				}
 				this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
 			});
 	}
@@ -240,8 +234,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	closeSockets() {
+		this.mainSocketService.removeAllListeners();
+		this.gameSocketSevice.removeAllListeners();
+
 		this.mainSocketService.closeSocket();
-		this.gameSocketService.closeSocket();
+		this.gameSocketSevice.closeSocket();
 	}
 
 	onActivate(edvent) {
@@ -255,8 +252,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();
-
 		this.mainSocketService.removeAllListeners();
-		this.gameSocketService.removeAllListeners();
+		this.mainSocketService.closeSocket();
 	}
 }
