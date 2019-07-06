@@ -62,12 +62,12 @@
 
     <div class="edge-header bg-header">
         <div class="container-fluid">
-            <div class="row justify-content-center">
+            <div class="row justify-content-end">
 
-                <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 text-center white-text">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center white-text">
                     <div class="row justify-content-center">
 
-                        <div class="col-12 mb-4 mt-3">
+                        <div class="col-12 mb-3 mt-3">
                             <div id="background-circle" class="p-3 size-img">
                                 <img src="{{(this.user.image ? this.user.image : 'assets/images/main-user.png')}}"
                                     class="img-fluid rounded-circle green-dark-seven-one" alt="Profile image">
@@ -80,14 +80,14 @@
                             </h6>
                         </div>
 
-                        <div class="col-5">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-lg-5 col-xl-4 text-center">
                             <mdb-icon fas icon="arrow-alt-circle-up mr-2"></mdb-icon>
                             Ganancias
                             <div class="mt-1">
                                 $ {{this.totalEarned}}
                             </div>
                         </div>
-                        <div class="col-5 v-divider">
+                        <div class="col-xs-12 col-sm-3 col-md-2 col-lg-5 col-xl-4 v-divider">
                             <mdb-icon fas icon="arrow-alt-circle-down mr-2"></mdb-icon>
                             Inversión
                             <div class="mt-1">
@@ -95,10 +95,10 @@
                             </div>
                         </div>
 
-                        <div class="col-12 mt-4 text-menu">
-                            <div class="row justify-content-center">
+                        <div class="col-12 mt-5 text-menu">
+                            <div class="row justify-content-center btn-dashboard">
 
-                                <div class="col-5 flex-center">
+                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a (click)="dashBoard()">
                                         <!-- clase active menu active-menu-dashboard -->
                                         <div class="active-menu-dashboard hover-menu p-4 hoverable">
@@ -109,7 +109,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-5 flex-center">
+                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a (click)="groups()">
                                         <div class="hover-menu p-4 hoverable">
                                             <mdb-icon fas icon="money-bill-wave" size="2x" class="mt-1"></mdb-icon>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 mt-3">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 mt-3">
 
                     <router-outlet (activate)="onActivate($event)"></router-outlet>
 
