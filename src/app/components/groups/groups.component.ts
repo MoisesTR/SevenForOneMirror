@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
 import { GroupService } from "../../core/services/shared/group.service";
 import { GroupGame } from "../../models/GroupGame";
 import { Router } from "@angular/router";
@@ -16,16 +16,20 @@ import swal from "sweetalert2";
 import { environment } from "../../../environments/environment";
 import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 import { EventEnum } from "../../enums/EventEnum";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
 	selector: "app-groups",
 	templateUrl: "./groups.component.html",
-	styleUrls: ["./groups.component.scss"]
+	styleUrls: ["./groups.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent implements OnInit, OnDestroy {
 	@ViewChild("paymentModal") paymentModal: ModalDirective;
+	ngUnsubscribe = new Subject<void>();
 
-	public groups: GroupGame[] = [];
+	public groups: Observable<GroupGame[]>;
 	public user: User;
 	public userIsAdmin = false;
 	public groupSelectedPayModal: GroupGame;
@@ -45,21 +49,19 @@ export class GroupsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.initSocketGame();
-		this.getGroups();
-		this.initConfigPaypal();
 		this.user = this.authService.getUser();
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
+		this.getGroups();
+		this.initConfigPaypal();
+		this.initSocketGame();
+	}
+
+	getGroups() {
+		this.groups = this.groupService.getGroups();
 	}
 
 	initSocketGame() {
-	  this.socketGroupGame.connect();
-  }
-
-	getGroups() {
-		this.groupService.getGroups().subscribe(groups => {
-			this.groups = groups;
-		});
+		this.socketGroupGame.connect();
 	}
 
 	private initConfigPaypal(): void {
@@ -103,14 +105,18 @@ export class GroupsComponent implements OnInit {
 				// );
 				const member = new MemberGroup();
 				member.payReference = data.id;
-				this.groupService.addMemberToGroup(member, this.groupSelectedPayModal._id).subscribe(() => {
-					swal.fire("Info", "The registration has been successful!", "success").then(() => {
-						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
+				this.groupService
+					.addMemberToGroup(member, this.groupSelectedPayModal._id)
+					.pipe(takeUntil(this.ngUnsubscribe))
+					.subscribe(() => {
+						swal.fire("Info", "The registration has been successful!", "success").then(() => {
+							this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
-						this.updateMoneyService.update(true);
-						this.router.navigate(["/game", this.groupSelectedPayModal._id]);
+							this.updateMoneyService.update(true);
+
+							this.router.navigate(["/game", this.groupSelectedPayModal._id]);
+						});
 					});
-				});
 			},
 			onCancel: (data, actions) => {
 				// console.log("OnCancel", actions);
@@ -132,10 +138,13 @@ export class GroupsComponent implements OnInit {
 	}
 
 	validateMemberIsNotAlreadyRegistered(groupId) {
-		this.groupService.getGroup(groupId).subscribe(group => {
-			const member = this.groupService.filterMemberByGroup(group, this.user._id);
-			this.actionViewGroup(member, groupId);
-		});
+		this.groupService
+			.getGroup(groupId)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(group => {
+				const member = this.groupService.filterMemberByGroup(group, this.user._id);
+				this.actionViewGroup(member, groupId);
+			});
 	}
 
 	actionViewGroup(member, groupId) {
@@ -143,7 +152,7 @@ export class GroupsComponent implements OnInit {
 			if (member) {
 				this.router.navigate(["/game", groupId]);
 			} else {
-				Utils.showMsgInfo("You need buy a entrance to the group!");
+				Utils.showMsgInfo("Necesitas comprar una entrada al grupo!");
 			}
 		} else {
 			this.router.navigate(["/game", groupId]);
@@ -154,5 +163,11 @@ export class GroupsComponent implements OnInit {
 		this.groupSelectedPayModal = group;
 		this.finalPrice = this.groupSelectedPayModal.initialInvertion;
 		this.paymentModal.show();
+	}
+
+	ngOnDestroy(): void {
+		this.ngUnsubscribe.next();
+		this.ngUnsubscribe.complete();
+		this.socketGroupGame.removeAllListeners();
 	}
 }

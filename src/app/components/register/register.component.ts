@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
 import { CustomValidators } from "../../validators/CustomValidators";
@@ -6,22 +6,26 @@ import { UserService } from "../../core/services/shared/user.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { Utils } from "../../infraestructura/Utils";
-import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular-6-social-login';
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
 import { Role } from "../../models/Role";
 import { RoleEnum } from "../../enums/RoleEnum";
-import {SocialPlatFormEnum} from '../../enums/SocialPlatFormEnum';
+import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
+import { Subject } from "rxjs";
+import { take, takeUntil } from "rxjs/operators";
 
 declare var $: any;
 
 @Component({
 	selector: "app-register",
 	templateUrl: "./register.component.html",
-	styleUrls: ["./register.component.scss"]
+	styleUrls: ["./register.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+	ngUnsubscribe = new Subject<void>();
 	public user: User;
-	public telefonos: string[] = [];
+	public phones: string[] = [];
 	public roles: Role[];
 	public disabledButton = false;
 	public width = 100;
@@ -109,10 +113,16 @@ export class RegisterComponent implements OnInit {
 	}
 
 	getRoles() {
-		this.rolService.getRoles().subscribe(roles => {
-			this.roles = roles;
-			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, this.roles);
-		});
+		this.rolService
+			.getRoles()
+			.pipe(
+				take(1),
+				takeUntil(this.ngUnsubscribe)
+			)
+			.subscribe(roles => {
+				this.roles = roles;
+				this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, this.roles);
+			});
 	}
 
 	getValuesForm() {
@@ -133,11 +143,11 @@ export class RegisterComponent implements OnInit {
 		}
 
 		if (this.secondFormGroup.value.phone) {
-			this.telefonos = [];
-			this.telefonos.push(this.secondFormGroup.value.phone);
+			this.phones = [];
+			this.phones.push(this.secondFormGroup.value.phone);
 		}
 
-		this.user.phones = this.telefonos;
+		this.user.phones = this.phones;
 		this.user.password = this.secondFormGroup.value.password;
 		this.user.passwordConfirm = this.secondFormGroup.value.confirmPassword;
 		this.user.email = this.secondFormGroup.value.email;
@@ -148,23 +158,26 @@ export class RegisterComponent implements OnInit {
 		this.getValuesForm();
 		this.disabledButton = true;
 
-		this.usuarioService.createUser(this.user).subscribe(
-			res => {
-				this.disabledButton = false;
-				localStorage.setItem("username", this.user.userName);
+		this.usuarioService
+			.createUser(this.user)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(
+				res => {
+					this.disabledButton = false;
+					localStorage.setItem("username", this.user.userName);
 
-				swal.fire("Info", res["success"], "success").then(() => {
-					this.router.navigate(["/emailConfirm"]);
-				});
-			},
-			() => {
-				this.disabledButton = false;
-			}
-		);
+					swal.fire("Info", res["success"], "success").then(() => {
+						this.router.navigate(["/emailConfirm"]);
+					});
+				},
+				() => {
+					this.disabledButton = false;
+				}
+			);
 	}
 
 	login() {
-		this.router.navigate(["/login"]);
+		this.router.navigateByUrl("/login");
 	}
 
 	openNav() {
@@ -184,26 +197,34 @@ export class RegisterComponent implements OnInit {
 		}
 	}
 
-  socialSignUp(socialPlatform: string) {
-    let socialPlatformProvider;
-    if (socialPlatform === SocialPlatFormEnum.Google) {
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    }
+	socialSignUp(socialPlatform: string) {
+		let socialPlatformProvider;
+		if (socialPlatform === SocialPlatFormEnum.Google) {
+			socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+		}
 
-    if (socialPlatform === SocialPlatFormEnum.Facebook) {
-      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    }
+		if (socialPlatform === SocialPlatFormEnum.Facebook) {
+			socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+		}
 
-    this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-      this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ?  userData.idToken : userData.token;
-      this.user.roleId = this.idRolUser;
+		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
+			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
+			this.user.roleId = this.idRolUser;
 
-      this.usuarioService.loginSocial(this.user, socialPlatformProvider).subscribe(response => {
-        this.usuarioService.identity = response.user;
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("identity", JSON.stringify(response.user));
-        this.router.navigate(["/dashboard"]);
-      });
-    });
-  }
+			this.usuarioService
+				.loginSocial(this.user, socialPlatformProvider)
+				.pipe(takeUntil(this.ngUnsubscribe))
+				.subscribe(response => {
+					this.usuarioService.identity = response.user;
+					localStorage.setItem("token", response.token);
+					localStorage.setItem("identity", JSON.stringify(response.user));
+					this.router.navigateByUrl("/dashboard");
+				});
+		});
+	}
+
+	ngOnDestroy(): void {
+		this.ngUnsubscribe.next();
+		this.ngUnsubscribe.complete();
+	}
 }

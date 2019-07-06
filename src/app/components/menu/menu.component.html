@@ -24,7 +24,7 @@
                         <span class="d-none d-md-inline-block"> Notifications</span>
                     </a>
                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                        <a class="dropdown-item waves-effect waves-light" href="#">
+                        <a class="dropdown-item waves-effect waves-light">
                             <i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
                             <span>New order received</span>
                             <span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 13 min</span>
@@ -99,9 +99,9 @@
                             <div class="row justify-content-center btn-dashboard">
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a (click)="dashBoard()">
+                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']" >
                                         <!-- clase active menu active-menu-dashboard -->
-                                        <div class="active-menu-dashboard hover-menu p-4 hoverable">
+                                        <div class="hover-menu p-4 hoverable">
                                             <mdb-icon fas icon="home" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
                                                 Dashboard
@@ -110,7 +110,7 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a (click)="groups()">
+                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']">
                                         <div class="hover-menu p-4 hoverable">
                                             <mdb-icon fas icon="money-bill-wave" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
@@ -346,5 +346,3 @@
         </div>
     </div>
 </div>
-
-<app-locked-screen *ngIf="closeSession"></app-locked-screen>

@@ -3,7 +3,9 @@ import { Router, CanActivate } from "@angular/router";
 import { AuthService } from "./auth.service";
 import { isPlatformBrowser } from "@angular/common";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class AuthGuardService implements CanActivate {
 	constructor(public auth: AuthService, public router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 

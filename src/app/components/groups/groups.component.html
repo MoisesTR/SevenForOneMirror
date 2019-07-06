@@ -18,7 +18,7 @@
                             <div class="row justify-content-center">
 
                                 <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 mb-5"
-                                    *ngFor="let group of groups; let i = index">
+                                    *ngFor="let group of groups | async let i = index">
 
                                     <div class="card rounded-all">
                                         <div class="card-body blue-seven-one white-text rounded-all">

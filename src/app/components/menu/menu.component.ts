@@ -12,8 +12,10 @@ import { UpdateMoneyService } from "../../core/services/shared/update-money.serv
 import confetti from "canvas-confetti";
 import { MainSocketService } from "../../core/services/shared/main-socket.service";
 import { EventEnum } from "../../enums/EventEnum";
-import { Utils } from "../../infraestructura/Utils";
-import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { NGXLogger } from "ngx-logger";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 declare var $: any;
 
@@ -23,12 +25,12 @@ declare var $: any;
 	styleUrls: ["./menu.component.scss"]
 })
 export class MenuComponent implements OnInit, OnDestroy {
+	ngUnsubscribe = new Subject<void>();
 	public user: User;
 	public purchaseHistory: PurchaseHistory[] = [];
 	public totalEarned = 0;
 	public totalInvested = 0;
 	public isUserAdmin = false;
-	public disableUpdateAmounts = false;
 	public currentGroupsUser: GroupGame[] = [];
 	public closeSession = false;
 
@@ -42,7 +44,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
 		private mainSocketService: MainSocketService,
-    private gameSocketService: SocketGroupGameService
+		private gameSocketService: SocketGroupGameService,
+		private logger: NGXLogger
 	) {}
 
 	ngOnInit() {
@@ -53,6 +56,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 		this.updateMoneyService.updateMount$.subscribe(update => {
 			if (update) {
+				this.logger.info("GET TOTAL EARNED");
 				this.getTotalEarned();
 			}
 		});
@@ -62,41 +66,45 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.connect();
 
 		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
-			console.log("Evento de conexion");
+			this.logger.info("CONNECT TO MAIN SOCKET");
 
 			this.mainSocketService.send(EventEnum.REGISTER_USER, this.authService.getUser().userName);
 
 			if (this.isUserAdmin) {
-				console.log("JOIN_ADMIN_ROOM");
+				this.logger.info("JOIN ADMIN ROOM");
 				this.mainSocketService.send(EventEnum.JOIN_ADMIN_ROOM, "");
 			}
 		});
 
 		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
-			console.log("Evento de desconexion");
+			this.logger.info("DISCONNECT MAIN SOCKET");
 		});
 
 		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
 			this.closeSession = true;
+			this.logger.info("CLOSE SESSION");
 			this.router.navigateByUrl("locked-screen");
-			// Utils.showMsgInfo('7X1 Esta abierto en otra ventana. Haz click en "USAR AQUI" para abrir 7x1 en esta ventana!');
-			console.log("CLOSE SESSION");
 		});
 
 		this.mainSocketService.onEvent(EventEnum.PLAYERS_ONLINE).subscribe(data => {
-			console.log("Jugadores en linea");
-			console.log(data.quantity);
+			this.logger.info("PLAYERS ONLINE: ", data.quantity);
 		});
 
 		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
-			Utils.showMsgInfo("Un usuario ha ganado!");
-			console.log(data);
+			this.logger.info("WIN-EVENT", data.content);
 		});
 
 		this.mainSocketService.onEvent(EventEnum.TOP_WINNER).subscribe(data => {
-			console.log("TOP WINNERS");
-			console.log(data);
+			this.logger.info("TOP WINNERS", data);
 		});
+
+    this.mainSocketService.onEvent(EventEnum.NOTIFICATION).subscribe(data => {
+      this.logger.info("NOTIFICATION", data);
+    });
+
+    this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
+      this.logger.info("UPDATE PURCHASE HISTORY USER", data);
+    });
 	}
 
 	celebration() {
@@ -156,7 +164,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	getTotalEarned() {
-		this.disableUpdateAmounts = true;
 		if (this.isUserAdmin) {
 			this.getTotalEarnedGlobalGroups();
 		} else {
@@ -166,10 +173,13 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	getPurchaseHistory() {
+		this.logger.info("GET PURCHASE HISTORY");
 		this.totalEarned = 0;
 		this.totalInvested = 0;
-		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.user._id).subscribe(
-			history => {
+		this.purchaseHistoryService
+			.getPurchaseHistoryByIdUser(this.user._id)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(history => {
 				this.purchaseHistory = history;
 				for (const item of this.purchaseHistory) {
 					const quantity = +item.quantity["$numberDecimal"];
@@ -179,64 +189,61 @@ export class MenuComponent implements OnInit, OnDestroy {
 						this.totalEarned += quantity;
 					}
 				}
-				this.disableUpdateAmounts = false;
-			},
-			() => {
-				this.disableUpdateAmounts = false;
-			}
-		);
+			});
 	}
 
 	getTotalEarnedGlobalGroups() {
+		this.logger.info("GET TOTAL EARNED GLOBAL GROUPS");
 		this.totalEarned = 0;
 		this.totalInvested = 0;
-		this.groupService.getGroups().subscribe(
-			groups => {
+		this.groupService
+			.getGroups()
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(groups => {
 				groups.forEach(group => {
 					if (group.enabled) {
 						this.totalEarned += group.totalInvested;
 					}
 				});
-				this.disableUpdateAmounts = false;
-			},
-			() => {
-				this.disableUpdateAmounts = false;
-			}
-		);
+			});
 	}
 
 	getGroupsCurrentUser() {
-		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(groups => {
-		  if (groups) {
-		    this.gameSocketService.connect();
-      }
-			this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
-		});
+		this.logger.info("GET GROUPS CURRENT USER");
+		this.groupService
+			.getGroupsCurrentUser(this.user._id)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(groups => {
+				if (groups) {
+					this.gameSocketService.connect();
+				}
+				this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
+			});
 	}
 
 	groups() {
-		this.router.navigate(["/groups"]);
+		this.router.navigateByUrl("/groups");
 	}
 
 	dashBoard() {
-		this.router.navigate(["/dashboard"]);
+		this.router.navigateByUrl("/dashboard");
 	}
 
 	updateProfile() {
-		this.router.navigate(["/profile"]);
+		this.router.navigateByUrl("/profile");
 	}
 
 	logout() {
 		localStorage.clear();
-		this.closeSockets();
 		this.usuarioService.identity = null;
-		this.router.navigate(["/login"]);
+		this.closeSockets();
+		this.router.navigateByUrl("/login");
 	}
 
 	closeSockets() {
-	  this.mainSocketService.closeSocket();
-    this.gameSocketService.closeSocket();
-  }
+		this.mainSocketService.closeSocket();
+		this.gameSocketService.closeSocket();
+	}
 
 	onActivate(edvent) {
 		window.scroll(0, 0);
@@ -247,6 +254,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 	onFileAdd(event) {}
 
 	ngOnDestroy(): void {
-		console.log("El componente menu se ha destruido");
+		this.ngUnsubscribe.next();
+		this.ngUnsubscribe.complete();
+
+		this.mainSocketService.removeAllListeners();
+		this.gameSocketService.removeAllListeners();
 	}
 }

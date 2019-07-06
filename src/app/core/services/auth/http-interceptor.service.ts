@@ -6,10 +6,13 @@ import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { throwError } from "rxjs";
 import { Utils } from "../../../infraestructura/Utils";
+import {NGXLogger} from "ngx-logger";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class HttpInterceptorService implements HttpInterceptor {
-	constructor(public auth: AuthService, public router: Router) {}
+	constructor(public auth: AuthService, public router: Router, private logger: NGXLogger) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		request = request.clone({
@@ -18,6 +21,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 			}
 		});
 
+		this.logger.debug(request.url);
 		return next.handle(request).pipe(
 			tap(
 				(response: HttpEvent<any>) => {},

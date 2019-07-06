@@ -369,13 +369,6 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.19"
 
-"@ng-select/ng-select@2.3.2":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-2.3.2.tgz#4e7da0421bf04a94539b1433e419154af84e9aed"
-  integrity sha1-Tn2gQhvwSpRTmxQz5BkVSvhOmu0=
-  dependencies:
-    tslib "^1.9.0"
-
 "@ngtools/webpack@6.0.8":
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.0.8.tgz#a05bce526aee9da62bb230a95fba83fee99d0bca"
@@ -754,11 +747,6 @@ angular-6-social-login@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/angular-6-social-login/-/angular-6-social-login-1.1.1.tgz#272f09b0a4be48bd367df9dad14e1b03ef844c9f"
   integrity sha512-/JCUhzHIRP8I+0m5yWQY3A7HjxgLQPjxLTyjxlQpQ7TEyZhd2Uy1NOvSPnBxODwFwTLnfAyJXlubzssYFhqzdw==
-
-angular-particle@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/angular-particle/-/angular-particle-1.0.4.tgz#80e8e6799ffd4175aa9d113cfcbdeba0380ed441"
-  integrity sha512-bvf9uAOHhK5PSn0+vqpYii9xxv9f7FoLUPigHXDLGz5xMSvY0My/U6Yrzp+LF0MYqEJOh/6vOpcRSUfRMsLR+g==
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -5306,6 +5294,19 @@ ng-pick-datetime@^6.0.16:
   dependencies:
     tslib "^1.9.0"
 
+ngx-cacheable@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/ngx-cacheable/-/ngx-cacheable-1.2.5.tgz#2bc13dbe4717f8192145f2549900e7c88a022d43"
+  integrity sha512-/LmtX6W8uR1kQlpb155LdFtZIX7ogGaV8JBr4dQvvPnlaGRZ1hL2xRRpcP7tbVOKkxF1PvQ0znTCUFTkA1cVGA==
+
+ngx-logger@^3.4.5:
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/ngx-logger/-/ngx-logger-3.4.5.tgz#dc3db10648a5690ed7f3c2568aab704b5f5fe396"
+  integrity sha512-K3ve4dDKcGoGvLYsLkY61KhEoXq/kBLx0en5iTWW17Q5AYxAGgmpv5rAY4kCCInHdG5Jkx/RRltoC/U47aj0ow==
+  dependencies:
+    tslib "^1.9.0"
+    vlq "^1.0.0"
+
 ngx-paypal@^5.0.0-beta.11:
   version "5.0.0-beta.11"
   resolved "https://registry.yarnpkg.com/ngx-paypal/-/ngx-paypal-5.0.0-beta.11.tgz#e416ab87e5fa2966ff204b40d96ad0b2f369d603"
@@ -8110,6 +8111,11 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vlq@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vlq/-/vlq-1.0.1.tgz#c003f6e7c0b4c1edd623fd6ee50bbc0d6a1de468"
+  integrity sha512-gQpnTgkubC6hQgdIcRdYGDSDc+SaujOdyesZQMv6JlfQee/9Mp0Qhnys6WxDWvQnL5WZdT7o2Ul187aSt0Rq+w==
 
 vm-browserify@0.0.4:
   version "0.0.4"
