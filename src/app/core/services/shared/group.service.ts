@@ -4,6 +4,7 @@ import {Global} from './global';
 import {Observable} from 'rxjs';
 import {GroupGame} from '../../../models/GroupGame';
 import {MemberGroup} from '../../../models/MemberGroup';
+import {Cacheable} from "ngx-cacheable";
 
 @Injectable({
 	providedIn: "root"
@@ -26,8 +27,9 @@ export class GroupService {
 		return this.http.get(this.url + this.gameUrl + "/" + groupId);
 	}
 
-	getGroups(): Observable<any> {
-		return this.http.get(this.url + this.gameUrl);
+	@Cacheable()
+	getGroups(): Observable<GroupGame[]> {
+		return this.http.get<GroupGame[]>(this.url + this.gameUrl);
 	}
 
 	getGroupsCurrentUser(userId): Observable<any> {
@@ -55,7 +57,7 @@ export class GroupService {
 			const members = group.members;
 			memberFiltered = members.find(member => member.userId === userId);
 
-			return memberFiltered || null;
+			return memberFiltered || undefined;
 		} else {
 			return null;
 		}

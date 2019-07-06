@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { GroupGame, Token, User } from "../../models/models.index";
+import { GroupGame, User } from "../../models/models.index";
 import { RolService } from "../../core/services/shared/rol.service";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
@@ -10,6 +10,12 @@ import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 import confetti from "canvas-confetti";
+import { MainSocketService } from "../../core/services/shared/main-socket.service";
+import { EventEnum } from "../../enums/EventEnum";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { NGXLogger } from "ngx-logger";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 declare var $: any;
 
@@ -18,14 +24,15 @@ declare var $: any;
 	templateUrl: "./menu.component.html",
 	styleUrls: ["./menu.component.scss"]
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
+	ngUnsubscribe = new Subject<void>();
 	public user: User;
 	public purchaseHistory: PurchaseHistory[] = [];
 	public totalEarned = 0;
 	public totalInvested = 0;
 	public isUserAdmin = false;
-	public disableUpdateAmounts = false;
 	public currentGroupsUser: GroupGame[] = [];
+	public closeSession = false;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -35,19 +42,69 @@ export class MenuComponent implements OnInit {
 		private purchaseHistoryService: PurchaseService,
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
-		private router: Router
+		private router: Router,
+		private mainSocketService: MainSocketService,
+		private gameSocketService: SocketGroupGameService,
+		private logger: NGXLogger
 	) {}
 
 	ngOnInit() {
-		this.dropdownAndScroll();
 		this.getCredentialsUser();
+		this.initSocket();
+		this.dropdownAndScroll();
 		this.getTotalEarned();
 
 		this.updateMoneyService.updateMount$.subscribe(update => {
 			if (update) {
+				this.logger.info("GET TOTAL EARNED");
 				this.getTotalEarned();
 			}
 		});
+	}
+
+	initSocket() {
+		this.mainSocketService.connect();
+
+		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
+			this.logger.info("CONNECT TO MAIN SOCKET");
+
+			this.mainSocketService.send(EventEnum.REGISTER_USER, this.authService.getUser().userName);
+
+			if (this.isUserAdmin) {
+				this.logger.info("JOIN ADMIN ROOM");
+				this.mainSocketService.send(EventEnum.JOIN_ADMIN_ROOM, "");
+			}
+		});
+
+		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
+			this.logger.info("DISCONNECT MAIN SOCKET");
+		});
+
+		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
+			this.closeSession = true;
+			this.logger.info("CLOSE SESSION");
+			this.router.navigateByUrl("locked-screen");
+		});
+
+		this.mainSocketService.onEvent(EventEnum.PLAYERS_ONLINE).subscribe(data => {
+			this.logger.info("PLAYERS ONLINE: ", data.quantity);
+		});
+
+		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
+			this.logger.info("WIN-EVENT", data.content);
+		});
+
+		this.mainSocketService.onEvent(EventEnum.TOP_WINNER).subscribe(data => {
+			this.logger.info("TOP WINNERS", data);
+		});
+
+    this.mainSocketService.onEvent(EventEnum.NOTIFICATION).subscribe(data => {
+      this.logger.info("NOTIFICATION", data);
+    });
+
+    this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
+      this.logger.info("UPDATE PURCHASE HISTORY USER", data);
+    });
 	}
 
 	celebration() {
@@ -107,7 +164,6 @@ export class MenuComponent implements OnInit {
 	}
 
 	getTotalEarned() {
-		this.disableUpdateAmounts = true;
 		if (this.isUserAdmin) {
 			this.getTotalEarnedGlobalGroups();
 		} else {
@@ -117,10 +173,13 @@ export class MenuComponent implements OnInit {
 	}
 
 	getPurchaseHistory() {
+		this.logger.info("GET PURCHASE HISTORY");
 		this.totalEarned = 0;
 		this.totalInvested = 0;
-		this.purchaseHistoryService.getPurchaseHistoryByIdUser(this.user._id).subscribe(
-			history => {
+		this.purchaseHistoryService
+			.getPurchaseHistoryByIdUser(this.user._id)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(history => {
 				this.purchaseHistory = history;
 				for (const item of this.purchaseHistory) {
 					const quantity = +item.quantity["$numberDecimal"];
@@ -130,54 +189,60 @@ export class MenuComponent implements OnInit {
 						this.totalEarned += quantity;
 					}
 				}
-				this.disableUpdateAmounts = false;
-			},
-			() => {
-				this.disableUpdateAmounts = false;
-			}
-		);
+			});
 	}
 
 	getTotalEarnedGlobalGroups() {
+		this.logger.info("GET TOTAL EARNED GLOBAL GROUPS");
 		this.totalEarned = 0;
 		this.totalInvested = 0;
-		this.groupService.getGroups().subscribe(
-			groups => {
+		this.groupService
+			.getGroups()
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(groups => {
 				groups.forEach(group => {
 					if (group.enabled) {
 						this.totalEarned += group.totalInvested;
 					}
 				});
-				this.disableUpdateAmounts = false;
-			},
-			() => {
-				this.disableUpdateAmounts = false;
-			}
-		);
+			});
 	}
 
 	getGroupsCurrentUser() {
-		this.groupService.getGroupsCurrentUser(this.user._id).subscribe(groups => {
-			this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
-		});
+		this.logger.info("GET GROUPS CURRENT USER");
+		this.groupService
+			.getGroupsCurrentUser(this.user._id)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(groups => {
+				if (groups) {
+					this.gameSocketService.connect();
+				}
+				this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
+			});
 	}
 
 	groups() {
-		this.router.navigate(["/groups"]);
+		this.router.navigateByUrl("/groups");
 	}
 
 	dashBoard() {
-		this.router.navigate(["/dashboard"]);
+		this.router.navigateByUrl("/dashboard");
 	}
 
 	updateProfile() {
-		this.router.navigate(["/profile"]);
+		this.router.navigateByUrl("/profile");
 	}
 
 	logout() {
 		localStorage.clear();
 		this.usuarioService.identity = null;
-		this.router.navigate(["/login"]);
+		this.closeSockets();
+		this.router.navigateByUrl("/login");
+	}
+
+	closeSockets() {
+		this.mainSocketService.closeSocket();
+		this.gameSocketService.closeSocket();
 	}
 
 	onActivate(edvent) {
@@ -187,4 +252,12 @@ export class MenuComponent implements OnInit {
 	onFileRemove() {}
 
 	onFileAdd(event) {}
+
+	ngOnDestroy(): void {
+		this.ngUnsubscribe.next();
+		this.ngUnsubscribe.complete();
+
+		this.mainSocketService.removeAllListeners();
+		this.gameSocketService.removeAllListeners();
+	}
 }

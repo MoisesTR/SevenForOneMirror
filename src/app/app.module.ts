@@ -12,10 +12,11 @@ import {MenuComponent} from './components/menu/menu.component';
 import {NotFound404Component} from './components/not-found404/not-found404.component';
 import {ConfirmComponent} from './components/confirm/confirm.component';
 import {EmailConfirmComponent} from './components/email-confirm/email-confirm.component';
-import {ParticlesModule} from 'angular-particle';
 import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import {environment} from '../environments/environment';
 import {MdbFileUploadModule} from "mdb-file-upload";
+import {LockedScreenComponent} from "./components/locked-screen/locked-screen.component";
+import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -41,7 +42,8 @@ export function getAuthServiceConfigs() {
 		NotFound404Component,
 		MenuComponent,
 		NotFound404Component,
-		EmailConfirmComponent
+		EmailConfirmComponent,
+    LockedScreenComponent
 	],
   imports: [
     BrowserModule.withServerTransition({appId: "serverApp"}),
@@ -50,7 +52,7 @@ export function getAuthServiceConfigs() {
     AppRoutingModule,
     MDBBootstrapModulesPro.forRoot(),
     SocialLoginModule,
-    ParticlesModule,
+    LoggerModule.forRoot({level: !environment.production ? NgxLoggerLevel.DEBUG : NgxLoggerLevel.OFF, httpResponseType: "json", serverLogLevel: NgxLoggerLevel.OFF}),
     MdbFileUploadModule
   ],
 	schemas: [NO_ERRORS_SCHEMA],

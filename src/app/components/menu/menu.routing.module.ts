@@ -1,22 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {DashboardComponent} from '../dashboard/dashboard.component';
-import {UsersComponent} from '../users/users.component';
 import {ProfileComponent} from '../profile/profile.component';
 import {GroupsComponent} from '../groups/groups.component';
 import {GamecontainerComponent} from '../gamecontainer/gamecontainer.component';
-import { AddGroupsComponent } from '../add-groups/add-groups.component';
-import { LockedScreenComponent } from '../locked-screen/locked-screen.component';
+import {AddGroupsComponent} from '../add-groups/add-groups.component';
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } }
-	, { path: "users", component: UsersComponent, data: { titulo: "Users" } }
 	, { path: "profile", component: ProfileComponent, data: { titulo: "Profile" } }
 	, { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
 	, { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
-	, { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "game"}}
-	, { path: "add-group", component: AddGroupsComponent, data: { titulo: "Add-group" } }
-	, { path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked-screen" } }
+	, { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "Game container"}}
+	, { path: "add-group", component: AddGroupsComponent, data: { titulo: "Add Group" } }
 ];
 
 @NgModule({

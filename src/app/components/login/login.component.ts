@@ -1,20 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../models/User';
-import {UserService} from '../../core/services/shared/user.service';
-import {Router} from '@angular/router';
-import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular-6-social-login';
-import {RolService} from '../../core/services/shared/rol.service';
-import {RoleEnum} from '../../enums/RoleEnum';
-import {SocialPlatFormEnum} from '../../enums/SocialPlatFormEnum';
-import {Utils} from '../../infraestructura/Utils';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { User } from "../../models/User";
+import { UserService } from "../../core/services/shared/user.service";
+import { Router } from "@angular/router";
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
+import { RolService } from "../../core/services/shared/rol.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
+import { Utils } from "../../infraestructura/Utils";
+import { Subject } from "rxjs";
+import { take, takeUntil } from "rxjs/operators";
 
 @Component({
 	selector: "app-login",
 	templateUrl: "./login.component.html",
-	styleUrls: ["./login.component.scss"]
+	styleUrls: ["./login.component.scss"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
+
+	ngUnsubscribe = new Subject<void>();
 	userForm: FormGroup;
 	public user: User;
 	public roles: RoleEnum[] = [];
@@ -69,24 +74,32 @@ export class LoginComponent implements OnInit {
 		};
 	}
 
-  initFormUser() {
-    this.userForm = this.formBuilder.group({
-      user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
-      password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
-    });
-  }
+	initFormUser() {
+		this.userForm = this.formBuilder.group({
+			user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
+			password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
+		});
+	}
 
 	getRoles() {
-		this.rolService.getRoles().subscribe(roles => {
-			this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
+		this.rolService
+			.getRoles()
+			.pipe(
+				take(1),
+				takeUntil(this.ngUnsubscribe)
+			)
+			.subscribe(
+				roles => {
+					this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
 
-			if (!this.idRolUser) {
-			  Utils.showMsgError('El rol de usuario no fue encontrado');
-      }
-
-		}, () => {
-		  Utils.showMsgError('Ocurrio un error al cargar los roles de usuario!');
-    });
+					if (!this.idRolUser) {
+						Utils.showMsgError("El rol de usuario no fue encontrado");
+					}
+				},
+				() => {
+					Utils.showMsgError("Ocurrio un error al cargar los roles de usuario!");
+				}
+			);
 	}
 
 	socialSignIn(socialPlatform: string) {
@@ -103,12 +116,15 @@ export class LoginComponent implements OnInit {
 			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
 			this.user.roleId = this.idRolUser;
 
-			this.usuarioService.loginSocial(this.user, socialPlatformProvider).subscribe(response => {
-				this.usuarioService.identity = response.user;
-				localStorage.setItem("token", response.token);
-				localStorage.setItem("identity", JSON.stringify(response.user));
-				this.router.navigate(["/dashboard"]);
-			});
+			this.usuarioService
+				.loginSocial(this.user, socialPlatformProvider)
+				.pipe(takeUntil(this.ngUnsubscribe))
+				.subscribe(response => {
+					this.usuarioService.identity = response.user;
+					localStorage.setItem("token", response.token);
+					localStorage.setItem("identity", JSON.stringify(response.user));
+					this.router.navigateByUrl("/dashboard");
+				});
 		});
 	}
 
@@ -117,18 +133,21 @@ export class LoginComponent implements OnInit {
 		this.user.getUserInfo = false;
 		this.disabledButton = true;
 
-		this.usuarioService.login(this.user).subscribe(
-			response => {
-				const token = response.token;
-				this.usuarioService.identity = response.user;
-				localStorage.setItem("token", token);
-				localStorage.setItem("identity", JSON.stringify(this.usuarioService.identity));
-				this.router.navigate(["/dashboard"]);
-			},
-			() => {
-				this.disabledButton = false;
-			}
-		);
+		this.usuarioService
+			.login(this.user)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(
+				response => {
+					const token = response.token;
+					this.usuarioService.identity = response.user;
+					localStorage.setItem("token", token);
+					localStorage.setItem("identity", JSON.stringify(this.usuarioService.identity));
+          this.router.navigateByUrl("/dashboard");
+				},
+				() => {
+					this.disabledButton = false;
+				}
+			);
 	}
 
 	getCredentialsUser() {
@@ -137,16 +156,19 @@ export class LoginComponent implements OnInit {
 	}
 
 	createUser() {
-		this.router.navigate(["/register"]);
+		this.router.navigateByUrl("/register");
 	}
 
 	openNav() {
-  		document.getElementById("myNav").style.width = "100%";
+		document.getElementById("myNav").style.width = "100%";
 	}
 
 	closeNav() {
 		document.getElementById("myNav").style.width = "0%";
 	}
 
-	forgotPassword() {}
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

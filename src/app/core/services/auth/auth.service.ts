@@ -3,7 +3,9 @@ import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from "../../../models/User";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class AuthService {
 	public jwtHelper;
 	constructor(private router: Router) {}

@@ -1,41 +1,64 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {UserService} from '../../core/services/shared/user.service';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { UserService } from "../../core/services/shared/user.service";
+import { Subject } from "rxjs";
+import { switchMap, takeUntil } from "rxjs/operators";
+import { NGXLogger } from "ngx-logger";
 
 @Component({
 	selector: "app-confirm",
 	templateUrl: "./confirm.component.html",
 	styleUrls: ["./confirm.component.scss"]
 })
-export class ConfirmComponent implements OnInit {
+export class ConfirmComponent implements OnInit, OnDestroy {
+	ngUnsubscribe = new Subject<void>();
 	public verified = false;
 	public tokenConfirmacion: string;
 	private username = "";
 
-	constructor(private activatedRoute: ActivatedRoute, private usuarioService: UserService, private router: Router) {}
+	constructor(
+		private activatedRoute: ActivatedRoute,
+		private usuarioService: UserService,
+		private router: Router,
+		private cdr: ChangeDetectorRef,
+		private logger: NGXLogger
+	) {}
 
 	ngOnInit() {
 		this.verifyTokenUser();
 	}
 
 	verifyTokenUser() {
-		this.activatedRoute.params.subscribe((params: Params) => {
-			this.tokenConfirmacion = params["token"];
-			this.username = params["userName"];
+		this.logger.info("VERIFY TOKEN USER");
+		this.activatedRoute.params
+			.pipe(
+				switchMap((params: Params) => this.verifyEmail(params)),
+				takeUntil(this.ngUnsubscribe)
+			)
+			.subscribe(
+				() => {
+					this.verified = true;
+				},
+				() => {
+					this.router.navigateByUrl("/login");
+				}
+			);
+	}
 
-      this.usuarioService.verifyEmail(this.tokenConfirmacion).subscribe(
-        () => {
-          this.verified = true;
-        },
-        () => {
-          this.router.navigate(["/login"]);
-        }
-      );
-
-		});
+	verifyEmail(params: Params) {
+		this.tokenConfirmacion = params["token"];
+		this.username = params["username"];
+		this.cdr.markForCheck();
+		this.logger.info("VERIFY EMAIL", params);
+		return this.usuarioService.verifyEmail(this.tokenConfirmacion);
 	}
 
 	login() {
-		this.router.navigate(["/login"]);
+		this.router.navigateByUrl("/login");
+	}
+
+	ngOnDestroy(): void {
+		this.ngUnsubscribe.next();
+		this.ngUnsubscribe.complete();
 	}
 }

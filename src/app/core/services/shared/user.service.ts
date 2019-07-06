@@ -5,7 +5,9 @@ import {User} from '../../../models/User';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+	providedIn: "root"
+})
 export class UserService {
 	public url: string;
 	public identity: User;
@@ -30,7 +32,7 @@ export class UserService {
 		});
 		const options = { headers: headers };
 
-		return this.http.post(this.url + this.getUrlSocial(socialPlatformProvider) , usuario, options);
+		return this.http.post(this.url + this.getUrlSocial(socialPlatformProvider), usuario, options);
 	}
 
 	private getUrlSocial(socialPlatformProvider) {
