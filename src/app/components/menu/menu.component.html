@@ -1,6 +1,6 @@
 <section>
 
-    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav z-depth-0"
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav"
         [containerInside]="false" id="top-section">
         <mdb-navbar-brand>
             <a class="navbar-brand">
@@ -99,9 +99,9 @@
                             <div class="row justify-content-center btn-dashboard">
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']" >
+                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable">
                                         <!-- clase active menu active-menu-dashboard -->
-                                        <div class="hover-menu p-4 hoverable">
+                                        <div class="p-4">
                                             <mdb-icon fas icon="home" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
                                                 Dashboard
@@ -110,8 +110,8 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']">
-                                        <div class="hover-menu p-4 hoverable">
+                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable">
+                                        <div class="p-4">
                                             <mdb-icon fas icon="money-bill-wave" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
                                                 Grupos
