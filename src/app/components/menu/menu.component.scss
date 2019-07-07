@@ -91,6 +91,11 @@
     border-radius: .75rem !important;
     height: 125px;
     width: 125px;
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -ms-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
 }
 
 .hover-menu:hover{

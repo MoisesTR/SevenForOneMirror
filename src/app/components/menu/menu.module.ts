@@ -9,6 +9,7 @@ import { GameComponent } from "../game/game.component";
 import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
 import {NgxPayPalModule} from 'ngx-paypal';
 import { AddGroupsComponent } from '../add-groups/add-groups.component';
+import { TopPlayersComponent } from '../top-players/top-players.component';
 
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro,  NgxPayPalModule],
@@ -19,7 +20,8 @@ import { AddGroupsComponent } from '../add-groups/add-groups.component';
 		GroupsComponent,
 		GameComponent,
 		GamecontainerComponent,
-		AddGroupsComponent
+		AddGroupsComponent,
+		TopPlayersComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

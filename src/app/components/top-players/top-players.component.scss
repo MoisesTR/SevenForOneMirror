@@ -1,0 +1,74 @@
+.avatar img {
+    width: 96px !important;
+    height: 96px !important;
+}
+
+.avatar-table img {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.top-padding { 
+    padding: 1.25rem;
+}
+
+.top-img {
+    position: absolute;
+    top: -15px;
+    right: 0px;
+}
+
+.top-img-1 {
+    position: absolute;
+    top: -20px;
+    right: -5px;
+}
+
+.separate { 
+    border-collapse:separate; 
+    border-spacing:0 15px; 
+}
+
+.border-left {
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+}
+.border-right {
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.top-text-color {
+    color: #6D6D6D;
+}
+
+.table-text-size {
+    font-size: 18px;
+    font-weight: 390;
+}
+
+.modal-dialog-scrollable{
+    overflow: auto !important;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5; 
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#42d583), color-stop(99%, #42d583),
+    to(#42d583));
+    background-image: -webkit-linear-gradient(bottom, #42d583 0%, #42d583 99%, #42d583 100%);
+    background-image: linear-gradient(to top, #42d583 0%, #42d583 99%, #42d583 100%); 
+}
