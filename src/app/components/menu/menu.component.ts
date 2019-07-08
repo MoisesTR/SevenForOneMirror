@@ -37,7 +37,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private rolService: RolService,
-		private usuarioService: UserService,
+		private userService: UserService,
 		private authService: AuthService,
 		private purchaseHistoryService: PurchaseService,
 		private groupService: GroupService,
@@ -228,7 +228,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	logout() {
 		localStorage.clear();
-		this.usuarioService.identity = null;
+		this.userService.identity = null;
 		this.closeSockets();
 		this.router.navigateByUrl("/login");
 	}

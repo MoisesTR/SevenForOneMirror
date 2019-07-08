@@ -1,7 +1,7 @@
-export class Token {
+export class BodyToken {
 	public token: string;
 	public refreshToken: string;
-	public expiration: string;
+	public expiration: number;
 
 	constructor() {}
 }

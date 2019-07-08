@@ -12,6 +12,7 @@ import { Role } from "../../models/Role";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 import { Subject } from "rxjs";
+import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.service";
 import { take, takeUntil } from "rxjs/operators";
 
 declare var $: any;
@@ -40,7 +41,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		private rolService: RolService,
 		private formBuilder: FormBuilder,
 		private router: Router,
-		private socialAuthService: AuthService
+		private socialAuthService: AuthService,
+		private authService: AuthServiceUser
 	) {
 		this.user = new User();
 	}
@@ -215,9 +217,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {
-					this.usuarioService.identity = response.user;
-					localStorage.setItem("token", response.token);
-					localStorage.setItem("identity", JSON.stringify(response.user));
+					this.authService.setValuesLocalStorage(response);
 					this.router.navigateByUrl("/dashboard");
 				});
 		});
