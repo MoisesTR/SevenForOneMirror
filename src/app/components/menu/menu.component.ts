@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { GroupGame, User } from "../../models/models.index";
@@ -16,6 +16,7 @@ import { SocketGroupGameService } from "../../core/services/shared/socket-group-
 import { NGXLogger } from "ngx-logger";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { ModalDirective } from "ng-uikit-pro-standard";
 
 declare var $: any;
 
@@ -33,6 +34,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 	public isUserAdmin = false;
 	public currentGroupsUser: GroupGame[] = [];
 	public closeSession = false;
+	public messageWin = "";
+	@ViewChild("modalWin") modalWin: ModalDirective;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -87,7 +90,18 @@ export class MenuComponent implements OnInit, OnDestroy {
 		});
 
 		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
-			this.logger.info("WIN-EVENT", data.content);
+			this.logger.info("WIN EVENT: ", data);
+
+			if (this.authService.getUser()._id !== Number(data.userId)) {
+				this.logger.info("SHOW CELEBRATION FOR USER ACTUAL");
+				this.messageWin = data.content;
+				this.modalWin.show();
+				this.gameSocketSevice.celebration();
+			} else {
+				this.logger.info("SHOW CELEBRATION FOR ANOTHER USER");
+				this.gameSocketSevice.messageWin = data.content;
+				this.gameSocketSevice.userHasWin = true;
+			}
 		});
 
 		this.mainSocketService.onEvent(EventEnum.TOP_WINNER).subscribe(data => {
@@ -101,31 +115,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
 			this.logger.info("UPDATE PURCHASE HISTORY USER", data);
 		});
-	}
-
-	celebration() {
-		const end = Date.now() + 5000;
-
-		const colors = ["#42d583", "#448aff"];
-
-		const interval = setInterval(function() {
-			if (Date.now() > end) {
-				return clearInterval(interval);
-			}
-
-			confetti({
-				startVelocity: 30,
-				spread: 360,
-				ticks: 60,
-				particleCount: 180,
-				origin: {
-					x: Math.random(),
-					// since they fall down, start a bit higher than random
-					y: Math.random() - 0.2
-				},
-				colors: colors
-			});
-		}, 200);
 	}
 
 	dropdownAndScroll() {
@@ -252,5 +241,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.ngUnsubscribe.complete();
 		this.mainSocketService.removeAllListeners();
 		this.mainSocketService.closeSocket();
+	}
+
+	clainEvent() {
+		this.modalWin.hide();
+		this.router.navigateByUrl("win-history");
 	}
 }

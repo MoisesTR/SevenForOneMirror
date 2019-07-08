@@ -69,7 +69,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					method: "post",
 					headers: {
 						"content-type": "application/json",
-						Authorization: `Bearer ${this.authService.getBodyToken().token}`
+						Authorization: `Bearer ${this.authService.getToken()}`
 					},
 					body: JSON.stringify({
 						finalPrice: this.finalPrice

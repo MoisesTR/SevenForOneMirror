@@ -7,13 +7,15 @@ import { ProfileComponent } from "../profile/profile.component";
 import { GroupsComponent } from "../groups/groups.component";
 import { GameComponent } from "../game/game.component";
 import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
-import {NgxPayPalModule} from 'ngx-paypal';
-import { AddGroupsComponent } from '../add-groups/add-groups.component';
-import { TopPlayersComponent } from '../top-players/top-players.component';
-import { InvoicesComponent } from '../invoices/invoices.component';
+import { NgxPayPalModule } from "ngx-paypal";
+import { AddGroupsComponent } from "../add-groups/add-groups.component";
+import { TopPlayersComponent } from "../top-players/top-players.component";
+
+import { InvoicesComponent } from "../invoices/invoices.component";
+import { WinHistoryComponent } from "../win-history/win-history.component";
 
 @NgModule({
-	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro,  NgxPayPalModule],
+	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro, NgxPayPalModule],
 	exports: [],
 	declarations: [
 		DashboardComponent,
@@ -23,7 +25,8 @@ import { InvoicesComponent } from '../invoices/invoices.component';
 		GamecontainerComponent,
 		AddGroupsComponent,
 		TopPlayersComponent,
-		InvoicesComponent
+		InvoicesComponent,
+		WinHistoryComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

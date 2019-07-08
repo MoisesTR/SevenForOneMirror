@@ -1,22 +1,26 @@
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {DashboardComponent} from '../dashboard/dashboard.component';
-import {ProfileComponent} from '../profile/profile.component';
-import {GroupsComponent} from '../groups/groups.component';
-import {GamecontainerComponent} from '../gamecontainer/gamecontainer.component';
-import {AddGroupsComponent} from '../add-groups/add-groups.component';
-import { TopPlayersComponent } from '../top-players/top-players.component';
-import { InvoicesComponent } from '../invoices/invoices.component';
+import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { DashboardComponent } from "../dashboard/dashboard.component";
+import { ProfileComponent } from "../profile/profile.component";
+import { GroupsComponent } from "../groups/groups.component";
+import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
+import { AddGroupsComponent } from "../add-groups/add-groups.component";
+import { TopPlayersComponent } from "../top-players/top-players.component";
+
+import { InvoicesComponent } from "../invoices/invoices.component";
+
+import { WinHistoryComponent } from "../win-history/win-history.component";
 
 const menuRoutes = [
-	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } }
-	, { path: "profile", component: ProfileComponent, data: { titulo: "Profile" } }
-	, { path: "groups", component: GroupsComponent, data: { titulo: "Groups" } }
-	, { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
-	, { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "Game container"}}
-	, { path: "add-group", component: AddGroupsComponent, data: { titulo: "Add Group" } }
-	, { path: "top-players", component: TopPlayersComponent, data: { titulo: "Top Players" } }
-	, { path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } }
+	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
+	{ path: "profile", component: ProfileComponent, data: { titulo: "Profile" } },
+	{ path: "groups", component: GroupsComponent, data: { titulo: "Groups" } },
+	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } },
+	{ path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "Game container" } },
+	{ path: "add-group", component: AddGroupsComponent, data: { titulo: "Add Group" } },
+	{ path: "top-players", component: TopPlayersComponent, data: { titulo: "Top Players" } },
+	{ path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } },
+	{ path: "win-history", component: WinHistoryComponent, data: { titulo: "Win History User" } }
 ];
 
 @NgModule({

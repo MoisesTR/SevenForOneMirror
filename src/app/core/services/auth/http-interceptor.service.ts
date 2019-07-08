@@ -1,13 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { AuthService } from "./auth.service";
-import { Observable } from "rxjs/Observable";
-import { catchError, filter, switchMap, take } from "rxjs/operators";
-import { Router } from "@angular/router";
-import { BehaviorSubject, throwError } from "rxjs";
-import { NGXLogger } from "ngx-logger";
-import { BodyToken } from "../../../models/BodyToken";
-import { Utils } from "../../../infraestructura/Utils";
+import {Injectable} from "@angular/core";
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {AuthService} from "./auth.service";
+import {Observable} from "rxjs/Observable";
+import {catchError, filter, switchMap, take} from "rxjs/operators";
+import {Router} from "@angular/router";
+import {BehaviorSubject, throwError} from "rxjs";
+import {NGXLogger} from "ngx-logger";
+import {Utils} from "../../../infraestructura/Utils";
 
 @Injectable({
 	providedIn: "root"
@@ -20,7 +19,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-		if (this.auth.isAuthenticated()) {
+		if (this.auth.getToken()) {
 			request = this.addToken(request, this.auth.getToken());
 		}
 

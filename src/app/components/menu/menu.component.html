@@ -10,7 +10,7 @@
         <links>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active waves-light" mdbWavesEffect>
-                    <a class="nav-link" (click)="basicModal.show(); celebration();">Celebración<span
+                    <a class="nav-link" (click)="basicModal.show();">Celebración<span
                             class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -373,7 +373,7 @@
     <i class="fas fa-arrow-up"></i>
 </button>
 
-<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<div mdbModal #modalWin="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content blue-dark-seven-one rounded-all">
@@ -389,17 +389,18 @@
                         <h2 class="mb-4 white-text mt-3 wow bounceInDown" data-wow-delay="0.2s">
                             <strong>Congratulations!</strong>
                             <br>
-                            Username
+                            {{this.authService.getUser().userName}}
                         </h2>
                         <h4 class="white-text mt-3 wow bounceInDown" data-wow-delay="0.1s">
-                            You have earned in the next groups:
-                            <br>
-                            $1, $10, $50
+                          {{messageWin}}
+<!--                            You have earned in the next groups:-->
+<!--                            <br>-->
+<!--                            $1, $10, $50-->
                         </h4>
                     </div>
                     <div class="col-12 text-center">
                         <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
-                            (click)="basicModal.hide();" mdbTooltip="Claim prize">
+                            (click)="clainEvent()" mdbTooltip="Claim prize">
                             <mdb-icon fas icon="trophy"></mdb-icon> Clain
                         </button>
                     </div>
