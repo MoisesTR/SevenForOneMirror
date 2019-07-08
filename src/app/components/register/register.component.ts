@@ -14,6 +14,7 @@ import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 import { Subject } from "rxjs";
 import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.service";
 import { take, takeUntil } from "rxjs/operators";
+import { CookieService } from "ngx-cookie-service";
 
 declare var $: any;
 
@@ -42,7 +43,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private socialAuthService: AuthService,
-		private authService: AuthServiceUser
+		private authService: AuthServiceUser,
+		private cookieService: CookieService
 	) {
 		this.user = new User();
 	}
@@ -166,7 +168,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 			.subscribe(
 				res => {
 					this.disabledButton = false;
-					localStorage.setItem("username", this.user.userName);
+					this.cookieService.set("username", this.user.userName);
 
 					swal.fire("Info", res["success"], "success").then(() => {
 						this.router.navigate(["/emailConfirm"]);
@@ -217,7 +219,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {
-					this.authService.setValuesLocalStorage(response);
+					this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
 				});
 		});

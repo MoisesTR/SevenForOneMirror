@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {
-				  this.authService.setValuesLocalStorage(response);
+				  this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
 				});
 		});
@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(
 				response => {
-          this.authService.setValuesLocalStorage(response);
+          this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
 				},
 				() => {

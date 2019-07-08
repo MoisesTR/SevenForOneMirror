@@ -20,7 +20,6 @@ export class ConfirmComponent implements OnInit, OnDestroy {
 		private activatedRoute: ActivatedRoute,
 		private usuarioService: UserService,
 		private router: Router,
-		private cdr: ChangeDetectorRef,
 		private logger: NGXLogger
 	) {}
 
@@ -48,7 +47,6 @@ export class ConfirmComponent implements OnInit, OnDestroy {
 	verifyEmail(params: Params) {
 		this.tokenConfirmacion = params["token"];
 		this.username = params["username"];
-		this.cdr.markForCheck();
 		this.logger.info("VERIFY EMAIL", params);
 		return this.usuarioService.verifyEmail(this.tokenConfirmacion);
 	}

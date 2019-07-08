@@ -19,10 +19,9 @@ export class HttpInterceptorService implements HttpInterceptor {
 	constructor(public auth: AuthService, public router: Router, private logger: NGXLogger) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const bodyToken: BodyToken = this.auth.getBodyToken();
 
 		if (this.auth.isAuthenticated()) {
-			request = this.addToken(request, bodyToken.token);
+			request = this.addToken(request, this.auth.getToken());
 		}
 
 		this.logger.debug(request.url);
@@ -30,7 +29,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 			catchError(error => {
 				let errorMessage;
 				if (error instanceof HttpErrorResponse) {
-					if (error.status === 401 && bodyToken.token) {
+					if (error.status === 401 && this.auth.getToken()) {
 						return this.handle401Error(request, next);
 					}
 

@@ -227,10 +227,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	logout() {
-		localStorage.clear();
-		this.userService.identity = null;
 		this.closeSockets();
-		this.router.navigateByUrl("/login");
+		this.authService.logout();
 	}
 
 	closeSockets() {

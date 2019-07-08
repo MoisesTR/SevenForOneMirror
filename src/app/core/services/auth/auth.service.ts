@@ -7,6 +7,8 @@ import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
 import { Global } from "../shared/global";
 import { tap } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
+import { CookieService } from "ngx-cookie-service";
+import { throwError } from "rxjs";
 
 @Injectable({
 	providedIn: "root"
@@ -15,8 +17,15 @@ export class AuthService {
 	public jwtHelper;
 	cachedRequests: Array<HttpRequest<any>> = [];
 	public urlAuth: string;
+	public JWT_REFRESH = "refreshToken";
+	public JWT_ACCESS = "token";
 
-	constructor(private router: Router, private http: HttpClient, private logger: NGXLogger) {
+	constructor(
+		private router: Router,
+		private http: HttpClient,
+		private logger: NGXLogger,
+		private cookieService: CookieService
+	) {
 		this.urlAuth = Global.urlAuth;
 	}
 
@@ -29,23 +38,31 @@ export class AuthService {
 		// be called after the token is refreshed
 	}
 
-	public getBodyToken() {
-		const bodyToken: BodyToken = JSON.parse(localStorage.getItem("bodyToken"));
-		return bodyToken || new BodyToken();
+	getToken() {
+		return this.cookieService.get(this.JWT_ACCESS);
 	}
 
 	getRefreshToken() {
-		return this.getBodyToken().refreshToken;
+		return this.cookieService.get(this.JWT_REFRESH);
 	}
 
 	public getUser(): User {
-		const identity = JSON.parse(localStorage.getItem("identity"));
+		let identity;
+
+		try {
+			identity = JSON.parse(this.cookieService.get("identity"));
+		} catch (e) {
+			this.logger.info("MISTAKE FROM JSON PARSE IDENTITY, \n" + "PROBABLY SOMEONE DELETED THE KEY IN THE COOKIE");
+			this.logout();
+			throwError(e);
+		}
+
 		return identity ? identity : null;
 	}
 
 	public isAuthenticated(): boolean {
 		this.jwtHelper = new JwtHelperService();
-		const token = this.getBodyToken().token;
+		const token = this.getToken();
 
 		return token ? !this.jwtHelper.isTokenExpired(token) : false;
 	}
@@ -60,31 +77,27 @@ export class AuthService {
 		return this.http.post(this.urlAuth + "refreshtoken", body, options).pipe(
 			tap((bodyToken: BodyToken) => {
 				this.logger.info("SAVE BODY TOKEN IN LOCAL STORAGE");
-				this.setBodyToken(bodyToken);
+				this.setTokenValues(bodyToken);
 			})
 		);
 	}
 
-	setValuesLocalStorage(response) {
-		const bodyToken = new BodyToken();
+	setValuesCookies(response) {
+		this.cookieService.set("token", response.token);
+		this.cookieService.set("refreshToken", response.refreshToken);
+		this.cookieService.set("expiration", response.expiration);
 
-		bodyToken.token = response.token;
-		bodyToken.refreshToken = response.refreshToken;
-		bodyToken.expiration = response.expiration;
-
-		localStorage.removeItem("bodyToken");
-		localStorage.setItem("bodyToken", JSON.stringify(bodyToken));
-
-		if (response.user) localStorage.setItem("identity", JSON.stringify(response.user));
+		if (response.user) this.cookieService.set("identity", JSON.stringify(response.user));
 	}
 
-	setBodyToken(bodyToken: BodyToken) {
-		localStorage.removeItem("bodyToken");
-		localStorage.setItem("bodyToken", JSON.stringify(bodyToken));
+	setTokenValues(bodyToken: BodyToken) {
+		this.cookieService.set("token", bodyToken.token);
+		this.cookieService.set("refreshToken", bodyToken.refreshToken);
+		this.cookieService.set("expiration", bodyToken.expiration);
 	}
 
 	public logout(): void {
-		localStorage.clear();
+		this.cookieService.deleteAll();
 		this.router.navigate(["/login"]);
 	}
 }
