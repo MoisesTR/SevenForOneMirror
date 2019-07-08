@@ -14,7 +14,8 @@ import confetti from "canvas-confetti";
 export class SocketGroupGameService {
 	private socket;
 	public userHasWin = false;
-	public messageWin: string;
+	public recentBuyTicketGroup = false;
+	public messageWin = '';
 	constructor(private logger: NGXLogger, private authService: AuthService) {}
 
 	public connect() {
@@ -52,6 +53,10 @@ export class SocketGroupGameService {
 			this.logger.info("CLOSE GAME SOCKET");
 			this.socket.close();
 		}
+	}
+
+	public removeListener(eventEnum: string) {
+		this.socket.remote(eventEnum);
 	}
 
 	public removeAllListeners() {

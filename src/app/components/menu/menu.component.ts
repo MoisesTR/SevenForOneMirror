@@ -9,7 +9,6 @@ import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
-import confetti from "canvas-confetti";
 import { MainSocketService } from "../../core/services/shared/main-socket.service";
 import { EventEnum } from "../../enums/EventEnum";
 import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
@@ -92,16 +91,18 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
 			this.logger.info("WIN EVENT: ", data);
 
-			if (this.authService.getUser()._id !== Number(data.userId)) {
-				this.logger.info("SHOW CELEBRATION FOR USER ACTUAL");
+			if (!this.gameSocketSevice.recentBuyTicketGroup) {
+				this.logger.info("SHOW CELEBRATION IN ACTUAL SCREEN");
 				this.messageWin = data.content;
 				this.modalWin.show();
 				this.gameSocketSevice.celebration();
 			} else {
-				this.logger.info("SHOW CELEBRATION FOR ANOTHER USER");
+				this.logger.info("SHOW CELEBRATION IN SCREEN GROUP/ID ");
 				this.gameSocketSevice.messageWin = data.content;
 				this.gameSocketSevice.userHasWin = true;
 			}
+
+			this.gameSocketSevice.recentBuyTicketGroup = false;
 		});
 
 		this.mainSocketService.onEvent(EventEnum.TOP_WINNER).subscribe(data => {

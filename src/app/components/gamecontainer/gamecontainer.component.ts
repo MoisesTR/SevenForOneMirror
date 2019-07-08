@@ -31,6 +31,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	public circleUsers: CircleUser[] = [];
 	public circleUserPlaying: CircleUser[] = [];
 	public messageWin = "";
+	public iterationValue = 1;
 	@ViewChild("modalWin") modalWin: ModalDirective;
 
 	constructor(
@@ -101,8 +102,33 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
 	initSocketGroupActivity(group: GroupGame) {
 		this.socketGroupGame.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(data => {
-			this.logger.info("ACTIVTY GROUP: ", data);
+			this.logger.info("ACTIVTY GROUP: ", group, data);
+			this.animationNewPlayer(data);
 		});
+	}
+
+	animationNewPlayer(data) {
+		const memberGroup = new MemberGroup();
+		memberGroup.userId = data.userId;
+		memberGroup.image = data.image;
+		memberGroup.userName = data.userName;
+		const circleUser: CircleUser = this.gameService.createCircle(memberGroup, 7);
+
+		let circleUSersCopy: CircleUser[] = this.circleUsers.filter(c => c.position !== 1);
+
+		circleUSersCopy = Object.assign([], this.circleUsers);
+		circleUSersCopy = circleUSersCopy.filter(c => c.position !== 1);
+
+		// Desplazar los circulos una posicion hacia atras
+		circleUSersCopy.forEach((circle, index) => {
+			circle.position = circle.position - 1;
+		});
+
+		circleUSersCopy.push(circleUser);
+		this.iterationValue = 0;
+		this.circleUsers = Object.assign([], circleUSersCopy);
+		this.circleUserPlaying = Object.assign([], this.gameService.getCircleUserPlaying(circleUSersCopy));
+		this.logger.info(circleUSersCopy);
 	}
 
 	clainEvent() {

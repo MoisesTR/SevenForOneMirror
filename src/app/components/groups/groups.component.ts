@@ -105,6 +105,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
 						swal.fire("Info", "The registration has been successful!", "success").then(() => {
+						  this.socketGroupGame.recentBuyTicketGroup = true;
               this.socketGroupGame.connect();
 							this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
