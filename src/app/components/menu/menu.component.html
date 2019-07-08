@@ -99,7 +99,7 @@
                             <div class="row justify-content-center btn-dashboard">
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable">
+                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable text-menu" mdbWavesEffect>
                                         <!-- clase active menu active-menu-dashboard -->
                                         <div class="p-4">
                                             <mdb-icon fas icon="home" size="2x" class="mt-1"></mdb-icon>
@@ -110,7 +110,7 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable">
+                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable text-menu" mdbWavesEffect>
                                         <div class="p-4">
                                             <mdb-icon fas icon="money-bill-wave" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
@@ -125,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 mt-3">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 mt-3 mb-3">
 
                     <router-outlet (activate)="onActivate($event)"></router-outlet>
 
