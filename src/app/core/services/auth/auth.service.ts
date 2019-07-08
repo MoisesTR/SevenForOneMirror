@@ -59,7 +59,7 @@ export class AuthService {
 		const body = JSON.stringify({ user, refreshToken });
 		return this.http.post(this.urlAuth + "refreshtoken", body, options).pipe(
 			tap((bodyToken: BodyToken) => {
-				this.logger.info("Save body token from refresh token endpoint");
+				this.logger.info("SAVE BODY TOKEN IN LOCAL STORAGE");
 				this.setBodyToken(bodyToken);
 			})
 		);

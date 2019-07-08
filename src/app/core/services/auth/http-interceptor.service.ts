@@ -30,7 +30,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 			catchError(error => {
 				let errorMessage;
 				if (error instanceof HttpErrorResponse) {
-					if (error.status === 401) {
+					if (error.status === 401 && bodyToken.token) {
 						return this.handle401Error(request, next);
 					}
 
