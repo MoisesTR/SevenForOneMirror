@@ -10,7 +10,7 @@
         <links>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active waves-light" mdbWavesEffect>
-                    <a class="nav-link" (click)="basicModal.show();">Celebración<span
+                    <a class="nav-link"">Celebración<span
                             class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -389,7 +389,7 @@
                         <h2 class="mb-4 white-text mt-3 wow bounceInDown" data-wow-delay="0.2s">
                             <strong>Congratulations!</strong>
                             <br>
-                            {{this.authService.getUser().userName}}
+                            {{user.userName}}
                         </h2>
                         <h4 class="white-text mt-3 wow bounceInDown" data-wow-delay="0.1s">
                           {{messageWin}}
