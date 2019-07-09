@@ -64,76 +64,85 @@
 <div mdbModal #paymentModal="mdbModal" class="modal fade" id="paymentModalModalTop" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body background-footer">
+        <div class="modal-content rounded-all">
+            <div class="modal-body">
 
-                <div class="row justify-content-center">
+                <div class="container">
+                    <div class="row justify-content-center">
 
-                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 white mt-2">
-                        <h2 class="font-weight-bold blue-seven-one-text product-name mb-3 mt-2">
-                            <strong>{{user.firstName}} {{user.lastName}}</strong>
-                        </h2>
+                        <div class="col-12">
+                            <h2 class="h2-responsive font-weight-bold blue-dark-seven-one-text">Factura</h2>
+                            <hr class="mb-4">
+                        </div>
 
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product name</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><strong> Game 7 x 1 </strong></td>
-                                    <td><strong> ${{groupSelectedPayModal.initialInvertion}} </strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="row justify-content-center">
-                            <div class="col-6 mb-2">
-                                <ngx-paypal [config]="payPalConfig" class="mb-3 ml-5 mr-5"></ngx-paypal>
-                            </div>
-                            <div class="col-5 mb-2">
-                                <button mdbBtn type="button" block="true" rounded="true"
-                                    class="mb-3 ml-3 mr-3 blue-paypal z-depth-0" mdbWavesEffect>Créditos 7 x 1</button>
+                        <div class="col-6">
+                            <div class="text-left">
+                                <p class="m-0 font-weight-bolder">Fecha</p>
+                                <p class="m-0">09/07/2019</p>
                             </div>
                         </div>
 
+                        <div class="col-6">
+                            <div class="text-left">
+                                <p class="m-0 font-weight-bolder">Nº de factura</p>
+                                <p class="m-0">1</p>
+                            </div>
+                        </div>
 
+                        <div class="col-6 mt-4">
+                            <div class="text-left">
+                                <p class="m-0 font-weight-bolder">Para</p>
+                                <p class="m-0 font-weight-bold blue-dark-seven-one-text">{{user.firstName}} {{user.lastName}}</p>
+                                <p class="m-0">Usuario</p>
+                                <p class="m-0">username@domain.com</p>
+                            </div>
+                        </div>
 
-                        <!-- <mdb-card>
-                            <mdb-card-body>
-                                <mdb-card-title>
-                                    <h2 class="font-weight-bold green-seven-one-text product-name mb-3">
-                                        <strong>{{user.firstName}} {{user.lastName}}</strong>
-                                    </h2>
-                                </mdb-card-title>
-                                <mdb-card-text>
+                        <div class="col-6 mt-4">
+                            <div class="text-left">
+                                <p class="m-0 font-weight-bolder">De</p>
+                                <p class="m-0 font-weight-bold blue-dark-seven-one-text">Seven x One</p>
+                                <p class="m-0">+1 234 632 9800</p>
+                                <p class="m-0">support@sevenxone.com</p>
+                            </div>
+                        </div>
 
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Product name</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td><strong> Game 7 x 1 </strong></td>
-                                                <td><strong> ${{groupSelectedPayModal.initialInvertion}} </strong></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <div class="col-12 mt-3">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="font-weight-bolder">Descripción</th>
+                                            <th scope="col" class="font-weight-bolder">Monto</th>
+                                            <th scope="col" class="font-weight-bolder">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Grupo de ${{groupSelectedPayModal.initialInvertion}} dolares</td>
+                                            <td>${{groupSelectedPayModal.initialInvertion}}</td>
+                                            <td>${{groupSelectedPayModal.initialInvertion}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ul class="list-unstyled text-right mr-5">
+                                <li class="font-weight-bold blue-dark-seven-one-text"><strong>TOTAL:</strong><span
+                                        class="float-right ml-3">${{groupSelectedPayModal.initialInvertion}}</span></li>
+                            </ul>
+                        </div>
 
-                                </mdb-card-text>
-                            </mdb-card-body>
+                        <div class="col-6 mb-2">
+                            <ngx-paypal [config]="payPalConfig" class="mb-3"></ngx-paypal>
+                        </div>
                             
-                        </mdb-card> -->
+                            <!-- <div class="col-5 mb-2">
+                                    <button mdbBtn type="button" block="true" rounded="true"
+                                        class="mb-3 ml-3 mr-3 blue-paypal z-depth-0" mdbWavesEffect>Créditos 7 x 1</button>
+                                </div> -->
+
                     </div>
+
                 </div>
 
             </div>
