@@ -1,7 +1,7 @@
 <section>
 
-    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav"
-        [containerInside]="false" id="top-section">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav" [containerInside]="false"
+        id="top-section">
         <mdb-navbar-brand>
             <a class="navbar-brand">
                 <img src="assets/images/logo.svg" height="30" alt="" (click)="dashBoard()">
@@ -99,10 +99,10 @@
                             <div class="row justify-content-center btn-dashboard">
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable">
-                                        <!-- clase active menu active-menu-dashboard -->
-                                        <div class="p-4">
-                                            <mdb-icon fas icon="home" size="2x" class="mt-1"></mdb-icon>
+                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']"
+                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                        <div class="p-3">
+                                            <mdb-icon fas icon="home" size="2x" class="mt-2"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
                                                 Dashboard
                                             </div>
@@ -110,22 +110,53 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable">
-                                        <div class="p-4">
-                                            <mdb-icon fas icon="money-bill-wave" size="2x" class="mt-1"></mdb-icon>
+                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']"
+                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                        <div class="p-3">
+                                            <mdb-icon fas icon="money-bill-wave" size="2x" class="mt-2"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
                                                 Grupos
                                             </div>
                                         </div>
                                     </a>
                                 </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-menu mt-2">
+                            <div class="row justify-content-center btn-dashboard">
+
+
+                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                        <div class="p-3">
+                                            <mdb-icon fas icon="edit" size="2x" class="mt-1"></mdb-icon>
+                                            <div class="mt-1 font-weight-bolder text-wrap">
+                                                Agregar grupo
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                        <div class="p-2">
+                                            <mdb-icon fas icon="users-cog" size="2x" class="mt-2"></mdb-icon>
+                                            <div class="mt-1 font-weight-bolder text-wrap">
+                                                Agregar administrador
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 mt-3">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9 mt-3 mb-3">
 
                     <router-outlet (activate)="onActivate($event)"></router-outlet>
 

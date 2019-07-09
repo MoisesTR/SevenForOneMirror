@@ -7,15 +7,20 @@
           <div class="card rounded-all z-depth-3">
             <div class="card-body">
               <img src="assets/images/logo.png" class="rounded mx-auto d-block wow fadeInDown" alt="Email confirm"
-                style="width:30%;" data-wow-delay="0.3s">
+                style="width:60%;" data-wow-delay="0.3s">
               <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
 
               <h4 class="gray-heading mb-4 wow fadeInDown" data-wow-delay="0.4s">
                 Surgió un bloqueo ya que <span class="green-seven-one-text">7x1</span>
                 está abierto en otra ventana
               </h4>
-              <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="close()">CERRAR</button>
-              <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="stayHere()">USAR AQUI</button>
+
+              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown btn-rounded" data-wow-delay="0.4s"
+                (click)="close()" mdbWavesEffect>Cerrar</button>
+
+              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown btn-rounded" data-wow-delay="0.4s"
+                (click)="stayHere()" mdbWavesEffect>Usar aquí</button>
+
             </div>
           </div>
 

@@ -2,19 +2,92 @@
   height: 100vh !important;
 }
 
-.view.mask {
-  overflow: auto !important;
+.seven-one-404 a {
+	color: #fff;
 }
 
-.btn-seven-one {
-  border: 2px solid black;
-  background-color: transparent;
-  color: black;
-  padding: 14px 28px;
-  cursor: pointer;
+.seven-one-404:before {
+	content: "";
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
-.outline-seven-one {
-  border-color: #42d583;
-  color: #42d583;
+.seven-one-404 .container {
+	position: relative;
+	z-index: 2;
+}
+
+.seven-one-404,
+.seven-one-404 .row {
+	height: 100vh;
+	min-height: 900px;
+}
+
+.seven-one-404 .logo {
+	display: inline-block;
+	position: relative;
+	-webkit-transition: .3s all ease-in-out;
+	-o-transition: .3s all ease-in-out;
+	transition: .3s all ease-in-out;
+	top: 0;
+}
+
+.seven-one-404 .logo img {
+	max-width: 200px;
+	margin-bottom: 2rem;
+}
+
+.seven-one-404 .logo:hover {
+	top: -10px;
+}
+
+.seven-one-404 .h1,
+.seven-one-404 h2 {
+	color: #fff;
+}
+
+.seven-one-404 .h1 {
+	font-size: 18rem;
+	font-weight: 900;
+	position: relative;
+}
+
+@media screen and (max-width: 980px) {
+	.seven-one-404 .h1 {
+		font-size: 10rem;
+	}
+}
+
+.seven-one-404 h2 {
+	font-size: 2rem;
+}
+
+.seven-one-404 p {
+	font-size: 1.3rem;
+	color: #fff;
+}
+
+.seven-one-404 .last {
+	line-height: 0;
+	position: relative;
+	display: inline-block;
+}
+
+.seven-one-404 .last.sleep {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: .8s all ease-in-out;
+	-o-transition: .8s all ease-in-out;
+	transition: .8s all ease-in-out;
+	top: -70px;
+}
+
+.seven-one-404 .last.awake {
+	opacity: 1;
+	visibility: visible;
+	top: 0px;
 }
