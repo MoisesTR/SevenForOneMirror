@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="785" height="706.5" viewBox="0 0 785 706.5">
+  <g id="Grupo_2" data-name="Grupo 2" transform="translate(-547 -145.5)">
+    <rect id="Rectángulo_1" data-name="Rectángulo 1" width="98" height="185" transform="translate(890.349 523)" fill="#ffb42b"/>
+    <path id="Rectángulo_2" data-name="Rectángulo 2" d="M15.686,0H388.314A15.686,15.686,0,0,1,404,15.686V244A202,202,0,0,1,202,446h0A202,202,0,0,1,0,244V15.686A15.686,15.686,0,0,1,15.686,0Z" transform="translate(737.349 145.5)" fill="#ffc335"/>
+    <path id="Trazado_2" data-name="Trazado 2" d="M765,413h0c-14.519,0-91.749-1.45-154.149-63.851A217.314,217.314,0,0,1,547,195H765ZM737,230H599A138,138,0,0,0,737,368h0Z" fill="#ffb42b"/>
+    <path id="Trazado_3" data-name="Trazado 3" d="M1114,195h218c0,120.4-97.6,218-218,218h0Zm28,173h0a138,138,0,0,0,138-138H1142Z" fill="#ffb42b"/>
+    <path id="Rectángulo_3" data-name="Rectángulo 3" d="M72,0H193a72,72,0,0,1,72,72v0a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0v0A72,72,0,0,1,72,0Z" transform="translate(806.849 708)" fill="#ffc335"/>
+    <path id="Rectángulo_4" data-name="Rectángulo 4" d="M72,0H417a72,72,0,0,1,72,72v0a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0v0A72,72,0,0,1,72,0Z" transform="translate(694.849 780)" fill="#ffb42b"/>
+    <path id="Trazado_4" data-name="Trazado 4" d="M1109,418s-24.515,134-148,134Z" fill="#fff" opacity="0.6"/>
+    <g id="Livello_100" data-name="Livello 100">
+      <path id="Trazado_5" data-name="Trazado 5" d="M1018.6,317.612a6.886,6.886,0,0,0-6.995-6.771c-.249,0-.493.014-.735.036l-48.306-1.14-16.5-43.081a7.047,7.047,0,0,0-13.431,0l-16.506,43.081-48.3,1.14c-.242-.024-.489-.036-.735-.036a6.881,6.881,0,0,0-6.991,6.771,6.709,6.709,0,0,0,3.2,5.687l38.476,27.2-13.729,42.672a6.511,6.511,0,0,0-.783,3.1,6.885,6.885,0,0,0,6.994,6.774,7.1,7.1,0,0,0,4.339-1.468L939.353,375.7l40.758,25.877a7.1,7.1,0,0,0,4.338,1.468,6.885,6.885,0,0,0,6.991-6.774,6.537,6.537,0,0,0-.783-3.1L976.93,350.5l38.474-27.2a6.726,6.726,0,0,0,3.2-5.687" fill="#fff"/>
+    </g>
+    <path id="Trazado_6" data-name="Trazado 6" d="M1156.823,687.658" fill="none" stroke="#dfffe9" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>
