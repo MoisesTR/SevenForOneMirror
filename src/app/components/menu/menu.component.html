@@ -130,7 +130,8 @@
 
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                    <a [routerLink]="['/invoices']" [routerLinkActive]="['active-menu-dashboard']"
+                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
                                         <div class="p-3">
                                             <mdb-icon fas icon="file-invoice-dollar" size="2x" class="mt-2"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
