@@ -10,7 +10,7 @@
         <links>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active waves-light" mdbWavesEffect>
-                    <a class="nav-link" (click)="basicModal.show(); celebration();">Celebración <span
+                    <a class="nav-link" (click)="basicModal.show(); celebration();">Celebración<span
                             class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -21,7 +21,7 @@
                         mdbWavesEffect>
                         <span class="badge red">3</span>
                         <mdb-icon fas icon="bell"></mdb-icon>
-                        <span class="d-none d-md-inline-block"> Notifications</span>
+                        <span class="d-none d-md-inline-block"> Notificaciones</span>
                     </a>
                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
                         <a class="dropdown-item waves-effect waves-light">
@@ -46,11 +46,11 @@
                 <li class="nav-item dropdown" dropdown>
                     <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                         mdbWavesEffect>
-                        <mdb-icon fas icon="user"></mdb-icon> Profile <span class="caret"></span>
+                        <mdb-icon fas icon="user"></mdb-icon> Perfil <span class="caret"></span>
                     </a>
                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                        <a class="dropdown-item" (click)="updateProfile()">Edit Profile</a>
-                        <a class="dropdown-item" (click)="mdlLogout.show()">Logout</a>
+                        <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
+                        <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
                     </div>
                 </li>
 
@@ -310,7 +310,7 @@
         <div class="modal-content text-center">
             <!--Header-->
             <div class="modal-header green-seven-one white-text">
-                <h4 class="title">Logout</h4>
+                <h4 class="title">Cerrar sesión</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlLogout.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -320,14 +320,14 @@
             <!--Body-->
             <div class="modal-body">
                 <i class="fas fa-times fa-4x animated rotateIn"></i>
-                <p>Are you sure that you want to logout now?</p>
+                <p>¿Estás seguro de que quieres cerrar sesión ahora?</p>
             </div>
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a (click)="logout()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect>Yes</a>
                 <a type="button" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect
                     data-dismiss="modal" (click)="mdlLogout.hide()">No</a>
+                <a (click)="logout()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect>Si</a>
             </div>
         </div>
         <!--/.Content-->
