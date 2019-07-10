@@ -7,6 +7,10 @@ import { NameSpaceEnum } from "../../../enums/NameSpaceEnum";
 import { NGXLogger } from "ngx-logger";
 import { AuthService } from "../auth/auth.service";
 import confetti from "canvas-confetti";
+import { MemberGroup } from "../../../models/MemberGroup";
+import { CircleUser } from "../../../models/CircleUser";
+import { GameService } from "./game.service";
+import { GroupGame } from "../../../models/GroupGame";
 
 @Injectable({
 	providedIn: "root"
@@ -15,8 +19,8 @@ export class SocketGroupGameService {
 	private socket;
 	public userHasWin = false;
 	public recentBuyTicketGroup = false;
-	public messageWin = '';
-	constructor(private logger: NGXLogger, private authService: AuthService) {}
+	public messageWin = " ";
+	constructor(private logger: NGXLogger, private authService: AuthService, private gameService: GameService) {}
 
 	public connect() {
 		if (!this.socket) {
@@ -66,28 +70,49 @@ export class SocketGroupGameService {
 		}
 	}
 
-  celebration() {
-    const end = Date.now() + 5000;
+	celebration() {
+		const end = Date.now() + 5000;
 
-    const colors = ["#42d583", "#448aff"];
+		const colors = ["#42d583", "#448aff"];
 
-    const interval = setInterval(function() {
-      if (Date.now() > end) {
-        return clearInterval(interval);
-      }
+		const interval = setInterval(function() {
+			if (Date.now() > end) {
+				return clearInterval(interval);
+			}
+			confetti({
+				startVelocity: 30,
+				spread: 360,
+				ticks: 60,
+				particleCount: 180,
+				origin: {
+					x: Math.random(),
+					// since they fall down, start a bit higher than random
+					y: Math.random() - 0.2
+				},
+				colors: colors
+			});
+		}, 200);
+	}
 
-      confetti({
-        startVelocity: 30,
-        spread: 360,
-        ticks: 60,
-        particleCount: 180,
-        origin: {
-          x: Math.random(),
-          // since they fall down, start a bit higher than random
-          y: Math.random() - 0.2
-        },
-        colors: colors
-      });
-    }, 200);
-  }
+	animationNewPlayer(data, circleUsers: CircleUser[], circleUsersPlaying: CircleUser[], group: GroupGame) {
+		this.logger.info("GENERATE ANIMATION BY MULTIPLES GROUPS");
+		const memberGroup = new MemberGroup();
+		memberGroup.userId = data.userId;
+		memberGroup.image = data.image;
+		memberGroup.userName = data.userName;
+		const circleUser: CircleUser = this.gameService.createCircle(memberGroup, 7);
+
+		let circleUSersCopy = Object.assign([], circleUsers);
+		circleUSersCopy = circleUSersCopy.filter(c => c.position !== 1);
+
+		// Desplazar los circulos una posicion hacia atras
+		circleUSersCopy.forEach((circle, index) => {
+			circle.position = circle.position - 1;
+		});
+
+		circleUSersCopy.push(circleUser);
+
+		group.circleUsers = Object.assign([], circleUSersCopy);
+		group.circleUsersPlaying = Object.assign([], this.gameService.getCircleUserPlaying(circleUSersCopy));
+	}
 }

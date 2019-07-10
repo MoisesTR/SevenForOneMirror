@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { GroupGame } from "../../models/GroupGame";
-import { UserService } from "../../core/services/shared/user.service";
-import { User } from "../../models/User";
-import { AuthService } from "../../core/services/auth/auth.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { GameService } from "../../core/services/shared/game.service";
-import { Router } from "@angular/router";
-import { Observable, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
-import { EventEnum } from "../../enums/EventEnum";
-import { NGXLogger } from "ngx-logger";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {GroupService} from "../../core/services/shared/group.service";
+import {GroupGame} from "../../models/GroupGame";
+import {UserService} from "../../core/services/shared/user.service";
+import {User} from "../../models/User";
+import {AuthService} from "../../core/services/auth/auth.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {GameService} from "../../core/services/shared/game.service";
+import {Router} from "@angular/router";
+import {Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
+import {EventEnum} from "../../enums/EventEnum";
+import {NGXLogger} from "ngx-logger";
 
 @Component({
 	selector: "app-dashboard",
@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	public isUserAdmin = false;
 	public group: GroupGame;
 	public showWelcomeUser = true;
+	public iterationValue = 1;
 
 	elements: any = [];
 	headElementsUsers = ["#", "Username", "First name", "Last name", "Email"];
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		if (!userIsAdmin) {
 			this.getGroupsOfCurrentUser();
 		} else {
-      this.gameSocketService.connect();
+			this.gameSocketService.connect();
 			this.getGroupsAdmin();
 			this.getUsersNormal();
 		}
@@ -85,6 +86,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 					this.gameSocketService.connect();
 					this.gameSocketService.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(data => {
 						this.logger.info("ACTIVTY-GROUP: " + group.initialInvertion, data);
+						this.iterationValue = 0;
+						this.gameSocketService.animationNewPlayer(data, group.circleUsers, group.circleUsersPlaying, group);
 					});
 
 					group.circleUsers = this.gameService.generateCircles(group.members, group.lastWinner, this.user);

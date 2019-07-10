@@ -30,7 +30,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	public isUserAdmin = false;
 	public circleUsers: CircleUser[] = [];
 	public circleUserPlaying: CircleUser[] = [];
-	public messageWin = "";
+	public messageWin = " ";
 	public iterationValue = 1;
 	@ViewChild("modalWin") modalWin: ModalDirective;
 
@@ -108,15 +108,14 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	}
 
 	animationNewPlayer(data) {
+		this.logger.info("GENERATE ANIMATION BY GROUP");
 		const memberGroup = new MemberGroup();
 		memberGroup.userId = data.userId;
 		memberGroup.image = data.image;
 		memberGroup.userName = data.userName;
 		const circleUser: CircleUser = this.gameService.createCircle(memberGroup, 7);
 
-		let circleUSersCopy: CircleUser[] = this.circleUsers.filter(c => c.position !== 1);
-
-		circleUSersCopy = Object.assign([], this.circleUsers);
+		let circleUSersCopy = Object.assign([], this.circleUsers);
 		circleUSersCopy = circleUSersCopy.filter(c => c.position !== 1);
 
 		// Desplazar los circulos una posicion hacia atras
@@ -128,7 +127,6 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.iterationValue = 0;
 		this.circleUsers = Object.assign([], circleUSersCopy);
 		this.circleUserPlaying = Object.assign([], this.gameService.getCircleUserPlaying(circleUSersCopy));
-		this.logger.info(circleUSersCopy);
 	}
 
 	clainEvent() {

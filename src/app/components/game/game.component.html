@@ -23,8 +23,8 @@
                                 [ngClass]="(i === 0) ? 'col-sm-8 col-md-8 col-lg-2' : ''">
                                 <div *ngIf="i === 0">
                                     <div class="row justify-content-center">
-                                        <div [ngClass]="[ iterationValue === 1 ? 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow bounceInRight' : 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow fadeIn']"
-                                            data-wow-delay="{{(iterationValue+1)/10}}s">
+                                        <div [ngClass]="[ iterationValue === 1 ? 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow bounceInRight' : 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow slideOutLeft']"
+                                             data-wow-delay="{{resultado(i)}}s">
                                             <h5 class='blue-seven-one-text mt-2 text-center'>{{i+1}}</h5>
                                             <div class="view">
                                                 <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'"
@@ -36,8 +36,8 @@
                                                     <p class="white-text">You</p>
                                                 </div>
                                             </div>
-                                            <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow fadeIn']"
-                                                data-wow-delay="{{(iterationValue+1)/10}}s">{{circleUser.member.userName}}</p>
+                                            <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow slideOutLeft']"
+                                                data-wow-delay="{{resultado(i)}}s">{{circleUser.member.userName}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -48,9 +48,9 @@
                                     <div *ngFor="let circleUser of circleUsers | slice:1; let i = index;"
                                         class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
 
-                                        <h5 [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow fadeIn']"
-                                            data-wow-delay="{{(iterationValue+1)/10}}s">{{i+2}}</h5>
-                                        <div class="view wow bounceInRight" data-wow-delay="{{(iterationValue+1)/10}}s">
+                                        <h5 [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow slideOutLeft']"
+                                            data-wow-delay="{{resultado(i)}}s">{{i+2}}</h5>
+                                        <div [ngClass]="[ iterationValue === 1 ? 'view wow bounceInRight' : 'view wow slideOutLeft']" data-wow-delay="{{resultado(i)}}s">
                                             <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'"
                                                 class="ratio img-responsive img-circle gray-circle"
                                                 [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : (circleUser.status === 'AC') ? 'assets/images/user.png' : '')  + ')'}">
@@ -60,8 +60,8 @@
                                                 <p class="white-text">You</p>
                                             </div>
                                         </div>
-                                        <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow fadeIn']"
-                                            data-wow-delay="{{(iterationValue+1)/10}}s">{{circleUser.member.userName}}</p>
+                                        <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow slideOutLeft']"
+                                           data-wow-delay="{{resultado(i)}}s">{{circleUser.member.userName}}</p>
                                     </div>
                                 </div>
                             </div>

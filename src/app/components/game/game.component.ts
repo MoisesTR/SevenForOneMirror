@@ -34,4 +34,16 @@ export class GameComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit() {}
+
+	resultado(i: number) {
+		if (this.iterationValue === 0) {
+			return 2 / 10;
+		} else {
+			return (i + 1) / 10;
+		}
+	}
+
+	trackingFunction(index: number, circleUser: CircleUser) {
+		return circleUser.position;
+	}
 }
