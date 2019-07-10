@@ -5299,6 +5299,11 @@ ngx-cacheable@^1.2.5:
   resolved "https://registry.yarnpkg.com/ngx-cacheable/-/ngx-cacheable-1.2.5.tgz#2bc13dbe4717f8192145f2549900e7c88a022d43"
   integrity sha512-/LmtX6W8uR1kQlpb155LdFtZIX7ogGaV8JBr4dQvvPnlaGRZ1hL2xRRpcP7tbVOKkxF1PvQ0znTCUFTkA1cVGA==
 
+ngx-cookie-service@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.2.0.tgz#79fe67863b3b93ee226c9ea8d60e1542c7115a58"
+  integrity sha512-2kaC1itlEMxiMAPJ320hOpcwU9vhvjbKQCZ1Go6bGhYjJtqG7eYvhNP7mM9IhFz1/afG2tBryJPySWmFUGhRpA==
+
 ngx-logger@^3.4.5:
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/ngx-logger/-/ngx-logger-3.4.5.tgz#dc3db10648a5690ed7f3c2568aab704b5f5fe396"

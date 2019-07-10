@@ -1,15 +1,16 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../models/User";
-import { UserService } from "../../core/services/shared/user.service";
-import { Router } from "@angular/router";
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
-import { RolService } from "../../core/services/shared/rol.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
-import { Utils } from "../../infraestructura/Utils";
-import { Subject } from "rxjs";
-import { take, takeUntil } from "rxjs/operators";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../models/User";
+import {UserService} from "../../core/services/shared/user.service";
+import {Router} from "@angular/router";
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from "angular-6-social-login";
+import {AuthService as AuthServiceUser} from "../../core/services/auth/auth.service";
+import {RolService} from "../../core/services/shared/rol.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {SocialPlatFormEnum} from "../../enums/SocialPlatFormEnum";
+import {Utils} from "../../infraestructura/Utils";
+import {Subject} from "rxjs";
+import {take, takeUntil} from "rxjs/operators";
 
 @Component({
 	selector: "app-login",
@@ -17,8 +18,7 @@ import { take, takeUntil } from "rxjs/operators";
 	styleUrls: ["./login.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit, OnDestroy{
-
+export class LoginComponent implements OnInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	userForm: FormGroup;
 	public user: User;
@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy{
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private rolService: RolService,
-		private socialAuthService: AuthService
+		private socialAuthService: AuthService,
+    private authService: AuthServiceUser
 	) {
 		this.user = new User();
 	}
@@ -92,9 +93,7 @@ export class LoginComponent implements OnInit, OnDestroy{
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {
-					this.usuarioService.identity = response.user;
-					localStorage.setItem("token", response.token);
-					localStorage.setItem("identity", JSON.stringify(response.user));
+				  this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
 				});
 		});
@@ -110,11 +109,8 @@ export class LoginComponent implements OnInit, OnDestroy{
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(
 				response => {
-					const token = response.token;
-					this.usuarioService.identity = response.user;
-					localStorage.setItem("token", token);
-					localStorage.setItem("identity", JSON.stringify(this.usuarioService.identity));
-          this.router.navigateByUrl("/dashboard");
+          this.authService.setValuesCookies(response);
+					this.router.navigateByUrl("/dashboard");
 				},
 				() => {
 					this.disabledButton = false;
@@ -139,8 +135,8 @@ export class LoginComponent implements OnInit, OnDestroy{
 		document.getElementById("myNav").style.width = "0%";
 	}
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
+	ngOnDestroy(): void {
+		this.ngUnsubscribe.next();
+		this.ngUnsubscribe.complete();
+	}
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { GroupGame, User } from "../../models/models.index";
@@ -9,13 +9,13 @@ import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
-import confetti from "canvas-confetti";
 import { MainSocketService } from "../../core/services/shared/main-socket.service";
 import { EventEnum } from "../../enums/EventEnum";
 import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 import { NGXLogger } from "ngx-logger";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { ModalDirective } from "ng-uikit-pro-standard";
 
 declare var $: any;
 
@@ -33,18 +33,20 @@ export class MenuComponent implements OnInit, OnDestroy {
 	public isUserAdmin = false;
 	public currentGroupsUser: GroupGame[] = [];
 	public closeSession = false;
+	public messageWin = "";
+	@ViewChild("modalWin") modalWin: ModalDirective;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private rolService: RolService,
-		private usuarioService: UserService,
+		private userService: UserService,
 		private authService: AuthService,
 		private purchaseHistoryService: PurchaseService,
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
 		private mainSocketService: MainSocketService,
-		private gameSocketService: SocketGroupGameService,
+		private gameSocketSevice: SocketGroupGameService,
 		private logger: NGXLogger
 	) {}
 
@@ -66,8 +68,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.connect();
 
 		this.mainSocketService.onEvent(EventEnum.CONNECT).subscribe(() => {
-			this.logger.info("CONNECT TO MAIN SOCKET");
-
 			this.mainSocketService.send(EventEnum.REGISTER_USER, this.authService.getUser().userName);
 
 			if (this.isUserAdmin) {
@@ -76,13 +76,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 			}
 		});
 
-		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {
-			this.logger.info("DISCONNECT MAIN SOCKET");
-		});
+		this.mainSocketService.onEvent(EventEnum.DISCONNECT).subscribe(() => {});
 
 		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(() => {
 			this.closeSession = true;
-			this.logger.info("CLOSE SESSION");
+			this.logger.info("CLOSE SESSION ANOTHER SCREEN");
 			this.router.navigateByUrl("locked-screen");
 		});
 
@@ -91,45 +89,33 @@ export class MenuComponent implements OnInit, OnDestroy {
 		});
 
 		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
-			this.logger.info("WIN-EVENT", data.content);
+			this.logger.info("WIN EVENT: ", data);
+
+			if (!this.gameSocketSevice.recentBuyTicketGroup) {
+				this.logger.info("SHOW CELEBRATION IN ACTUAL SCREEN");
+				this.messageWin = data.content;
+				this.modalWin.show();
+				this.gameSocketSevice.celebration();
+			} else {
+				this.logger.info("SHOW CELEBRATION IN SCREEN GROUP/ID ");
+				this.gameSocketSevice.messageWin = data.content;
+				this.gameSocketSevice.userHasWin = true;
+			}
+
+			this.gameSocketSevice.recentBuyTicketGroup = false;
 		});
 
 		this.mainSocketService.onEvent(EventEnum.TOP_WINNER).subscribe(data => {
 			this.logger.info("TOP WINNERS", data);
 		});
 
-    this.mainSocketService.onEvent(EventEnum.NOTIFICATION).subscribe(data => {
-      this.logger.info("NOTIFICATION", data);
-    });
+		this.mainSocketService.onEvent(EventEnum.NOTIFICATION).subscribe(data => {
+			this.logger.info("NOTIFICATION", data);
+		});
 
-    this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
-      this.logger.info("UPDATE PURCHASE HISTORY USER", data);
-    });
-	}
-
-	celebration() {
-		const end = Date.now() + 5000;
-
-		const colors = ["#42d583", "#448aff"];
-
-		const interval = setInterval(function() {
-			if (Date.now() > end) {
-				return clearInterval(interval);
-			}
-
-			confetti({
-				startVelocity: 30,
-				spread: 360,
-				ticks: 60,
-				particleCount: 180,
-				origin: {
-					x: Math.random(),
-					// since they fall down, start a bit higher than random
-					y: Math.random() - 0.2
-				},
-				colors: colors
-			});
-		}, 200);
+		this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
+			this.logger.info("UPDATE PURCHASE HISTORY USER", data);
+		});
 	}
 
 	dropdownAndScroll() {
@@ -173,7 +159,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	getPurchaseHistory() {
-		this.logger.info("GET PURCHASE HISTORY");
+		this.logger.info("GET PURCHASE HISTORY IN MENU");
 		this.totalEarned = 0;
 		this.totalInvested = 0;
 		this.purchaseHistoryService
@@ -209,14 +195,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	getGroupsCurrentUser() {
-		this.logger.info("GET GROUPS CURRENT USER");
+		this.logger.info("GET GROUPS CURRENT USER IN MENU");
 		this.groupService
 			.getGroupsCurrentUser(this.user._id)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(groups => {
-				if (groups) {
-					this.gameSocketService.connect();
-				}
 				this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
 			});
 	}
@@ -234,15 +217,16 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	logout() {
-		localStorage.clear();
-		this.usuarioService.identity = null;
 		this.closeSockets();
-		this.router.navigateByUrl("/login");
+		this.authService.logout();
 	}
 
 	closeSockets() {
+		this.mainSocketService.removeAllListeners();
+		this.gameSocketSevice.removeAllListeners();
+
 		this.mainSocketService.closeSocket();
-		this.gameSocketService.closeSocket();
+		this.gameSocketSevice.closeSocket();
 	}
 
 	onActivate(edvent) {
@@ -256,8 +240,12 @@ export class MenuComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();
-
 		this.mainSocketService.removeAllListeners();
-		this.gameSocketService.removeAllListeners();
+		this.mainSocketService.closeSocket();
+	}
+
+	clainEvent() {
+		this.modalWin.hide();
+		this.router.navigateByUrl("win-history");
 	}
 }

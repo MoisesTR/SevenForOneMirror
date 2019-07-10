@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../models/User';
-import {GroupGame} from '../../models/GroupGame';
-import {MemberGroup} from '../../models/MemberGroup';
-import {CircleUser} from '../../models/CircleUser';
+import { Component, Input, OnInit } from "@angular/core";
+import { User } from "../../models/User";
+import { GroupGame } from "../../models/GroupGame";
+import { MemberGroup } from "../../models/MemberGroup";
+import { CircleUser } from "../../models/CircleUser";
 
 @Component({
 	selector: "app-game",
@@ -22,13 +22,28 @@ export class GameComponent implements OnInit {
 	@Input()
 	circleUsers: CircleUser[] = [];
 
-  @Input()
-  circleUsersPlaying: CircleUser[] = [];
+	@Input()
+	circleUsersPlaying: CircleUser[] = [];
 
 	@Input()
-  members: MemberGroup[] = [];
+	members: MemberGroup[] = [];
+
+	@Input()
+	iterationValue = 1;
 
 	constructor() {}
 
 	ngOnInit() {}
+
+	resultado(i: number) {
+		if (this.iterationValue === 0) {
+			return 2 / 10;
+		} else {
+			return (i + 1) / 10;
+		}
+	}
+
+	trackingFunction(index: number, circleUser: CircleUser) {
+		return circleUser.position;
+	}
 }

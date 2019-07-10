@@ -163,6 +163,7 @@
 
         <app-game *ngFor="let group of groupsUser" [circleUsers]="group.circleUsers"
             [circleUsersPlaying]="group.circleUsersPlaying" [groupSelected]="group" [actualUser]="user"
+                  [iterationValue]="iterationValue"
             [isUserAdmin]="isUserAdmin">
         </app-game>
 

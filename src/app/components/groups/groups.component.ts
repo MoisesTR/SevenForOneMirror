@@ -53,15 +53,10 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 		this.getGroups();
 		this.initConfigPaypal();
-		this.initSocketGame();
 	}
 
 	getGroups() {
 		this.groups = this.groupService.getGroups();
-	}
-
-	initSocketGame() {
-		this.socketGroupGame.connect();
 	}
 
 	private initConfigPaypal(): void {
@@ -110,6 +105,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
 						swal.fire("Info", "The registration has been successful!", "success").then(() => {
+						  this.socketGroupGame.recentBuyTicketGroup = true;
+              this.socketGroupGame.connect();
 							this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
 							this.updateMoneyService.update(true);
@@ -168,6 +165,5 @@ export class GroupsComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();
-		this.socketGroupGame.removeAllListeners();
 	}
 }

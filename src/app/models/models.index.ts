@@ -1,4 +1,4 @@
 export { User } from "./User";
 export { Role } from "./Role";
-export { Token } from "./Token";
+export { BodyToken } from "./BodyToken";
 export { GroupGame } from "./GroupGame";
