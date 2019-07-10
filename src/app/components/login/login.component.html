@@ -15,67 +15,67 @@
 
                     <div class="col-10 col-md-9 col-lg-9">
 
-                            <div class="card rounded-all z-depth-3">
-                                <div class="card-body">
-                                    <h1 class="display-4 text-center font-weight-bold">Sign in</h1>
-    
-                                    <div class="col-12 text-center mb-3">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <a type="button" mdbBtn floating="true" size="lg" class="btn-fb waves-light"
-                                                    mdbTooltip="Facebook" placement="left"
-                                                    (click)="socialSignIn('facebook')" mdbWavesEffect><i
-                                                        class="fab fa-facebook-f"></i></a>
-                                                <a type="button" mdbBtn floating="true" size="lg"
-                                                    class=" btn-gplus waves-light" mdbTooltip="Gmail" placement="right"
-                                                    (click)="socialSignIn('google')" mdbWavesEffect><i
-                                                        class="fab fa-google"></i></a>
-                                            </div>
+                        <div class="card rounded-all z-depth-3">
+                            <div class="card-body">
+                                <h1 class="display-4 text-center font-weight-bold">Ingresar</h1>
+
+                                <div class="col-12 text-center mb-3">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a type="button" mdbBtn floating="true" size="lg" class="btn-fb waves-light"
+                                                mdbTooltip="Facebook" placement="left"
+                                                (click)="socialSignIn('facebook')" mdbWavesEffect><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                            <a type="button" mdbBtn floating="true" size="lg"
+                                                class=" btn-gplus waves-light" mdbTooltip="Gmail" placement="right"
+                                                (click)="socialSignIn('google')" mdbWavesEffect><i
+                                                    class="fab fa-google"></i></a>
                                         </div>
                                     </div>
-    
-    
-                                    <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12">
-    
-                                        <div class="text-center mt-1">
-                                            <h6>or use your account</h6>
-                                        </div>
-    
-                                        <!-- Username -->
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="user"></mdb-icon>
-                                            <input type="text" id="user" class="form-control" name="user" autocomplete="off"
-                                                formControlName="user" mdbInput>
-                                            <label for="user">Username or Email</label>
-                                            <show-errors [control]="userForm.controls['user']"></show-errors>
-                                        </div>
-    
-                                        <!-- Password -->
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="lock"></mdb-icon>
-                                            <input type="password" id="password" class="form-control" name="user"
-                                                autocomplete="off" formControlName="password" mdbInput>
-                                            <label for="password">Password</label>
-                                            <show-errors [control]="userForm.controls['password']"></show-errors>
-                                        </div>
-    
-                                        <div class="text-center mt-3">
-                                            <!-- Forgot password -->
-                                            <a (click)="forgotPassword.show()" class="green-seven-one-text">
-                                                <h5>Forgot password?</h5>
-                                            </a>
-    
-                                        </div>
-    
-                                        <div class="mt-3 text-center">
-                                            <!-- Sign in button -->
-                                            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
-                                                type="submit" [disabled]="userForm.invalid || disabledButton">Sign
-                                                in</button>
-                                        </div>
-                                    </form>
                                 </div>
+
+
+                                <form [formGroup]="userForm" (ngSubmit)="login()" class="col-md-12">
+
+                                    <div class="text-center mt-1">
+                                        <h6>o usa tu cuenta</h6>
+                                    </div>
+
+                                    <!-- Username -->
+                                    <div class="md-form md-outline">
+                                        <mdb-icon fas icon="user"></mdb-icon>
+                                        <input type="text" id="user" class="form-control" name="user" autocomplete="off"
+                                            formControlName="user" mdbInput>
+                                        <label for="user">Usuario o correo</label>
+                                        <show-errors [control]="userForm.controls['user']"></show-errors>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="md-form md-outline">
+                                        <mdb-icon fas icon="lock"></mdb-icon>
+                                        <input type="password" id="password" class="form-control" name="user"
+                                            autocomplete="off" formControlName="password" mdbInput>
+                                        <label for="password">Contraseña</label>
+                                        <show-errors [control]="userForm.controls['password']"></show-errors>
+                                    </div>
+
+                                    <div class="text-center mt-3">
+                                        <!-- Forgot password -->
+                                        <a (click)="forgotPassword.show()" class="green-seven-one-text">
+                                            <h5>¿Se te olvidó tu contraseña?</h5>
+                                        </a>
+
+                                    </div>
+
+                                    <div class="mt-3 text-center">
+                                        <!-- Sign in button -->
+                                        <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
+                                            type="submit"
+                                            [disabled]="userForm.invalid || disabledButton">Ingresar</button>
+                                    </div>
+                                </form>
                             </div>
+                        </div>
                     </div>
 
                 </div>
@@ -85,10 +85,10 @@
 
         <div class="col-lg-6 col-md-5 blue-seven-one rounded d-flex flex-column justify-content-center align-items-center white-text background-blue-space"
             id="bg-hide">
-            <h1 class="display-4 text-center font-weight-bold">Hello, Friend!</h1>
-            <h3 class="mt-2 text-center">Enter your personal details and start journey with us</h3>
+            <h1 class="display-4 text-center font-weight-bold">Hola amigo!</h1>
+            <h3 class="mt-2 text-center">Introduzca sus datos personales y comience a jugar y ganar con nosotros.</h3>
             <button mdbBtn type="button" color="white" rounded="true" outline="true" class="mt-3" mdbWavesEffect
-                (click)="createUser()">Create an account</button>
+                (click)="createUser()">Crear una cuenta</button>
         </div>
 
     </div>
@@ -98,7 +98,7 @@
 <div id="myNav" class="overlay">
     <a class="closebtn" (click)="closeNav()">&times;</a>
     <div class="overlay-content">
-        <a (click)="createUser()">Register</a>
+        <a (click)="createUser()">Crear una cuenta</a>
     </div>
 </div>
 
@@ -112,35 +112,30 @@
 <div mdbModal #forgotPassword="mdbModal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="myBasicModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <!-- <div class="">
-                
-                 <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
-            </div> -->
-            <div class="modal-body">
+        <div class="modal-content rounded-all">
+            <div class="modal-body background-card">
                 <button type="button" class="close pull-right" aria-label="Close" (click)="forgotPassword.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
 
                 <div class="text-center">
-                    <mdb-icon fas icon="lock" size="4x"></mdb-icon>
-                    <h2 class="mt-2 font-weight-bold">Forgot Password?</h2>
-                    <h6>You can reset your password here.</h6>
+                    <mdb-icon fas icon="lock" size="4x" class="green-seven-one-text"></mdb-icon>
+                    <h2 class="mt-2 font-weight-bold green-seven-one-text">¿Se te olvidó tu contraseña?</h2>
+                    <h6 class="text-muted">Puede restablecer su contraseña aquí.</h6>
                 </div>
                 <form action="">
 
                     <div class="md-form md-outline">
                         <mdb-icon fas icon="envelope"></mdb-icon>
                         <input type="text" id="emailPasswordForgot" class="form-control" mdbInput>
-                        <label for="emailPasswordForgot">Email address</label>
+                        <label for="emailPasswordForgot">Correo Electrónico</label>
                     </div>
 
                 </form>
 
                 <div class="text-center">
                     <button type="button" rounded="true" mdbBtn color="primary" class="relative waves-light"
-                        mdbWavesEffect>Reset
-                        password</button>
+                        mdbWavesEffect>Restablecer la contraseña</button>
                 </div>
             </div>
         </div>
