@@ -10,6 +10,7 @@ import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component
 import {NgxPayPalModule} from 'ngx-paypal';
 import { AddGroupsComponent } from '../add-groups/add-groups.component';
 import { TopPlayersComponent } from '../top-players/top-players.component';
+import { InvoicesComponent } from '../invoices/invoices.component';
 
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro,  NgxPayPalModule],
@@ -21,7 +22,8 @@ import { TopPlayersComponent } from '../top-players/top-players.component';
 		GameComponent,
 		GamecontainerComponent,
 		AddGroupsComponent,
-		TopPlayersComponent
+		TopPlayersComponent,
+		InvoicesComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

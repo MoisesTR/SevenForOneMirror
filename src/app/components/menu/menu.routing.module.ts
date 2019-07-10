@@ -6,6 +6,7 @@ import {GroupsComponent} from '../groups/groups.component';
 import {GamecontainerComponent} from '../gamecontainer/gamecontainer.component';
 import {AddGroupsComponent} from '../add-groups/add-groups.component';
 import { TopPlayersComponent } from '../top-players/top-players.component';
+import { InvoicesComponent } from '../invoices/invoices.component';
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } }
@@ -15,6 +16,7 @@ const menuRoutes = [
 	, { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "Game container"}}
 	, { path: "add-group", component: AddGroupsComponent, data: { titulo: "Add Group" } }
 	, { path: "top-players", component: TopPlayersComponent, data: { titulo: "Top Players" } }
+	, { path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } }
 ];
 
 @NgModule({
