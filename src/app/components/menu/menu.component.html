@@ -8,13 +8,14 @@
             </a>
         </mdb-navbar-brand>
         <links>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active waves-light" mdbWavesEffect>
-                    <a class="nav-link">Celebración<span
-                            class="sr-only">(current)</span></a>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                
+                <li *ngIf="!isUserAdmin" class="nav-item waves-light" mdbWavesEffect>
+                    <a class="nav-link" (click)="groupsUser.show()">
+                        <mdb-icon fas icon="money-bill-alt"></mdb-icon>
+                        Grupos individuales
+                    </a>
                 </li>
-            </ul>
-            <ul class="navbar-nav nav-flex-icons">
 
                 <li class="nav-item dropdown" dropdown>
                     <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
@@ -373,7 +374,43 @@
     <i class="fas fa-arrow-up"></i>
 </button>
 
-<div mdbModal #modalWin="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<!-- Modal individual group -->
+<div mdbModal #groupsUser="mdbModal" class="modal fade right" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-full-height modal-right" role="document">
+        <div class="modal-content rounded-all  background-card">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="groupsUser.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h2 class="mt-2 font-weight-bold green-seven-one-text">Grupos individuales</h2>
+            </div>
+            <div class="modal-body">
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-12" *ngFor="let currentGroupUser of currentGroupsUser">
+                            <div class="blue-seven-one rounded-all">
+                                <h4 class='text-uppercase text-center white-text flex-center p-3'>
+                                    {{currentGroupUser.timesPlayUser}} X ${{currentGroupUser.initialInvertion}}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <div class="text-center">
+                <button type="button" mdbBtn rounded="true" class="waves-light red-seven-one white-text"
+                    aria-label="Close" (click)="groupsUser.hide()" mdbWavesEffect>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal celebration -->
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content blue-dark-seven-one rounded-all">
