@@ -12,10 +12,7 @@
     "serve:ssr": "node dist/server",
     "build:client-and-server-bundles": "ng build --prod && ng run SevenForOne:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "start-ssr": "npm run build:ssr && npm run serve:ssr",
-    "build-locale:en": "ng build --prod --i18n-locale en --i18n-format xlf --i18n-file src/translate/messages.en.xlf --output-path=dist/en --baseHref /en/",
-    "build-locale:es": "ng build --prod --i18n-locale es --i18n-format xlf --i18n-file src/translate/messages.es.xlf --output-path=dist/es --baseHref /es/",
-    "build-locale": "npm run build-locale:en && npm run build-locale:es"
+    "start-ssr": "npm run build:ssr && npm run serve:ssr"
   },
   "private": true,
   "dependencies": {
