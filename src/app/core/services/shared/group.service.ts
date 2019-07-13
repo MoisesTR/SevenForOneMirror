@@ -4,7 +4,7 @@ import {Global} from './global';
 import {Observable, Subject} from 'rxjs';
 import {GroupGame} from '../../../models/GroupGame';
 import {MemberGroup} from '../../../models/MemberGroup';
-import {CacheBuster} from "ngx-cacheable";
+import {Cacheable, CacheBuster} from "ngx-cacheable";
 
 const cacheBuster$ = new Subject<void>();
 
@@ -39,8 +39,8 @@ export class GroupService {
 		return this.http.get(this.url + this.gameUrl + "/" + groupId);
 	}
 
-  @CacheBuster({
-    cacheBusterNotifier: cacheBuster$
+  @Cacheable({
+    cacheBusterObserver: cacheBuster$
   })
 	getGroups(): Observable<GroupGame[]> {
 		return this.http.get<GroupGame[]>(this.url + this.gameUrl);
