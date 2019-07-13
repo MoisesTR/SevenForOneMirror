@@ -38,10 +38,6 @@
     border-top-right-radius: 6px;
 }
 
-.top-text-color {
-    color: #6D6D6D;
-}
-
 .table-text-size {
     font-size: 18px;
     font-weight: 390;
@@ -71,4 +67,16 @@
     to(#42d583));
     background-image: -webkit-linear-gradient(bottom, #42d583 0%, #42d583 99%, #42d583 100%);
     background-image: linear-gradient(to top, #42d583 0%, #42d583 99%, #42d583 100%); 
+}
+
+.text-top {
+    white-space: break-word;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+  
+.text-top:hover {
+    overflow: visible;
+    word-wrap: break-word;
 }

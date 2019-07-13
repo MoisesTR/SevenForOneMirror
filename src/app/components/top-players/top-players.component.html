@@ -4,17 +4,22 @@
 <div mdbModal #topPlayers="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
   aria-hidden="true" [config]="{backdrop: true}">
   <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">
-    <div class="modal-content blue-dark-seven-one rounded-all">
-      <div class="modal-body">
+    <div class="modal-content rounded-all">
+      <div class="modal-body background-card">
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="topPlayers.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+
         <div class="row justify-content-center">
 
-        <div class="col-8">
-          <img src="/assets/images/trophy.svg" class="w-25 mx-auto d-block" alt="Trofeo">
-        </div>
+          <div class="col-8">
+            <img src="/assets/images/trophy.svg" class="w-25 mx-auto d-block" alt="Trofeo">
+          </div>
 
           <div class="col-12">
 
-            <h3 class="white-text font-weight-bold text-center mb-4 mt-2">
+            <h3 class="green-seven-one-text font-weight-bold text-center mb-4 mt-2">
               Ranking de jugadores
             </h3>
 
@@ -23,20 +28,20 @@
               <!-- Primer lugar -->
               <div class="col-10 col-sm-10 col-md-10 col-lg-3 mb-4">
 
-                <div class="white top-padding rounded-all">
+                <div class="blue-seven-one top-padding rounded-all">
 
                   <img src="/assets/images/Grupo1B.png" class="top-img-1" alt="">
 
                   <div class="avatar mx-auto flex-center">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto white"
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                       class="rounded-circle img-fluid">
                   </div>
 
-                  <h4 class="text-center green-seven-one-text mt-2">
-                    Username
+                  <h4 class="text-center white-text mt-2">
+                    <p class="text-top">Username991234567899Username991234567899Username991234567899</p>
                   </h4>
 
-                  <p class="text-muted mt-2 text-center">
+                  <p class="white-text mt-2 text-center">
                     $224
                   </p>
 
@@ -47,20 +52,20 @@
               <!-- Segundo lugar -->
               <div class="col-10 col-sm-10 col-md-10 col-lg-3 mb-4">
 
-                <div class="white top-padding rounded-all">
+                <div class="blue-seven-one top-padding rounded-all">
 
                   <img src="/assets/images/Grupo2B.png" class="top-img" alt="">
 
                   <div class="avatar mx-auto flex-center">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto white"
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                       class="rounded-circle img-fluid">
                   </div>
 
-                  <h4 class="text-center green-seven-one-text mt-2">
-                    Username
+                  <h4 class="text-center white-text mt-2">
+                    <p class="text-top">Username</p>
                   </h4>
 
-                  <p class="text-muted mt-2 text-center">
+                  <p class="white-text mt-2 text-center">
                     $224
                   </p>
 
@@ -71,7 +76,7 @@
               <!-- Tercer lugar -->
               <div class="col-10 col-sm-10 col-md-10 col-lg-3">
 
-                <div class="white top-padding rounded-all">
+                <div class="blue-seven-one top-padding rounded-all">
 
                   <img src="/assets/images/Grupo3B.png" class="top-img" alt="">
 
@@ -80,11 +85,11 @@
                       class="rounded-circle img-fluid">
                   </div>
 
-                  <h4 class="text-center green-seven-one-text mt-2">
-                    Username
+                  <h4 class="text-center white-text mt-2">
+                    <p class="text-top">Username</p>
                   </h4>
 
-                  <p class="text-muted mt-2 text-center">
+                  <p class="white-text mt-2 text-center">
                     $224
                   </p>
 
@@ -99,7 +104,7 @@
           </div>
 
           <!-- Siguiente posiciones -->
-          <div class="col-lg-9 mt-3">
+          <div class="col-lg-9 mt-2">
 
             <div class="table-responsive">
               <table class="table separate table-borderless">
@@ -107,116 +112,122 @@
 
                   <tr>
                     <th scope="col" class="border-left table-text-size">#</th>
-                    <th scope="col" class="table-text-size">Usuario</th>
-                    <th scope="col" class="border-right table-text-size">Monto</th>
+                    <th scope="col" class="table-text-size">
+                      <mdb-icon fas icon="user-alt" class="mr-1"></mdb-icon>
+                      Usuario
+                    </th>
+                    <th scope="col" class="border-right table-text-size">
+                      <mdb-icon fas icon="money-bill-alt" class="mr-1"></mdb-icon>
+                      Monto
+                    </th>
                   </tr>
 
                 </thead>
                 <tbody>
 
-                  <tr class="white green-seven-one-text">
-                    <th scope="row" class="border-left table-text-size align-middle">
+                  <tr class="blue-seven-one green-seven-one-text">
+                    <th scope="row" class="border-left white-text align-middle">
                       4
                     </th>
                     <td>
-                      <div class="avatar-table table-text-size mx-auto top-text-color">
+                      <div class="avatar-table white-text mx-auto top-text-color">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                           class="rounded-circle img-fluid mr-3">
 
                         Fulanito el mero matatan
                       </div>
                     </td>
-                    <td class="border-right table-text-size align-middle top-text-color">$ 200</td>
+                    <td class="border-right white-text align-middle top-text-color">$ 200</td>
                   </tr>
 
-                  <tr class="white green-seven-one-text">
-                    <th scope="row" class="border-left table-text-size align-middle">
+                  <tr class="blue-seven-one green-seven-one-text">
+                    <th scope="row" class="border-left white-text align-middle">
                       5
                     </th>
                     <td>
-                      <div class="avatar-table table-text-size mx-auto top-text-color">
+                      <div class="avatar-table white-text mx-auto top-text-color">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                           class="rounded-circle img-fluid mr-3">
 
                         Fulanito el mero matatan
                       </div>
                     </td>
-                    <td class="border-right table-text-size align-middle top-text-color">$ 200</td>
+                    <td class="border-right white-text align-middle top-text-color">$ 200</td>
                   </tr>
 
-                  <tr class="white green-seven-one-text">
-                    <th scope="row" class="border-left table-text-size align-middle">
+                  <tr class="blue-seven-one green-seven-one-text">
+                    <th scope="row" class="border-left white-text align-middle">
                       6
                     </th>
                     <td>
-                      <div class="avatar-table table-text-size mx-auto top-text-color">
+                      <div class="avatar-table white-text mx-auto top-text-color">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                           class="rounded-circle img-fluid mr-3">
 
                         Fulanito el mero matatan
                       </div>
                     </td>
-                    <td class="border-right table-text-size align-middle top-text-color">$ 200</td>
+                    <td class="border-right white-text align-middle top-text-color">$ 200</td>
                   </tr>
 
-                  <tr class="white green-seven-one-text">
-                    <th scope="row" class="border-left table-text-size align-middle">
+                  <tr class="blue-seven-one green-seven-one-text">
+                    <th scope="row" class="border-left white-text align-middle">
                       7
                     </th>
                     <td>
-                      <div class="avatar-table table-text-size mx-auto top-text-color">
+                      <div class="avatar-table white-text mx-auto top-text-color">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                           class="rounded-circle img-fluid mr-3">
 
                         Fulanito el mero matatan
                       </div>
                     </td>
-                    <td class="border-right table-text-size align-middle top-text-color">$ 200</td>
+                    <td class="border-right white-text align-middle top-text-color">$ 200</td>
                   </tr>
 
-                  <tr class="white green-seven-one-text">
-                    <th scope="row" class="border-left table-text-size align-middle">
+                  <tr class="blue-seven-one green-seven-one-text">
+                    <th scope="row" class="border-left white-text align-middle">
                       8
                     </th>
                     <td>
-                      <div class="avatar-table table-text-size mx-auto top-text-color">
+                      <div class="avatar-table white-text mx-auto top-text-color">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                           class="rounded-circle img-fluid mr-3">
 
                         Fulanito el mero matatan
                       </div>
                     </td>
-                    <td class="border-right table-text-size align-middle top-text-color">$ 200</td>
+                    <td class="border-right white-text align-middle top-text-color">$ 200</td>
                   </tr>
 
-                  <tr class="white green-seven-one-text">
-                    <th scope="row" class="border-left table-text-size align-middle">
+                  <tr class="blue-seven-one green-seven-one-text">
+                    <th scope="row" class="border-left white-text align-middle">
                       9
                     </th>
                     <td>
-                      <div class="avatar-table table-text-size mx-auto top-text-color">
+                      <div class="avatar-table white-text mx-auto top-text-color">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                           class="rounded-circle img-fluid mr-3">
 
                         Fulanito el mero matatan
                       </div>
                     </td>
-                    <td class="border-right table-text-size align-middle top-text-color">$ 200</td>
+                    <td class="border-right white-text align-middle top-text-color">$ 200</td>
                   </tr>
 
-                  <tr class="white green-seven-one-text">
-                    <th scope="row" class="border-left table-text-size align-middle">
+                  <tr class="blue-seven-one green-seven-one-text">
+                    <th scope="row" class="border-left white-text align-middle">
                       10
                     </th>
                     <td>
-                      <div class="avatar-table table-text-size mx-auto top-text-color">
+                      <div class="avatar-table white-text mx-auto top-text-color">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto"
                           class="rounded-circle img-fluid mr-3">
 
                         Fulanito el mero matatan
                       </div>
                     </td>
-                    <td class="border-right table-text-size align-middle top-text-color">$ 200</td>
+                    <td class="border-right white-text align-middle top-text-color">$ 200</td>
                   </tr>
 
                 </tbody>
