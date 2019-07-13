@@ -8,6 +8,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
 import { Role } from "../../models/Role";
+import { ActionGameEnum } from "../../enums/ActionGameEnum";
 
 @Component({
 	selector: "app-invoices",
@@ -42,7 +43,9 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 				this.purchaseHistoryInvested = Object.keys(historyPurchase).map(index => {
 					return historyPurchase[index];
 				});
-				this.purchaseHistoryInvested = this.purchaseHistoryInvested.filter(h => h.moneyDirection);
+				this.purchaseHistoryInvested = this.purchaseHistoryInvested
+					.filter(h => h.action === ActionGameEnum.INVEST)
+					.reverse();
 			});
 	}
 

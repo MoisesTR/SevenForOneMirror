@@ -210,10 +210,14 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.router.navigateByUrl("/groups");
 	}
 
-  addGroup() {
-	  this.logger.info('CREATE GROUP');
-	  this.groupService.showModal();
-  }
+	addGroup() {
+		this.logger.info("CREATE GROUP");
+		this.groupService.showModal();
+	}
+
+	addAdmin() {
+		this.logger.info("CREATE ADMIN");
+	}
 
 	dashBoard() {
 		this.router.navigateByUrl("/dashboard");

@@ -23,7 +23,7 @@
 
                       <tr>
                         <th scope="col" class="border-left table-text-size">#</th>
-                        <th scope="col" class="table-text-size">Nombres</th>
+<!--                        <th scope="col" class="table-text-size">Nombres</th>-->
                         <th scope="col" class="table-text-size">Grupo</th>
                         <th scope="col" class="table-text-size">Fecha</th>
 <!--                        <th scope="col" class="table-text-size">Hora</th>-->
@@ -37,19 +37,19 @@
                         <th scope="row" class="border-left border-top-bottom table-text-size align-middle">
                           {{i + 1}}
                         </th>
+<!--                        <td class="border-top-bottom">-->
+<!--                          <div class="table-text-size mx-auto">-->
+<!--                            {{this.user.userName}}-->
+<!--                          </div>-->
+<!--                        </td>-->
                         <td class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            {{this.user.userName}}
+                            {{invested.quantity["$numberDecimal"]}} $
                           </div>
                         </td>
                         <td class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            $ {{invested.quantity["$numberDecimal"]}}
-                          </div>
-                        </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            {{invested.createdAt}}
+                            {{invested.createdAt | date:'dd-MM-yyyy'}}
                           </div>
                         </td>
 <!--                        <td class="border-top-bottom">-->
