@@ -26,95 +26,37 @@
                         <th scope="col" class="table-text-size">Nombres</th>
                         <th scope="col" class="table-text-size">Grupo</th>
                         <th scope="col" class="table-text-size">Fecha</th>
-                        <th scope="col" class="table-text-size">Hora</th>
+<!--                        <th scope="col" class="table-text-size">Hora</th>-->
                         <th scope="col" class="border-right table-text-size">Método de pago</th>
                       </tr>
 
                     </thead>
                     <tbody>
 
-                      <tr>
+                      <tr *ngFor="let invested of purchaseHistoryInvested; let i = index">
                         <th scope="row" class="border-left border-top-bottom table-text-size align-middle">
-                          1
+                          {{i + 1}}
                         </th>
                         <td class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            Moises Trigueros
+                            {{this.user.userName}}
                           </div>
                         </td>
                         <td class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            $ 20
+                            $ {{invested.quantity["$numberDecimal"]}}
                           </div>
                         </td>
                         <td class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            09/07/2019
+                            {{invested.createdAt}}
                           </div>
                         </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            08:30 PM
-                          </div>
-                        </td>
-                        <td class="border-right border-top-bottom table-text-size align-middle">
-                          Paypal
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <th scope="row" class="border-left border-top-bottom table-text-size align-middle">
-                          2
-                        </th>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            Jake Zeledon
-                          </div>
-                        </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            $ 20
-                          </div>
-                        </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            09/07/2019
-                          </div>
-                        </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            08:30 PM
-                          </div>
-                        </td>
-                        <td class="border-right border-top-bottom table-text-size align-middle">
-                          Paypal
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <th scope="row" class="border-left border-top-bottom table-text-size align-middle">
-                          3
-                        </th>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            Genaro Tinoco
-                          </div>
-                        </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            $ 20
-                          </div>
-                        </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            09/07/2019
-                          </div>
-                        </td>
-                        <td class="border-top-bottom">
-                          <div class="table-text-size mx-auto">
-                            08:30 PM
-                          </div>
-                        </td>
+<!--                        <td class="border-top-bottom">-->
+<!--                          <div class="table-text-size mx-auto">-->
+<!--                            08:30 PM-->
+<!--                          </div>-->
+<!--                        </td>-->
                         <td class="border-right border-top-bottom table-text-size align-middle">
                           Paypal
                         </td>
@@ -123,13 +65,8 @@
                     </tbody>
                   </table>
                 </div>
-
-
               </div>
-
             </div>
-
-
           </div>
 
         </div>

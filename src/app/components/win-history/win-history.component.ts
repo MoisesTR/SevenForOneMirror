@@ -17,7 +17,6 @@ export class WinHistoryComponent implements OnInit {
 	ngUnsubscribe = new Subject<void>();
 	public totalEarned = 0;
 	public totalInvested = 0;
-	public purchaseHistory: PurchaseHistory[] = [];
 	public purchaseHistoryEearned: PurchaseHistory[];
 
 	public user: User;
@@ -40,15 +39,11 @@ export class WinHistoryComponent implements OnInit {
 		this.purchaseHistoryService
 			.getPurchaseHistoryByIdUser(this.user._id)
 			.pipe(takeUntil(this.ngUnsubscribe))
-			.subscribe(history => {
-				this.purchaseHistory = history;
-				this.purchaseHistoryEearned = this.purchaseHistory.filter(h => !h.moneyDirection);
-				// for (const item of this.purchaseHistory) {
-				// 	const quantity = +item.quantity["$numberDecimal"];
-				// 	if (!item.moneyDirection) {
-				// 		this.totalEarned += quantity;
-				// 	}
-				// }
+			.subscribe(historyPurchase => {
+				this.purchaseHistoryEearned = Object.keys(historyPurchase).map(index => {
+					return historyPurchase[index];
+				});
+				this.purchaseHistoryEearned = this.purchaseHistoryEearned.filter(h => !h.moneyDirection);
 			});
 	}
 }

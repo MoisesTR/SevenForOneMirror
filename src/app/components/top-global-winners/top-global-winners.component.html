@@ -1,0 +1,27 @@
+<!--<button mdbBtn rounded="true" size="lg" class="green-seven-one white-text mt-3 mb-3"-->
+<!--        (click)="topPlayers.show();">Top</button>-->
+<!--<div mdbModal #topPlayers="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
+<!--     aria-hidden="true" [config]="{backdrop: true}">-->
+<!--  <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">-->
+<!--    <div class="modal-content blue-dark-seven-one rounded-all">-->
+<!--      <div class="modal-body">-->
+
+
+        <app-top-players [winners3]="this.winners3"
+                         [winners7]="this.winners7">
+
+          <div class="col-12 text-center">
+            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayers.hide();">
+              Cerrar
+            </button>
+          </div>
+
+        </app-top-players>
+
+
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+

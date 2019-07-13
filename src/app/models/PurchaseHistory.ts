@@ -9,7 +9,7 @@ export class PurchaseHistory {
   public quantity: string[];
   public payReference: string;
   public moneyDirection: boolean;
-  public createAt: string;
+  public createdAt: string;
   public updateAt: string;
 
   public constructor(){}
