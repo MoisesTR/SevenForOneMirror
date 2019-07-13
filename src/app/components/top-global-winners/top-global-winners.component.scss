@@ -19,3 +19,15 @@
   background-image: -webkit-linear-gradient(bottom, #42d583 0%, #42d583 99%, #42d583 100%);
   background-image: linear-gradient(to top, #42d583 0%, #42d583 99%, #42d583 100%);
 }
+
+.card-body .top .text-top {
+  white-space: break-word !important;
+  width: auto  !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.card-body .top .text-top:hover {
+  overflow: visible !important;
+  word-wrap: break-word !important;
+}

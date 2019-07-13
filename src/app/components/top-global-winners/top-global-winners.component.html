@@ -1,27 +1,36 @@
-<!--<button mdbBtn rounded="true" size="lg" class="green-seven-one white-text mt-3 mb-3"-->
-<!--        (click)="topPlayers.show();">Top</button>-->
-<!--<div mdbModal #topPlayers="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
-<!--     aria-hidden="true" [config]="{backdrop: true}">-->
-<!--  <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">-->
-<!--    <div class="modal-content blue-dark-seven-one rounded-all">-->
-<!--      <div class="modal-body">-->
+<section>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 colsm-12 col-md-12 col-lg-12">
+
+        <div class="card card-cascade narrower rounded-all z-depth-3">
+
+          <div class="view view-cascade gradient-card-header green-seven-one">
+            <h2 class="card-header-title mb-2">Ranking global</h2>
+          </div>
 
 
-        <app-top-players [winners3]="this.winners3"
-                         [winners7]="this.winners7">
+          <!-- Card content -->
+          <div class="card-body card-body-cascade">
 
-          <div class="col-12 text-center">
+            <div class="mt-3">
+
+              <app-top-players [winners3]="this.winners3" [winners7]="this.winners7">
+
+                <!-- <div class="col-12 text-center">
             <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayers.hide();">
               Cerrar
             </button>
+          </div> -->
+
+              </app-top-players>
+
+            </div>
+
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        </app-top-players>
-
-
-
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
+</section>
