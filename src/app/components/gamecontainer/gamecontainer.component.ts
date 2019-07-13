@@ -52,9 +52,9 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
 	ngAfterViewInit(): void {
 		if (this.socketGroupGame.userHasWin) {
-			this.socketGroupGame.userHasWin = false;
-			this.messageWin = this.socketGroupGame.messageWin;
 			setTimeout(() => {
+        this.socketGroupGame.userHasWin = false;
+        this.messageWin = this.socketGroupGame.messageWin;
 				this.modalWin.show();
 				this.socketGroupGame.celebration();
 			}, 2000);

@@ -101,6 +101,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 				// 	"onClientAuthorization - you should probably inform your server about completed transaction at this point",
 				// 	data
 				// );
+        this.socketGroupGame.recentBuyTicketGroup = true;
+
 				const member = new MemberGroup();
 				member.payReference = data.id;
 				this.groupService
@@ -108,7 +110,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
 						swal.fire("Info", "The registration has been successful!", "success").then(() => {
-							this.socketGroupGame.recentBuyTicketGroup = true;
+
 							this.socketGroupGame.connect();
 							this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
