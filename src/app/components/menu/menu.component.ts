@@ -91,6 +91,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
 			this.logger.info("WIN EVENT: ", data);
 
+			this.updateMoneyService.update(true);
+
 			if (!this.gameSocketSevice.recentBuyTicketGroup) {
 				this.logger.info("SHOW CELEBRATION IN ACTUAL SCREEN");
 				this.messageWin = data.content;
@@ -207,6 +209,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 	groups() {
 		this.router.navigateByUrl("/groups");
 	}
+
+  addGroup() {
+	  this.logger.info('CREATE GROUP');
+	  this.groupService.showModal();
+  }
 
 	dashBoard() {
 		this.router.navigateByUrl("/dashboard");

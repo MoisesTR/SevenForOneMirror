@@ -8,25 +8,25 @@ import { GroupsComponent } from "../groups/groups.component";
 import { GameComponent } from "../game/game.component";
 import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
 import { NgxPayPalModule } from "ngx-paypal";
-import { AddGroupsComponent } from "../add-groups/add-groups.component";
 import { TopPlayersComponent } from "../top-players/top-players.component";
 
 import { InvoicesComponent } from "../invoices/invoices.component";
 import { WinHistoryComponent } from "../win-history/win-history.component";
+import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
 
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro, NgxPayPalModule],
-	exports: [],
+	exports: [GameComponent],
 	declarations: [
 		DashboardComponent,
 		ProfileComponent,
 		GroupsComponent,
 		GameComponent,
 		GamecontainerComponent,
-		AddGroupsComponent,
 		TopPlayersComponent,
 		InvoicesComponent,
-		WinHistoryComponent
+		WinHistoryComponent,
+		TopGlobalWinnersComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

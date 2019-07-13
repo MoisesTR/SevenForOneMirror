@@ -18,11 +18,13 @@ import { SocketGroupGameService } from "../../core/services/shared/socket-group-
 import { EventEnum } from "../../enums/EventEnum";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { DatePipe } from "@angular/common";
 
 @Component({
 	selector: "app-groups",
 	templateUrl: "./groups.component.html",
 	styleUrls: ["./groups.component.scss"],
+	providers: [DatePipe],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupsComponent implements OnInit, OnDestroy {
@@ -33,7 +35,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 	public user: User;
 	public userIsAdmin = false;
 	public groupSelectedPayModal: GroupGame;
-
+	actualDate = new Date();
 	public payPalConfig?: IPayPalConfig;
 	private finalPrice = 0;
 
@@ -43,6 +45,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		private purchaseService: PurchaseService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
+		private datePipe: DatePipe,
 		private socketGroupGame: SocketGroupGameService
 	) {
 		this.groupSelectedPayModal = new GroupGame();
@@ -105,8 +108,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
 						swal.fire("Info", "The registration has been successful!", "success").then(() => {
-						  this.socketGroupGame.recentBuyTicketGroup = true;
-              this.socketGroupGame.connect();
+							this.socketGroupGame.recentBuyTicketGroup = true;
+							this.socketGroupGame.connect();
 							this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
 							this.updateMoneyService.update(true);

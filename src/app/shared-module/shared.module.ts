@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { DirectivesModule } from "../directives/directives.module";
-import { ShowErrorsComponent } from "../components/show-errors.component";
-import { DateTimeAdapter, OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from "ng-pick-datetime";
-import { NativeDateTimeAdapter } from "ng-pick-datetime/date-time/adapter/native-date-time-adapter.class";
-import { Platform } from "@angular/cdk/platform";
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DirectivesModule} from "../directives/directives.module";
+import {ShowErrorsComponent} from "../components/show-errors.component";
+import {DateTimeAdapter, OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
+import {NativeDateTimeAdapter} from "ng-pick-datetime/date-time/adapter/native-date-time-adapter.class";
+import {Platform} from "@angular/cdk/platform";
 
 @NgModule({
 	imports: [CommonModule],
