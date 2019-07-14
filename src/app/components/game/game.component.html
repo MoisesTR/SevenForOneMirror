@@ -14,7 +14,7 @@
                 <!-- Card content -->
                 <div class="card-body card-body-cascade text-center">
 
-                    <div class="container-fluid">
+                    <div class="container-fluid mt-3">
 
                         <div class="row justify-content-center">
 
@@ -24,8 +24,14 @@
                                 <div *ngIf="i === 0">
                                     <div class="row justify-content-center">
                                         <div [ngClass]="[ iterationValue === 1 ? 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow bounceInRight' : 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow slideOutLeft']"
-                                             data-wow-delay="{{resultado(i)}}s">
-                                            <h5 class='blue-seven-one-text mt-2 text-center'>{{i+1}}</h5>
+                                            data-wow-delay="{{resultado(i)}}s">
+                                            <!-- Mostrar imagen de ganador -->
+                                            <ng-template #smallHoverImgTemp>
+                                                <div [innerHtml]="smallHoverImg"></div>
+                                            </ng-template>
+                                            <h5 class='blue-seven-one-text mt-2 text-center' [mdbPopover]="smallHoverImgTemp" [isOpen]="circleUser.status === 'AC' ? true : false">
+                                                {{i+1}}
+                                            </h5>
                                             <div class="view">
                                                 <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'"
                                                     [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : (circleUser.status === 'AC') ? 'assets/images/user.png' : '')  + ')'}">
@@ -33,7 +39,7 @@
                                                 <div *ngIf="circleUser.isUserLogged"
                                                     class="mask flex-center rgba-black-strong"
                                                     style="border-radius: 50%;">
-                                                    <p class="white-text">You</p>
+                                                    <p class="white-text">Yo</p>
                                                 </div>
                                             </div>
                                             <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow slideOutLeft']"
@@ -50,18 +56,19 @@
 
                                         <h5 [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow slideOutLeft']"
                                             data-wow-delay="{{resultado(i)}}s">{{i+2}}</h5>
-                                        <div [ngClass]="[ iterationValue === 1 ? 'view wow bounceInRight' : 'view wow slideOutLeft']" data-wow-delay="{{resultado(i)}}s">
+                                        <div [ngClass]="[ iterationValue === 1 ? 'view wow bounceInRight' : 'view wow slideOutLeft']"
+                                            data-wow-delay="{{resultado(i)}}s">
                                             <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'"
                                                 class="ratio img-responsive img-circle gray-circle"
                                                 [ngStyle]="{'background-image': 'url(' + (circleUser.member.image ? circleUser.member.image : (circleUser.status === 'AC') ? 'assets/images/user.png' : '')  + ')'}">
                                             </div>
                                             <div *ngIf="circleUser.isUserLogged"
                                                 class="mask flex-center rgba-black-strong" style="border-radius: 50%;">
-                                                <p class="white-text">You</p>
+                                                <p class="white-text">Yo</p>
                                             </div>
                                         </div>
                                         <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow bounceInRight' : 'blue-seven-one-text mt-2 text-center wow slideOutLeft']"
-                                           data-wow-delay="{{resultado(i)}}s">{{circleUser.member.userName}}</p>
+                                            data-wow-delay="{{resultado(i)}}s">{{circleUser.member.userName}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -71,9 +78,9 @@
                                     <table class="table table-responsive-sm table-hover text-center">
                                         <thead>
                                             <tr>
-                                                <th>Position</th>
-                                                <th>Username</th>
-                                                <th>Accumulated</th>
+                                                <th>Posición</th>
+                                                <th>Usuario</th>
+                                                <th>Acumulado</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

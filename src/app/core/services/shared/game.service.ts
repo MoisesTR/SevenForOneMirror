@@ -46,7 +46,7 @@ export class GameService {
 			circleUser.isUserLogged = this.user._id === member.userId;
 		} else {
 			circleUser.member = new MemberGroup();
-			circleUser.member.userName = 'Available';
+			circleUser.member.userName = 'Disponible';
 			circleUser.status = CircleStatusEnum.Inactive;
 		}
 
