@@ -125,13 +125,12 @@
                             </div>
                         </div>
 
-                        <!-- *ngIf="isUserAdmin" -->
-                        <div class="col-12 text-menu mt-2">
+                        <div *ngIf="isUserAdmin" class="col-12 text-menu mt-2">
                             <div class="row justify-content-center btn-dashboard">
 
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect (click)="addGroup()">
                                         <div class="p-3">
                                             <mdb-icon fas icon="edit" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
@@ -142,7 +141,7 @@
                                 </div>
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect (click)="addAdmin()">
                                         <div class="p-2">
                                             <mdb-icon fas icon="users-cog" size="2x" class="mt-2"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
@@ -172,7 +171,8 @@
                                 </div>
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                    <a [routerLink]="['/global-winners']" [routerLinkActive]="['active-menu-dashboard']"
+                                       class="hover-menu hoverable text-menu" mdbWavesEffect>
                                         <div class="p-3">
                                             <mdb-icon fas icon="trophy" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
@@ -410,7 +410,7 @@
 </div>
 
 <!-- Modal celebration -->
-<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<div mdbModal #modalWin="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content blue-dark-seven-one rounded-all">
@@ -438,7 +438,7 @@
                     <div class="col-12 text-center">
                         <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
                             (click)="clainEvent()" mdbTooltip="Claim prize">
-                            <mdb-icon fas icon="trophy"></mdb-icon> Clain
+                            <mdb-icon fas icon="trophy"></mdb-icon> Reclamar
                         </button>
                     </div>
                 </div>
@@ -446,3 +446,5 @@
         </div>
     </div>
 </div>
+
+<app-add-groups></app-add-groups>

@@ -1,0 +1,36 @@
+<section>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 colsm-12 col-md-12 col-lg-12">
+
+        <div class="card card-cascade narrower rounded-all z-depth-3">
+
+          <div class="view view-cascade gradient-card-header green-seven-one">
+            <h2 class="card-header-title mb-2">Ranking global</h2>
+          </div>
+
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade">
+
+            <div class="mt-3">
+
+              <app-top-players [winners3]="this.winners3" [winners7]="this.winners7">
+
+                <!-- <div class="col-12 text-center">
+            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayers.hide();">
+              Cerrar
+            </button>
+          </div> -->
+
+              </app-top-players>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

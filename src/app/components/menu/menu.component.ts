@@ -16,6 +16,7 @@ import { NGXLogger } from "ngx-logger";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ModalDirective } from "ng-uikit-pro-standard";
+import { ActionGameEnum } from "../../enums/ActionGameEnum";
 
 declare var $: any;
 
@@ -91,6 +92,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
 			this.logger.info("WIN EVENT: ", data);
 
+			this.updateMoneyService.update(true);
+			
 			if (!this.gameSocketSevice.recentBuyTicketGroup) {
 				this.logger.info("SHOW CELEBRATION IN ACTUAL SCREEN");
 				this.messageWin = data.content;
@@ -169,7 +172,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 				this.purchaseHistory = history;
 				for (const item of this.purchaseHistory) {
 					const quantity = +item.quantity["$numberDecimal"];
-					if (item.moneyDirection) {
+					if (item.action === ActionGameEnum.INVEST) {
 						this.totalInvested += quantity;
 					} else {
 						this.totalEarned += quantity;
@@ -206,6 +209,15 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	groups() {
 		this.router.navigateByUrl("/groups");
+	}
+
+	addGroup() {
+		this.logger.info("CREATE GROUP");
+		this.groupService.showModal();
+	}
+
+	addAdmin() {
+		this.logger.info("CREATE ADMIN");
 	}
 
 	dashBoard() {
