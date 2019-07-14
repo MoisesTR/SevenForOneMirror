@@ -25,14 +25,14 @@
 
                                             <div class="row d-flex justify-content-between">
                                                 <div class="col-12">
-                                                    <h4><strong>${{group.initialInvertion}}</strong></h4>
+                                                    Grupo
                                                 </div>
                                                 <div class="col-12">
-                                                    <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
+                                                    <h4><strong>${{group.initialInvertion}}</strong></h4>
                                                 </div>
                                             </div>
 
-                                            <p>Cantidad de jugadores: {{group.totalMembers}}</p>
+                                            <!-- <p>Cantidad de jugadores: {{group.totalMembers}}</p> -->
 
                                             <div class="text-center">
                                                 <button mdbBtn rounded="true" size="sm"
@@ -92,9 +92,9 @@
                         <div class="col-6 mt-4">
                             <div class="text-left">
                                 <p class="m-0 font-weight-bolder">Para</p>
-<!--                                <p class="m-0 font-weight-bold blue-dark-seven-one-text">{{user.firstName}} {{user.lastName}}</p>-->
-                              <p class="m-0">{{user.userName}}</p>
-                              <p class="m-0">{{user.email}}</p>
+                                <!--                                <p class="m-0 font-weight-bold blue-dark-seven-one-text">{{user.firstName}} {{user.lastName}}</p>-->
+                                <p class="m-0">{{user.userName}}</p>
+                                <p class="m-0">{{user.email}}</p>
 
                             </div>
                         </div>
@@ -136,8 +136,8 @@
                         <div class="col-6 mb-2">
                             <ngx-paypal [config]="payPalConfig" class="mb-3"></ngx-paypal>
                         </div>
-                            
-                            <!-- <div class="col-5 mb-2">
+
+                        <!-- <div class="col-5 mb-2">
                                     <button mdbBtn type="button" block="true" rounded="true"
                                         class="mb-3 ml-3 mr-3 blue-paypal z-depth-0" mdbWavesEffect>Créditos 7 x 1</button>
                                 </div> -->
