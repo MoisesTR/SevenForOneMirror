@@ -68,15 +68,3 @@
     background-image: -webkit-linear-gradient(bottom, #42d583 0%, #42d583 99%, #42d583 100%);
     background-image: linear-gradient(to top, #42d583 0%, #42d583 99%, #42d583 100%); 
 }
-
-.text-top {
-    white-space: break-word;
-    width: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-  
-.text-top:hover {
-    overflow: visible;
-    word-wrap: break-word;
-}
