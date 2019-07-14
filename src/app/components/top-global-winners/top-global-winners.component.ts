@@ -1,58 +1,58 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
-import { TopWinnersService } from "../../core/services/shared/top-winners.service";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { TopService } from "../../core/services/shared/top.service";
 import { Winner } from "../../models/Winner";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { Top } from "../../models/Top";
 import { NGXLogger } from "ngx-logger";
 import { Router } from "@angular/router";
-import {ModalDirective} from "ng-uikit-pro-standard";
+import { ModalDirective } from "ng-uikit-pro-standard";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: "app-top-global-winners",
 	templateUrl: "./top-global-winners.component.html",
 	styleUrls: ["./top-global-winners.component.scss"]
 })
-export class TopGlobalWinnersComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class TopGlobalWinnersComponent implements OnInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	public winners3: Winner[] = [];
 	public winners7: Winner[] = [];
 	public winners: Winner[] = [];
-	public top: Top;
-  @ViewChild("topPlayers") topPlayers: ModalDirective;
-	constructor(private topWinnersService: TopWinnersService, private logger: NGXLogger, private router: Router) {}
+
+	@ViewChild("topPlayers") topPlayers: ModalDirective;
+	constructor(
+		private topWinnersService: TopService,
+		private logger: NGXLogger,
+		private router: Router,
+		private spinner: NgxSpinnerService
+	) {}
 
 	ngOnInit() {
 		this.getTopWinners();
 	}
 
 	getTopWinners() {
+		this.spinner.show();
 		this.topWinnersService
-			.getTop10ByGroupId("5d1840a7e8cb71841ac481fd", 10)
+			.getTop10WinnersByMount()
 			.pipe(takeUntil(this.ngUnsubscribe))
-			.subscribe(top => {
-				this.top = top[0];
+			.subscribe(winners => {
+				this.winners = winners;
 
-				this.winners = Object.keys(this.top.lastWinners).map(index => {
-					return this.top.lastWinners[index];
-				});
-
-				this.winners.forEach((value, index) => {
+				this.winners.forEach((winner, index) => {
 					if (index <= 2) {
-						this.winners3.push(value);
-					}
+						winner.trophyImageSrc = "/assets/images/" + `Grupo${index + 1}B.png`;
 
+						this.winners3.push(winner);
+					}
 					if (index > 2) {
-						this.winners7.push(value);
+						this.winners7.push(winner);
 					}
 				});
+
+				this.spinner.hide();
 			});
 	}
-
-  ngAfterViewInit(): void {
-    this.topPlayers.show();
-  }
 
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();

@@ -15,12 +15,12 @@ const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
 	{ path: "profile", component: ProfileComponent, data: { titulo: "Profile" } },
 	{ path: "groups", component: GroupsComponent, data: { titulo: "Groups" } },
-  { path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "Game container" } },
+	{ path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "Game container" } },
 	{ path: "top-players", component: TopPlayersComponent, data: { titulo: "Top Players" } },
 	{ path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } },
 	{ path: "win-history", component: WinHistoryComponent, data: { titulo: "Win History User" } },
 	{ path: "global-winners", component: TopGlobalWinnersComponent, data: { titulo: "Top Global Winners" } },
-  { path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
+	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 ];
 
 @NgModule({

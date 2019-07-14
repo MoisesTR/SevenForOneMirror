@@ -1,12 +1,13 @@
-import {Injectable} from "@angular/core";
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {AuthService} from "./auth.service";
-import {Observable} from "rxjs/Observable";
-import {catchError, filter, switchMap, take} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {BehaviorSubject, throwError} from "rxjs";
-import {NGXLogger} from "ngx-logger";
-import {Utils} from "../../../infraestructura/Utils";
+import { Injectable } from "@angular/core";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { AuthService } from "./auth.service";
+import { Observable } from "rxjs/Observable";
+import { catchError, filter, switchMap, take } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { BehaviorSubject, throwError } from "rxjs";
+import { NGXLogger } from "ngx-logger";
+import { Utils } from "../../../infraestructura/Utils";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable({
 	providedIn: "root"
@@ -15,10 +16,14 @@ export class HttpInterceptorService implements HttpInterceptor {
 	private isRefreshing = false;
 	private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-	constructor(public auth: AuthService, public router: Router, private logger: NGXLogger) {}
+	constructor(
+		public auth: AuthService,
+		public router: Router,
+		private logger: NGXLogger,
+		private spinner: NgxSpinnerService
+	) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
 		if (this.auth.getToken()) {
 			request = this.addToken(request, this.auth.getToken());
 		}
@@ -28,6 +33,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 			catchError(error => {
 				let errorMessage;
 				if (error instanceof HttpErrorResponse) {
+					this.spinner.hide();
+
 					if (error.status === 401 && this.auth.getToken()) {
 						return this.handle401Error(request, next);
 					}
@@ -36,11 +43,11 @@ export class HttpInterceptorService implements HttpInterceptor {
 						? Utils.msgError(error)
 						: `Error Code: ${error.status}\nMessage: ${error.message}`;
 
-          Utils.showMsgError(errorMessage, "An internal error ocurred during your request!");
+					Utils.showMsgError(errorMessage, "An internal error ocurred during your request!");
 
-          return throwError(errorMessage)
-
-        } else {
+					return throwError(errorMessage);
+				} else {
+					this.spinner.hide();
 					return throwError(error);
 				}
 			})

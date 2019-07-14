@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MemberGroup } from "../../models/MemberGroup";
 import { User } from "../../models/User";
 import { GroupGame } from "../../models/GroupGame";
@@ -14,6 +14,9 @@ import { NGXLogger } from "ngx-logger";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ModalDirective } from "ng-uikit-pro-standard";
+import { TopService } from "../../core/services/shared/top.service";
+import { Winner } from "../../models/Winner";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: "app-gamecontainer",
@@ -26,13 +29,19 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	public groupSelected: GroupGame;
 	public members: MemberGroup[] = [];
 	public userActual: User;
-	public idGroup: number;
+	public idGroup: string;
 	public isUserAdmin = false;
 	public circleUsers: CircleUser[] = [];
 	public circleUserPlaying: CircleUser[] = [];
+	public topWinners3: Winner[] = [];
+	public topWinners7: Winner[] = [];
+	public concurrentWinners3: Winner[] = [];
+	public concurrentWinners7: Winner[] = [];
 	public messageWin = " ";
 	public iterationValue = 1;
 	@ViewChild("modalWin") modalWin: ModalDirective;
+	@ViewChild("topPlayers") topPlayers: ModalDirective;
+	@ViewChild("topPlayersConcurrent") topPlayersConcurrent: ModalDirective;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -40,6 +49,8 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		private authService: AuthService,
 		private gameService: GameService,
 		private socketGroupGame: SocketGroupGameService,
+		private topService: TopService,
+		private spinner: NgxSpinnerService,
 		private router: Router,
 		private logger: NGXLogger
 	) {}
@@ -53,8 +64,8 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	ngAfterViewInit(): void {
 		if (this.socketGroupGame.userHasWin) {
 			setTimeout(() => {
-        this.socketGroupGame.userHasWin = false;
-        this.messageWin = this.socketGroupGame.messageWin;
+				this.socketGroupGame.userHasWin = false;
+				this.messageWin = this.socketGroupGame.messageWin;
 				this.modalWin.show();
 				this.socketGroupGame.celebration();
 			}, 2000);
@@ -81,6 +92,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	}
 
 	getMembersGroup(idGroup) {
+		this.spinner.show();
 		this.groupService
 			.getGroup(idGroup)
 			.pipe(takeUntil(this.ngUnsubscribe))
@@ -97,6 +109,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 				);
 				this.circleUserPlaying = this.gameService.getCircleUserPlaying(this.circleUsers);
 				// this.circleUserPlaying = this.circleUserPlaying.reverse();
+				this.spinner.hide();
 			});
 	}
 
@@ -133,6 +146,51 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.modalWin.hide();
 		this.router.navigateByUrl("win-history");
 	}
+
+	top10WinnersByGroupId() {
+		this.topService
+			.getTop10WinnersByGroupId(this.idGroup)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe((winners: Winner[]) => {
+				this.topWinners3 = [];
+				this.topWinners7 = [];
+				winners.forEach((winner, index) => {
+					if (index <= 2) {
+						winner.trophyImageSrc = "/assets/images/" + `Grupo${index + 1}B.png`;
+
+						this.topWinners3.push(winner);
+					}
+					if (index > 2) {
+						this.topWinners7.push(winner);
+					}
+				});
+
+				this.topPlayers.show();
+			});
+	}
+
+	top10WinnersConcurrent() {
+		this.topService
+			.getTop10ConcurrentWinners(this.idGroup)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe((concurrentWinners: Winner[]) => {
+				this.concurrentWinners3 = [];
+				this.concurrentWinners7 = [];
+				concurrentWinners.forEach((concurrentWinner, index) => {
+					if (index <= 2) {
+						concurrentWinner.trophyImageSrc = "/assets/images/" + `Grupo${index + 1}B.png`;
+
+						this.concurrentWinners3.push(concurrentWinner);
+					}
+					if (index > 2) {
+						this.concurrentWinners7.push(concurrentWinner);
+					}
+				});
+
+				this.topPlayersConcurrent.show();
+			});
+	}
+
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();

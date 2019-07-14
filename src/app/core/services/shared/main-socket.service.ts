@@ -18,16 +18,15 @@ export class MainSocketService {
 	}
 
 	public send(event: EventEnum, payload: string): void {
-    this.logger.info('MAIN SOCKET EVENT EMIT: ' + event);
+		this.logger.info("MAIN SOCKET EVENT EMIT: " + event);
 		this.socket.emit(event, payload);
 	}
 
 	public onEvent(event: EventEnum): Observable<any> {
-    this.logger.info('MAIN SOCKET EVENT ON: ' + event);
+		this.logger.info("MAIN SOCKET EVENT ON: " + event);
 		return new Observable<EventEnum>(observer => {
 			this.socket.on(event, data => observer.next(data));
 		});
-
 	}
 
 	public closeSocket() {
@@ -38,9 +37,9 @@ export class MainSocketService {
 	}
 
 	public removeAllListeners() {
-	  if (this.socket) {
-      this.logger.info("REMOVE ALL LISTENERS MAIN SOCKET");
-      this.socket.removeAllListeners();
-    }
+		if (this.socket) {
+			this.logger.info("REMOVE ALL LISTENERS MAIN SOCKET");
+			this.socket.removeAllListeners();
+		}
 	}
 }

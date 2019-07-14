@@ -1,17 +1,18 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {GroupService} from "../../core/services/shared/group.service";
-import {GroupGame} from "../../models/GroupGame";
-import {UserService} from "../../core/services/shared/user.service";
-import {User} from "../../models/User";
-import {AuthService} from "../../core/services/auth/auth.service";
-import {RoleEnum} from "../../enums/RoleEnum";
-import {GameService} from "../../core/services/shared/game.service";
-import {Router} from "@angular/router";
-import {Observable, Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
-import {EventEnum} from "../../enums/EventEnum";
-import {NGXLogger} from "ngx-logger";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { UserService } from "../../core/services/shared/user.service";
+import { User } from "../../models/User";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { GameService } from "../../core/services/shared/game.service";
+import { Router } from "@angular/router";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { EventEnum } from "../../enums/EventEnum";
+import { NGXLogger } from "ngx-logger";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: "app-dashboard",
@@ -40,12 +41,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		private authService: AuthService,
 		private gameSocketService: SocketGroupGameService,
 		private router: Router,
-		private logger: NGXLogger
+		private logger: NGXLogger,
+		private spinner: NgxSpinnerService
 	) {}
 
 	ngOnInit() {
 		this.user = this.authService.getUser();
 		this.isUserAdmin = this.user.role.name === RoleEnum.Admin;
+		this.spinner.show();
 		this.createContentDashboard(this.isUserAdmin);
 	}
 
@@ -70,6 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 			.subscribe(users => {
 				this.users = users;
 				this.users = this.userService.filterUsersByRol(users, RoleEnum.User);
+				this.spinner.show();
 			});
 	}
 
@@ -92,6 +96,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 					group.circleUsers = this.gameService.generateCircles(group.members, group.lastWinner, this.user);
 					group.circleUsersPlaying = this.gameService.getCircleUserPlaying(group.circleUsers);
+					this.spinner.hide();
 					// group.circleUsersPlaying = group.circleUsersPlaying.reverse();
 				});
 			});
