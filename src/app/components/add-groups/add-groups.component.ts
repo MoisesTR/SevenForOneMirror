@@ -69,7 +69,6 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 	}
 
 	groupIsValid(): boolean {
-		console.log("initial invertion", this.initialInvertion);
 		if (this.initialInvertion <= 0) {
 			Utils.showMsgInfo("El monto debe ser mayor a cero!");
 			return false;

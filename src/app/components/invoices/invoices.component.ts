@@ -9,6 +9,7 @@ import { takeUntil } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
 import { Role } from "../../models/Role";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: "app-invoices",
@@ -25,17 +26,18 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private authSevice: AuthService,
 		private logger: NGXLogger,
-		private purchaseHistoryService: PurchaseService
+		private purchaseHistoryService: PurchaseService,
+		private spinner: NgxSpinnerService
 	) {}
 
 	ngOnInit() {
 		this.user = this.authSevice.getUser();
-
 		this.logger.info("GET PURCHASE HISTORY INVESTED");
 		this.getPurchaseHistory();
 	}
 
 	getPurchaseHistory() {
+		this.spinner.show();
 		this.purchaseHistoryService
 			.getPurchaseHistoryByIdUser(this.user._id)
 			.pipe(takeUntil(this.ngUnsubscribe))
@@ -46,6 +48,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 				this.purchaseHistoryInvested = this.purchaseHistoryInvested
 					.filter(h => h.action === ActionGameEnum.INVEST)
 					.reverse();
+				this.spinner.hide();
 			});
 	}
 

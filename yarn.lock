@@ -5331,6 +5331,13 @@ ngx-socket-io@^2.1.1:
     socket.io-client "^2.0.1"
     zone.js "^0.8.11"
 
+"ngx-spinner@^7.1.4 ":
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/ngx-spinner/-/ngx-spinner-7.1.4.tgz#d271b91b60426d156c45e939e105b5da82c87aa5"
+  integrity sha512-J8+ObulyapAjJfW2bEfFnlmSnp1NA80vtuplZjTa/wQa1Z6tBptmV2g0OLVCJhu/5wjmxV+gbMfN/t2FDup0Bw==
+  dependencies:
+    tslib "^1.9.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

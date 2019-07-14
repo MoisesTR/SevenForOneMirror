@@ -1,16 +1,16 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from "@angular/core";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {User} from "../../models/User";
-import {UserService} from "../../core/services/shared/user.service";
-import {Router} from "@angular/router";
-import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from "angular-6-social-login";
-import {AuthService as AuthServiceUser} from "../../core/services/auth/auth.service";
-import {RolService} from "../../core/services/shared/rol.service";
-import {RoleEnum} from "../../enums/RoleEnum";
-import {SocialPlatFormEnum} from "../../enums/SocialPlatFormEnum";
-import {Utils} from "../../infraestructura/Utils";
-import {Subject} from "rxjs";
-import {take, takeUntil} from "rxjs/operators";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { User } from "../../models/User";
+import { UserService } from "../../core/services/shared/user.service";
+import { Router } from "@angular/router";
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
+import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.service";
+import { RolService } from "../../core/services/shared/rol.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
+import { Utils } from "../../infraestructura/Utils";
+import { Subject } from "rxjs";
+import { take, takeUntil } from "rxjs/operators";
 
 @Component({
 	selector: "app-login",
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private rolService: RolService,
 		private socialAuthService: AuthService,
-    private authService: AuthServiceUser
+		private authService: AuthServiceUser
 	) {
 		this.user = new User();
 	}
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {
-				  this.authService.setValuesCookies(response);
+					this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
 				});
 		});
@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(
 				response => {
-          this.authService.setValuesCookies(response);
+					this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
 				},
 				() => {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { GroupGame } from "src/app/models/GroupGame";
 import { Winner } from "../../models/Winner";
 
@@ -7,9 +7,8 @@ import { Winner } from "../../models/Winner";
 	templateUrl: "./top-players.component.html",
 	styleUrls: ["./top-players.component.scss"]
 })
-export class TopPlayersComponent implements OnInit, AfterViewInit {
-
-  @Input()
+export class TopPlayersComponent implements OnInit {
+	@Input()
 	winners3: Winner[] = [];
 
 	@Input()
@@ -19,11 +18,12 @@ export class TopPlayersComponent implements OnInit, AfterViewInit {
 	group: GroupGame;
 
 	@Input()
-  title = 'Monto';
+	title = "Monto";
+
+	@Input()
+	renderMount = true;
 
 	constructor() {}
 
 	ngOnInit() {}
-
-	ngAfterViewInit(): void {}
 }

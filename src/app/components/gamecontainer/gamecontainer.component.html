@@ -1,5 +1,7 @@
 <section>
 
+  <button (click)="top10WinnersByGroupId()">PRUEBA BOTON TOP 10 WINNERS BY MOUNT</button>
+  <button (click)="top10WinnersConcurrent()">PRUEBA BOTON TOP 10 WINNERS CONCURRENT</button>
   <app-game  [circleUsers]="circleUsers"
              [circleUsersPlaying]="circleUserPlaying"
              [groupSelected]="groupSelected"
@@ -42,6 +44,56 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mdbModal #topPlayers="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true" [config]="{backdrop: true}">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">
+    <div class="modal-content rounded-all">
+      <div class="modal-body background-card">
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="topPlayers.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <app-top-players [winners3]="this.topWinners3" [winners7]="this.topWinners7">
+        </app-top-players>
+
+        <div class="col-12 text-center">
+          <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayers.hide();" >
+            Cerrar
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div mdbModal #topPlayersConcurrent="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true" [config]="{backdrop: true}">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">
+    <div class="modal-content rounded-all">
+      <div class="modal-body background-card">
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="topPlayersConcurrent.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <app-top-players [winners3]="this.concurrentWinners3" [winners7]="this.concurrentWinners7" title="Veces"
+                         [renderMount]="false">
+        </app-top-players>
+
+        <div class="col-12 text-center">
+          <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayersConcurrent.hide();">
+            Cerrar
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
