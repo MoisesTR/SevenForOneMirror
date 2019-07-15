@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.user = this.authService.getUser();
-		this.isUserAdmin = this.user.role.name === RoleEnum.Admin;
+		this.isUserAdmin = this.authService.userIsAdmin();
 		this.spinner.show();
 		this.createContentDashboard(this.isUserAdmin);
 	}
@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 			.subscribe(users => {
 				this.users = users;
 				this.users = this.userService.filterUsersByRol(users, RoleEnum.User);
-				this.spinner.show();
+				this.spinner.hide();
 			});
 	}
 
@@ -91,14 +91,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 					this.gameSocketService.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(data => {
 						this.logger.info("ACTIVTY-GROUP: " + group.initialInvertion, data);
 						this.iterationValue = 0;
-						this.gameSocketService.animationNewPlayer(data, group.circleUsers, group.circleUsersPlaying, group);
+						this.gameSocketService.animationNewPlayer(data, group);
 					});
 
 					group.circleUsers = this.gameService.generateCircles(group.members, group.lastWinner, this.user);
 					group.circleUsersPlaying = this.gameService.getCircleUserPlaying(group.circleUsers);
-					this.spinner.hide();
 					// group.circleUsersPlaying = group.circleUsersPlaying.reverse();
 				});
+				this.spinner.hide();
 			});
 	}
 

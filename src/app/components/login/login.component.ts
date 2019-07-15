@@ -111,6 +111,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				response => {
 					this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
+					console.log(response)
 				},
 				() => {
 					this.disabledButton = false;

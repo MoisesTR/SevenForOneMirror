@@ -7,7 +7,6 @@ import { AuthService } from "../../core/services/auth/auth.service";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
 import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { GroupService } from "../../core/services/shared/group.service";
-import { RoleEnum } from "../../enums/RoleEnum";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 import { MainSocketService } from "../../core/services/shared/main-socket.service";
 import { EventEnum } from "../../enums/EventEnum";
@@ -93,7 +92,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 			this.logger.info("WIN EVENT: ", data);
 
 			this.updateMoneyService.update(true);
-			
+
 			if (!this.gameSocketSevice.recentBuyTicketGroup) {
 				this.logger.info("SHOW CELEBRATION IN ACTUAL SCREEN");
 				this.messageWin = data.content;
@@ -149,7 +148,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	getCredentialsUser() {
 		this.user = this.authService.getUser();
-		this.isUserAdmin = this.user.role.name === RoleEnum.Admin;
+		this.isUserAdmin = this.authService.userIsAdmin();
 	}
 
 	getTotalEarned() {

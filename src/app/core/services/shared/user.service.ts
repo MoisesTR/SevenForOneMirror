@@ -75,6 +75,6 @@ export class UserService {
 	}
 
 	filterUsersByRol(users: User[], rol) {
-		return users.filter(user => user.role.name === rol);
+		return users.filter(user => user.role && user.role.name === rol);
 	}
 }

@@ -2,8 +2,8 @@
 
   <button (click)="top10WinnersByGroupId()">PRUEBA BOTON TOP 10 WINNERS BY MOUNT</button>
   <button (click)="top10WinnersConcurrent()">PRUEBA BOTON TOP 10 WINNERS CONCURRENT</button>
-  <app-game  [circleUsers]="circleUsers"
-             [circleUsersPlaying]="circleUserPlaying"
+  <app-game  [circleUsers]="groupSelected.circleUsers"
+             [circleUsersPlaying]="groupSelected.circleUsersPlaying"
              [groupSelected]="groupSelected"
              [actualUser]="userActual"
              [iterationValue]="iterationValue"
