@@ -13,7 +13,6 @@ import { TopPlayersComponent } from "../top-players/top-players.component";
 import { InvoicesComponent } from "../invoices/invoices.component";
 import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
-import { LandingPageComponent } from '../landing-page/landing-page.component';
 
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro, NgxPayPalModule],
@@ -27,8 +26,7 @@ import { LandingPageComponent } from '../landing-page/landing-page.component';
 		TopPlayersComponent,
 		InvoicesComponent,
 		WinHistoryComponent,
-		TopGlobalWinnersComponent,
-		LandingPageComponent
+		TopGlobalWinnersComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

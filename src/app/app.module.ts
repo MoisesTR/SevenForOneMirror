@@ -26,6 +26,7 @@ import { AddGroupsComponent } from "./components/add-groups/add-groups.component
 import { NgxSpinnerModule } from "ngx-spinner";
 import { GlobalErrorHandlerService } from "./core/services/shared/global-error-handler.service";
 import { ErrorHandler } from "protractor/built/exitCodes";
+import {LandingPageComponent} from "./components/landing-page/landing-page.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -53,7 +54,8 @@ export function getAuthServiceConfigs() {
 		NotFound404Component,
 		EmailConfirmComponent,
 		LockedScreenComponent,
-		AddGroupsComponent
+		AddGroupsComponent,
+    LandingPageComponent
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: "serverApp" }),
