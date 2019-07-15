@@ -10,8 +10,6 @@ import {CircleUser} from "../../models/CircleUser";
 	styleUrls: ["./game.component.scss"]
 })
 export class GameComponent implements OnInit {
-	public smallHoverImg =
-		'<h4 class="blue-seven-one-text text-center"> Último ganador </h4> <img src="/assets/images/trophy.svg" class="w-25 mx-auto d-block mt-2" alt="Trofeo"/>';
 
 	@Input()
 	groupSelected: GroupGame;
