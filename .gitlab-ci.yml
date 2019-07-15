@@ -51,7 +51,7 @@ build stage:
     # Rebuild SASS
     - npm rebuild node-sass
     # # Build App
-    - npm run build:ssr
+    - npm run build
   artifacts:
     paths:
       # Build folder
