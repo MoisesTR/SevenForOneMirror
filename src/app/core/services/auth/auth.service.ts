@@ -9,13 +9,14 @@ import { tap } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
 import { CookieService } from "ngx-cookie-service";
 import { throwError } from "rxjs";
+import {RoleEnum} from "../../../enums/RoleEnum";
+import {Utils} from "../../../infraestructura/Utils";
 
 @Injectable({
 	providedIn: "root"
 })
 export class AuthService {
 	public jwtHelper;
-	cachedRequests: Array<HttpRequest<any>> = [];
 	public urlAuth: string;
 	public JWT_REFRESH = "refreshToken";
 	public JWT_ACCESS = "token";
@@ -27,15 +28,6 @@ export class AuthService {
 		private cookieService: CookieService
 	) {
 		this.urlAuth = Global.urlAuth;
-	}
-
-	public collectFailedRequest(request): void {
-		this.cachedRequests.push(request);
-	}
-
-	public retryFailedRequests(): void {
-		// retry the requests. this method can
-		// be called after the token is refreshed
 	}
 
 	getToken() {
@@ -60,6 +52,15 @@ export class AuthService {
 		return identity ? identity : null;
 	}
 
+	public userIsAdmin() {
+    if (this.getUser().role) {
+      return this.getUser().role.name === RoleEnum.Admin;
+    } else {
+      Utils.showMsgInfo("Ha ocurrido un error al obtener el rol del usuario");
+      this.logout();
+    }
+  }
+
 	public isAuthenticated(): boolean {
 		this.jwtHelper = new JwtHelperService();
 		const token = this.getToken();
@@ -83,14 +84,20 @@ export class AuthService {
 	}
 
 	setValuesCookies(response) {
+		this.cookieService.deleteAll();
+
 		this.cookieService.set("token", response.token);
 		this.cookieService.set("refreshToken", response.refreshToken);
 		this.cookieService.set("expiration", response.expiration);
 
-		if (response.user) this.cookieService.set("identity", JSON.stringify(response.user));
+		this.cookieService.set("identity", JSON.stringify(response.user));
 	}
 
 	setTokenValues(bodyToken: BodyToken) {
+		this.cookieService.delete("token");
+		this.cookieService.delete("refreshToken");
+		this.cookieService.delete("expiration");
+
 		this.cookieService.set("token", bodyToken.token);
 		this.cookieService.set("refreshToken", bodyToken.refreshToken);
 		this.cookieService.set("expiration", bodyToken.expiration);

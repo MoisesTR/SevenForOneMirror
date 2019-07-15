@@ -94,25 +94,26 @@ export class SocketGroupGameService {
 		}, 200);
 	}
 
-	animationNewPlayer(data, circleUsers: CircleUser[], circleUsersPlaying: CircleUser[], group: GroupGame) {
+	animationNewPlayer(data, group: GroupGame) {
 		this.logger.info("GENERATE ANIMATION BY MULTIPLES GROUPS");
 		const memberGroup = new MemberGroup();
 		memberGroup.userId = data.userId;
 		memberGroup.image = data.image;
 		memberGroup.userName = data.userName;
+
 		const circleUser: CircleUser = this.gameService.createCircle(memberGroup, 7);
 
-		let circleUSersCopy = Object.assign([], circleUsers);
+		let circleUSersCopy = group.circleUsers.map(obj => ({ ...obj }));
 		circleUSersCopy = circleUSersCopy.filter(c => c.position !== 1);
 
 		// Desplazar los circulos una posicion hacia atras
-		circleUSersCopy.forEach((circle, index) => {
+		circleUSersCopy.forEach(circle => {
 			circle.position = circle.position - 1;
 		});
 
 		circleUSersCopy.push(circleUser);
 
-		group.circleUsers = Object.assign([], circleUSersCopy);
-		group.circleUsersPlaying = Object.assign([], this.gameService.getCircleUserPlaying(circleUSersCopy));
+		group.circleUsers = circleUSersCopy.map(obj => ({ ...obj }));
+		group.circleUsersPlaying = this.gameService.getCircleUserPlaying(circleUSersCopy).map(obj => ({ ...obj }));
 	}
 }

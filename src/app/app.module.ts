@@ -23,7 +23,9 @@ import { MdbFileUploadModule } from "mdb-file-upload";
 import { LockedScreenComponent } from "./components/locked-screen/locked-screen.component";
 import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
 import { AddGroupsComponent } from "./components/add-groups/add-groups.component";
-import {NgxSpinnerModule} from "ngx-spinner";
+import { NgxSpinnerModule } from "ngx-spinner";
+import { GlobalErrorHandlerService } from "./core/services/shared/global-error-handler.service";
+import { ErrorHandler } from "protractor/built/exitCodes";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -60,7 +62,7 @@ export function getAuthServiceConfigs() {
 		AppRoutingModule,
 		MDBBootstrapModulesPro.forRoot(),
 		SocialLoginModule,
-    NgxSpinnerModule,
+		NgxSpinnerModule,
 		LoggerModule.forRoot({
 			level: !environment.production ? NgxLoggerLevel.DEBUG : NgxLoggerLevel.OFF,
 			httpResponseType: "json",
@@ -74,7 +76,8 @@ export function getAuthServiceConfigs() {
 		{
 			provide: AuthServiceConfig,
 			useFactory: getAuthServiceConfigs
-		}
+		},
+		[GlobalErrorHandlerService, { provide: ErrorHandler, useClass: GlobalErrorHandlerService }]
 	],
 	bootstrap: [AppComponent]
 })

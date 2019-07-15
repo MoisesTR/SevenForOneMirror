@@ -13,8 +13,8 @@ export class GroupGame {
 	public updateAt: string;
 	public enabled: boolean;
 	public lastWinner?: MemberGroup;
-	public circleUsers?: CircleUser[];
-	public circleUsersPlaying?: CircleUser[];
+	public circleUsers?: CircleUser[] = [];
+	public circleUsersPlaying?: CircleUser[] = [];
 	public timesPlayUser = 0;
 
 	public GroupGame() {}

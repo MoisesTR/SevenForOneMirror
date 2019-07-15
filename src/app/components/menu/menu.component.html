@@ -99,7 +99,7 @@
                                 $ {{this.totalEarned}}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-3 col-md-2 col-lg-5 col-xl-4 v-divider">
+                        <div *ngIf="!isUserAdmin" class="col-xs-12 col-sm-3 col-md-2 col-lg-5 col-xl-4 v-divider">
                             <mdb-icon fas icon="arrow-alt-circle-down mr-2"></mdb-icon>
                             Inversión
                             <div class="mt-1">
@@ -169,7 +169,7 @@
                             <div class="row justify-content-center btn-dashboard">
 
 
-                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                <div *ngIf="!isUserAdmin"  class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a [routerLink]="['/invoices']" [routerLinkActive]="['active-menu-dashboard']"
                                         class="hover-menu hoverable text-menu" mdbWavesEffect>
                                         <div class="p-3">

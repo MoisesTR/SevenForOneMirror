@@ -1,22 +1,22 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { MemberGroup } from "../../models/MemberGroup";
-import { User } from "../../models/User";
-import { GroupGame } from "../../models/GroupGame";
-import { AuthService } from "../../core/services/auth/auth.service";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { GroupService } from "../../core/services/shared/group.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { GameService } from "../../core/services/shared/game.service";
-import { CircleUser } from "../../models/CircleUser";
-import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
-import { EventEnum } from "../../enums/EventEnum";
-import { NGXLogger } from "ngx-logger";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { ModalDirective } from "ng-uikit-pro-standard";
-import { TopService } from "../../core/services/shared/top.service";
-import { Winner } from "../../models/Winner";
-import { NgxSpinnerService } from "ngx-spinner";
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {MemberGroup} from "../../models/MemberGroup";
+import {User} from "../../models/User";
+import {GroupGame} from "../../models/GroupGame";
+import {AuthService} from "../../core/services/auth/auth.service";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {GroupService} from "../../core/services/shared/group.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {GameService} from "../../core/services/shared/game.service";
+import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
+import {EventEnum} from "../../enums/EventEnum";
+import {NGXLogger} from "ngx-logger";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {ModalDirective} from "ng-uikit-pro-standard";
+import {TopService} from "../../core/services/shared/top.service";
+import {Winner} from "../../models/Winner";
+import {NgxSpinnerService} from "ngx-spinner";
+import {Utils} from "../../infraestructura/Utils";
 
 @Component({
 	selector: "app-gamecontainer",
@@ -26,13 +26,11 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	public group: GroupGame;
-	public groupSelected: GroupGame;
+	public groupSelected = new GroupGame();
 	public members: MemberGroup[] = [];
 	public userActual: User;
 	public idGroup: string;
 	public isUserAdmin = false;
-	public circleUsers: CircleUser[] = [];
-	public circleUserPlaying: CircleUser[] = [];
 	public topWinners3: Winner[] = [];
 	public topWinners7: Winner[] = [];
 	public concurrentWinners3: Winner[] = [];
@@ -102,12 +100,12 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 				this.initSocketGroupActivity(group);
 
 				this.members = this.groupSelected.members;
-				this.circleUsers = this.gameService.generateCircles(
+				this.groupSelected.circleUsers = this.gameService.generateCircles(
 					this.members,
 					this.groupSelected.lastWinner,
 					this.userActual
 				);
-				this.circleUserPlaying = this.gameService.getCircleUserPlaying(this.circleUsers);
+				this.groupSelected.circleUsersPlaying = this.gameService.getCircleUserPlaying(this.groupSelected.circleUsers);
 				// this.circleUserPlaying = this.circleUserPlaying.reverse();
 				this.spinner.hide();
 			});
@@ -116,30 +114,9 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	initSocketGroupActivity(group: GroupGame) {
 		this.socketGroupGame.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(data => {
 			this.logger.info("ACTIVTY GROUP: ", group, data);
-			this.animationNewPlayer(data);
+			this.iterationValue = 0;
+			this.socketGroupGame.animationNewPlayer(data, group);
 		});
-	}
-
-	animationNewPlayer(data) {
-		this.logger.info("GENERATE ANIMATION BY GROUP");
-		const memberGroup = new MemberGroup();
-		memberGroup.userId = data.userId;
-		memberGroup.image = data.image;
-		memberGroup.userName = data.userName;
-		const circleUser: CircleUser = this.gameService.createCircle(memberGroup, 7);
-
-		let circleUSersCopy = Object.assign([], this.circleUsers);
-		circleUSersCopy = circleUSersCopy.filter(c => c.position !== 1);
-
-		// Desplazar los circulos una posicion hacia atras
-		circleUSersCopy.forEach((circle, index) => {
-			circle.position = circle.position - 1;
-		});
-
-		circleUSersCopy.push(circleUser);
-		this.iterationValue = 0;
-		this.circleUsers = Object.assign([], circleUSersCopy);
-		this.circleUserPlaying = Object.assign([], this.gameService.getCircleUserPlaying(circleUSersCopy));
 	}
 
 	clainEvent() {
@@ -165,7 +142,11 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 					}
 				});
 
-				this.topPlayers.show();
+				if (winners.length > 0) {
+					this.topPlayers.show();
+				} else {
+					Utils.showMsgInfo("No hay ganadores en este grupo actualmente!");
+				}
 			});
 	}
 
@@ -187,7 +168,11 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 					}
 				});
 
-				this.topPlayersConcurrent.show();
+				if (concurrentWinners.length > 0) {
+					this.topPlayersConcurrent.show();
+				} else {
+					Utils.showMsgInfo("No hay ganadores en este grupo actualmente!");
+				}
 			});
 	}
 

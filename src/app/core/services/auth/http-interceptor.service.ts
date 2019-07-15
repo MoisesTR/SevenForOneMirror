@@ -48,6 +48,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 					return throwError(errorMessage);
 				} else {
 					this.spinner.hide();
+					console.log('ha ocurrido un error ')
 					return throwError(error);
 				}
 			})

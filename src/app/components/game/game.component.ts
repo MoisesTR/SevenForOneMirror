@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { User } from "../../models/User";
-import { GroupGame } from "../../models/GroupGame";
-import { MemberGroup } from "../../models/MemberGroup";
-import { CircleUser } from "../../models/CircleUser";
+import {Component, Input, OnInit} from "@angular/core";
+import {User} from "../../models/User";
+import {GroupGame} from "../../models/GroupGame";
+import {MemberGroup} from "../../models/MemberGroup";
+import {CircleUser} from "../../models/CircleUser";
 
 @Component({
 	selector: "app-game",
@@ -10,9 +10,8 @@ import { CircleUser } from "../../models/CircleUser";
 	styleUrls: ["./game.component.scss"]
 })
 export class GameComponent implements OnInit {
-
-
-	public smallHoverImg: string = '<h4 class="blue-seven-one-text text-center"> Último ganador </h4> <img src="/assets/images/trophy.svg" class="w-25 mx-auto d-block mt-2" alt="Trofeo"/>';
+	public smallHoverImg =
+		'<h4 class="blue-seven-one-text text-center"> Último ganador </h4> <img src="/assets/images/trophy.svg" class="w-25 mx-auto d-block mt-2" alt="Trofeo"/>';
 
 	@Input()
 	groupSelected: GroupGame;
@@ -39,15 +38,11 @@ export class GameComponent implements OnInit {
 
 	ngOnInit() {}
 
-	resultado(i: number) {
+	delay(i: number) {
 		if (this.iterationValue === 0) {
-			return 2 / 10;
+      return (( 10  - (i + 1)) / 10).toString() + 's';
 		} else {
-			return (i + 1) / 10;
+      return (( 10  - (i + 1)) / 10).toString() + 's';
 		}
-	}
-
-	trackingFunction(index: number, circleUser: CircleUser) {
-		return circleUser.position;
 	}
 }
