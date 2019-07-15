@@ -1,0 +1,39 @@
+.view {
+  height: 100vh;
+}
+
+@media (max-width: 559px) {
+  .view {
+    height: 1000px;
+  }
+}
+
+@media (min-width: 560px) and (max-width: 740px) {
+  .view {
+    height: 700px;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+  .view {
+    height: 600px;
+  }
+}
+
+.logo {
+  display: inline-block;
+  position: relative;
+  -webkit-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  top: 0;
+}
+
+.logo img {
+  max-width: 200px;
+  margin-bottom: 2rem;
+}
+
+.logo:hover {
+  top: -10px;
+}
