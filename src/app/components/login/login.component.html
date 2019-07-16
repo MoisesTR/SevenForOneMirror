@@ -61,11 +61,22 @@
                                         <show-errors [control]="userForm.controls['password']"></show-errors>
                                     </div>
 
-                                    <div class="text-center mt-3">
-                                        <!-- Forgot password -->
-                                        <a (click)="forgotPassword.show()" class="green-seven-one-text">
-                                            <h5>¿Se te olvidó tu contraseña?</h5>
-                                        </a>
+                                    <div class="mt-3">
+
+                                        <div class="row justify-content-center">
+
+                                            <div class="col-6">
+                                                <mdb-checkbox>Mantener sesión</mdb-checkbox>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <a (click)="forgotPassword.show()"
+                                                    class="green-seven-one-text text-right">
+                                                    <h5>¿Se te olvidó tu contraseña?</h5>
+                                                </a>
+                                            </div>
+
+                                        </div>
 
                                     </div>
 
