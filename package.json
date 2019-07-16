@@ -52,7 +52,6 @@
     "ngx-cookie-service": "^2.2.0",
     "ngx-logger": "^3.4.5",
     "ngx-paypal": "^5.0.0-beta.11",
-    "ngx-socket-io": "^2.1.1",
     "ngx-spinner": "^7.1.4 ",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",

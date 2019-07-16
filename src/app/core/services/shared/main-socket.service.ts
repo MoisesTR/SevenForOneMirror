@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 import * as socketIo from "socket.io-client";
-import { environment } from "../../../../environments/environment";
-import { Observable } from "rxjs";
-import { EventEnum } from "../../../enums/EventEnum";
-import { NGXLogger } from "ngx-logger";
+import {environment} from "../../../../environments/environment";
+import {Observable} from "rxjs";
+import {EventEnum} from "../../../enums/EventEnum";
+import {NGXLogger} from "ngx-logger";
 
 @Injectable({
 	providedIn: "root"
@@ -14,7 +14,7 @@ export class MainSocketService {
 	constructor(private logger: NGXLogger) {}
 
 	public connect() {
-		this.socket = socketIo.connect(environment.socket);
+		this.socket = socketIo.connect(environment.socket, { path: "/seven/socket.io", transports: ['websocket'] });
 	}
 
 	public send(event: EventEnum, payload: string): void {
