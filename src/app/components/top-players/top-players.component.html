@@ -30,18 +30,18 @@
                         </h4>
                     </a>
 
-                  <ng-template [ngIf]="renderMount" [ngIfElse]="renderConcurrent">
-                    <p class="white-text mt-2 text-center">
-                      $ {{winner.totalWon['$numberDecimal']}}
-                    </p>
-                  </ng-template>
+                    <ng-template [ngIf]="renderMount" [ngIfElse]="renderConcurrent">
+                        <p class="white-text mt-2 text-center">
+                            $ {{winner.totalWon['$numberDecimal']}}
+                        </p>
+                    </ng-template>
 
-                  <!-- CAMBIAR ICONO POR ALGO DE CONCURRENCIA-->
-                  <ng-template #renderConcurrent>
-                    <p class="white-text mt-2 text-center">
-                      {{winner.wonTimes}}
-                    </p>
-                  </ng-template>
+                    <ng-template #renderConcurrent>
+                        <p class="white-text mt-2 text-center">
+                            <mdb-icon fas icon="award"></mdb-icon>
+                            {{winner.wonTimes}}
+                        </p>
+                    </ng-template>
 
                 </div>
 
@@ -81,21 +81,24 @@
                         </th>
                         <td>
                             <div class="avatar-table white-text mx-auto top-text-color">
-                                <img src="{{winner.image | imageUser}}"
-                                    alt="avatar mx-auto" class="rounded-circle img-fluid mr-3 green-dark-seven-one">
+                                <img src="{{winner.image | imageUser}}" alt="avatar mx-auto"
+                                    class="rounded-circle img-fluid mr-3 green-dark-seven-one">
 
                                 {{winner.userName}}
                             </div>
                         </td>
 
-                      <ng-template [ngIf]="renderMount" [ngIfElse]="renderConcurrent">
-                        <td class="border-right white-text align-middle top-text-color">$ {{winner.totalWon['$numberDecimal']}}</td>
-                      </ng-template>
+                        <ng-template [ngIf]="renderMount" [ngIfElse]="renderConcurrent">
+                            <td class="border-right white-text align-middle top-text-color">$
+                                {{winner.totalWon['$numberDecimal']}}</td>
+                        </ng-template>
 
-                      <!-- CAMBIAR ICONO POR ALGO DE CONCURRENCIA-->
-                      <ng-template #renderConcurrent>
-                        <td class="border-right white-text align-middle top-text-color">{{winner.wonTimes}}</td>
-                      </ng-template>
+                        <ng-template #renderConcurrent>
+                            <td class="border-right white-text align-middle top-text-color">
+                                <mdb-icon fas icon="award"></mdb-icon>
+                                {{winner.wonTimes}}
+                            </td>
+                        </ng-template>
 
                     </tr>
 

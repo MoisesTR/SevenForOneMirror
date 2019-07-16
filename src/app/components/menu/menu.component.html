@@ -9,7 +9,7 @@
         </mdb-navbar-brand>
         <links>
             <ul class="navbar-nav ml-auto nav-flex-icons">
-                
+
                 <li *ngIf="!isUserAdmin" class="nav-item waves-light" mdbWavesEffect>
                     <a class="nav-link" (click)="groupsUser.show()">
                         <mdb-icon fas icon="money-bill-alt"></mdb-icon>
@@ -61,16 +61,10 @@
         </links>
     </mdb-navbar>
 
-  <ngx-spinner
-    bdOpacity = 0.9
-    bdColor = "rgba(255,255,255,1)"
-    size = "large"
-    color = "#047dff"
-    type = "square-jelly-box"
-    [fullScreen] = "false"
-  >
-    <p style="color: black" > Cargando... </p>
-  </ngx-spinner>
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(255,255,255,1)" size="large" color="#047dff" type="square-jelly-box"
+        [fullScreen]="false">
+        <p style="color: black"> Cargando... </p>
+    </ngx-spinner>
 
     <div class="edge-header bg-header">
         <div class="container-fluid">
@@ -169,7 +163,7 @@
                             <div class="row justify-content-center btn-dashboard">
 
 
-                                <div *ngIf="!isUserAdmin"  class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                <div *ngIf="!isUserAdmin" class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a [routerLink]="['/invoices']" [routerLinkActive]="['active-menu-dashboard']"
                                         class="hover-menu hoverable text-menu" mdbWavesEffect>
                                         <div class="p-3">
@@ -183,7 +177,7 @@
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a [routerLink]="['/global-winners']" [routerLinkActive]="['active-menu-dashboard']"
-                                       class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
                                         <div class="p-3">
                                             <mdb-icon fas icon="trophy" size="2x" class="mt-1"></mdb-icon>
                                             <div class="mt-1 font-weight-bolder text-wrap">
@@ -192,6 +186,26 @@
                                         </div>
                                     </a>
                                 </div>
+
+                            </div>
+                        </div>
+
+                        <div *ngIf="!isUserAdmin" class="col-12 text-menu mt-2">
+                            <div class="row justify-content-center btn-dashboard">
+
+
+                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                    <a [routerLink]="['/win-history']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                        <div class="p-3">
+                                            <mdb-icon fas icon="hand-holding-usd" size="2x" class="mt-1"></mdb-icon>
+                                            <div class="mt-1 font-weight-bolder text-wrap">
+                                                Historial Ganancias
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center"></div>
 
                             </div>
                         </div>
@@ -337,15 +351,15 @@
                             {{user.userName}}
                         </h2>
                         <h4 class="white-text mt-3 wow bounceInDown" data-wow-delay="0.1s">
-                          {{messageWin}}
-<!--                            You have earned in the next groups:-->
-<!--                            <br>-->
-<!--                            $1, $10, $50-->
+                            {{messageWin}}
+                            <!--                            You have earned in the next groups:-->
+                            <!--                            <br>-->
+                            <!--                            $1, $10, $50-->
                         </h4>
                     </div>
                     <div class="col-12 text-center">
-                        <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
-                            (click)="clainEvent()" mdbTooltip="Claim prize">
+                        <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="clainEvent()"
+                            mdbTooltip="Claim prize">
                             <mdb-icon fas icon="trophy"></mdb-icon> Reclamar
                         </button>
                     </div>
