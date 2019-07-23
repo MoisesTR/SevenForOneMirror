@@ -1,5 +1,6 @@
 import { MemberGroup } from "./MemberGroup";
 import { CircleUser } from "./CircleUser";
+import {UserWin} from "./interface/UserWin";
 
 export class GroupGame {
 	public _id: string;
@@ -16,6 +17,7 @@ export class GroupGame {
 	public circleUsers?: CircleUser[] = [];
 	public circleUsersPlaying?: CircleUser[] = [];
 	public timesPlayUser = 0;
+	public dataUserWin: UserWin;
 
 	public GroupGame() {}
 }

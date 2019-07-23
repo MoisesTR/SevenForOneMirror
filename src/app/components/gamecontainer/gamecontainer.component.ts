@@ -11,7 +11,7 @@ import {SocketGroupGameService} from "../../core/services/shared/socket-group-ga
 import {EventEnum} from "../../enums/EventEnum";
 import {NGXLogger} from "ngx-logger";
 import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import {debounceTime, takeUntil} from "rxjs/operators";
 import {ModalDirective} from "ng-uikit-pro-standard";
 import {TopService} from "../../core/services/shared/top.service";
 import {Winner} from "../../models/Winner";
@@ -40,6 +40,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	@ViewChild("modalWin") modalWin: ModalDirective;
 	@ViewChild("topPlayers") topPlayers: ModalDirective;
 	@ViewChild("topPlayersConcurrent") topPlayersConcurrent: ModalDirective;
+  $animate: Subject<GroupGame> = new Subject<GroupGame>();
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -57,6 +58,9 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.getUser();
 		this.getParams();
 		this.initSocketGroupGame();
+		this.$animate.pipe(debounceTime(500)).subscribe(group => {
+			this.socketGroupGame.animationNewPlayer(group);
+		});
 	}
 
 	ngAfterViewInit(): void {
@@ -115,7 +119,8 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.socketGroupGame.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(data => {
 			this.logger.info("ACTIVTY GROUP: ", group, data);
 			this.iterationValue = 0;
-			this.socketGroupGame.animationNewPlayer(data, group);
+			group.dataUserWin = data;
+			this.$animate.next(group);
 		});
 	}
 
