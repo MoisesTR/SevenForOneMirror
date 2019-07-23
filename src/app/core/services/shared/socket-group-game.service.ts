@@ -94,12 +94,12 @@ export class SocketGroupGameService {
 		}, 200);
 	}
 
-	animationNewPlayer(data, group: GroupGame) {
+	animationNewPlayer(group: GroupGame) {
 		this.logger.info("GENERATE ANIMATION BY MULTIPLES GROUPS");
 		const memberGroup = new MemberGroup();
-		memberGroup.userId = data.userId;
-		memberGroup.image = data.image;
-		memberGroup.userName = data.userName;
+		memberGroup.userId = group.dataUserWin.userId;
+		memberGroup.image = group.dataUserWin.image;
+		memberGroup.userName = group.dataUserWin.userName;
 
 		const circleUser: CircleUser = this.gameService.createCircle(memberGroup, 7);
 
