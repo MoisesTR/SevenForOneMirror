@@ -36,26 +36,23 @@
                     </thead>
                     <tbody>
 
-                      <tr *ngFor="let history of purchaseHistoryEearned">
+                      <tr *ngFor="let history of purchaseHistoryEearned; let i = index">
                         <th scope="row" class="border-left border-top-bottom table-text-size align-middle">
-                          <!-- {{i + 1}} -->
+                          {{i + 1}}
                         </th>
                         <td class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-
-                            <!-- variable grupo -->
-
+                            ${{history.groupInfo.initialInvertion}}
                           </div>
                         </td>
                         <td class="border-top-bottom">
-
-                          <!-- variable ganancias -->
-                          <!-- {{history.quantity['$numberDecimal']}} -->
-
+                          <div class="table-text-size mx-auto">
+                            ${{history.quantity["$numberDecimal"]}}
+                          </div>
                         </td>
                         <td class="border-right border-top-bottom table-text-size align-middle">
 
-                          <!-- Variable fecha -->
+                          {{history.createdAt | date:'dd-MM-yyyy'}}
 
                         </td>
                       </tr>

@@ -8,6 +8,7 @@ import { AuthService } from "../../core/services/auth/auth.service";
 import { Subject } from "rxjs";
 import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: "app-win-history",
@@ -25,11 +26,13 @@ export class WinHistoryComponent implements OnInit, OnDestroy {
 		private logger: NGXLogger,
 		private router: Router,
 		private purchaseHistoryService: PurchaseService,
-		private authService: AuthService
+		private authService: AuthService,
+		private spinner: NgxSpinnerService
 	) {}
 
 	ngOnInit() {
 		this.user = this.authService.getUser();
+		this.spinner.show();
 		this.getPurchaseHistory();
 	}
 
@@ -47,6 +50,8 @@ export class WinHistoryComponent implements OnInit, OnDestroy {
 				this.purchaseHistoryEearned = this.purchaseHistoryEearned
 					.filter(h => h.action === ActionGameEnum.WIN)
 					.reverse();
+
+				this.spinner.hide();
 			});
 	}
 
