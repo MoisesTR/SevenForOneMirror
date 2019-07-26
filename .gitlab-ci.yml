@@ -18,7 +18,7 @@ build stage:
     - yarn install --ignore-scripts --ignore-engines
   script:
     # Install angular
-    - yarn add @angular/cli@8.0.4 --ignore-scripts --ignore-engines
+    - yarn add @angular/cli@7.2.3 --ignore-scripts --ignore-engines
     # Rebuild SASS
     - npm rebuild node-sass
     # # Build App
