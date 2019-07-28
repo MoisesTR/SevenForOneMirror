@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
-import {GroupService} from "../../core/services/shared/group.service";
-import {GroupGame} from "../../models/GroupGame";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {Utils} from "../../infraestructura/Utils";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {EventModal} from "../../models/interface/EventModal";
-import {ModalDirective} from "ng-uikit-pro-standard";
-import {Router} from "@angular/router";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { Utils } from "../../shared-module/Utils";
+import { Subject } from "rxjs";
+import {first, take, takeUntil} from "rxjs/operators";
+import { EventModal } from "../../models/interface/EventModal";
+import { ModalDirective } from "ng-uikit-pro-standard";
+import { Router } from "@angular/router";
 import swal from "sweetalert2";
 
 @Component({
@@ -28,7 +28,7 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 
 	ngOnInit() {
 		this.initFormGroup();
-		this.subscribeEventoModal();
+		this.subscribeEventModal();
 	}
 
 	initFormGroup() {
@@ -82,8 +82,8 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 		return true;
 	}
 
-	subscribeEventoModal() {
-		this.groupsService.modalEvent.subscribe(showModal => {
+	subscribeEventModal() {
+		this.groupsService.modalEvent.pipe(takeUntil(this.ngUnsubscribe)).subscribe(showModal => {
 			if (showModal) {
 				this.formAddGroup.reset();
 				this.modalAddGroup.show();
