@@ -106,23 +106,21 @@
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
-                                        <div class="p-3">
-                                            <mdb-icon fas icon="home" size="2x" class="mt-2"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder text-wrap">
-                                                Dashboard
-                                            </div>
+                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                        mdbWavesEffect>
+                                        <mdb-icon fas icon="home" size="2x"></mdb-icon>
+                                        <div class="font-weight-bolder text-wrap">
+                                            Dashboard
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
-                                        <div class="p-3">
-                                            <mdb-icon fas icon="money-bill-wave" size="2x" class="mt-2"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder text-wrap">
-                                                Grupos
-                                            </div>
+                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                        mdbWavesEffect>
+                                        <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
+                                        <div class="font-weight-bolder text-wrap">
+                                            Grupos
                                         </div>
                                     </a>
                                 </div>
@@ -135,23 +133,21 @@
 
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect (click)="addGroup()">
-                                        <div class="p-3">
-                                            <mdb-icon fas icon="edit" size="2x" class="mt-1"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder text-wrap">
-                                                Agregar grupo
-                                            </div>
+                                    <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                        mdbWavesEffect (click)="addGroup()">
+                                        <mdb-icon fas icon="edit" size="2x"></mdb-icon>
+                                        <div class="font-weight-bolder text-wrap">
+                                            Agregar grupo
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu hoverable text-menu" mdbWavesEffect (click)="addAdmin()">
-                                        <div class="p-2">
-                                            <mdb-icon fas icon="users-cog" size="2x" class="mt-2"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder text-wrap">
-                                                Agregar administrador
-                                            </div>
+                                    <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                        mdbWavesEffect (click)="addAdmin()">
+                                        <mdb-icon fas icon="users-cog" size="2x"></mdb-icon>
+                                        <div class="font-weight-bolder text-wrap">
+                                            Agregar administrador
                                         </div>
                                     </a>
                                 </div>
@@ -165,24 +161,22 @@
 
                                 <div *ngIf="!isUserAdmin" class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a [routerLink]="['/invoices']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
-                                        <div class="p-3">
-                                            <mdb-icon fas icon="file-invoice-dollar" size="2x" class="mt-2"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder text-wrap">
-                                                Facturas
-                                            </div>
+                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                        mdbWavesEffect>
+                                        <mdb-icon fas icon="file-invoice-dollar" size="2x"></mdb-icon>
+                                        <div class="font-weight-bolder text-wrap">
+                                            Facturas
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a [routerLink]="['/global-winners']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu hoverable text-menu" mdbWavesEffect>
-                                        <div class="p-3">
-                                            <mdb-icon fas icon="trophy" size="2x" class="mt-1"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder text-wrap">
-                                                Ranking global
-                                            </div>
+                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1 pl-1 pr-1"
+                                        mdbWavesEffect>
+                                        <mdb-icon fas icon="trophy" size="2x"></mdb-icon>
+                                        <div class="font-weight-bolder text-wrap">
+                                            Ranking global
                                         </div>
                                     </a>
                                 </div>
@@ -195,10 +189,12 @@
 
 
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/win-history']" [routerLinkActive]="['active-menu-dashboard']" class="hover-menu hoverable text-menu" mdbWavesEffect>
+                                    <a [routerLink]="['/win-history']" [routerLinkActive]="['active-menu-dashboard']"
+                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                        mdbWavesEffect>
                                         <div class="p-3">
-                                            <mdb-icon fas icon="hand-holding-usd" size="2x" class="mt-1"></mdb-icon>
-                                            <div class="mt-1 font-weight-bolder text-wrap">
+                                            <mdb-icon fas icon="hand-holding-usd" size="2x"></mdb-icon>
+                                            <div class="font-weight-bolder text-wrap">
                                                 Historial Ganancias
                                             </div>
                                         </div>
