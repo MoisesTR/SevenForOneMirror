@@ -131,7 +131,6 @@
                         <div *ngIf="isUserAdmin" class="col-12 text-menu mt-2">
                             <div class="row justify-content-center btn-dashboard">
 
-
                                 <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
                                     <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
                                         mdbWavesEffect (click)="addGroup()">
@@ -262,7 +261,7 @@
 
             <!--Header-->
             <div class="modal-header green-seven-one white-text">
-                <h4 class="title"><i class="fas fa-user"></i> Upload new avatar</h4>
+                <h4 class="title" i18n="@@uploadnewAvatar"><i class="fas fa-user"></i> Upload new avatar</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlAvatar.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -277,7 +276,7 @@
             </div>
 
             <div class="text-center mb-3">
-                <button mdbBtn rounded="true" class="green-seven-one white-text mt-3">Update</button>
+                <button mdbBtn rounded="true" class="green-seven-one white-text mt-3"><span i18n="@@update">Update</span></button>
             </div>
 
         </div>

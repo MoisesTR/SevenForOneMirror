@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
 import {Meta, Title} from '@angular/platform-browser';
+import { Component, LOCALE_ID } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  providers: [ { provide: LOCALE_ID, useValue: 'en' } ],
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

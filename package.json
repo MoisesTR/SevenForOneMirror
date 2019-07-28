@@ -14,7 +14,10 @@
     "build:client-and-server-bundles": "ng build --prod && ng run SevenForOne:server:production",
     "build:prerender": "npm run build:client-and-server-bundles && npm run compile:server && npm run generate:prerender",
     "generate:prerender": "cd dist && node prerender",
-    "serve:prerender": "cd dist/browser && http-server"
+    "serve:prerender": "cd dist/browser && http-server",
+    "build-locale:en": "ng build --prod --i18n-locale en --i18n-format xlf --i18n-file src/translate/messages.en.xlf --output-path=dist/en --baseHref /en/",
+    "build-locale:es": "ng build --prod --i18n-locale es --i18n-format xlf --i18n-file src/translate/messages.es.xlf --output-path=dist/es --baseHref /es/",
+    "build-locale": "npm run build-locale:en && npm run build-locale:es"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +38,7 @@
     "@nguniversal/express-engine": "^7.1.1",
     "@nguniversal/module-map-ngfactory-loader": "0.0.0",
     "angular-6-social-login": "^1.1.1",
+    "bufferutil": "^4.0.1",
     "canvas-confetti": "^0.2.1",
     "chart.js": "^2.5.0",
     "core-js": "^2.5.4",
@@ -57,6 +61,7 @@
     "rxjs-compat": "^6.2.1",
     "screenfull": "3.3.0",
     "sweetalert2": "^8.0.6",
+    "utf-8-validate": "^5.0.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
