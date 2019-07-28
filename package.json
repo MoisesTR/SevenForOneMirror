@@ -35,7 +35,6 @@
     "angular-6-social-login": "^1.1.1",
     "bufferutil": "^4.0.1",
     "@ng-select/ng-select": "2.3.2",
-    "angular-particle": "^1.0.4",
     "mdb-file-upload": "file:mdb-file-upload-7.5.4.tgz",
     "canvas-confetti": "^0.2.1",
     "chart.js": "^2.5.0",

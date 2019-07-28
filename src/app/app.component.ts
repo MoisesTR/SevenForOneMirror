@@ -6,7 +6,6 @@ const configKey = makeStateKey("CONFIG");
 @Component({
 	selector: "app-root",
 	templateUrl: "./app.component.html",
-	providers: [{ provide: LOCALE_ID, useValue: "es" }],
 	styleUrls: ["./app.component.css"]
 })
 export class AppComponent {

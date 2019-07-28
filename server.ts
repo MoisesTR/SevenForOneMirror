@@ -1,12 +1,11 @@
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
-import { renderModuleFactory } from '@angular/platform-server';
-import { enableProdMode } from '@angular/core';
-import { ngExpressEngine } from '@nguniversal/express-engine'
+import {renderModuleFactory} from '@angular/platform-server';
+import {enableProdMode} from '@angular/core';
 import * as express from 'express';
-import { join } from 'path';
-import { readFileSync } from 'fs';
+import {join} from 'path';
+import {readFileSync} from 'fs';
 
 const domino = require('domino');
 const fs = require('fs');

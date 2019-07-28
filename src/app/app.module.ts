@@ -18,7 +18,6 @@ import {MdbFileUploadModule} from "mdb-file-upload";
 import {LockedScreenComponent} from "./components/locked-screen/locked-screen.component";
 import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 import {AddGroupsComponent} from "./components/add-groups/add-groups.component";
-import {NgxSpinnerModule} from "ngx-spinner";
 import {LandingPageComponent} from "./components/landing-page/landing-page.component";
 
 // Configs
@@ -57,7 +56,6 @@ export function getAuthServiceConfigs() {
 		AppRoutingModule,
 		MDBBootstrapModulesPro.forRoot(),
 		SocialLoginModule,
-		NgxSpinnerModule,
 		LoggerModule.forRoot({
 			level: !environment.production ? NgxLoggerLevel.DEBUG : NgxLoggerLevel.OFF,
 			httpResponseType: "json",

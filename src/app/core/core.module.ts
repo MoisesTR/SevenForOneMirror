@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from "@angular/core";
+import {LOCALE_ID, NgModule, Optional, SkipSelf} from "@angular/core";
 import { throwIfAlreadyLoaded } from "./module-import-guard";
 import { HttpInterceptorService } from "./services/auth/http-interceptor.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";

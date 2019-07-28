@@ -1,4 +1,4 @@
-import { enableProdMode, TRANSLATIONS, TRANSLATIONS_FORMAT } from '@angular/core';
+import {enableProdMode, LOCALE_ID, TRANSLATIONS, TRANSLATIONS_FORMAT} from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
@@ -20,6 +20,7 @@ if (location[0] == "en") {
 }
 */
 document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule)
+  platformBrowserDynamic().bootstrapModule(AppModule, {providers: [{provide: LOCALE_ID, useValue: 'es-NI' }]})
     .catch(err => console.log(err));
 });
+
