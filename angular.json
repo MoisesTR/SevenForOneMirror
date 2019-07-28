@@ -58,15 +58,15 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
-            }, 
-            "es":{
+            },
+            "es": {
               "aot": true,
               "i18nFile": "src/translate/messages.es.xlf",
               "i18nFormat": "xfl",
               "i18nLocale": "es",
               "i18nMissingTranslation": "error"
             },
-            "en":{
+            "en": {
               "aot": true,
               "i18nFile": "src/translate/messages.en.xlf",
               "i18nFormat": "xfl",
@@ -84,10 +84,10 @@
             "production": {
               "browserTarget": "SevenForOne:build:production"
             },
-            "es":{
+            "es": {
               "browserTarget": "SevenForOne:build:es"
             },
-            "en":{
+            "en": {
               "browserTarget": "SevenForOne:build:en"
             }
           }

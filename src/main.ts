@@ -8,24 +8,18 @@ if (environment.production) {
   enableProdMode();
 }
 
-declare const require;
+/** declare const require;
 var translations;
- let location = window.location.hostname.split(".");
+let location = window.location.hostname.split(".");
 
- if(location[0] == "es"){
+if (location[0] == "en") {
   translations = require(`raw-loader!./translate/messages.es.xlf`);
 
- }else{
-   translations = null;
- }
-
+} else {
+  translations = null;
+}
+*/
 document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule,
-    {
-      providers:[
-        {provide: TRANSLATIONS, useValue: translations},
-        {provide: TRANSLATIONS_FORMAT, useValue: 'xlf'}
-      ]
-    })
+  platformBrowserDynamic().bootstrapModule(AppModule)
     .catch(err => console.log(err));
 });

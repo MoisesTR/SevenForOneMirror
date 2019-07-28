@@ -1,4 +1,4 @@
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, BrowserTransferStateModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
 
@@ -63,7 +63,8 @@ export function getAuthServiceConfigs() {
 			httpResponseType: "json",
 			serverLogLevel: NgxLoggerLevel.OFF
 		}),
-		MdbFileUploadModule
+		MdbFileUploadModule,
+		BrowserTransferStateModule
 	],
 	schemas: [NO_ERRORS_SCHEMA],
 	providers: [
@@ -75,4 +76,4 @@ export function getAuthServiceConfigs() {
 	],
 	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

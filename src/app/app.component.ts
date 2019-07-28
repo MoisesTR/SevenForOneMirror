@@ -1,21 +1,32 @@
-import {Meta, Title} from '@angular/platform-browser';
-import { Component, LOCALE_ID } from '@angular/core';
+import {Component, Inject, Injector, LOCALE_ID, PLATFORM_ID} from '@angular/core';
+import {makeStateKey, Meta, Title, TransferState} from '@angular/platform-browser'
+import {isPlatformServer} from '@angular/common';
+
+const configKey = makeStateKey('CONFIG');
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [ { provide: LOCALE_ID, useValue: 'en' } ],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   nombreApp = 'SevenForOne';
   title = 'SevenForOne: Ganar Dinero Facil y Seguro';
-  descripcion = 'Ganar dinero extra online de manera facil, ' +
-    'en esta pagina web podras duplicar tu dinero con SevenForOne ganas al instante invita a tus amigos para que las oportunidad de ganar sean mayores';
+  descripcion = 'Ganar dinero extra online de manera facil, en esta pagina web podras duplicar tu dinero con SevenForOne ganas al instante invita a tus amigos para que las oportunidad de ganar sean mayores';
   urlsitio = '';
 
-  constructor(seo: Meta, title: Title) {
+  constructor(seo: Meta, title: Title,
+    private injector: Injector,
+    private state: TransferState,
+    @Inject(PLATFORM_ID) private platformid: Object) {
 
+    if (isPlatformServer(this.platformid)) {
+      const envJson = this.injector.get('CONFIG') ? this.injector.get('CONFIG') : {};
+      this.state.set(configKey, envJson as any);
+    } else {
+      console.log(this.state.get(configKey, undefined as any));
+    }
     //twitter meta datos
     seo.addTags([
       {name: 'twitter:card', content: 'summary'},
