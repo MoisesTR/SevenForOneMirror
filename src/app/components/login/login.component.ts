@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
 import { UserService } from "../../core/services/shared/user.service";
@@ -11,6 +11,7 @@ import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 import { Utils } from "../../infraestructura/Utils";
 import { Subject } from "rxjs";
 import { take, takeUntil } from "rxjs/operators";
+import { isPlatformServer } from "@angular/common";
 
 @Component({
 	selector: "app-login",
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public roles: RoleEnum[] = [];
 	public disabledButton = false;
 	public idRolUser: string;
+	public exact: boolean;
 
 	constructor(
 		private usuarioService: UserService,
@@ -32,7 +34,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private rolService: RolService,
 		private socialAuthService: AuthService,
-		private authService: AuthServiceUser
+		private authService: AuthServiceUser,
+		@Inject(PLATFORM_ID) private platformId: Object
 	) {
 		this.user = new User();
 	}
@@ -111,7 +114,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				response => {
 					this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
-					console.log(response)
+					console.log(response);
 				},
 				() => {
 					this.disabledButton = false;
@@ -125,7 +128,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 	}
 
 	createUser() {
-		this.router.navigateByUrl("/register");
+		if (isPlatformServer(this.platformId)) {
+			this.exact = true;
+			//this.router.navigateByUrl("/register")
+		} else {
+			this.router.navigate(["/register"]);
+		}
 	}
 
 	openNav() {

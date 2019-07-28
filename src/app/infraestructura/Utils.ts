@@ -1,5 +1,4 @@
 import swal from "sweetalert2";
-import * as moment from "moment";
 import { environment } from "../../environments/environment";
 
 
@@ -39,12 +38,4 @@ export class Utils {
 		swal.fire(titulo, mensaje, "success");
 	}
 
-	static formatDateYYYYMMDD(myDate) {
-
-		return myDate ? moment(myDate).format("YYYY-MM-DD") : '';
-	}
-
-	static getYearDate(myDate) {
-		return moment(myDate, "YYYY-MM-DD").year();
-	}
 }

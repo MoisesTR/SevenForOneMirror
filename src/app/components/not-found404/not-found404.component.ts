@@ -12,26 +12,28 @@ export class NotFound404Component implements OnInit {
 	constructor() {}
 
 	ngOnInit() {
-		$(function() {
-			function testAnim(x) {
-				$(".js-last")
-					.removeClass()
-					.addClass(x + " last js-last slow animated")
-					.one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
-						$(this).removeClass();
-						$(this).addClass("js-last last sleep slow");
+		$(document).ready(() => {
+			$(() => {
+				function testAnim(x) {
+					$(".js-last")
+						.removeClass()
+						.addClass(x + " last js-last slow animated")
+						.one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", () => {
+							$(this).removeClass();
+							$(this).addClass("js-last last sleep slow");
 
-						setTimeout(function() {
-							$("body")
-								.find(".js-last")
-								.addClass("awake");
-						}, 800);
-					});
-			}
+							setTimeout(() => {
+								$("body")
+									.find(".js-last")
+									.addClass("awake");
+							}, 800);
+						});
+				}
 
-			setInterval(function() {
-				testAnim("last js-last animated hinge");
-			}, 2000);
+				setInterval(() => {
+					testAnim("last js-last animated hinge");
+				}, 2000);
+			});
 		});
 	}
 }

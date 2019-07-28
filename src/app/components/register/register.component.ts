@@ -5,7 +5,6 @@ import { CustomValidators } from "../../validators/CustomValidators";
 import { UserService } from "../../core/services/shared/user.service";
 import swal from "sweetalert2";
 import { Router } from "@angular/router";
-import { Utils } from "../../infraestructura/Utils";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
 import { Role } from "../../models/Role";
@@ -15,6 +14,7 @@ import { Subject } from "rxjs";
 import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.service";
 import { take, takeUntil } from "rxjs/operators";
 import { CookieService } from "ngx-cookie-service";
+import * as dayjs from "dayjs";
 
 declare var $: any;
 
@@ -143,7 +143,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		// SECOND FORM
 		if (this.firstFormGroup.value.birthday) {
-			this.user.birthDate = Utils.formatDateYYYYMMDD(this.firstFormGroup.value.birthday);
+			this.user.birthDate = dayjs(this.firstFormGroup.value.birthday).format("YYYY-MM-DD");
 		}
 
 		if (this.secondFormGroup.value.phone) {

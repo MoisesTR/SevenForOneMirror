@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { GroupGame } from "src/app/models/GroupGame";
+import { GroupGame } from "../../models/GroupGame";
 import { Winner } from "../../models/Winner";
 
 @Component({

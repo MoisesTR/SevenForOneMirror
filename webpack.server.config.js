@@ -1,5 +1,3 @@
-// Work around for https://github.com/angular/angular-cli/issues/7200
-
 const path = require('path');
 const webpack = require('webpack');
 
@@ -7,9 +5,7 @@ module.exports = {
   mode: 'none',
   entry: {
     // This is our Express server for Dynamic universal
-    server: './server.ts',
-    prerender: './prerender.ts'
-
+    server: './server.ts'
   },
   target: 'node',
   resolve: { extensions: ['.ts', '.js'] },
@@ -46,4 +42,4 @@ module.exports = {
       {}
     )
   ]
-};
+}

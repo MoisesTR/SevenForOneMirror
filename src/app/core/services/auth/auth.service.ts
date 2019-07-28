@@ -1,16 +1,17 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from "../../../models/User";
 import { BodyToken } from "../../../models/BodyToken";
-import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Global } from "../shared/global";
 import { tap } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
 import { CookieService } from "ngx-cookie-service";
 import { throwError } from "rxjs";
-import {RoleEnum} from "../../../enums/RoleEnum";
-import {Utils} from "../../../infraestructura/Utils";
+import { RoleEnum } from "../../../enums/RoleEnum";
+import { Utils } from "../../../infraestructura/Utils";
+import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
 	providedIn: "root"
@@ -25,7 +26,8 @@ export class AuthService {
 		private router: Router,
 		private http: HttpClient,
 		private logger: NGXLogger,
-		private cookieService: CookieService
+		private cookieService: CookieService,
+		@Inject(PLATFORM_ID) private platformID: object
 	) {
 		this.urlAuth = Global.urlAuth;
 	}
@@ -53,19 +55,23 @@ export class AuthService {
 	}
 
 	public userIsAdmin() {
-    if (this.getUser().role) {
-      return this.getUser().role.name === RoleEnum.Admin;
-    } else {
-      Utils.showMsgInfo("Ha ocurrido un error al obtener el rol del usuario");
-      this.logout();
-    }
-  }
+		if (this.getUser().role) {
+			return this.getUser().role.name === RoleEnum.Admin;
+		} else {
+			Utils.showMsgInfo("Ha ocurrido un error al obtener el rol del usuario");
+			this.logout();
+		}
+	}
 
 	public isAuthenticated(): boolean {
-		this.jwtHelper = new JwtHelperService();
-		const token = this.getToken();
+		if (isPlatformBrowser(this.platformID)) {
+			this.jwtHelper = new JwtHelperService();
+			const token = this.getToken();
 
-		return token ? !this.jwtHelper.isTokenExpired(token) : false;
+			return token ? !this.jwtHelper.isTokenExpired(token) : false;
+		} else {
+			return false;
+		}
 	}
 
 	refreshToken() {

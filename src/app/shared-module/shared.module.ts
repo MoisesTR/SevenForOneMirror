@@ -24,7 +24,7 @@ import { ImageUserPipe } from "../pipe/image-user.pipe";
 	],
 	declarations: [ShowErrorsComponent, ImageUserPipe],
 	providers: [
-		{ provide: OWL_DATE_TIME_LOCALE, useValue: "en" },
+		{ provide: OWL_DATE_TIME_LOCALE, useValue: "es" },
 		{
 			provide: DateTimeAdapter,
 			useClass: NativeDateTimeAdapter,

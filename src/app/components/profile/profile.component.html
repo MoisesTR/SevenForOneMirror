@@ -1,130 +1,130 @@
 <section>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-12 colsm-12 col-md-12 col-lg-12">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 colsm-12 col-md-12 col-lg-12">
 
-                <div class="card card-cascade narrower rounded-all z-depth-3">
+        <div class="card card-cascade narrower rounded-all z-depth-3">
 
-                    <div class="view view-cascade gradient-card-header green-seven-one">
-                        <h2 class="card-header-title mb-2">Actualizar perfil</h2>
+          <div class="view view-cascade gradient-card-header green-seven-one">
+            <h2 class="card-header-title mb-2">Actualizar perfil</h2>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade">
+
+            <form [formGroup]="updateFormGroup">
+
+              <div class="container-fluid">
+                <div class="row">
+
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="user"></mdb-icon>
+                      <input type="text" id="user" class="form-control" name="user"
+                             formControlName="userName" autocomplete="off" mdbInput>
+                      <label for="user">User</label>
                     </div>
+                  </div>
 
-                    <!-- Card content -->
-                    <div class="card-body card-body-cascade">
-
-                        <form [formGroup]="updateFormGroup">
-
-                            <div class="container-fluid">
-                                <div class="row">
-
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="user"></mdb-icon>
-                                            <input type="text" id="user" class="form-control" name="user"
-                                                formControlName="userName" autocomplete="off" mdbInput>
-                                            <label for="user">User</label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Name -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="user"></mdb-icon>
-                                            <input type="text" id="firstNames" class="form-control"
-                                                formControlName="firstName" autocomplete="off" mdbInput>
-                                            <label for="firstNames">First Name</label>
-                                        </div>
-                                    </div>
-
-                                    <!-- LastName -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="user"></mdb-icon>
-                                            <input type="text" id="lastName" class="form-control"
-                                                formControlName="lastName" autocomplete="off" mdbInput>
-                                            <label for="lastName">Last Name</label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Gender -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="md-form md-outline form">
-                                            <mdb-icon fas icon="users"></mdb-icon>
-                                            <select class="browser-default custom-select width-select"
-                                                formControlName="gender">
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Birthday -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="birthday-cake"></mdb-icon>
-                                            <input type="text" id="birthday" class="form-control"
-                                                formControlName="birthDay" autocomplete="off" [owlDateTimeTrigger]="dt2"
-                                                [owlDateTime]="dt2" readonly mdbInput>
-                                            <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
-                                            <label for="birthday">Birthday</label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="envelope"></mdb-icon>
-                                            <input type="text" id="email" class="form-control" formControlName="email"
-                                                autocomplete="off" mdbInput>
-                                            <label for="email">Email</label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Phone -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="phone"></mdb-icon>
-                                            <input type="text" id="phone" class="form-control" formControlName="phone"
-                                                autocomplete="off" mdbInput>
-                                            <label for="phone">Phone</label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Password -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="lock"></mdb-icon>
-                                            <input type="password" id="pass" class="form-control"
-                                                formControlName="password" autocomplete="off" mdbInput>
-                                            <label for="pass">Password</label>
-                                        </div>
-                                    </div>
-
-                                    <!-- Confirm Password -->
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="md-form md-outline">
-                                            <mdb-icon fas icon="lock"></mdb-icon>
-                                            <input type="password" id="confpass" class="form-control"
-                                                formControlName="passwordConfirm" autocomplete="off" mdbInput>
-                                            <label for="confpass">Confirm</label>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="mt-3 text-center">
-                                <!-- Update button -->
-                                <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" type="submit"
-                                    [disabled]="true">Update</button>
-                            </div>
-
-                        </form>
-
+                  <!-- Name -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="user"></mdb-icon>
+                      <input type="text" id="firstNames" class="form-control"
+                             formControlName="firstName" autocomplete="off" mdbInput>
+                      <label for="firstNames">First Name</label>
                     </div>
+                  </div>
+
+                  <!-- LastName -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="user"></mdb-icon>
+                      <input type="text" id="lastName" class="form-control"
+                             formControlName="lastName" autocomplete="off" mdbInput>
+                      <label for="lastName">Last Name</label>
+                    </div>
+                  </div>
+
+                  <!-- Gender -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="md-form md-outline form">
+                      <mdb-icon fas icon="users"></mdb-icon>
+                      <select class="browser-default custom-select width-select"
+                              formControlName="gender">
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Birthday -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="birthday-cake"></mdb-icon>
+                      <input type="text" id="birthday" class="form-control"
+                             formControlName="birthDay" autocomplete="off" [owlDateTimeTrigger]="dt2"
+                             [owlDateTime]="dt2" readonly mdbInput>
+                      <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+                      <label for="birthday">Birthday</label>
+                    </div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="envelope"></mdb-icon>
+                      <input type="text" id="email" class="form-control" formControlName="email"
+                             autocomplete="off" mdbInput>
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+
+                  <!-- Phone -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="phone"></mdb-icon>
+                      <input type="text" id="phone" class="form-control" formControlName="phone"
+                             autocomplete="off" mdbInput>
+                      <label for="phone">Phone</label>
+                    </div>
+                  </div>
+
+                  <!-- Password -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="lock"></mdb-icon>
+                      <input type="password" id="pass" class="form-control"
+                             formControlName="password" autocomplete="off" mdbInput>
+                      <label for="pass">Password</label>
+                    </div>
+                  </div>
+
+                  <!-- Confirm Password -->
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="md-form md-outline">
+                      <mdb-icon fas icon="lock"></mdb-icon>
+                      <input type="password" id="confpass" class="form-control"
+                             formControlName="passwordConfirm" autocomplete="off" mdbInput>
+                      <label for="confpass">Confirm</label>
+                    </div>
+                  </div>
+
                 </div>
-            </div>
+              </div>
+
+              <div class="mt-3 text-center">
+                <!-- Update button -->
+                <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" type="submit"
+                        [disabled]="true">Update</button>
+              </div>
+
+            </form>
+
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
 </section>
