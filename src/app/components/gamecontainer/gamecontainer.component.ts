@@ -11,12 +11,12 @@ import {SocketGroupGameService} from "../../core/services/shared/socket-group-ga
 import {EventEnum} from "../../enums/EventEnum";
 import {NGXLogger} from "ngx-logger";
 import {Subject} from "rxjs";
-import {debounceTime, takeUntil} from "rxjs/operators";
+import {takeUntil} from "rxjs/operators";
 import {ModalDirective} from "ng-uikit-pro-standard";
 import {TopService} from "../../core/services/shared/top.service";
 import {Winner} from "../../models/Winner";
 import {NgxSpinnerService} from "ngx-spinner";
-import {Utils} from "../../infraestructura/Utils";
+import {Utils} from "../../shared-module/Utils";
 
 @Component({
 	selector: "app-gamecontainer",

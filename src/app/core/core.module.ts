@@ -1,9 +1,9 @@
-import {LOCALE_ID, NgModule, Optional, SkipSelf} from "@angular/core";
-import { throwIfAlreadyLoaded } from "./module-import-guard";
-import { HttpInterceptorService } from "./services/auth/http-interceptor.service";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { SharedModule } from "../shared-module/shared.module";
-import { CookieService } from "ngx-cookie-service";
+import {NgModule, Optional, SkipSelf} from "@angular/core";
+import {throwIfAlreadyLoaded} from "./module-import-guard";
+import {HttpInterceptorService} from "./services/auth/http-interceptor.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {SharedModule} from "../shared-module/shared.module";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
 	imports: [],

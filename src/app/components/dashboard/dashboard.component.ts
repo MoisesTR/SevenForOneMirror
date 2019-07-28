@@ -1,18 +1,18 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { GroupGame } from "../../models/GroupGame";
-import { UserService } from "../../core/services/shared/user.service";
-import { User } from "../../models/User";
-import { AuthService } from "../../core/services/auth/auth.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { GameService } from "../../core/services/shared/game.service";
-import { Router } from "@angular/router";
-import { Observable, Subject } from "rxjs";
-import {debounceTime, takeUntil} from "rxjs/operators";
-import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
-import { EventEnum } from "../../enums/EventEnum";
-import { NGXLogger } from "ngx-logger";
-import { NgxSpinnerService } from "ngx-spinner";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {GroupService} from "../../core/services/shared/group.service";
+import {GroupGame} from "../../models/GroupGame";
+import {UserService} from "../../core/services/shared/user.service";
+import {User} from "../../models/User";
+import {AuthService} from "../../core/services/auth/auth.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {GameService} from "../../core/services/shared/game.service";
+import {Router} from "@angular/router";
+import {Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
+import {EventEnum} from "../../enums/EventEnum";
+import {NGXLogger} from "ngx-logger";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
 	selector: "app-dashboard",

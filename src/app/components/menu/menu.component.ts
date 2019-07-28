@@ -56,7 +56,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.dropdownAndScroll();
 		this.getTotalEarned();
 
-		this.updateMoneyService.updateMount$.subscribe(update => {
+		this.updateMoneyService.updateMount$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(update => {
 			if (update) {
 				this.logger.info("GET TOTAL EARNED");
 				this.getTotalEarned();

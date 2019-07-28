@@ -26,7 +26,7 @@ export const routes: Routes = [
 	},
   { path: "login", canActivate: [LoginGuardService], component: LoginComponent },
   { path: "register", canActivate: [LoginGuardService], component: RegisterComponent },
-  { path: "confirm/:token/:userName", component: ConfirmComponent, data: { titulo: "Confirm" } },
+  { path: "confirm/:token/:userName", component: ConfirmComponent, data: { titulo: "Confirm Email" } },
   { path: "emailConfirm", canActivate: [LoginGuardService], component: EmailConfirmComponent },
   { path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked-screen" } },
   { path: "landing-page", component: LandingPageComponent, data: { titulo: "Landing page" } },
@@ -34,7 +34,7 @@ export const routes: Routes = [
 		path: "**",
 		component: NotFound404Component,
 		data: {
-			titulo: "No encontrado"
+			titulo: "Not found"
 		}
 	}
 ];

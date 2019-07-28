@@ -8,7 +8,7 @@ import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.se
 import { RolService } from "../../core/services/shared/rol.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
-import { Utils } from "../../infraestructura/Utils";
+import { Utils } from "../../shared-module/Utils";
 import { Subject } from "rxjs";
 import { take, takeUntil } from "rxjs/operators";
 import { isPlatformServer } from "@angular/common";

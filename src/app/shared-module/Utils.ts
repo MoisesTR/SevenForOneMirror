@@ -26,7 +26,7 @@ export class Utils {
 		return undefined;
 	}
 
-	static showMsgInfo(mensaje: string, titulo = "Information") {
+	static showMsgInfo(mensaje: string, titulo = "Información") {
 		swal.fire(titulo, mensaje, "info");
 	}
 

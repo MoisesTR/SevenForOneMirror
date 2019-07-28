@@ -2,7 +2,7 @@ import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from "../../../models/User";
-import { BodyToken } from "../../../models/BodyToken";
+import { Token } from "../../../models/Token";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Global } from "../shared/global";
 import { tap } from "rxjs/operators";
@@ -10,7 +10,7 @@ import { NGXLogger } from "ngx-logger";
 import { CookieService } from "ngx-cookie-service";
 import { throwError } from "rxjs";
 import { RoleEnum } from "../../../enums/RoleEnum";
-import { Utils } from "../../../infraestructura/Utils";
+import { Utils } from "../../../shared-module/Utils";
 import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
@@ -82,7 +82,7 @@ export class AuthService {
 
 		const body = JSON.stringify({ user, refreshToken });
 		return this.http.post(this.urlAuth + "refreshtoken", body, options).pipe(
-			tap((bodyToken: BodyToken) => {
+			tap((bodyToken: Token) => {
 				this.logger.info("SAVE BODY TOKEN IN LOCAL STORAGE");
 				this.setTokenValues(bodyToken);
 			})
@@ -99,7 +99,7 @@ export class AuthService {
 		this.cookieService.set("identity", JSON.stringify(response.user));
 	}
 
-	setTokenValues(bodyToken: BodyToken) {
+	setTokenValues(bodyToken: Token) {
 		this.cookieService.delete("token");
 		this.cookieService.delete("refreshToken");
 		this.cookieService.delete("expiration");

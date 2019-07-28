@@ -12,7 +12,9 @@
     "serve:ssr": "node dist/server",
     "build:client-and-server-bundles": "ng build --prod && ng run SevenForOne:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "start-ssr": "npm run build:ssr && npm run serve:ssr"
+    "start-ssr": "npm run build:ssr && npm run serve:ssr",
+    "build:stats": "ng build --stats-json",
+    "analyze": "webpack-bundle-analyzer dist/browser/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -62,6 +64,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
+    "@angular-devkit/build-optimizer": "^0.801.2",
     "@angular/cdk": "^6.4.7",
     "@angular/language-service": "^7.2.2",
     "@types/jasmine": "~2.8.6",

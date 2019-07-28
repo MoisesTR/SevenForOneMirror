@@ -27,10 +27,16 @@
               "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
-              "node_modules/sweetalert2/dist/sweetalert2.min.css",
+              {
+                "input": "node_modules/sweetalert2/dist/sweetalert2.min.css",
+                "lazy" : true
+              },
               "node_modules/ng-uikit-pro-standard/assets/scss/bootstrap/bootstrap.scss",
               "node_modules/ng-uikit-pro-standard/assets/scss/mdb.scss",
-              "src/styles.scss"
+              {
+                "input": "src/styles.scss",
+                "lazy" : true
+              }
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.js",
