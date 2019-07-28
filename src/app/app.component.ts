@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID } from "@angular/core";
+import { Component } from "@angular/core";
 import { makeStateKey, Meta, Title } from "@angular/platform-browser";
 
 const configKey = makeStateKey("CONFIG");
@@ -10,7 +10,7 @@ const configKey = makeStateKey("CONFIG");
 })
 export class AppComponent {
 	nombreApp = "SevenForOne";
-	title = "SevenForOne: Ganar Dinero Facil y Seguro";
+	title = "SevenForOne: Ganar Dinero Facil y Segura";
 	descripcion =
 		"Ganar dinero extra online de manera facil, " +
 		"en esta pagina web podras duplicar tu dinero con SevenForOne ganas al instante invita a tus amigos para que las oportunidad de ganar sean mayores";

@@ -8,7 +8,7 @@ import { AuthService } from "../../core/services/auth/auth.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
-import { Utils } from "../../infraestructura/Utils";
+import { Utils } from "../../shared-module/Utils";
 import { ModalDirective } from "ng-uikit-pro-standard";
 import { IPayPalConfig } from "ngx-paypal";
 import { Global } from "../../core/services/shared/global";

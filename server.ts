@@ -6,6 +6,7 @@ import {enableProdMode} from '@angular/core';
 import * as express from 'express';
 import {join} from 'path';
 import {readFileSync} from 'fs';
+const compression = require('compression');
 
 const domino = require('domino');
 
