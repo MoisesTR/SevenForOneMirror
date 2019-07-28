@@ -58,7 +58,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.getUser();
 		this.getParams();
 		this.initSocketGroupGame();
-		this.$animate.pipe(debounceTime(500)).subscribe(group => {
+		this.$animate.pipe(takeUntil(this.ngUnsubscribe)).subscribe(group => {
 			this.socketGroupGame.animationNewPlayer(group);
 		});
 	}

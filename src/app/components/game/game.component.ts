@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {User} from "../../models/User";
-import {GroupGame} from "../../models/GroupGame";
-import {MemberGroup} from "../../models/MemberGroup";
-import {CircleUser} from "../../models/CircleUser";
+import { Component, Input, OnInit } from "@angular/core";
+import { User } from "../../models/User";
+import { GroupGame } from "../../models/GroupGame";
+import { MemberGroup } from "../../models/MemberGroup";
+import { CircleUser } from "../../models/CircleUser";
 
 @Component({
 	selector: "app-game",
@@ -10,7 +10,6 @@ import {CircleUser} from "../../models/CircleUser";
 	styleUrls: ["./game.component.scss"]
 })
 export class GameComponent implements OnInit {
-
 	@Input()
 	groupSelected: GroupGame;
 
@@ -38,9 +37,10 @@ export class GameComponent implements OnInit {
 
 	delay(i: number) {
 		if (this.iterationValue === 0) {
-      return (( 10  - (i + 1)) / 10).toString() + 's';
+			return "0s";
+			// return (( 10  - (i + 1)) / 10).toString() + 's';
 		} else {
-      return (( 10  - (i + 1)) / 10).toString() + 's';
+			return ((10 - (i + 1)) / 10).toString() + "s";
 		}
 	}
 }
