@@ -8,8 +8,6 @@ import {join} from 'path';
 import {readFileSync} from 'fs';
 
 const domino = require('domino');
-const fs = require('fs');
-const path = require('path');
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -17,7 +15,7 @@ enableProdMode();
 // Express server
 const app = express();
 
-const PORT = process.env.PORT || 4201;
+const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist/browser');
 
 // Our index.html we'll use as our template
@@ -66,9 +64,9 @@ app.get('*', (req, res) => {
   res.render('index', { req });
 });
 
-app.get('/api/*', (req, res) => {
-  res.status(404).send('data requests are not supported');
-});
+// app.get('/api/*', (req, res) => {
+//   res.status(404).send('data requests are not supported');
+// });
 
 // Start up the Node server
 app.listen(PORT, () => {
