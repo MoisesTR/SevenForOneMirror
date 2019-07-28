@@ -23,7 +23,7 @@
                                 [ngClass]="(i === 0) ? 'col-sm-8 col-md-8 col-lg-2' : ''">
                                 <div *ngIf="i === 0">
                                     <div class="row justify-content-center">
-                                        <div [ngClass]="[ iterationValue === 1 ? 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow fadeInRight' : 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow fadeInRight']"
+                                        <div [ngClass]="[ iterationValue === 1 ? 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow fadeInRight' : 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow flipInX']"
                                             [attr.data-wow-delay]="delay(0)">
                                             <h5 *ngIf="circleUser.status !== 'AC'"
                                                 class='blue-seven-one-text mt-2 text-center'>
@@ -41,7 +41,7 @@
                                                     <p class="white-text">Yo</p>
                                                 </div>
                                             </div>
-                                            <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow fadeInRight' : 'blue-seven-one-text mt-2 text-center wow fadeInRight']"
+                                            <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow fadeInRight' : 'blue-seven-one-text mt-2 text-center wow flipInX']"
                                                 [attr.data-wow-delay]="delay(0)">{{circleUser.member.userName}}</p>
                                         </div>
                                     </div>
@@ -53,9 +53,9 @@
                                     <div *ngFor="let circleUser of circleUsers | slice:1; let i = index;"
                                         class="col-6 col-sm-6 col-md-6 col-lg-2 background-blue">
 
-                                        <h5 [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow fadeInRight' : 'blue-seven-one-text mt-2 text-center wow fadeInRight']"
+                                        <h5 [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow fadeInRight' : 'blue-seven-one-text mt-2 text-center wow flipInX']"
                                             [attr.data-wow-delay]="delay(i + 1)">{{i+2}}</h5>
-                                        <div [ngClass]="[ iterationValue === 1 ? 'view wow fadeInRight' : 'view wow fadeInRight']"
+                                        <div [ngClass]="[ iterationValue === 1 ? 'view wow fadeInRight' : 'view wow flipInX']"
                                             [attr.data-wow-delay]="delay(i + 1)">
                                             <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'"
                                                 class="ratio img-responsive img-circle gray-circle"
@@ -66,7 +66,7 @@
                                                 <p class="white-text">Yo</p>
                                             </div>
                                         </div>
-                                        <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow fadeInRight' : 'blue-seven-one-text mt-2 text-center wow fadeInRight']"
+                                        <p [ngClass]="[ iterationValue === 1 ? 'blue-seven-one-text mt-2 text-center wow fadeInRight' : 'blue-seven-one-text mt-2 text-center wow flipInX']"
                                             [attr.data-wow-delay]="delay(i + 1)">{{circleUser.member.userName}}</p>
                                     </div>
                                 </div>

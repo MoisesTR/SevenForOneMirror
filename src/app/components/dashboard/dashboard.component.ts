@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		this.isUserAdmin = this.authService.userIsAdmin();
 		this.spinner.show();
 		this.createContentDashboard(this.isUserAdmin);
-    this.$animate.pipe(debounceTime(500)).subscribe(group => {
+    this.$animate.pipe(takeUntil(this.ngUnsubscribe)).subscribe(group => {
       this.socketGroupGame.animationNewPlayer(group);
     });
 	}
