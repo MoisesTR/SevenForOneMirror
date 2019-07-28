@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from "../../../models/User";
 import { BodyToken } from "../../../models/BodyToken";
-import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Global } from "../shared/global";
 import { tap } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";

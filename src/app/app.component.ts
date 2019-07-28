@@ -1,55 +1,49 @@
-import {Component, Inject, Injector, LOCALE_ID, PLATFORM_ID} from '@angular/core';
-import {makeStateKey, Meta, Title, TransferState} from '@angular/platform-browser'
-import {isPlatformServer} from '@angular/common';
+import { Component, LOCALE_ID } from "@angular/core";
+import { makeStateKey, Meta, Title } from "@angular/platform-browser";
 
-const configKey = makeStateKey('CONFIG');
+const configKey = makeStateKey("CONFIG");
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
-  styleUrls: ['./app.component.css']
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	providers: [{ provide: LOCALE_ID, useValue: "es" }],
+	styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  nombreApp = 'SevenForOne';
-  title = 'SevenForOne: Ganar Dinero Facil y Seguro';
-  descripcion = 'Ganar dinero extra online de manera facil, en esta pagina web podras duplicar tu dinero con SevenForOne ganas al instante invita a tus amigos para que las oportunidad de ganar sean mayores';
-  urlsitio = '';
+	nombreApp = "SevenForOne";
+	title = "SevenForOne: Ganar Dinero Facil y Seguro";
+	descripcion =
+		"Ganar dinero extra online de manera facil, en esta pagina web podras duplicar tu dinero con SevenForOne ganas al instante invita a tus amigos para que las oportunidad de ganar sean mayores";
+	urlsitio = "";
 
-  constructor(seo: Meta, title: Title,
-    private injector: Injector,
-    private state: TransferState,
-    @Inject(PLATFORM_ID) private platformid: Object) {
-
-    if (isPlatformServer(this.platformid)) {
+	constructor(seo: Meta, title: Title) {
+		/* if (isPlatformServer(this.platformid)) {
       const envJson = this.injector.get('CONFIG') ? this.injector.get('CONFIG') : {};
       this.state.set(configKey, envJson as any);
     } else {
       console.log(this.state.get(configKey, undefined as any));
-    }
-    //twitter meta datos
-    seo.addTags([
-      {name: 'twitter:card', content: 'summary'},
-      {name: 'twitter:title', content: this.title},
-      {name: 'twitter:description', content: this.descripcion},
-      {name: 'twitter:creator', content: this.nombreApp},
-      {name: 'twitter:image', content: 'https://avatars3.githubusercontent.com/u/16628445?v=3&s=200'}
-    ]);
+    } */
+		//twitter meta datos
 
-    //open Graph data for facebook
+		seo.addTags([
+			{ name: "twitter:card", content: "summary" },
+			{ name: "twitter:title", content: this.title },
+			{ name: "twitter:description", content: this.descripcion },
+			{ name: "twitter:creator", content: this.nombreApp },
+			{ name: "twitter:image", content: "https://avatars3.githubusercontent.com/u/16628445?v=3&s=200" }
+		]);
 
-    seo.addTags([
-      {property: 'og:title', content: this.title},
-      {property: 'og:type', content: 'article'},
-      {property: 'og:description', content: this.descripcion},
-      {property: 'og:url', content: this.urlsitio},
-      {property: 'og:site_name', content: this.nombreApp},
-      {property: 'og:image', content: 'https://avatars3.githubusercontent.com/u/16628445?v=3&s=200'},
-      {property: 'article:section', content: 'SevenForOne Ganar Dinero'},
-      {property: 'article:tag', contetn: 'sevenforone'},
-    ]);
-  }
+		//open Graph data for facebook
 
+		seo.addTags([
+			{ property: "og:title", content: this.title },
+			{ property: "og:type", content: "article" },
+			{ property: "og:description", content: this.descripcion },
+			{ property: "og:url", content: this.urlsitio },
+			{ property: "og:site_name", content: this.nombreApp },
+			{ property: "og:image", content: "https://avatars3.githubusercontent.com/u/16628445?v=3&s=200" },
+			{ property: "article:section", content: "SevenForOne Ganar Dinero" },
+			{ property: "article:tag", contetn: "sevenforone" }
+		]);
+	}
 }
-
-
