@@ -43,7 +43,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 						? Utils.msgError(error)
 						: `Error Code: ${error.status}\nMessage: ${error.message}`;
 
-					Utils.showMsgError(errorMessage, "An internal error ocurred during your request!");
+					Utils.showMsgError(errorMessage, "Ha ocurrido un error interno durante la petición!");
 
 					return throwError(errorMessage);
 				} else {
