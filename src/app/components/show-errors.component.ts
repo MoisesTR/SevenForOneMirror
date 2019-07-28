@@ -13,9 +13,9 @@ import { AbstractControlDirective, AbstractControl } from '@angular/forms';
 export class ShowErrorsComponent {
 
   private static readonly errorMessages = {
-    'required': () => 'this field is required',
-    'minlength': (params) => params.requiredLength + ' characters minimum',
-    'maxlength': (params) => params.requiredLength + ' characters maximum',
+    'required': () => 'Este campo es requerido',
+    'minlength': (params) => params.requiredLength + ' caracteres minimos',
+    'maxlength': (params) => params.requiredLength + ' caracteres maximos',
    /* 'pattern': (params) => 'The required pattern is: ' + params.requiredPattern,*/
     'pattern': (params) => 'The email is not valid',
     'uniqueName': (params) => params.message,
