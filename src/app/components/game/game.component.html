@@ -20,7 +20,7 @@
 
               <!-- Primer lugar -->
               <div *ngFor="let circleUser of circleUsers; let i = index"
-                   [ngClass]="(i === 0) ? 'col-sm-8 col-md-8 col-lg-2' : ''">
+                   [ngClass]="(i === 0) ? 'col-sm-8 col-md-6 col-lg-2' : ''">
                 <div *ngIf="i === 0">
                   <div class="row justify-content-center">
                     <div [ngClass]="[ iterationValue === 1 ? 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow fadeInRight' : 'col-8 col-sm-8 col-md-8 col-lg-10 background-blue wow flipInX']"

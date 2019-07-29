@@ -1,27 +1,61 @@
 <section>
 
-  <button (click)="top10WinnersByGroupId()">PRUEBA BOTON TOP 10 WINNERS BY MOUNT</button>
-  <button (click)="top10WinnersConcurrent()">PRUEBA BOTON TOP 10 WINNERS CONCURRENT</button>
-  <app-game  [circleUsers]="groupSelected.circleUsers"
-             [circleUsersPlaying]="groupSelected.circleUsersPlaying"
-             [groupSelected]="groupSelected"
-             [actualUser]="userActual"
-             [iterationValue]="iterationValue"
-            [isUserAdmin]="isUserAdmin">
+  <div class="col-12 text-menu mb-2">
+    <div class="row justify-content-center btn-dashboard">
+
+
+      <div class="col-sm-3 col-md-2 col-lg-4 col-xl-3 flex-center">
+        <a (click)="top10WinnersByGroupId()"
+          class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1 text-center"
+          mdbWavesEffect>
+          <mdb-icon fas icon="dollar-sign" size="2x"></mdb-icon>
+          <div class="font-weight-bolder text-wrap">
+            Ranking por monto
+          </div>
+        </a>
+      </div>
+
+      <div class="col-sm-3 col-md-2 col-lg-4 col-xl-3 flex-center">
+        <a (click)="top10WinnersConcurrent()"
+          class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1 pl-1 pr-1 text-center"
+          mdbWavesEffect>
+          <mdb-icon fas icon="award" size="2x"></mdb-icon>
+          <div class="font-weight-bolder text-wrap">
+            Ranking por concurrencia
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div class="row justify-content-center mb-3 mt-2">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-center">
+      <button mdbBtn type="button" class="blue-seven-one white-text" rounded="true" (click)="top10WinnersByGroupId()" mdbWavesEffect>Ranking
+        por monto</button>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-center">
+      <button mdbBtn type="button" class="blue-seven-one white-text" rounded="true" (click)="top10WinnersConcurrent()"
+        mdbWavesEffect>Ranking por concurrencia</button>
+    </div>
+  </div> -->
+
+  <app-game [circleUsers]="groupSelected.circleUsers" [circleUsersPlaying]="groupSelected.circleUsersPlaying"
+    [groupSelected]="groupSelected" [actualUser]="userActual" [iterationValue]="iterationValue"
+    [isUserAdmin]="isUserAdmin">
   </app-game>
 
 </section>
 
 <div mdbModal #modalWin="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-     aria-hidden="true" [config]="{backdrop: false}">
+  aria-hidden="true" [config]="{backdrop: false}">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content blue-dark-seven-one rounded-all">
       <div class="modal-body">
         <div class="row justify-content-center">
-          <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown"
-               data-wow-delay="0.3s">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown" data-wow-delay="0.3s">
             <div class="ratio img-responsive img-circle green-seven-one"
-                 style="background-image: url(https://lh3.googleusercontent.com/-UM0Tss7wgPg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reVCnhvENK3MJUYYUR1pvQIyQcqmA/mo/photo.jpg?sz=46);">
+              style="background-image: url(https://lh3.googleusercontent.com/-UM0Tss7wgPg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reVCnhvENK3MJUYYUR1pvQIyQcqmA/mo/photo.jpg?sz=46);">
             </div>
           </div>
           <div class="col-12 text-center">
@@ -38,8 +72,8 @@
             </h4>
           </div>
           <div class="col-12 text-center">
-            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2"
-                    (click)="clainEvent()" mdbTooltip="Claim prize">
+            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="clainEvent()"
+              mdbTooltip="Claim prize">
               <mdb-icon fas icon="trophy"></mdb-icon> Reclamar
             </button>
           </div>
@@ -50,7 +84,7 @@
 </div>
 
 <div mdbModal #topPlayers="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-     aria-hidden="true" [config]="{backdrop: true}">
+  aria-hidden="true" [config]="{backdrop: true}">
   <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">
     <div class="modal-content rounded-all">
       <div class="modal-body background-card">
@@ -63,7 +97,7 @@
         </app-top-players>
 
         <div class="col-12 text-center">
-          <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayers.hide();" >
+          <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayers.hide();">
             Cerrar
           </button>
         </div>
@@ -74,8 +108,8 @@
 </div>
 
 
-<div mdbModal #topPlayersConcurrent="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-     aria-hidden="true" [config]="{backdrop: true}">
+<div mdbModal #topPlayersConcurrent="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="myBasicModalLabel" aria-hidden="true" [config]="{backdrop: true}">
   <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">
     <div class="modal-content rounded-all">
       <div class="modal-body background-card">
@@ -85,7 +119,7 @@
         </button>
 
         <app-top-players [winners3]="this.concurrentWinners3" [winners7]="this.concurrentWinners7" title="Veces"
-                         [renderMount]="false">
+          [renderMount]="false">
         </app-top-players>
 
         <div class="col-12 text-center">
