@@ -48,9 +48,6 @@
             </div>
 
         </div>
-        <div class="col-12">
-
-        </div>
     </div>
 
     <!-- Siguiente posiciones -->
@@ -66,8 +63,7 @@
                             <mdb-icon fas icon="user-alt" class="mr-1"></mdb-icon>
                             Usuario
                         </th>
-                        <th scope="col" class="border-right table-text-size">
-                            <mdb-icon fas icon="money-bill-alt" class="mr-1"></mdb-icon>
+                        <th scope="col" class="border-right table-text-size text-center">
                             {{title}}
                         </th>
                     </tr>
@@ -89,12 +85,12 @@
                         </td>
 
                         <ng-template [ngIf]="renderMount" [ngIfElse]="renderConcurrent">
-                            <td class="border-right white-text align-middle top-text-color">$
+                            <td class="border-right white-text align-middle text-center top-text-color">$
                                 {{winner.totalWon['$numberDecimal']}}</td>
                         </ng-template>
 
                         <ng-template #renderConcurrent>
-                            <td class="border-right white-text align-middle top-text-color">
+                            <td class="border-right white-text align-middle text-center top-text-color">
                                 <mdb-icon fas icon="award"></mdb-icon>
                                 {{winner.wonTimes}}
                             </td>
