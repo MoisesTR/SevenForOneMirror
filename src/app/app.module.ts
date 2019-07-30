@@ -47,7 +47,7 @@ export function getAuthServiceConfigs() {
 		EmailConfirmComponent,
 		LockedScreenComponent,
 		AddGroupsComponent,
-    LandingPageComponent
+    	LandingPageComponent
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: "serverApp" }),
