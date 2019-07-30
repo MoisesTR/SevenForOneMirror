@@ -66,10 +66,12 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	ngAfterViewInit(): void {
 		if (this.socketGroupGame.userHasWin) {
 			setTimeout(() => {
-				this.socketGroupGame.userHasWin = false;
-				this.messageWin = this.socketGroupGame.messageWin;
-				this.modalWin.show();
-				this.socketGroupGame.celebration();
+        if (this.router.url === '/game/' + this.idGroup) {
+          this.socketGroupGame.userHasWin = false;
+          this.messageWin = this.socketGroupGame.messageWin;
+          this.modalWin.show();
+          this.socketGroupGame.celebration();
+        }
 			}, 2000);
 		}
 	}
@@ -126,7 +128,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
 	clainEvent() {
 		this.modalWin.hide();
-		this.router.navigateByUrl("win-history");
+		this.router.navigate(["win-history"]);
 	}
 
 	top10WinnersByGroupId() {
