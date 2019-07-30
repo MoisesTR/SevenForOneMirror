@@ -217,10 +217,12 @@
 /*Rounded cards*/
 .rounded-card {
     border-radius: .75rem !important;
+    -moz-border-radius: .75rem !important;
 }
 
 .rounded-all {
     border-radius: .75rem !important;
+    -moz-border-radius: .75rem !important;
 }
 
 .rounded-card:hover{

@@ -76,11 +76,11 @@
 }
 
 .v-divider {
-  margin-left:5px;
-  margin-right:5px;
-  width:1px;
-  height:auto;
-  border-left:1px solid white;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 1px;
+  height: auto;
+  border-left: 1px solid white;
 }
 
 .edge-header {
@@ -88,7 +88,7 @@
 }
 
 .hover-menu {
-  border-radius: .75rem !important;
+  border-radius: 0.75rem !important;
   height: 125px;
   width: 125px;
   -webkit-transition-delay: 0s;
@@ -96,23 +96,32 @@
   -ms-transition-delay: 0s;
   -o-transition-delay: 0s;
   transition-delay: 0s;
-}
-
-.hover-menu:hover{
-  background-color: #216FCE;
-  color: white !important;
+  &:hover {
+    background-color: #34BF6C;
+    color: white !important;
+  }
 }
 
 .bg-header {
-  background-image: linear-gradient(rgba(1, 123, 255, .8)
-  , rgba(1, 123, 255, .8)), url("/assets/images/edge-header-bg.jpg");
+  background-image: linear-gradient(rgba(1, 123, 255, 0.8), rgba(1, 123, 255, 0.8)), url("/assets/images/edge-header-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat, no-repeat;
 }
 
 .text-menu {
-  color: #4F6178 !important;
+  color: #fff !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .text-menu {
+    color: #4f6178 !important;
+  }
+  .hover-menu {
+    &:hover {
+      background-color: #216fce;
+    }
+  }
 }
 
 .size-img img {
@@ -129,13 +138,12 @@
     border-left: initial;
     margin-top: 10px;
   }
-
   .edge-header {
     height: 355px !important;
   }
 }
 
-@media only screen and (max-width: 1700px)  {
+@media only screen and (max-width: 1700px) {
   .btn-dashboard .col-xl-4 {
     flex: 0 0 41.66666667%;
     max-width: 41.66666667%;
@@ -150,14 +158,15 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  .btn-dashboard .col-xl-4 {
-    flex: initial;
-    max-width: initial;
-  }
-
-  .btn-dashboard .col-lg-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+  .btn-dashboard {
+    .col-xl-4 {
+      flex: initial;
+      max-width: initial;
+    }
+    .col-lg-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
   }
 }
 

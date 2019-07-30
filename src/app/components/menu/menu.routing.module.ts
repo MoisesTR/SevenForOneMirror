@@ -10,6 +10,7 @@ import { InvoicesComponent } from "../invoices/invoices.component";
 
 import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
+import { AddAdminComponent } from '../add-admin/add-admin.component';
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
@@ -20,6 +21,7 @@ const menuRoutes = [
 	{ path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } },
 	{ path: "win-history", component: WinHistoryComponent, data: { titulo: "Win History User" } },
 	{ path: "global-winners", component: TopGlobalWinnersComponent, data: { titulo: "Top Global Winners" } },
+	{ path: "add-admin", component: AddAdminComponent, data: { titulo: "Add Admin" } },
 	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 ];
 
