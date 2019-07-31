@@ -1,7 +1,7 @@
 import {Directive, ElementRef, HostListener} from '@angular/core';
 
 @Directive({
-    selector: '[Alphanumeric]'
+    selector: '[appAlphanumeric]'
 })
 export class AlphanumericDirective {
     private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home'];

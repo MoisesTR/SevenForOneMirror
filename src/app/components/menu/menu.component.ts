@@ -217,6 +217,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	addAdmin() {
 		this.logger.info("CREATE ADMIN");
+		this.userService.showModalAdmin();
 	}
 
 	dashBoard() {

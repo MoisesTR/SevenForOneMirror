@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Global} from "./global";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../../../models/User";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {NGXLogger} from "ngx-logger";
+import { EventEmitter, Injectable } from "@angular/core";
+import { Global } from "./global";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { User } from "../../../models/User";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { NGXLogger } from "ngx-logger";
 
 @Injectable({
 	providedIn: "root"
@@ -14,10 +14,15 @@ export class UserService {
 	public url: string;
 	public identity: User;
 	public userUrl = "users";
+	public modalEvent = new EventEmitter<any>();
 
 	constructor(private http: HttpClient, private logger: NGXLogger) {
 		this.urlAuth = Global.urlAuth;
 		this.url = Global.url;
+	}
+
+	showModalAdmin() {
+		this.modalEvent.emit(true);
 	}
 
 	login(usuario: User): Observable<any> {
@@ -54,6 +59,15 @@ export class UserService {
 
 		return this.http.post(this.urlAuth + "signup", usuario, options);
 	}
+
+  createAdmin(admin: User) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    const options = { headers: headers };
+
+    return this.http.post(this.urlAuth + "admin", admin, options);
+  }
 
 	updateUser(usuario: User): Observable<any> {
 		const headers = new HttpHeaders({
