@@ -15,7 +15,8 @@ export class Utils {
 
     // VALIDATIONS API
     if (Array.isArray(mensaje.error)) {
-      return mensaje.error[0].param + ' ' + mensaje.error[0].msg;
+      // return mensaje.error[0].param + ' ' + mensaje.error[0].msg;
+      return mensaje.error[0].msg;
     }
 
 		// MONGO ERROR

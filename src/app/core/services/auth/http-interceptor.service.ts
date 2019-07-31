@@ -35,7 +35,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 				if (error instanceof HttpErrorResponse) {
 					this.spinner.hide();
 
-					if (error.status === 401 && this.auth.getToken()) {
+					if (error.status === 401 && this.auth.getToken() && !this.auth.isAuthenticated()) {
 						return this.handle401Error(request, next);
 					}
 

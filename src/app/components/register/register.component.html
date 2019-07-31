@@ -61,8 +61,7 @@
                                                     <div class="md-form md-outline">
                                                         <i class="fas fa-user prefix"></i>
                                                         <input type="text" id="user" class="form-control" name="user"
-                                                            autocomplete="off" formControlName="user" mdbInput
-                                                            AlphanumericDirective>
+                                                            autocomplete="off" formControlName="user" mdbInput appAlphanumeric>
                                                         <label for="user">Usuario</label>
                                                         <show-errors [control]="firstFormGroup.controls['user']">
                                                         </show-errors>
@@ -169,8 +168,7 @@
                                                         <label for="confpass">Confirmar</label>
                                                         <div
                                                             *ngIf="secondFormGroup.controls['confirmPassword'].hasError('noPasswordMatch')">
-                                                            <span class="error-message" style="left: 2.5rem;">Password
-                                                                do not match</span>
+                                                            <span class="error-message" style="left: 2.5rem;">Contraseñas no coinciden!</span>
                                                         </div>
                                                     </div>
                                                 </div>

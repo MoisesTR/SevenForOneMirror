@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { GroupGame } from "../../models/GroupGame";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { Utils } from "../../shared-module/Utils";
-import { Subject } from "rxjs";
-import {first, take, takeUntil} from "rxjs/operators";
-import { EventModal } from "../../models/interface/EventModal";
-import { ModalDirective } from "ng-uikit-pro-standard";
-import { Router } from "@angular/router";
+import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {GroupService} from "../../core/services/shared/group.service";
+import {GroupGame} from "../../models/GroupGame";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {Utils} from "../../shared-module/Utils";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {EventModal} from "../../models/interface/EventModal";
+import {ModalDirective} from "ng-uikit-pro-standard";
+import {Router} from "@angular/router";
 import swal from "sweetalert2";
 
 @Component({

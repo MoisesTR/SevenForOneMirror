@@ -1,23 +1,22 @@
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { SharedModule } from "../../shared-module/shared.module";
-import { MenuRoutingModule } from "./menu.routing.module";
-import { DashboardComponent } from "../dashboard/dashboard.component";
-import { MDBBootstrapModulesPro } from "ng-uikit-pro-standard";
-import { ProfileComponent } from "../profile/profile.component";
-import { GroupsComponent } from "../groups/groups.component";
-import { GameComponent } from "../game/game.component";
-import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
-import { NgxPayPalModule } from "ngx-paypal";
-import { TopPlayersComponent } from "../top-players/top-players.component";
+import {NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
+import {SharedModule} from "../../shared-module/shared.module";
+import {MenuRoutingModule} from "./menu.routing.module";
+import {DashboardComponent} from "../dashboard/dashboard.component";
+import {MDBBootstrapModulesPro} from "ng-uikit-pro-standard";
+import {ProfileComponent} from "../profile/profile.component";
+import {GroupsComponent} from "../groups/groups.component";
+import {GameComponent} from "../game/game.component";
+import {GamecontainerComponent} from "../gamecontainer/gamecontainer.component";
+import {NgxPayPalModule} from "ngx-paypal";
+import {TopPlayersComponent} from "../top-players/top-players.component";
 
-import { InvoicesComponent } from "../invoices/invoices.component";
-import { WinHistoryComponent } from "../win-history/win-history.component";
-import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
-import { AddAdminComponent } from '../add-admin/add-admin.component';
+import {InvoicesComponent} from "../invoices/invoices.component";
+import {WinHistoryComponent} from "../win-history/win-history.component";
+import {TopGlobalWinnersComponent} from "../top-global-winners/top-global-winners.component";
 
 @NgModule({
 	imports: [SharedModule, MenuRoutingModule, MDBBootstrapModulesPro, NgxPayPalModule],
-	exports: [GameComponent],
+  exports: [GameComponent],
 	declarations: [
 		DashboardComponent,
 		ProfileComponent,
@@ -27,8 +26,7 @@ import { AddAdminComponent } from '../add-admin/add-admin.component';
 		TopPlayersComponent,
 		InvoicesComponent,
 		WinHistoryComponent,
-		TopGlobalWinnersComponent,
-		AddAdminComponent
+		TopGlobalWinnersComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })
