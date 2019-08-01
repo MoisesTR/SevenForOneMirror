@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, NgZone, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { GroupService } from "../../core/services/shared/group.service";
 import { GroupGame } from "../../models/GroupGame";
 import { Router } from "@angular/router";
@@ -17,12 +17,12 @@ import { SocketGroupGameService } from "../../core/services/shared/socket-group-
 import { EventEnum } from "../../enums/EventEnum";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { NGXLogger } from "ngx-logger";
 
 @Component({
 	selector: "app-groups",
 	templateUrl: "./groups.component.html",
-	styleUrls: ["./groups.component.scss"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: ["./groups.component.scss"]
 })
 export class GroupsComponent implements OnInit, OnDestroy {
 	@ViewChild("paymentModal") paymentModal: ModalDirective;
@@ -43,7 +43,9 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
 		private socketGroupGame: SocketGroupGameService,
-		private toast: ToastService
+		private ngZone: NgZone,
+		private toast: ToastService,
+		private logger: NGXLogger
 	) {
 		this.groupSelectedPayModal = new GroupGame();
 	}
@@ -87,17 +89,15 @@ export class GroupsComponent implements OnInit, OnDestroy {
 						}
 					}),
 			onApprove: (data, actions) => {
-				// console.log("onApprove - transaction was approved, but not authorized", data, actions);
-
 				actions.order.get().then(details => {
-					// console.log("onApprove - you can get full order details inside onApprove: ", details);
+					this.logger.info("onApprove - you can get full order details inside onApprove: ", details);
 				});
 			},
 			onClientAuthorization: data => {
-				// console.log(
-				// 	"onClientAuthorization - you should probably inform your server about completed transaction at this point",
-				// 	data
-				// );
+				this.logger.info(
+					"onClientAuthorization - you should probably inform your server about completed transaction at this point",
+					data
+				);
 
 				const member = new MemberGroup();
 				member.payReference = data.id;
@@ -106,14 +106,15 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
 						this.paymentModal.hide();
+						this.logger.info("SUCCESS MEMBER REGISTER DATABASE");
 
 						this.socketGroupGame.connect();
 						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
 						this.updateMoneyService.update(true);
+						this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id)).then();
 
-						this.router.navigate(["/game", this.groupSelectedPayModal._id]);
-
+						console.log(this.groupSelectedPayModal._id);
 						const options = { toastClass: "opacity" };
 						this.toast.success(
 							"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",

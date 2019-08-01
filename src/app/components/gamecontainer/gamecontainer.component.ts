@@ -54,6 +54,7 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
+		this.spinner.show();
 		this.getUser();
 		this.getParams();
 		this.initSocketGroupGame();
@@ -70,6 +71,8 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 
 			if (this.idGroup) {
 				this.getMembersGroup(this.idGroup);
+			} else {
+				this.spinner.hide();
 			}
 		});
 	}
@@ -79,7 +82,6 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 	}
 
 	getMembersGroup(idGroup) {
-		this.spinner.show();
 		this.groupService
 			.getGroup(idGroup)
 			.pipe(takeUntil(this.ngUnsubscribe))
