@@ -16,7 +16,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ModalDirective } from "ng-uikit-pro-standard";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
-import {RoleEnum} from "../../enums/RoleEnum";
+import { RoleEnum } from "../../enums/RoleEnum";
 
 declare var $: any;
 
@@ -65,12 +65,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 				this.getTotalEarned();
 			}
 		});
-
-		// ELIMINAR SET TIMEOUT Y INSTRUCCIONES DENTRO LUEGO DE PROBAR CON LA IMAGEN DE LA MODAL DEL GANADOR
-		setTimeout( () => {
-		  this.modalWin.show();
-		  this.messageWin = 'ERES EL GANADOR';
-    }, 1000);
 	}
 
 	initSocket() {
@@ -217,14 +211,14 @@ export class MenuComponent implements OnInit, OnDestroy {
 			});
 	}
 
-  getTotalUsersRegistered() {
-    this.userService
-      .getUsers()
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(users => {
-        this.registeredUsers = this.userService.filterUsersByRol(users, RoleEnum.User).length;
-      });
-  }
+	getTotalUsersRegistered() {
+		this.userService
+			.getUsers()
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(users => {
+				this.registeredUsers = this.userService.filterUsersByRol(users, RoleEnum.User).length;
+			});
+	}
 
 	groups() {
 		this.router.navigateByUrl("/groups");
