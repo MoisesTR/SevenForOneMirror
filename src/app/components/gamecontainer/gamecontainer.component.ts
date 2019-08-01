@@ -1,22 +1,22 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
-import {MemberGroup} from "../../models/MemberGroup";
-import {User} from "../../models/User";
-import {GroupGame} from "../../models/GroupGame";
-import {AuthService} from "../../core/services/auth/auth.service";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {GroupService} from "../../core/services/shared/group.service";
-import {RoleEnum} from "../../enums/RoleEnum";
-import {GameService} from "../../core/services/shared/game.service";
-import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
-import {EventEnum} from "../../enums/EventEnum";
-import {NGXLogger} from "ngx-logger";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {ModalDirective} from "ng-uikit-pro-standard";
-import {TopService} from "../../core/services/shared/top.service";
-import {Winner} from "../../models/Winner";
-import {NgxSpinnerService} from "ngx-spinner";
-import {Utils} from "../../shared-module/Utils";
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { MemberGroup } from "../../models/MemberGroup";
+import { User } from "../../models/User";
+import { GroupGame } from "../../models/GroupGame";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { GroupService } from "../../core/services/shared/group.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { GameService } from "../../core/services/shared/game.service";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { EventEnum } from "../../enums/EventEnum";
+import { NGXLogger } from "ngx-logger";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { ModalDirective } from "ng-uikit-pro-standard";
+import { TopService } from "../../core/services/shared/top.service";
+import { Winner } from "../../models/Winner";
+import { NgxSpinnerService } from "ngx-spinner";
+import { Utils } from "../../shared-module/Utils";
 
 @Component({
 	selector: "app-gamecontainer",
@@ -40,7 +40,6 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 	@ViewChild("modalWin") modalWin: ModalDirective;
 	@ViewChild("topPlayers") topPlayers: ModalDirective;
 	@ViewChild("topPlayersConcurrent") topPlayersConcurrent: ModalDirective;
-  $animate: Subject<GroupGame> = new Subject<GroupGame>();
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -58,20 +57,17 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.getUser();
 		this.getParams();
 		this.initSocketGroupGame();
-		this.$animate.pipe(takeUntil(this.ngUnsubscribe)).subscribe(group => {
-			this.socketGroupGame.animationNewPlayer(group);
-		});
 	}
 
 	ngAfterViewInit(): void {
 		if (this.socketGroupGame.userHasWin) {
 			setTimeout(() => {
-        if (this.router.url === '/game/' + this.idGroup) {
-          this.socketGroupGame.userHasWin = false;
-          this.messageWin = this.socketGroupGame.messageWin;
-          this.modalWin.show();
-          this.socketGroupGame.celebration();
-        }
+				if (this.router.url === "/game/" + this.idGroup) {
+					this.socketGroupGame.userHasWin = false;
+					this.messageWin = this.socketGroupGame.messageWin;
+					this.modalWin.show();
+					this.socketGroupGame.celebration();
+				}
 			}, 2000);
 		}
 	}
@@ -122,7 +118,7 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 			this.logger.info("ACTIVTY GROUP: ", group, data);
 			this.iterationValue = 0;
 			group.dataUserWin = data;
-			this.$animate.next(group);
+			this.socketGroupGame.animationNewPlayer(group);
 		});
 	}
 
