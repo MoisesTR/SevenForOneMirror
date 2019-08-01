@@ -65,6 +65,12 @@ export class MenuComponent implements OnInit, OnDestroy {
 				this.getTotalEarned();
 			}
 		});
+
+		// ELIMINAR SET TIMEOUT Y INSTRUCCIONES DENTRO LUEGO DE PROBAR CON LA IMAGEN DE LA MODAL DEL GANADOR
+		setTimeout( () => {
+		  this.modalWin.show();
+		  this.messageWin = 'ERES EL GANADOR';
+    }, 1000);
 	}
 
 	initSocket() {
