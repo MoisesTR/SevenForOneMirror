@@ -53,8 +53,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 		this.getGroups();
 		this.initConfigPaypal();
-		const options = { toastClass: "opacity" };
-		setTimeout(this.toast.success("Te has registrado exitosamente al grupo!", "Grupo", options), 500);
 	}
 
 	getGroups() {
@@ -108,6 +106,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
 						this.paymentModal.hide();
+
 						this.socketGroupGame.connect();
 						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
@@ -115,10 +114,12 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
 						this.router.navigate(["/game", this.groupSelectedPayModal._id]);
 
-						// swal.fire("Info", "La inscripción ha sido exitosa!", "success").then(() => {
-						//
-						//
-						// });
+						const options = { toastClass: "opacity" };
+						this.toast.success(
+							"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",
+							"Grupo",
+							options
+						);
 					});
 			},
 			onCancel: (data, actions) => {
