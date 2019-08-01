@@ -16,6 +16,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ModalDirective } from "ng-uikit-pro-standard";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
+import { RoleEnum } from "../../enums/RoleEnum";
 
 declare var $: any;
 
@@ -34,6 +35,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 	public currentGroupsUser: GroupGame[] = [];
 	public closeSession = false;
 	public messageWin = "";
+	public usersOnline = 0;
+	public registeredUsers = 0;
 	@ViewChild("modalWin") modalWin: ModalDirective;
 
 	constructor(
@@ -86,6 +89,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 		this.mainSocketService.onEvent(EventEnum.PLAYERS_ONLINE).subscribe(data => {
 			this.logger.info("PLAYERS ONLINE: ", data.quantity);
+			this.usersOnline = data.quantity;
 		});
 
 		this.mainSocketService.onEvent(EventEnum.WIN_EVENT).subscribe(data => {
@@ -154,6 +158,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	getTotalEarned() {
 		if (this.isUserAdmin) {
 			this.getTotalEarnedGlobalGroups();
+			this.getTotalUsersRegistered();
 		} else {
 			this.getPurchaseHistory();
 			this.getGroupsCurrentUser();
@@ -203,6 +208,15 @@ export class MenuComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(groups => {
 				this.currentGroupsUser = this.groupService.getGroupsPlayingUser(groups, this.user._id);
+			});
+	}
+
+	getTotalUsersRegistered() {
+		this.userService
+			.getUsers()
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(users => {
+				this.registeredUsers = this.userService.filterUsersByRol(users, RoleEnum.User).length;
 			});
 	}
 

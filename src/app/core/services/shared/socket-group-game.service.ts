@@ -83,7 +83,7 @@ export class SocketGroupGameService {
 				startVelocity: 30,
 				spread: 360,
 				ticks: 60,
-				particleCount: 180,
+				particleCount: 150,
 				origin: {
 					x: Math.random(),
 					// since they fall down, start a bit higher than random

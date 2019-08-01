@@ -1,18 +1,18 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {GroupService} from "../../core/services/shared/group.service";
-import {GroupGame} from "../../models/GroupGame";
-import {UserService} from "../../core/services/shared/user.service";
-import {User} from "../../models/User";
-import {AuthService} from "../../core/services/auth/auth.service";
-import {RoleEnum} from "../../enums/RoleEnum";
-import {GameService} from "../../core/services/shared/game.service";
-import {Router} from "@angular/router";
-import {Observable, Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
-import {EventEnum} from "../../enums/EventEnum";
-import {NGXLogger} from "ngx-logger";
-import {NgxSpinnerService} from "ngx-spinner";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { UserService } from "../../core/services/shared/user.service";
+import { User } from "../../models/User";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { GameService } from "../../core/services/shared/game.service";
+import { Router } from "@angular/router";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { EventEnum } from "../../enums/EventEnum";
+import { NGXLogger } from "ngx-logger";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: "app-dashboard",
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	headElementsUsers = ["#", "Username", "First name", "Last name", "Email"];
 	headElementsGroupsEarning = ["#", "Group", "Total invested", "Total winners"];
 
-  $animate: Subject<GroupGame> = new Subject<GroupGame>();
+	$animate: Subject<GroupGame> = new Subject<GroupGame>();
 
 	constructor(
 		private groupService: GroupService,
@@ -52,9 +52,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		this.isUserAdmin = this.authService.userIsAdmin();
 		this.spinner.show();
 		this.createContentDashboard(this.isUserAdmin);
-    this.$animate.pipe(takeUntil(this.ngUnsubscribe)).subscribe(group => {
-      this.socketGroupGame.animationNewPlayer(group);
-    });
 	}
 
 	createContentDashboard(userIsAdmin) {
@@ -97,7 +94,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 						this.logger.info("ACTIVTY-GROUP: " + group.initialInvertion, data);
 						this.iterationValue = 0;
 						group.dataUserWin = data;
-						this.$animate.next(group);
+						this.socketGroupGame.animationNewPlayer(group);
 					});
 
 					group.circleUsers = this.gameService.generateCircles(group.members, group.lastWinner, this.user);
