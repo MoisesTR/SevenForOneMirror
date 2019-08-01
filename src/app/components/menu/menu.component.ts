@@ -96,19 +96,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 			this.logger.info("WIN EVENT: ", data);
 
 			this.updateMoneyService.update(true);
-
-			if (!this.gameSocketSevice.recentBuyTicketGroup) {
-				this.logger.info("SHOW CELEBRATION IN ACTUAL SCREEN");
-				this.messageWin = data.content;
-				this.modalWin.show();
-				this.gameSocketSevice.celebration();
-			} else {
-				this.logger.info("SHOW CELEBRATION IN SCREEN GROUP/ID ");
-				this.gameSocketSevice.messageWin = data.content;
-				this.gameSocketSevice.userHasWin = true;
-			}
-
-			this.gameSocketSevice.recentBuyTicketGroup = false;
+			this.logger.info("SHOW CELEBRATION TO WINNER");
+			this.messageWin = data.content;
+			this.modalWin.show();
+			this.gameSocketSevice.celebration();
 		});
 
 		this.mainSocketService.onEvent(EventEnum.TOP_WINNER).subscribe(data => {

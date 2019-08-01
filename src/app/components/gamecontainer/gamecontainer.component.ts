@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MemberGroup } from "../../models/MemberGroup";
 import { User } from "../../models/User";
 import { GroupGame } from "../../models/GroupGame";
@@ -23,7 +23,7 @@ import { Utils } from "../../shared-module/Utils";
 	templateUrl: "./gamecontainer.component.html",
 	styleUrls: ["./gamecontainer.component.scss"]
 })
-export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class GamecontainerComponent implements OnInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	public group: GroupGame;
 	public groupSelected = new GroupGame();
@@ -57,19 +57,6 @@ export class GamecontainerComponent implements OnInit, AfterViewInit, OnDestroy 
 		this.getUser();
 		this.getParams();
 		this.initSocketGroupGame();
-	}
-
-	ngAfterViewInit(): void {
-		if (this.socketGroupGame.userHasWin) {
-			setTimeout(() => {
-				if (this.router.url === "/game/" + this.idGroup) {
-					this.socketGroupGame.userHasWin = false;
-					this.messageWin = this.socketGroupGame.messageWin;
-					this.modalWin.show();
-					this.socketGroupGame.celebration();
-				}
-			}, 2000);
-		}
 	}
 
 	getUser() {

@@ -7,7 +7,7 @@ import { CoreModule } from "./core/core.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { RegisterComponent } from "./components/register/register.component";
 import { LoginComponent } from "./components/login/login.component";
-import { MDBBootstrapModulesPro, MDBSpinningPreloader } from "ng-uikit-pro-standard";
+import {MDBBootstrapModulesPro, MDBSpinningPreloader, ToastModule} from "ng-uikit-pro-standard";
 import { MenuComponent } from "./components/menu/menu.component";
 import { NotFound404Component } from "./components/not-found404/not-found404.component";
 import { ConfirmComponent } from "./components/confirm/confirm.component";
@@ -63,6 +63,7 @@ export function getAuthServiceConfigs() {
 		AppRoutingModule,
 		MDBBootstrapModulesPro.forRoot(),
 		SocialLoginModule,
+    ToastModule.forRoot(),
 		LoggerModule.forRoot({
 			level: !environment.production ? NgxLoggerLevel.DEBUG : NgxLoggerLevel.OFF,
 			httpResponseType: "json",

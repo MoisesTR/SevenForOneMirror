@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { GroupService } from "../../core/services/shared/group.service";
 import { GroupGame } from "../../models/GroupGame";
 import { Router } from "@angular/router";
@@ -9,10 +9,9 @@ import { RoleEnum } from "../../enums/RoleEnum";
 import { PurchaseService } from "../../core/services/shared/purchase.service";
 import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
 import { Utils } from "../../shared-module/Utils";
-import { ModalDirective } from "ng-uikit-pro-standard";
+import { ModalDirective, ToastService } from "ng-uikit-pro-standard";
 import { IPayPalConfig } from "ngx-paypal";
 import { Global } from "../../core/services/shared/global";
-import swal from "sweetalert2";
 import { environment } from "../../../environments/environment";
 import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 import { EventEnum } from "../../enums/EventEnum";
@@ -43,7 +42,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		private purchaseService: PurchaseService,
 		private updateMoneyService: UpdateMoneyService,
 		private router: Router,
-		private socketGroupGame: SocketGroupGameService
+		private socketGroupGame: SocketGroupGameService,
+		private toast: ToastService
 	) {
 		this.groupSelectedPayModal = new GroupGame();
 	}
@@ -53,6 +53,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		this.userIsAdmin = this.user.role.name === RoleEnum.Admin;
 		this.getGroups();
 		this.initConfigPaypal();
+		const options = { toastClass: "opacity" };
+		setTimeout(this.toast.success("Te has registrado exitosamente al grupo!", "Grupo", options), 500);
 	}
 
 	getGroups() {
@@ -98,7 +100,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
 				// 	"onClientAuthorization - you should probably inform your server about completed transaction at this point",
 				// 	data
 				// );
-        this.socketGroupGame.recentBuyTicketGroup = true;
 
 				const member = new MemberGroup();
 				member.payReference = data.id;
@@ -106,15 +107,18 @@ export class GroupsComponent implements OnInit, OnDestroy {
 					.addMemberToGroup(member, this.groupSelectedPayModal._id)
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
-						swal.fire("Info", "La inscripción ha sido exitosa!", "success").then(() => {
+						this.paymentModal.hide();
+						this.socketGroupGame.connect();
+						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
-							this.socketGroupGame.connect();
-							this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
+						this.updateMoneyService.update(true);
 
-							this.updateMoneyService.update(true);
+						this.router.navigate(["/game", this.groupSelectedPayModal._id]);
 
-							this.router.navigate(["/game", this.groupSelectedPayModal._id]);
-						});
+						// swal.fire("Info", "La inscripción ha sido exitosa!", "success").then(() => {
+						//
+						//
+						// });
 					});
 			},
 			onCancel: (data, actions) => {
