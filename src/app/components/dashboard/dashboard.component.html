@@ -40,23 +40,39 @@
 
                         <div class="container-fluid mt-3">
 
-                            <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">
+                          <div class="row">
+                            <div class="col-md-12 mx-auto">
+                              <div class="md-form">
+                                <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput>
+                                <label for="search">Buscar</label>
+                              </div>
+                            </div>
+                          </div>
+
+                            <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true" striped="true">
                                 <thead>
                                     <tr>
-                                        <th *ngFor="let head of headElementsUsers; let i = index" scope="col">
-                                            {{head}}
-                                        </th>
+                                      <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="users" [sortBy]="sortByElements[i]"
+                                          scope="col">{{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+                                      </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let user of users; let i = index">
-                                        <th scope="row"> {{i + 1}}</th>
-                                        <td>{{user.userName}}</td>
-                                        <td>{{user.firstName}}</td>
-                                        <td>{{user.lastName}}</td>
-                                        <td>{{user.email}}</td>
+                                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row"> {{i + 1}}</th>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.userName}}</td>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.firstName}}</td>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.lastName}}</td>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.email}}</td>
                                     </tr>
                                 </tbody>
+                              <tfoot class="grey lighten-5 w-100">
+                              <tr>
+                                <td colspan="5">
+                                  <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="users"></mdb-table-pagination>
+                                </td>
+                              </tr>
+                              </tfoot>
                             </table>
 
                         </div>

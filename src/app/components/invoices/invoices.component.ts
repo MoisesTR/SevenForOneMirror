@@ -1,4 +1,13 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+	AfterViewInit,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	HostListener,
+	OnDestroy,
+	OnInit,
+	ViewChild
+} from "@angular/core";
 import { Router } from "@angular/router";
 import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { User } from "../../models/User";
@@ -10,13 +19,28 @@ import { NGXLogger } from "ngx-logger";
 import { Role } from "../../models/Role";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
 import { NgxSpinnerService } from "ngx-spinner";
+import { MdbTableDirective, MdbTablePaginationComponent } from "ng-uikit-pro-standard";
 
 @Component({
 	selector: "app-invoices",
 	templateUrl: "./invoices.component.html",
 	styleUrls: ["./invoices.component.scss"]
 })
-export class InvoicesComponent implements OnInit, OnDestroy {
+export class InvoicesComponent implements OnInit, OnDestroy, AfterViewInit {
+	// DATATABLES PROPERTIES
+	@ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
+	@ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
+	@ViewChild("row") row: ElementRef;
+
+	elements: any = [];
+	headElements = ["#", "Grupo", "Fecha", "Método de Pago"];
+
+	sortByElements = ["#", "invested", "createdAt", "paypal"];
+	previous: string;
+	keyword = "de";
+
+	maxVisibleItems = 15;
+
 	ngUnsubscribe = new Subject<void>();
 	public purchaseHistoryInvested: PurchaseHistory[] = [];
 	public user: User;
@@ -27,13 +51,22 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 		private authSevice: AuthService,
 		private logger: NGXLogger,
 		private purchaseHistoryService: PurchaseService,
-		private spinner: NgxSpinnerService
+		private spinner: NgxSpinnerService,
+		private cdRef: ChangeDetectorRef
 	) {}
 
 	ngOnInit() {
 		this.user = this.authSevice.getUser();
 		this.logger.info("GET PURCHASE HISTORY INVESTED");
 		this.getPurchaseHistory();
+	}
+
+	ngAfterViewInit(): void {
+		this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
+
+		this.mdbTablePagination.calculateFirstItemIndex();
+		this.mdbTablePagination.calculateLastItemIndex();
+		this.cdRef.detectChanges();
 	}
 
 	getPurchaseHistory() {
@@ -48,6 +81,15 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 				this.purchaseHistoryInvested = this.purchaseHistoryInvested
 					.filter(h => h.action === ActionGameEnum.INVEST)
 					.reverse();
+
+				this.purchaseHistoryInvested.forEach((value, inde) => {
+					value.invested = Number(value.quantity["$numberDecimal"]);
+				});
+
+				this.mdbTable.setDataSource(this.purchaseHistoryInvested);
+				this.purchaseHistoryInvested = this.mdbTable.getDataSource();
+				this.previous = this.mdbTable.getDataSource();
+
 				this.spinner.hide();
 			});
 	}
