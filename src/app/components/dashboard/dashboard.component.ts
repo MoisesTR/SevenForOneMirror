@@ -1,4 +1,13 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from "@angular/core";
 import { GroupService } from "../../core/services/shared/group.service";
 import { GroupGame } from "../../models/GroupGame";
 import { UserService } from "../../core/services/shared/user.service";
@@ -13,13 +22,29 @@ import { SocketGroupGameService } from "../../core/services/shared/socket-group-
 import { EventEnum } from "../../enums/EventEnum";
 import { NGXLogger } from "ngx-logger";
 import { NgxSpinnerService } from "ngx-spinner";
+import { MdbTableDirective, MdbTablePaginationComponent } from "ng-uikit-pro-standard";
 
 @Component({
 	selector: "app-dashboard",
 	templateUrl: "./dashboard.component.html",
 	styleUrls: ["./dashboard.component.scss"]
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
+	// DATATABLES PROPERTIES
+	@ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
+	@ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
+	@ViewChild("row") row: ElementRef;
+
+	headElements = ["#", "Usuario", "Nombres", "Apellidos", "Correo"];
+
+	sortByElements = ["#", "userName", "firstName", "lastName", "email"];
+
+	searchText = "";
+	previous: string;
+	keyword = "de";
+
+	maxVisibleItems = 20;
+
 	ngUnsubscribe = new Subject<void>();
 	public groupsAdmin: Observable<GroupGame[]>;
 	public groupsUser: GroupGame[] = [];
@@ -31,10 +56,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	public iterationValue = 1;
 
 	elements: any = [];
-	headElementsUsers = ["#", "Username", "First name", "Last name", "Email"];
-	headElementsGroupsEarning = ["#", "Group", "Total invested", "Total winners"];
-
-	$animate: Subject<GroupGame> = new Subject<GroupGame>();
 
 	constructor(
 		private groupService: GroupService,
@@ -44,14 +65,42 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		private socketGroupGame: SocketGroupGameService,
 		private router: Router,
 		private logger: NGXLogger,
-		private spinner: NgxSpinnerService
+		private spinner: NgxSpinnerService,
+		private cdRef: ChangeDetectorRef
 	) {}
+
+  @HostListener("input") oninput() {
+    this.mdbTablePagination.searchText = this.searchText;
+    this.searchElements();
+  }
+
+  searchElements() {
+    const prev = this.mdbTable.getDataSource();
+
+    if (!this.searchText) {
+      this.mdbTable.setDataSource(this.previous);
+      this.users = this.mdbTable.getDataSource();
+    }
+
+    if (this.searchText) {
+      this.users = this.mdbTable.searchLocalDataBy(this.searchText);
+      this.mdbTable.setDataSource(prev);
+    }
+  }
 
 	ngOnInit() {
 		this.user = this.authService.getUser();
 		this.isUserAdmin = this.authService.userIsAdmin();
 		this.spinner.show();
 		this.createContentDashboard(this.isUserAdmin);
+	}
+
+	ngAfterViewInit(): void {
+		this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
+
+		this.mdbTablePagination.calculateFirstItemIndex();
+		this.mdbTablePagination.calculateLastItemIndex();
+		this.cdRef.detectChanges();
 	}
 
 	createContentDashboard(userIsAdmin) {
@@ -75,6 +124,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 			.subscribe(users => {
 				this.users = users;
 				this.users = this.userService.filterUsersByRol(users, RoleEnum.User);
+				this.mdbTable.setDataSource(this.users);
+				this.users = this.mdbTable.getDataSource();
+				this.previous = this.mdbTable.getDataSource();
 				this.spinner.hide();
 			});
 	}

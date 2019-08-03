@@ -114,7 +114,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
 						this.updateMoneyService.update(true);
 						this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id)).then();
 
-						console.log(this.groupSelectedPayModal._id);
 						const options = { toastClass: "opacity" };
 						this.toast.success(
 							"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",

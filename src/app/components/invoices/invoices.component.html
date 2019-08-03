@@ -21,23 +21,21 @@
               <div class="row justify-content-center">
 
                 <div class="table-responsive">
-                  <table class="table separate table-borderless table-hover">
+
+                  <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true" striped="true">
                     <thead class="blue-seven-one white-text">
 
                       <tr>
-                        <th scope="col" class="border-left table-text-size">#</th>
-<!--                        <th scope="col" class="table-text-size">Nombres</th>-->
-                        <th scope="col" class="table-text-size">Grupo</th>
-                        <th scope="col" class="table-text-size">Fecha</th>
-<!--                        <th scope="col" class="table-text-size">Hora</th>-->
-                        <th scope="col" class="border-right table-text-size">Método de pago</th>
+                        <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="purchaseHistoryInvested" [sortBy]="sortByElements[i]"
+                            scope="col">{{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
                       </tr>
 
                     </thead>
                     <tbody>
 
-                      <tr *ngFor="let invested of purchaseHistoryInvested; let i = index">
-                        <th scope="row" class="border-left border-top-bottom table-text-size align-middle">
+                      <tr *ngFor="let purchaseHistory of purchaseHistoryInvested; let i = index">
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  scope="row" class="border-left border-top-bottom table-text-size align-middle">
                           {{i + 1}}
                         </th>
 <!--                        <td class="border-top-bottom">-->
@@ -45,14 +43,14 @@
 <!--                            {{this.user.userName}}-->
 <!--                          </div>-->
 <!--                        </td>-->
-                        <td class="border-top-bottom">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            ${{invested.quantity["$numberDecimal"]}}
+                            ${{purchaseHistory.invested}}
                           </div>
                         </td>
-                        <td class="border-top-bottom">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            {{invested.createdAt | date:'dd-MM-yyyy'}}
+                            {{purchaseHistory.createdAt | date:'dd-MM-yyyy'}}
                           </div>
                         </td>
 <!--                        <td class="border-top-bottom">-->
@@ -60,12 +58,19 @@
 <!--                            08:30 PM-->
 <!--                          </div>-->
 <!--                        </td>-->
-                        <td class="border-right border-top-bottom table-text-size align-middle">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  class="border-right border-top-bottom table-text-size align-middle">
                           Paypal
                         </td>
                       </tr>
 
                     </tbody>
+                    <tfoot class="grey lighten-5 w-100">
+                    <tr>
+                      <td colspan="4">
+                        <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="purchaseHistoryInvested"></mdb-table-pagination>
+                      </td>
+                    </tr>
+                    </tfoot>
                   </table>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-<!-- <div *ngFor="let history of purchaseHistoryEearned">
+<!-- <div *ngFor="let history of purchaseHistoryEarned">
   {{history.quantity['$numberDecimal']}}
 </div> -->
 <section>
@@ -20,44 +20,51 @@
 
             <div class="container-fluid mt-3">
 
-              <div class="row justify-content-center">
+              <div class="row justify-content-censeter">
 
                 <div class="table-responsive">
-                  <table class="table separate table-borderless table-hover">
+                  <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true" striped="true">
                     <thead class="blue-seven-one white-text">
 
                       <tr>
-                        <th scope="col" class="border-left table-text-size">#</th>
-                        <th scope="col" class="table-text-size">Grupo</th>
-                        <th scope="col" class="table-text-size">Ganancias</th>
-                        <th scope="col" class="table-text-size border-right">Fecha</th>
+
+                        <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="purchaseHistoryEarned" [sortBy]="sortByElements[i]"
+                            scope="col">{{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+
                       </tr>
 
                     </thead>
-                    <tbody>
+                    <tbody #row>
 
-                      <tr *ngFor="let history of purchaseHistoryEearned; let i = index">
-                        <th scope="row" class="border-left border-top-bottom table-text-size align-middle">
+                      <tr *ngFor="let history of purchaseHistoryEarned; let i = index">
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row" class="border-left border-top-bottom table-text-size align-middle">
                           {{i + 1}}
                         </th>
-                        <td class="border-top-bottom">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="border-top-bottom">
                           <div class="table-text-size mx-auto">
                             ${{history.groupInfo.initialInvertion}}
                           </div>
                         </td>
-                        <td class="border-top-bottom">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="border-top-bottom">
                           <div class="table-text-size mx-auto">
-                            ${{history.quantity["$numberDecimal"]}}
+                            ${{history.earned}}
                           </div>
                         </td>
-                        <td class="border-right border-top-bottom table-text-size align-middle">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="border-right border-top-bottom table-text-size align-middle">
 
                           {{history.createdAt | date:'dd-MM-yyyy'}}
 
                         </td>
                       </tr>
-
                     </tbody>
+                    <tfoot class="grey lighten-5 w-100">
+                    <tr>
+                      <td colspan="4">
+                        <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="purchaseHistoryEarned"></mdb-table-pagination>
+                      </td>
+                    </tr>
+                    </tfoot>
                   </table>
                 </div>
               </div>

@@ -14,6 +14,8 @@ export class PurchaseHistory {
   public moneyDirection: boolean;
   public createdAt: string;
   public updateAt: string;
+  public invested?: number;
+  public earned: number;
 
   public constructor(){}
 }
