@@ -89,7 +89,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 				if (this.groupsUser.length > 0) this.showWelcomeUser = false;
 
 				this.groupsUser.forEach((group, index) => {
-					this.socketGroupGame.connect();
+					if (index === 0) this.socketGroupGame.connect();
+
 					this.socketGroupGame.onEventGroup(EventEnum.GROUP_ACTIVITY + group.initialInvertion).subscribe(data => {
 						this.logger.info("ACTIVTY-GROUP: " + group.initialInvertion, data);
 						this.iterationValue = 0;
