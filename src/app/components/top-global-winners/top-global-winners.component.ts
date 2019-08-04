@@ -18,6 +18,7 @@ export class TopGlobalWinnersComponent implements OnInit, OnDestroy {
 	public winners3: Winner[] = [];
 	public winners7: Winner[] = [];
 	public winners: Winner[] = [];
+	public existsRecords = true;
 
 	@ViewChild("topPlayers") topPlayers: ModalDirective;
 	constructor(
@@ -49,6 +50,8 @@ export class TopGlobalWinnersComponent implements OnInit, OnDestroy {
 						this.winners7.push(winner);
 					}
 				});
+
+				if (this.winners.length === 0) this.existsRecords = false;
 
 				this.spinner.hide();
 			});

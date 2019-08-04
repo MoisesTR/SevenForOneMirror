@@ -19,7 +19,7 @@
 
               <div class="row justify-content-center">
 
-                <div class="table-responsive">
+                <div *ngIf="existInvoices; else emptyInvoices" class="table-responsive">
 
                   <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true"
                     striped="true">
@@ -80,12 +80,10 @@
                   </table>
                 </div>
 
-                <!-- Cuando no hay registro de factura -->
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                  <h1 class="h1-responsive font-weight-bold blue-seven-one-text mb-0 text-center">
-                    No hay registros</h1>
-                  <img src="assets/images/empty.png" class="img-fluid" alt="dashboard user">
-                </div>
+                <ng-template #emptyInvoices>
+                  <!-- Cuando no hay registro de factura -->
+                  <app-empty-records></app-empty-records>
+                </ng-template>
 
               </div>
             </div>

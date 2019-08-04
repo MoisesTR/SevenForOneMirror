@@ -8,21 +8,21 @@ import {
   OnInit,
   ViewChild
 } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { GroupGame } from "../../models/GroupGame";
-import { UserService } from "../../core/services/shared/user.service";
-import { User } from "../../models/User";
-import { AuthService } from "../../core/services/auth/auth.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { GameService } from "../../core/services/shared/game.service";
-import { Router } from "@angular/router";
-import { Observable, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
-import { EventEnum } from "../../enums/EventEnum";
-import { NGXLogger } from "ngx-logger";
-import { NgxSpinnerService } from "ngx-spinner";
-import { MdbTableDirective, MdbTablePaginationComponent } from "ng-uikit-pro-standard";
+import {GroupService} from "../../core/services/shared/group.service";
+import {GroupGame} from "../../models/GroupGame";
+import {UserService} from "../../core/services/shared/user.service";
+import {User} from "../../models/User";
+import {AuthService} from "../../core/services/auth/auth.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {GameService} from "../../core/services/shared/game.service";
+import {Router} from "@angular/router";
+import {Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
+import {EventEnum} from "../../enums/EventEnum";
+import {NGXLogger} from "ngx-logger";
+import {NgxSpinnerService} from "ngx-spinner";
+import {MdbTableDirective, MdbTablePaginationComponent} from "ng-uikit-pro-standard";
 
 @Component({
 	selector: "app-dashboard",
@@ -44,6 +44,10 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 	keyword = "de";
 
 	maxVisibleItems = 20;
+
+	// END DATATABLE PROPERTIES
+
+	public existsRegisteredUsers = true;
 
 	ngUnsubscribe = new Subject<void>();
 	public groupsAdmin: Observable<GroupGame[]>;
@@ -69,24 +73,24 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 		private cdRef: ChangeDetectorRef
 	) {}
 
-  @HostListener("input") oninput() {
-    this.mdbTablePagination.searchText = this.searchText;
-    this.searchElements();
-  }
+	@HostListener("input") oninput() {
+		this.mdbTablePagination.searchText = this.searchText;
+		this.searchElements();
+	}
 
-  searchElements() {
-    const prev = this.mdbTable.getDataSource();
+	searchElements() {
+		const prev = this.mdbTable.getDataSource();
 
-    if (!this.searchText) {
-      this.mdbTable.setDataSource(this.previous);
-      this.users = this.mdbTable.getDataSource();
-    }
+		if (!this.searchText) {
+			this.mdbTable.setDataSource(this.previous);
+			this.users = this.mdbTable.getDataSource();
+		}
 
-    if (this.searchText) {
-      this.users = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
-  }
+		if (this.searchText) {
+			this.users = this.mdbTable.searchLocalDataBy(this.searchText);
+			this.mdbTable.setDataSource(prev);
+		}
+	}
 
 	ngOnInit() {
 		this.user = this.authService.getUser();
@@ -96,11 +100,12 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
-
-		this.mdbTablePagination.calculateFirstItemIndex();
-		this.mdbTablePagination.calculateLastItemIndex();
-		this.cdRef.detectChanges();
+		if (this.isUserAdmin && this.mdbTable) {
+			this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
+			this.mdbTablePagination.calculateFirstItemIndex();
+			this.mdbTablePagination.calculateLastItemIndex();
+			this.cdRef.detectChanges();
+		}
 	}
 
 	createContentDashboard(userIsAdmin) {
@@ -124,9 +129,16 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 			.subscribe(users => {
 				this.users = users;
 				this.users = this.userService.filterUsersByRol(users, RoleEnum.User);
-				this.mdbTable.setDataSource(this.users);
-				this.users = this.mdbTable.getDataSource();
-				this.previous = this.mdbTable.getDataSource();
+
+				if (this.mdbTable) {
+					this.mdbTable.setDataSource(this.users);
+					this.users = this.mdbTable.getDataSource();
+					this.previous = this.mdbTable.getDataSource();
+				}
+
+				if (this.users.length === 0) {
+					this.existsRegisteredUsers = false;
+				}
 				this.spinner.hide();
 			});
 	}

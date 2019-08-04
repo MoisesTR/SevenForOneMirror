@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div *ngIf="existsRecords ;else emptyRecords" class="row justify-content-center">
 
     <div class="col-8">
         <img src="/assets/images/trophy.svg" class="w-18 mx-auto d-block" alt="Trofeo">
@@ -108,3 +108,9 @@
     </div>
 
 </div>
+
+<ng-template #emptyRecords>
+  <!-- Cuando no hay registro de factura -->
+  <app-empty-records></app-empty-records>
+
+</ng-template>

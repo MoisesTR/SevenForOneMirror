@@ -93,7 +93,7 @@
           <span aria-hidden="true">×</span>
         </button>
 
-        <app-top-players [winners3]="this.topWinners3" [winners7]="this.topWinners7">
+        <app-top-players [winners3]="this.topWinners3" [winners7]="this.topWinners7" [existsRecords]="existsRecordsTopMoneyUsers">
         </app-top-players>
 
         <div class="col-12 text-center">
@@ -119,7 +119,7 @@
         </button>
 
         <app-top-players [winners3]="this.concurrentWinners3" [winners7]="this.concurrentWinners7" title="Veces"
-          [renderMount]="false">
+          [renderMount]="false" [existsRecords]="existsRecordsTopConcurrentUsers" >
         </app-top-players>
 
         <div class="col-12 text-center">

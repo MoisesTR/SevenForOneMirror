@@ -38,7 +38,7 @@
                     <!-- Card content -->
                     <div class="card-body card-body-cascade text-center">
 
-                        <div class="container-fluid mt-3">
+                        <div *ngIf="existsRegisteredUsers; else emptyRegisteredUsers" class="container-fluid mt-3">
 
                           <div class="row">
                             <div class="col-md-12 mx-auto">
@@ -76,6 +76,11 @@
                             </table>
 
                         </div>
+
+                      <ng-template #emptyRegisteredUsers>
+                        <!-- No existen usuarios registrados -->
+                        <app-empty-records></app-empty-records>
+                      </ng-template>
 
                     </div>
 

@@ -22,7 +22,7 @@
 
               <div class="row justify-content-censeter">
 
-                <div class="table-responsive">
+                <div *ngIf="existHistoryWin; else emptyHistoryWin" class="table-responsive">
                   <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true" striped="true">
                     <thead class="blue-seven-one white-text">
 
@@ -67,7 +67,13 @@
                     </tfoot>
                   </table>
                 </div>
+
+                <ng-template #emptyHistoryWin>
+                  <!-- Cuando no hay registro de historial de ganancias del jugador -->
+                  <app-empty-records></app-empty-records>
+                </ng-template>
               </div>
+
             </div>
           </div>
 

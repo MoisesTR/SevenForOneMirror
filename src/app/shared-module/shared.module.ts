@@ -8,21 +8,23 @@ import { NativeDateTimeAdapter } from "ng-pick-datetime/date-time/adapter/native
 import { Platform } from "@angular/cdk/platform";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ImageUserPipe } from "../pipe/image-user.pipe";
+import {EmptyRecordsComponent} from "../components/empty-records/empty-records.component";
 
 @NgModule({
 	imports: [CommonModule],
-	exports: [
-		CommonModule,
-		ReactiveFormsModule,
-		FormsModule,
-		DirectivesModule,
-		ShowErrorsComponent,
-		OwlDateTimeModule,
-		OwlNativeDateTimeModule,
-		NgxSpinnerModule,
-		ImageUserPipe
-	],
-	declarations: [ShowErrorsComponent, ImageUserPipe],
+  exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    DirectivesModule,
+    ShowErrorsComponent,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    NgxSpinnerModule,
+    ImageUserPipe,
+    EmptyRecordsComponent
+  ],
+	declarations: [ShowErrorsComponent, ImageUserPipe, EmptyRecordsComponent],
 	providers: [
 		{ provide: OWL_DATE_TIME_LOCALE, useValue: "es" },
 		{

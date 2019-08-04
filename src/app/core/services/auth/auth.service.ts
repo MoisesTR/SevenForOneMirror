@@ -110,6 +110,7 @@ export class AuthService {
 	}
 
 	public logout(): void {
+	  this.logger.info('CLOSE SESSION FROM AUTH SERVICE');
 		this.cookieService.deleteAll();
 		this.router.navigate(["/login"]);
 	}

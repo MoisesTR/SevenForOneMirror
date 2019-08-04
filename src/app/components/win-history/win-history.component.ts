@@ -1,13 +1,4 @@
-import {
-	AfterViewInit,
-	ChangeDetectorRef,
-	Component,
-	ElementRef,
-	HostListener,
-	OnDestroy,
-	OnInit,
-	ViewChild
-} from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { takeUntil } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
 import { Router } from "@angular/router";
@@ -42,6 +33,8 @@ export class WinHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
 	maxVisibleItems = 15;
 
 	// END DATATABLE PROPERTIES
+	public existHistoryWin = true;
+
 	ngUnsubscribe = new Subject<void>();
 	public totalEarned = 0;
 	public totalInvested = 0;
@@ -83,17 +76,19 @@ export class WinHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
 					return historyPurchase[index];
 				});
 
-				this.purchaseHistoryEarned = this.purchaseHistoryEarned
-					.filter(h => h.action === ActionGameEnum.WIN)
-					.reverse();
+				this.purchaseHistoryEarned = this.purchaseHistoryEarned.filter(h => h.action === ActionGameEnum.WIN).reverse();
 
 				this.purchaseHistoryEarned.forEach((value, index) => {
 					value.earned = Number(value.quantity["$numberDecimal"]);
 				});
 
-				this.mdbTable.setDataSource(this.purchaseHistoryEarned);
-				this.purchaseHistoryEarned = this.mdbTable.getDataSource();
-				this.previous = this.mdbTable.getDataSource();
+				if (this.purchaseHistoryEarned.length === 0) this.existHistoryWin = false;
+
+				if (this.mdbTable) {
+					this.mdbTable.setDataSource(this.purchaseHistoryEarned);
+					this.purchaseHistoryEarned = this.mdbTable.getDataSource();
+					this.previous = this.mdbTable.getDataSource();
+				}
 
 				this.spinner.hide();
 			});
