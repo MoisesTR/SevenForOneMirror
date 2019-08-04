@@ -144,105 +144,208 @@
                             </div>
                         </div>
 
-                        <div class="col-12 mt-5 text-menu">
-                            <div class="row justify-content-center btn-dashboard">
+                        <!-- Botones menu cuando las pantallas son tamanio Medium >=992px -->
 
-                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
-                                        mdbWavesEffect>
-                                        <mdb-icon fas icon="home" size="2x"></mdb-icon>
-                                        <div class="font-weight-bolder text-wrap">
-                                            Dashboard
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
-                                        mdbWavesEffect>
-                                        <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
-                                        <div class="font-weight-bolder text-wrap">
-                                            Grupos
-                                        </div>
-                                    </a>
-                                </div>
+                        <div class="container-fluid d-lg-none d-xl-none">
+                            <div class="col-12 mt-5 text-menu scroll-auto">
+                                <div class="row flex-row flex-nowrap btn-dashboard mb-2">
 
-                            </div>
-                        </div>
-
-                        <div *ngIf="isUserAdmin" class="col-12 text-menu mt-2">
-                            <div class="row justify-content-center btn-dashboard">
-
-                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
-                                        mdbWavesEffect (click)="addGroup()">
-                                        <mdb-icon fas icon="edit" size="2x"></mdb-icon>
-                                        <div class="font-weight-bolder text-wrap">
-                                            Agregar grupo
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
-                                        mdbWavesEffect (click)="addAdmin()">
-                                        <mdb-icon fas icon="users-cog" size="2x"></mdb-icon>
-                                        <div class="font-weight-bolder text-wrap">
-                                            Agregar administrador
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-12 text-menu mt-2">
-                            <div class="row justify-content-center btn-dashboard">
-
-
-                                <div *ngIf="!isUserAdmin" class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/invoices']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
-                                        mdbWavesEffect>
-                                        <mdb-icon fas icon="file-invoice-dollar" size="2x"></mdb-icon>
-                                        <div class="font-weight-bolder text-wrap">
-                                            Facturas
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/global-winners']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1 pl-1 pr-1"
-                                        mdbWavesEffect>
-                                        <mdb-icon fas icon="trophy" size="2x"></mdb-icon>
-                                        <div class="font-weight-bolder text-wrap">
-                                            Ranking global
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div *ngIf="!isUserAdmin" class="col-12 text-menu mt-2">
-                            <div class="row justify-content-center btn-dashboard">
-
-
-                                <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
-                                    <a [routerLink]="['/win-history']" [routerLinkActive]="['active-menu-dashboard']"
-                                        class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
-                                        mdbWavesEffect>
-                                        <div class="p-3">
-                                            <mdb-icon fas icon="hand-holding-usd" size="2x"></mdb-icon>
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a [routerLink]="['/dashboard']" [routerLinkActive]="['active-menu-dashboard']"
+                                            class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                            mdbWavesEffect>
+                                            <mdb-icon fas icon="home" size="2x"></mdb-icon>
                                             <div class="font-weight-bolder text-wrap">
-                                                Historial Ganancias
+                                                Dashboard
                                             </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']"
+                                            class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                            mdbWavesEffect>
+                                            <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
+                                            <div class="font-weight-bolder text-wrap">
+                                                Grupos
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="isUserAdmin"
+                                        class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                            mdbWavesEffect (click)="addGroup()">
+                                            <mdb-icon fas icon="edit" size="2x"></mdb-icon>
+                                            <div class="font-weight-bolder text-wrap">
+                                                Agregar grupo
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="isUserAdmin"
+                                        class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                            mdbWavesEffect (click)="addAdmin()">
+                                            <mdb-icon fas icon="users-cog" size="2x"></mdb-icon>
+                                            <div class="font-weight-bolder text-wrap">
+                                                Agregar administrador
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="!isUserAdmin"
+                                        class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a [routerLink]="['/invoices']" [routerLinkActive]="['active-menu-dashboard']"
+                                            class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                            mdbWavesEffect>
+                                            <mdb-icon fas icon="file-invoice-dollar" size="2x"></mdb-icon>
+                                            <div class="font-weight-bolder text-wrap">
+                                                Facturas
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a [routerLink]="['/global-winners']"
+                                            [routerLinkActive]="['active-menu-dashboard']"
+                                            class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1 pl-1 pr-1"
+                                            mdbWavesEffect>
+                                            <mdb-icon fas icon="trophy" size="2x"></mdb-icon>
+                                            <div class="font-weight-bolder text-wrap">
+                                                Ranking global
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div *ngIf="!isUserAdmin"
+                                        class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a [routerLink]="['/win-history']"
+                                            [routerLinkActive]="['active-menu-dashboard']"
+                                            class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                            mdbWavesEffect>
+                                            <div class="p-3">
+                                                <mdb-icon fas icon="hand-holding-usd" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Historial Ganancias
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones menu cuando las pantallas son tamanio Large >=1200px -->
+                        <div class="d-none d-lg-block d-xl-block">
+                            <div class="row">
+                                <div class="col-12 mt-5 text-menu">
+                                    <div class="row justify-content-center btn-dashboard">
+
+                                        <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a [routerLink]="['/dashboard']"
+                                                [routerLinkActive]="['active-menu-dashboard']"
+                                                class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                                mdbWavesEffect>
+                                                <mdb-icon fas icon="home" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Dashboard
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
+                                        <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a [routerLink]="['/groups']" [routerLinkActive]="['active-menu-dashboard']"
+                                                class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                                mdbWavesEffect>
+                                                <mdb-icon fas icon="money-bill-wave" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Grupos
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
                                 </div>
 
+                                <div *ngIf="isUserAdmin" class="col-12 text-menu mt-2">
+                                    <div class="row justify-content-center btn-dashboard">
+
+                                        <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                                mdbWavesEffect (click)="addGroup()">
+                                                <mdb-icon fas icon="edit" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Agregar grupo
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                                mdbWavesEffect (click)="addAdmin()">
+                                                <mdb-icon fas icon="users-cog" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Agregar administrador
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 text-menu mt-2">
+                                    <div class="row justify-content-center btn-dashboard">
+
+
+                                        <div *ngIf="!isUserAdmin"
+                                            class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a [routerLink]="['/invoices']"
+                                                [routerLinkActive]="['active-menu-dashboard']"
+                                                class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                                mdbWavesEffect>
+                                                <mdb-icon fas icon="file-invoice-dollar" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Facturas
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a [routerLink]="['/global-winners']"
+                                                [routerLinkActive]="['active-menu-dashboard']"
+                                                class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1 pl-1 pr-1"
+                                                mdbWavesEffect>
+                                                <mdb-icon fas icon="trophy" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Ranking global
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div *ngIf="!isUserAdmin" class="col-12 text-menu mt-2">
+                                    <div class="row justify-content-center btn-dashboard">
+
+
+                                        <div class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a [routerLink]="['/win-history']"
+                                                [routerLinkActive]="['active-menu-dashboard']"
+                                                class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                                mdbWavesEffect>
+                                                <div class="p-3">
+                                                    <mdb-icon fas icon="hand-holding-usd" size="2x"></mdb-icon>
+                                                    <div class="font-weight-bolder text-wrap">
+                                                        Historial Ganancias
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -378,7 +481,7 @@
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown"
                         data-wow-delay="0.3s">
                         <div class="ratio img-responsive img-circle green-seven-one"
-                             [ngStyle]="{'background-image': 'url(' + (user.image | imageUser) + ')'}">
+                            [ngStyle]="{'background-image': 'url(' + (user.image | imageUser) + ')'}">
                         </div>
                     </div>
                     <div class="col-12 text-center">
