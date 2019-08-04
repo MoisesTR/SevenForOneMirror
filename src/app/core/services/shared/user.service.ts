@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { Global } from "./global";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { User } from "../../../models/User";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -60,14 +60,14 @@ export class UserService {
 		return this.http.post(this.urlAuth + "signup", usuario, options);
 	}
 
-  createAdmin(admin: User) {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    const options = { headers: headers };
+	createAdmin(admin: User) {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers: headers };
 
-    return this.http.post(this.urlAuth + "admin", admin, options);
-  }
+		return this.http.post(this.urlAuth + "admin", admin, options);
+	}
 
 	updateUser(usuario: User): Observable<any> {
 		const headers = new HttpHeaders({
@@ -76,6 +76,18 @@ export class UserService {
 		const options = { headers: headers };
 
 		return this.http.put(this.urlAuth + this.userUrl, usuario);
+	}
+
+	disableUser(userId, enabled = false) {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+
+		const httpParams = new HttpParams().set("enabled", enabled ? 'true' : 'false');
+
+		const options = { headers, params: httpParams };
+
+		return this.http.delete(this.urlAuth + this.userUrl + "/" + userId, options);
 	}
 
 	verifyEmail(token) {

@@ -22,7 +22,7 @@ import {SocketGroupGameService} from "../../core/services/shared/socket-group-ga
 import {EventEnum} from "../../enums/EventEnum";
 import {NGXLogger} from "ngx-logger";
 import {NgxSpinnerService} from "ngx-spinner";
-import {MdbTableDirective, MdbTablePaginationComponent} from "ng-uikit-pro-standard";
+import {MdbTableDirective, MdbTablePaginationComponent, ToastService} from "ng-uikit-pro-standard";
 
 @Component({
 	selector: "app-dashboard",
@@ -35,9 +35,9 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 	@ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
 	@ViewChild("row") row: ElementRef;
 
-	headElements = ["#", "Usuario", "Nombres", "Apellidos", "Correo"];
+	headElements = ["#", "Usuario", "Nombres", "Apellidos", "Correo", "Estado", "Acción"];
 
-	sortByElements = ["#", "userName", "firstName", "lastName", "email"];
+	sortByElements = ["#", "userName", "firstName", "lastName", "email", "estado", "action"];
 
 	searchText = "";
 	previous: string;
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 	// END DATATABLE PROPERTIES
 
 	public existsRegisteredUsers = true;
-
+	public optionsToast = { toastClass: "opacity" };
 	ngUnsubscribe = new Subject<void>();
 	public groupsAdmin: Observable<GroupGame[]>;
 	public groupsUser: GroupGame[] = [];
@@ -70,7 +70,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 		private router: Router,
 		private logger: NGXLogger,
 		private spinner: NgxSpinnerService,
-		private cdRef: ChangeDetectorRef
+		private cdRef: ChangeDetectorRef,
+		private toast: ToastService
 	) {}
 
 	@HostListener("input") oninput() {
@@ -176,6 +177,34 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	groupsDashboard() {
 		this.router.navigate(["/groups"]);
+	}
+
+	disableUser(user: User) {
+		if (!user.enabled) {
+			this.toast.info("El usuario: " + user.userName + " ya se encuentra inhabilitado!", "Usuario", this.optionsToast);
+		} else {
+			this.userService
+				.disableUser(user._id, false)
+				.pipe(takeUntil(this.ngUnsubscribe))
+				.subscribe(resp => {
+					user.enabled = false;
+					this.toast.info("El usuario: " + user.userName + " ha sido inhabilitado!", "Usuario", this.optionsToast);
+				});
+		}
+	}
+
+	enableUser(user: User) {
+		if (user.enabled) {
+			this.toast.info("El usuario: " + user.userName + " ya se encuentra habilitado!", "Usuario", this.optionsToast);
+		} else {
+			this.userService
+				.disableUser(user._id, true)
+				.pipe(takeUntil(this.ngUnsubscribe))
+				.subscribe(resp => {
+					user.enabled = true;
+					this.toast.info("El usuario: " + user.userName + " ha sido habilitado!", "Usuario", this.optionsToast);
+				});
+		}
 	}
 
 	ngOnDestroy(): void {

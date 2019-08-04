@@ -64,11 +64,23 @@
                                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.firstName}}</td>
                                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.lastName}}</td>
                                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.email}}</td>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >
+                                          <div class="text-center">
+                                            <mdb-icon fas [icon]="user.enabled ? 'user-check' : 'user-alt-slash'"></mdb-icon> {{user.enabled ? 'Habilitado' : 'Inhabilitado'}}
+                                          </div>
+                                        </td>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >
+                                          <div class="text-center">
+                                            <button mdbBtn type="button" color="success" mdbWavesEffect mdbTooltip="Habilitar usuario" (click)="enableUser(user)"><mdb-icon fas icon="user-check" class="ml-1"></mdb-icon></button>
+                                            <button mdbBtn type="button" color="danger" mdbWavesEffect mdbTooltip="Inhabilitar usuario" (click)="disableUser(user)"><mdb-icon fas icon="user-alt-slash" class="ml-1"></mdb-icon></button>
+                                        </div>
+
+                                        </td>
                                     </tr>
                                 </tbody>
                               <tfoot class="grey lighten-5 w-100">
                               <tr>
-                                <td colspan="5">
+                                <td colspan="7">
                                   <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="users"></mdb-table-pagination>
                                 </td>
                               </tr>
