@@ -15,13 +15,13 @@
             <!-- Primer lugar -->
             <div *ngFor="let winner of winners3" class="col-10 col-sm-10 col-md-10 col-lg-3 mb-4">
 
-                <div class="blue-seven-one top-padding rounded-all">
+                <div class="green-dark-seven-one top-padding rounded-all">
 
                     <img src="{{winner.trophyImageSrc}}" class="top-img-1" alt="">
 
                     <div class="avatar mx-auto flex-center">
                         <img src="{{winner.image | imageUser}}" alt="avatar mx-auto"
-                            class="rounded-circle img-fluid green-dark-seven-one">
+                            class="rounded-circle img-fluid blue-dark-seven-one">
                     </div>
 
                     <a>
@@ -54,8 +54,8 @@
     <div class="col-lg-9 mt-2">
 
         <div class="table-responsive">
-            <table class="table separate table-borderless">
-                <thead class="green-seven-one white-text">
+            <table class="table separate table-borderless table-striped table-hover">
+                <thead class="blue-seven-one white-text">
 
                     <tr>
                         <th scope="col" class="border-left table-text-size">#</th>
@@ -71,12 +71,13 @@
                 </thead>
                 <tbody>
 
-                    <tr *ngFor="let winner of winners7; let i = index" class="blue-seven-one green-seven-one-text">
-                        <th scope="row" class="border-left white-text align-middle">
+                    <tr *ngFor="let winner of winners7; let i = index">
+                        <th scope="row"
+                            class="border-left border-top-bottom top-text-color table-text-size align-middle">
                             {{i + 4}}
                         </th>
-                        <td>
-                            <div class="avatar-table white-text mx-auto top-text-color">
+                        <td class="border-top-bottom">
+                            <div class="avatar-table mx-auto table-text-size top-text-color">
                                 <img src="{{winner.image | imageUser}}" alt="avatar mx-auto"
                                     class="rounded-circle img-fluid mr-3 green-dark-seven-one">
 
@@ -85,12 +86,14 @@
                         </td>
 
                         <ng-template [ngIf]="renderMount" [ngIfElse]="renderConcurrent">
-                            <td class="border-right white-text align-middle text-center top-text-color">$
-                                {{winner.totalWon['$numberDecimal']}}</td>
+                            <td
+                                class="border-right border-top-bottom table-text-size top-text-color align-middle text-center">
+                                $ {{winner.totalWon['$numberDecimal']}}</td>
                         </ng-template>
 
                         <ng-template #renderConcurrent>
-                            <td class="border-right white-text align-middle text-center top-text-color">
+                            <td
+                                class="border-right border-top-bottom table-text-size top-text-color align-middle text-center">
                                 <mdb-icon fas icon="award"></mdb-icon>
                                 {{winner.wonTimes}}
                             </td>

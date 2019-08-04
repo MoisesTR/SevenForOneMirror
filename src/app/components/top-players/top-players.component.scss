@@ -35,6 +35,10 @@
 	border-bottom-right-radius: 6px;
 	border-top-right-radius: 6px;
 }
+.border-top-bottom {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
 .table-text-size {
 	font-size: 18px;
 	font-weight: 390;
@@ -63,4 +67,7 @@
 }
 .flex-center {
 	height: auto !important;
+}
+.top-text-color {
+    color: #6D6D6D;
 }
