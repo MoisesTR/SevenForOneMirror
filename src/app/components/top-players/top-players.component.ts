@@ -23,6 +23,9 @@ export class TopPlayersComponent implements OnInit {
 	@Input()
 	renderMount = true;
 
+	@Input()
+	existsRecords = true;
+
 	constructor() {}
 
 	ngOnInit() {}

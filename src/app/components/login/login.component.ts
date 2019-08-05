@@ -8,10 +8,10 @@ import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.se
 import { RolService } from "../../core/services/shared/rol.service";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
-import { Utils } from "../../shared-module/Utils";
 import { Subject } from "rxjs";
 import { take, takeUntil } from "rxjs/operators";
 import { isPlatformServer } from "@angular/common";
+import { ModalService } from "../../core/services/shared/modal.service";
 
 @Component({
 	selector: "app-login",
@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private rolService: RolService,
 		private socialAuthService: AuthService,
 		private authService: AuthServiceUser,
-		@Inject(PLATFORM_ID) private platformId: Object
+		@Inject(PLATFORM_ID) private platformId: Object,
+		private modalService: ModalService
 	) {
 		this.user = new User();
 	}
@@ -69,11 +70,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 					this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
 
 					if (!this.idRolUser) {
-						Utils.showMsgError("El rol de usuario no fue encontrado");
+						this.modalService.showModalError("El rol de usuario no fue encontrado");
 					}
 				},
 				() => {
-					Utils.showMsgError("Ocurrio un error al cargar los roles de usuario!");
+					this.modalService.showModalError("Ocurrio un error al cargar los roles de usuario!");
 				}
 			);
 	}

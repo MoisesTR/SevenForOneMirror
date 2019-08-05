@@ -13,7 +13,7 @@ export class User {
 	public passwordHash: string;
 	public password: string;
 	public passwordConfirm: string;
-	public enabled: number;
+	public enabled: boolean;
 	public createdAt: string;
 	public updatedAt: string;
 	public accessToken: string;

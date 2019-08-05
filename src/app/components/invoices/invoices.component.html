@@ -1,4 +1,3 @@
-
 <section>
 
   <div class="container-fluid">
@@ -20,14 +19,16 @@
 
               <div class="row justify-content-center">
 
-                <div class="table-responsive">
+                <div *ngIf="existInvoices; else emptyInvoices" class="table-responsive">
 
-                  <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true" striped="true">
+                  <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true"
+                    striped="true">
                     <thead class="blue-seven-one white-text">
 
                       <tr>
-                        <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="purchaseHistoryInvested" [sortBy]="sortByElements[i]"
-                            scope="col">{{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+                        <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="purchaseHistoryInvested"
+                          [sortBy]="sortByElements[i]" scope="col">{{head | titlecase}} <mdb-icon fas icon="sort">
+                          </mdb-icon>
                         </th>
                       </tr>
 
@@ -35,44 +36,55 @@
                     <tbody>
 
                       <tr *ngFor="let purchaseHistory of purchaseHistoryInvested; let i = index">
-                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  scope="row" class="border-left border-top-bottom table-text-size align-middle">
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          scope="row" class="border-left border-top-bottom table-text-size align-middle">
                           {{i + 1}}
                         </th>
-<!--                        <td class="border-top-bottom">-->
-<!--                          <div class="table-text-size mx-auto">-->
-<!--                            {{this.user.userName}}-->
-<!--                          </div>-->
-<!--                        </td>-->
-                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  class="border-top-bottom">
+                        <!--                        <td class="border-top-bottom">-->
+                        <!--                          <div class="table-text-size mx-auto">-->
+                        <!--                            {{this.user.userName}}-->
+                        <!--                          </div>-->
+                        <!--                        </td>-->
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="border-top-bottom">
                           <div class="table-text-size mx-auto">
                             ${{purchaseHistory.invested}}
                           </div>
                         </td>
-                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  class="border-top-bottom">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="border-top-bottom">
                           <div class="table-text-size mx-auto">
                             {{purchaseHistory.createdAt | date:'dd-MM-yyyy'}}
                           </div>
                         </td>
-<!--                        <td class="border-top-bottom">-->
-<!--                          <div class="table-text-size mx-auto">-->
-<!--                            08:30 PM-->
-<!--                          </div>-->
-<!--                        </td>-->
-                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"  class="border-right border-top-bottom table-text-size align-middle">
+                        <!--                        <td class="border-top-bottom">-->
+                        <!--                          <div class="table-text-size mx-auto">-->
+                        <!--                            08:30 PM-->
+                        <!--                          </div>-->
+                        <!--                        </td>-->
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="border-right border-top-bottom table-text-size align-middle">
                           Paypal
                         </td>
                       </tr>
 
                     </tbody>
                     <tfoot class="grey lighten-5 w-100">
-                    <tr>
-                      <td colspan="4">
-                        <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="purchaseHistoryInvested"></mdb-table-pagination>
-                      </td>
-                    </tr>
+                      <tr>
+                        <td colspan="4">
+                          <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign=""
+                            [searchDataSource]="purchaseHistoryInvested"></mdb-table-pagination>
+                        </td>
+                      </tr>
                     </tfoot>
                   </table>
                 </div>
+
+                <ng-template #emptyInvoices>
+                  <!-- Cuando no hay registro de factura -->
+                  <app-empty-records></app-empty-records>
+                </ng-template>
+
               </div>
             </div>
           </div>

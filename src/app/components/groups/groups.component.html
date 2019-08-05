@@ -21,11 +21,11 @@
                                     *ngFor="let group of groups | async let i = index">
 
                                     <div class="card rounded-all">
-                                        <div class="card-body blue-seven-one white-text rounded-all">
+                                        <div class="card-body white-text background-card-groups">
 
-                                            <div class="row d-flex justify-content-between">
+                                            <div class="row d-flex justify-content-between green-dark-seven-one-text">
                                                 <div class="col-12">
-                                                    Grupo
+                                                    <h4><strong>Grupo</strong></h4>
                                                 </div>
                                                 <div class="col-12">
                                                     <h4><strong>${{group.initialInvertion}}</strong></h4>
@@ -71,7 +71,7 @@
 
                         <div class="col-12">
                             <h2 class="h2-responsive font-weight-bold blue-dark-seven-one-text text-center">
-                                Factura 
+                                Factura
                             </h2>
                             <img src="assets/images/logo.png" class="w-18 mx-auto d-block" alt="Logo 7x1">
                             <hr class="mb-4">
@@ -146,3 +146,6 @@
         </div>
     </div>
 </div>
+
+<app-modal-info (okEvent)="okEventInfo()"></app-modal-info>
+<app-modal-error (okEvent)="okEventError()"></app-modal-error>

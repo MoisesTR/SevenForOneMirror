@@ -16,7 +16,6 @@ import { ModalDirective } from "ng-uikit-pro-standard";
 import { TopService } from "../../core/services/shared/top.service";
 import { Winner } from "../../models/Winner";
 import { NgxSpinnerService } from "ngx-spinner";
-import { Utils } from "../../shared-module/Utils";
 
 @Component({
 	selector: "app-gamecontainer",
@@ -37,6 +36,8 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 	public concurrentWinners7: Winner[] = [];
 	public messageWin = " ";
 	public iterationValue = 1;
+	public existsRecordsTopConcurrentUsers = true;
+	public existsRecordsTopMoneyUsers = true;
 	@ViewChild("modalWin") modalWin: ModalDirective;
 	@ViewChild("topPlayers") topPlayers: ModalDirective;
 	@ViewChild("topPlayersConcurrent") topPlayersConcurrent: ModalDirective;
@@ -111,11 +112,6 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	clainEvent() {
-		this.modalWin.hide();
-		this.router.navigate(["win-history"]);
-	}
-
 	top10WinnersByGroupId() {
 		this.topService
 			.getTop10WinnersByGroupId(this.idGroup)
@@ -134,11 +130,10 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 					}
 				});
 
-				if (winners.length > 0) {
-					this.topPlayers.show();
-				} else {
-					Utils.showMsgInfo("No hay ganadores en este grupo actualmente!");
+				if (winners.length === 0) {
+					this.existsRecordsTopMoneyUsers = false;
 				}
+				this.topPlayers.show();
 			});
 	}
 
@@ -160,11 +155,11 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 					}
 				});
 
-				if (concurrentWinners.length > 0) {
-					this.topPlayersConcurrent.show();
-				} else {
-					Utils.showMsgInfo("No hay ganadores en este grupo actualmente!");
+				if (concurrentWinners.length === 0) {
+					this.existsRecordsTopConcurrentUsers = false;
 				}
+
+				this.topPlayersConcurrent.show();
 			});
 	}
 

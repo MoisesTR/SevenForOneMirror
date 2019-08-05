@@ -1,15 +1,16 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { EventModal } from "../../models/interface/EventModal";
-import { Subject } from "rxjs";
-import { UserService } from "../../core/services/shared/user.service";
-import { take, takeUntil } from "rxjs/operators";
-import { ModalDirective } from "ng-uikit-pro-standard";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { CustomValidators } from "../../validators/CustomValidators";
-import { User } from "../../models/User";
-import { RolService } from "../../core/services/shared/rol.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { Utils } from "../../shared-module/Utils";
+import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {EventModal} from "../../models/interface/EventModal";
+import {Subject} from "rxjs";
+import {UserService} from "../../core/services/shared/user.service";
+import {take, takeUntil} from "rxjs/operators";
+import {ModalDirective} from "ng-uikit-pro-standard";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {CustomValidators} from "../../validators/CustomValidators";
+import {User} from "../../models/User";
+import {RolService} from "../../core/services/shared/rol.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {ModalService} from "../../core/services/shared/modal.service";
+
 declare var $: any;
 
 @Component({
@@ -23,7 +24,7 @@ export class AddAdminComponent implements OnInit, EventModal, OnDestroy {
 	public formAdmin: FormGroup;
 	public admin: User = new User();
 	public idRolAdmin: string;
-	constructor(private userService: UserService, private rolService: RolService, private formBuilder: FormBuilder) {}
+	constructor(private userService: UserService, private rolService: RolService, private formBuilder: FormBuilder, private modalService: ModalService) {}
 
 	ngOnInit() {
     $(document).ready(() => {
@@ -120,7 +121,7 @@ export class AddAdminComponent implements OnInit, EventModal, OnDestroy {
 			.createAdmin(this.admin)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(resp => {
-				Utils.showMsgSucces("El administrador " + this.admin.userName + " se ha creado correctamente!");
+			  this.modalService.showModalSuccess("El administrador " + this.admin.userName + " se ha creado correctamente!");
 				this.resetAndHideModal();
 			});
 	}

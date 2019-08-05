@@ -1,13 +1,4 @@
-import {
-	AfterViewInit,
-	ChangeDetectorRef,
-	Component,
-	ElementRef,
-	HostListener,
-	OnDestroy,
-	OnInit,
-	ViewChild
-} from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { PurchaseHistory } from "../../models/PurchaseHistory";
 import { User } from "../../models/User";
@@ -45,6 +36,7 @@ export class InvoicesComponent implements OnInit, OnDestroy, AfterViewInit {
 	public purchaseHistoryInvested: PurchaseHistory[] = [];
 	public user: User;
 	public roles: Role[] = [];
+	public existInvoices = true;
 
 	constructor(
 		private router: Router,
@@ -86,9 +78,13 @@ export class InvoicesComponent implements OnInit, OnDestroy, AfterViewInit {
 					value.invested = Number(value.quantity["$numberDecimal"]);
 				});
 
-				this.mdbTable.setDataSource(this.purchaseHistoryInvested);
-				this.purchaseHistoryInvested = this.mdbTable.getDataSource();
-				this.previous = this.mdbTable.getDataSource();
+				if (this.purchaseHistoryInvested.length === 0) this.existInvoices = false;
+
+				if (this.mdbTable) {
+					this.mdbTable.setDataSource(this.purchaseHistoryInvested);
+					this.purchaseHistoryInvested = this.mdbTable.getDataSource();
+					this.previous = this.mdbTable.getDataSource();
+				}
 
 				this.spinner.hide();
 			});

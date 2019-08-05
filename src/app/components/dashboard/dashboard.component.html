@@ -38,7 +38,7 @@
                     <!-- Card content -->
                     <div class="card-body card-body-cascade text-center">
 
-                        <div class="container-fluid mt-3">
+                        <div *ngIf="existsRegisteredUsers; else emptyRegisteredUsers" class="container-fluid mt-3">
 
                           <div class="row">
                             <div class="col-md-12 mx-auto">
@@ -64,11 +64,23 @@
                                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.firstName}}</td>
                                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.lastName}}</td>
                                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{user.email}}</td>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >
+                                          <div class="text-center">
+                                            <mdb-icon fas [icon]="user.enabled ? 'user-check' : 'user-alt-slash'"></mdb-icon> {{user.enabled ? 'Habilitado' : 'Inhabilitado'}}
+                                          </div>
+                                        </td>
+                                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >
+                                          <div class="text-center">
+                                            <button mdbBtn type="button" color="success" mdbWavesEffect mdbTooltip="Habilitar usuario" (click)="enableUser(user)"><mdb-icon fas icon="user-check" class="ml-1"></mdb-icon></button>
+                                            <button mdbBtn type="button" color="danger" mdbWavesEffect mdbTooltip="Inhabilitar usuario" (click)="disableUser(user)"><mdb-icon fas icon="user-alt-slash" class="ml-1"></mdb-icon></button>
+                                        </div>
+
+                                        </td>
                                     </tr>
                                 </tbody>
                               <tfoot class="grey lighten-5 w-100">
                               <tr>
-                                <td colspan="5">
+                                <td colspan="7">
                                   <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="users"></mdb-table-pagination>
                                 </td>
                               </tr>
@@ -77,58 +89,16 @@
 
                         </div>
 
+                      <ng-template #emptyRegisteredUsers>
+                        <!-- No existen usuarios registrados -->
+                        <app-empty-records></app-empty-records>
+                      </ng-template>
+
                     </div>
 
                 </div>
 
             </div>
-
-<!--            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">-->
-
-<!--                &lt;!&ndash;Card&ndash;&gt;-->
-<!--                <mdb-card cascade="true" narrower="true">-->
-
-<!--                    <div class="view view-cascade gradient-card-header green-seven-one">-->
-<!--                        <h2 class="card-header-title mb-2" i18n="@@historicalInvested">Historico Invertido</h2>-->
-<!--                    </div>-->
-
-<!--                    <mdb-card-body cascade="true">-->
-
-<!--                        <mdb-card-text>-->
-
-<!--                            <div class="container-fluid mt-3">-->
-
-<!--                                <table mdbTable mdbTableScroll scrollY="true" maxHeight="500" bordered="true">-->
-<!--                                    <thead>-->
-<!--                                        <tr>-->
-<!--                                            <th *ngFor="let head of headElementsGroupsEarning; let i = index"-->
-<!--                                                scope="col">{{head}}</th>-->
-<!--                                        </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody>-->
-<!--                                        <tr *ngFor="let group of groupsUser; let i = index">-->
-<!--                                            <th scope="row">{{ i + 1}}</th>-->
-<!--                                            <td>$ {{group.initialInvertion}}</td>-->
-<!--                                            <td>$ {{group.totalInvested}}</td>-->
-<!--                                            <td>{{group.winners}}</td>-->
-<!--                                        </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-
-<!--                            </div>-->
-
-
-<!--                        </mdb-card-text>-->
-
-<!--                    </mdb-card-body>-->
-<!--                    &lt;!&ndash;/.Card content&ndash;&gt;-->
-
-<!--                </mdb-card>-->
-<!--                &lt;!&ndash;/.Card&ndash;&gt;-->
-
-
-<!--            </div>-->
-
         </div>
     </div>
 

@@ -47,42 +47,6 @@
 
 </section>
 
-<div mdbModal #modalWin="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-  aria-hidden="true" [config]="{backdrop: false}">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content blue-dark-seven-one rounded-all">
-      <div class="modal-body">
-        <div class="row justify-content-center">
-          <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown" data-wow-delay="0.3s">
-            <div class="ratio img-responsive img-circle green-seven-one"
-                 [ngStyle]="{'background-image': 'url(' + (userActual.image | imageUser) + ')'}">
-            </div>
-          </div>
-          <div class="col-12 text-center">
-            <h2 class="mb-4 white-text mt-3 wow bounceInDown" data-wow-delay="0.2s">
-              <strong>Felicidades!</strong>
-              <br>
-              {{userActual.userName}}
-            </h2>
-            <h4 class="white-text mt-3 wow bounceInDown" data-wow-delay="0.1s">
-              {{messageWin}}
-              <!--                            You have earned in the next groups:-->
-              <!--                            <br>-->
-              <!--                            $1, $10, $50-->
-            </h4>
-          </div>
-          <div class="col-12 text-center">
-            <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="clainEvent()"
-              mdbTooltip="Claim prize">
-              <mdb-icon fas icon="trophy"></mdb-icon> Reclamar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div mdbModal #topPlayers="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
   aria-hidden="true" [config]="{backdrop: true}">
   <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar-lady-lips" role="document">
@@ -93,7 +57,7 @@
           <span aria-hidden="true">×</span>
         </button>
 
-        <app-top-players [winners3]="this.topWinners3" [winners7]="this.topWinners7">
+        <app-top-players [winners3]="this.topWinners3" [winners7]="this.topWinners7" [existsRecords]="existsRecordsTopMoneyUsers">
         </app-top-players>
 
         <div class="col-12 text-center">
@@ -119,7 +83,7 @@
         </button>
 
         <app-top-players [winners3]="this.concurrentWinners3" [winners7]="this.concurrentWinners7" title="Veces"
-          [renderMount]="false">
+          [renderMount]="false" [existsRecords]="existsRecordsTopConcurrentUsers" >
         </app-top-players>
 
         <div class="col-12 text-center">

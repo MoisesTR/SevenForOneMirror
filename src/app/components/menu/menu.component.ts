@@ -262,7 +262,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	}
 
 	clainEvent() {
-		this.modalWin.hide();
-		this.router.navigateByUrl("win-history");
+		// this.modalWin.hide();
+		this.router.navigateByUrl("/win-history");
 	}
 }
