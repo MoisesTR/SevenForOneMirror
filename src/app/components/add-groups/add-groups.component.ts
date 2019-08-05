@@ -1,14 +1,13 @@
-import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
-import {GroupService} from "../../core/services/shared/group.service";
-import {GroupGame} from "../../models/GroupGame";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {Utils} from "../../shared-module/Utils";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {EventModal} from "../../models/interface/EventModal";
-import {ModalDirective} from "ng-uikit-pro-standard";
-import {Router} from "@angular/router";
-import swal from "sweetalert2";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { EventModal } from "../../models/interface/EventModal";
+import { ModalDirective } from "ng-uikit-pro-standard";
+import { Router } from "@angular/router";
+import { ModalService } from "../../core/services/shared/modal.service";
 
 @Component({
 	selector: "app-add-groups",
@@ -24,7 +23,12 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 	disableButton = false;
 	initialInvertion: number;
 
-	constructor(private groupsService: GroupService, private formBuilder: FormBuilder, private router: Router) {}
+	constructor(
+		private groupsService: GroupService,
+		private formBuilder: FormBuilder,
+		private router: Router,
+		private modalService: ModalService
+	) {}
 
 	ngOnInit() {
 		this.initFormGroup();
@@ -48,9 +52,7 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 				.subscribe(
 					() => {
 						this.modalAddGroup.hide();
-						swal.fire("Info", "El grupo ha sido creado!", "success").then(() => {
-							this.router.navigateByUrl("/groups");
-						});
+						this.modalService.showModalSuccess("El grupo ha sido creado!");
 					},
 					() => {
 						this.disableButton = false;
@@ -64,18 +66,24 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 		}
 	}
 
+	okEventSuccess(value) {
+		if (value) {
+			this.router.navigateByUrl("/groups");
+		}
+	}
+
 	getValues() {
 		this.initialInvertion = this.formAddGroup.value.initialInvertion;
 	}
 
 	groupIsValid(): boolean {
 		if (this.initialInvertion <= 0) {
-			Utils.showMsgInfo("El monto debe ser mayor a cero!");
+			this.modalService.showModalInfo("El monto debe ser mayor a cero!");
 			return false;
 		}
 
 		if (this.initialInvertion >= 100000) {
-			Utils.showMsgInfo("El monto debe ser menor a 100,000$");
+			this.modalService.showModalInfo("El monto debe ser menor a 100,000$");
 			return false;
 		}
 

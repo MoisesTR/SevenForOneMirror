@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { AuthService } from "./auth.service";
-import { Observable } from "rxjs/Observable";
-import { catchError, filter, switchMap, take } from "rxjs/operators";
-import { Router } from "@angular/router";
-import { BehaviorSubject, throwError } from "rxjs";
-import { NGXLogger } from "ngx-logger";
-import { Utils } from "../../../shared-module/Utils";
-import { NgxSpinnerService } from "ngx-spinner";
+import {Injectable} from "@angular/core";
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {AuthService} from "./auth.service";
+import {Observable} from "rxjs/Observable";
+import {catchError, filter, switchMap, take} from "rxjs/operators";
+import {Router} from "@angular/router";
+import {BehaviorSubject, throwError} from "rxjs";
+import {NGXLogger} from "ngx-logger";
+import {Utils} from "../../../shared-module/Utils";
+import {NgxSpinnerService} from "ngx-spinner";
+import {ModalService} from "../shared/modal.service";
 
 @Injectable({
 	providedIn: "root"
@@ -20,7 +21,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 		public auth: AuthService,
 		public router: Router,
 		private logger: NGXLogger,
-		private spinner: NgxSpinnerService
+		private spinner: NgxSpinnerService,
+    private modalService: ModalService
 	) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -43,7 +45,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 						? Utils.msgError(error)
 						: `Error Code: ${error.status}\nMessage: ${error.message}`;
 
-					Utils.showMsgError(errorMessage, "Ha ocurrido un error interno durante la petición!");
+
+					this.modalService.showModalError(errorMessage);
 
 					return throwError(errorMessage);
 				} else {

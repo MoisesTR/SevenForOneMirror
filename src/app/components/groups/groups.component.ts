@@ -1,23 +1,23 @@
-import { Component, NgZone, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { GroupService } from "../../core/services/shared/group.service";
-import { GroupGame } from "../../models/GroupGame";
-import { Router } from "@angular/router";
-import { MemberGroup } from "../../models/MemberGroup";
-import { User } from "../../models/User";
-import { AuthService } from "../../core/services/auth/auth.service";
-import { RoleEnum } from "../../enums/RoleEnum";
-import { PurchaseService } from "../../core/services/shared/purchase.service";
-import { UpdateMoneyService } from "../../core/services/shared/update-money.service";
-import { Utils } from "../../shared-module/Utils";
-import { ModalDirective, ToastService } from "ng-uikit-pro-standard";
-import { IPayPalConfig } from "ngx-paypal";
-import { Global } from "../../core/services/shared/global";
-import { environment } from "../../../environments/environment";
-import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
-import { EventEnum } from "../../enums/EventEnum";
-import { Observable, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { NGXLogger } from "ngx-logger";
+import {Component, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {GroupService} from "../../core/services/shared/group.service";
+import {GroupGame} from "../../models/GroupGame";
+import {Router} from "@angular/router";
+import {MemberGroup} from "../../models/MemberGroup";
+import {User} from "../../models/User";
+import {AuthService} from "../../core/services/auth/auth.service";
+import {RoleEnum} from "../../enums/RoleEnum";
+import {PurchaseService} from "../../core/services/shared/purchase.service";
+import {UpdateMoneyService} from "../../core/services/shared/update-money.service";
+import {ModalDirective, ToastService} from "ng-uikit-pro-standard";
+import {IPayPalConfig} from "ngx-paypal";
+import {Global} from "../../core/services/shared/global";
+import {environment} from "../../../environments/environment";
+import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
+import {EventEnum} from "../../enums/EventEnum";
+import {Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {NGXLogger} from "ngx-logger";
+import {ModalService} from "../../core/services/shared/modal.service";
 
 @Component({
 	selector: "app-groups",
@@ -45,7 +45,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		private socketGroupGame: SocketGroupGameService,
 		private ngZone: NgZone,
 		private toast: ToastService,
-		private logger: NGXLogger
+		private logger: NGXLogger,
+    private modalService: ModalService
 	) {
 		this.groupSelectedPayModal = new GroupGame();
 	}
@@ -84,7 +85,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 						if (!order.error) {
 							return order.orderID;
 						} else {
-							Utils.showMsgError(order.error, "Paypal Transaction");
+						  this.logger.error('ERROR PAYPAL TRANSACTION');
+						  this.modalService.showModalError(order.error);
 							throw new Error(order.error);
 						}
 					}),
@@ -156,7 +158,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 			if (member) {
 				this.router.navigate(["/game", groupId]);
 			} else {
-				Utils.showMsgInfo("Necesitas comprar una entrada al grupo!");
+        this.modalService.showModalInfo('Necesitas comprar una entrada al grupo!');
 			}
 		} else {
 			this.router.navigate(["/game", groupId]);
@@ -168,6 +170,14 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		this.finalPrice = this.groupSelectedPayModal.initialInvertion;
 		this.paymentModal.show();
 	}
+
+  okEventInfo() {
+
+  }
+
+  okEventError() {
+
+  }
 
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();

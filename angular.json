@@ -27,10 +27,6 @@
               "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
               "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
-              {
-                "input": "node_modules/sweetalert2/dist/sweetalert2.min.css",
-                "lazy" : true
-              },
               "node_modules/ng-uikit-pro-standard/assets/scss/bootstrap/bootstrap.scss",
               "node_modules/ng-uikit-pro-standard/assets/scss/mdb.scss",
               {
@@ -43,7 +39,6 @@
               "node_modules/easy-pie-chart/dist/easypiechart.js",
               "node_modules/screenfull/dist/screenfull.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/sweetalert2/dist/sweetalert2.min.js",
               "node_modules/hammerjs/hammer.min.js"
             ]
           },

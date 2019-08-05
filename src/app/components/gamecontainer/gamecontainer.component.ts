@@ -112,11 +112,6 @@ export class GamecontainerComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	clainEvent() {
-		this.modalWin.hide();
-		this.router.navigate(["win-history"]);
-	}
-
 	top10WinnersByGroupId() {
 		this.topService
 			.getTop10WinnersByGroupId(this.idGroup)

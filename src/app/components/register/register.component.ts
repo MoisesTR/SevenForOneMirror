@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { User } from "../../models/User";
 import { CustomValidators } from "../../validators/CustomValidators";
 import { UserService } from "../../core/services/shared/user.service";
-import swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
@@ -15,6 +14,7 @@ import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.se
 import { take, takeUntil } from "rxjs/operators";
 import { CookieService } from "ngx-cookie-service";
 import * as dayjs from "dayjs";
+import { ModalService } from "../../core/services/shared/modal.service";
 
 declare var $: any;
 
@@ -44,7 +44,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private socialAuthService: AuthService,
 		private authService: AuthServiceUser,
-		private cookieService: CookieService
+		private cookieService: CookieService,
+		private modalService: ModalService
 	) {
 		this.user = new User();
 	}
@@ -170,14 +171,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
 					this.disabledButton = false;
 					this.cookieService.set("username", this.user.userName);
 
-					swal.fire("Info", res["success"], "success").then(() => {
-						this.router.navigate(["/emailConfirm"]);
-					});
+					this.modalService.showModalSuccess(res["success"]);
 				},
 				() => {
 					this.disabledButton = false;
 				}
 			);
+	}
+
+	okEventSuccess(value) {
+		if (value) {
+			this.router.navigate(["/emailConfirm"]);
+		}
 	}
 
 	login() {

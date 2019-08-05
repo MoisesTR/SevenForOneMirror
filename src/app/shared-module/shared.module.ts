@@ -9,6 +9,7 @@ import { Platform } from "@angular/cdk/platform";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ImageUserPipe } from "../pipe/image-user.pipe";
 import {EmptyRecordsComponent} from "../components/empty-records/empty-records.component";
+import {ModalModule} from "ng-uikit-pro-standard";
 
 @NgModule({
 	imports: [CommonModule],
