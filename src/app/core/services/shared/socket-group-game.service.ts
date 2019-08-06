@@ -92,6 +92,12 @@ export class SocketGroupGameService {
 				colors: colors
 			});
 		}, 200);
+
+		this.overlay();
+	}
+
+	overlay() {
+		document.getElementById("overlay").style.display = "block";
 	}
 
 	animationNewPlayer(group: GroupGame) {

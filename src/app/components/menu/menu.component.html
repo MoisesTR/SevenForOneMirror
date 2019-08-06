@@ -62,7 +62,7 @@
 
     <ngx-spinner bdOpacity=0.9 bdColor="rgba(255,255,255,1)" size="large" color="#047dff" type="square-jelly-box"
         [fullScreen]="false">
-        <p style="color: black"> Cargando... </p>
+        <h5 class="green-seven-one-text h5-responsive"> Cargando... </h5>
     </ngx-spinner>
 
     <div class="edge-header bg-header">
@@ -472,7 +472,7 @@
 
 <!-- Modal celebration -->
 <div mdbModal #modalWin="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-    aria-hidden="true" [config]="{backdrop: false}">
+    aria-hidden="true" [config]="{backdrop: false}" id="overlay" (click)="off()">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content blue-dark-seven-one rounded-all">
             <div class="modal-body">
