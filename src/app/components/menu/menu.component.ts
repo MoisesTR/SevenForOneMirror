@@ -125,20 +125,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 				}
 			});
 		});
-
-		function fixNavDropdown() {
-			if ($(window).width() >= 992) {
-				$(".navbar .dropdown-menu").addClass("dropdown-menu-right");
-			} else {
-				$(".navbar .dropdown-menu").removeClass("dropdown-menu-right");
-			}
-		}
-
-		$(window).resize(function() {
-			fixNavDropdown();
-		});
-
-		fixNavDropdown();
 	}
 
 	getCredentialsUser() {
