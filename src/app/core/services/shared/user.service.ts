@@ -78,7 +78,7 @@ export class UserService {
 		return this.http.put(this.urlAuth + this.userUrl, usuario);
 	}
 
-	disableUser(userId, enabled = false) {
+	changeStateUser(userId, enabled = false) {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
 		});
