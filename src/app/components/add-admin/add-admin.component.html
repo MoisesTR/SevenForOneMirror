@@ -16,13 +16,11 @@
           <div class="container-fluid">
             <div class="row">
 
-              <!-- 
-                En caso que se ponga el correo deja la linea de abajo
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"> -->
-              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="md-form md-outline">
                   <mdb-icon fas icon="user"></mdb-icon>
-                  <input type="text" id="user" class="form-control" formControlName="userName" appAlphanumeric autocomplete="off" mdbInput>
+                  <input type="text" id="user" class="form-control" formControlName="userName" appAlphanumeric
+                    autocomplete="off" mdbInput>
                   <label for="user">Usuario</label>
                   <show-errors [control]="formAdmin.controls['user']">
                   </show-errors>
@@ -32,7 +30,8 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="md-form md-outline">
                   <mdb-icon fas icon="envelope"></mdb-icon>
-                  <input type="email" id="email" class="form-control" formControlName="email" autocomplete="off" mdbInput>
+                  <input type="email" id="email" class="form-control" formControlName="email" autocomplete="off"
+                    mdbInput>
                   <label for="email">Correo electrónico</label>
                   <show-errors [control]="formAdmin.controls['email']">
                   </show-errors>
@@ -42,7 +41,8 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="md-form md-outline">
                   <mdb-icon fas icon="user"></mdb-icon>
-                  <input type="text" id="firstname" class="form-control letras" autocomplete="off" formControlName="firstName" mdbInput>
+                  <input type="text" id="firstname" class="form-control letras" autocomplete="off"
+                    formControlName="firstName" mdbInput>
                   <label for="firstname">Nombres</label>
                   <show-errors [control]="formAdmin.controls['firstName']">
                   </show-errors>
@@ -52,7 +52,8 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="md-form md-outline">
                   <mdb-icon fas icon="user"></mdb-icon>
-                  <input type="text" id="lastname" class="form-control letras" formControlName="lastName" autocomplete="off" mdbInput>
+                  <input type="text" id="lastname" class="form-control letras" formControlName="lastName"
+                    autocomplete="off" mdbInput>
                   <label for="lastname">Apellidos</label>
                   <show-errors [control]="formAdmin.controls['lastName']">
                   </show-errors>
@@ -62,7 +63,8 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="md-form md-outline">
                   <mdb-icon fas icon="lock"></mdb-icon>
-                  <input type="password" id="password" class="form-control" formControlName="password" autocomplete="off" mdbInput>
+                  <input type="password" id="password" class="form-control" formControlName="password"
+                    autocomplete="off" mdbInput>
                   <label for="password">Contraseña</label>
                   <show-errors [control]="formAdmin.controls['password']">
                   </show-errors>
@@ -72,11 +74,11 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="md-form md-outline">
                   <mdb-icon fas icon="lock"></mdb-icon>
-                  <input type="password" id="confirm" class="form-control" formControlName="confirmPassword" autocomplete="off" mdbInput>
+                  <input type="password" id="confirm" class="form-control" formControlName="confirmPassword"
+                    autocomplete="off" mdbInput>
                   <label for="confirm">Confirmar</label>
-                  <div
-                    *ngIf="formAdmin.controls['confirmPassword'].hasError('noPasswordMatch')">
-                                                            <span class="error-message" style="left: 2.5rem;">Contraseñas no coinciden!</span>
+                  <div *ngIf="formAdmin.controls['confirmPassword'].hasError('noPasswordMatch')">
+                    <span class="error-message" style="left: 2.5rem;">Contraseñas no coinciden!</span>
                   </div>
                 </div>
               </div>
@@ -85,8 +87,8 @@
           </div>
 
           <div class="text-center">
-            <button type="submit" rounded="true" mdbBtn color="primary" class="relative waves-light"
-              mdbWavesEffect [disabled]="formAdmin.invalid">Agregar</button>
+            <button type="submit" rounded="true" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+              [disabled]="formAdmin.invalid">Agregar</button>
           </div>
 
         </form>

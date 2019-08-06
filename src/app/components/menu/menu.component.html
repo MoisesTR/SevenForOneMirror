@@ -1,6 +1,6 @@
 <section>
 
-    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one ie-nav" [containerInside]="false"
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue-seven-one" [containerInside]="false"
         id="top-section">
         <mdb-navbar-brand>
             <a class="navbar-brand">
@@ -8,7 +8,7 @@
             </a>
         </mdb-navbar-brand>
         <links>
-            <ul class="navbar-nav ml-auto nav-flex-icons">
+            <ul class="navbar-nav ml-auto text-center">
 
                 <li *ngIf="!isUserAdmin" class="nav-item waves-light" mdbWavesEffect>
                     <a class="nav-link" (click)="groupsUser.show()">
@@ -48,7 +48,7 @@
                         mdbWavesEffect>
                         <mdb-icon fas icon="user"></mdb-icon> Perfil <span class="caret"></span>
                     </a>
-                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary text-center" role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
                         <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
                     </div>
@@ -62,7 +62,7 @@
 
     <ngx-spinner bdOpacity=0.9 bdColor="rgba(255,255,255,1)" size="large" color="#047dff" type="square-jelly-box"
         [fullScreen]="false">
-        <p style="color: black"> Cargando... </p>
+        <h5 class="green-seven-one-text h5-responsive"> Cargando... </h5>
     </ngx-spinner>
 
     <div class="edge-header bg-header">
@@ -380,7 +380,7 @@
 
             <!--Body-->
             <div class="modal-body">
-                <i class="fas fa-times fa-4x animated rotateIn"></i>
+                <i class="fas fa-times fa-4x animated text-danger rotateIn"></i>
                 <p>¿Estás seguro de que quieres cerrar sesión ahora?</p>
             </div>
 
@@ -472,7 +472,7 @@
 
 <!-- Modal celebration -->
 <div mdbModal #modalWin="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-    aria-hidden="true" [config]="{backdrop: false}">
+    aria-hidden="true" [config]="{backdrop: false}" id="overlay" (click)="off()">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content blue-dark-seven-one rounded-all">
             <div class="modal-body">
