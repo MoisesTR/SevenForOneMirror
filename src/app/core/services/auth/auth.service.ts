@@ -58,7 +58,7 @@ export class AuthService {
 		if (this.getUser().role) {
 			return this.getUser().role.name === RoleEnum.Admin;
 		} else {
-		  this.logger.info('ERROR GET ROLE USUARIO');
+		  this.logger.info('ERROR GET ROLE USER');
 			this.logout();
 		}
 	}

@@ -1,10 +1,31 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, FormControl } from "@angular/forms";
+import { Utils } from "../shared-module/Utils";
 
 export class CustomValidators {
 	static nospaceValidator(control: AbstractControl): { [s: string]: boolean } {
 		if (control.value && control.value.toString().trim().length === 0) {
 			return { nospace: true };
 		}
+	}
+
+	static birthDateUser(c: FormControl) {
+		const yearOfDate = Utils.getYearOfDate(c.value);
+		const yearActual = Utils.getYearOfDate(new Date());
+		let error = "";
+
+		if (yearActual - yearOfDate <= 18) {
+			error = "El jugador no debe tener menos de 18 años!";
+		} else {
+			error = "";
+		}
+
+		const message = {
+			birthDateUser: {
+				message: error
+			}
+		};
+
+		return error ? message : null;
 	}
 
 	static passwordMatchValidator(control: AbstractControl) {

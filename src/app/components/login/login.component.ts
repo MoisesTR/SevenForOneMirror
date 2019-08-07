@@ -72,9 +72,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 					if (!this.idRolUser) {
 						this.modalService.showModalError("El rol de usuario no fue encontrado");
 					}
-				},
-				() => {
-					this.modalService.showModalError("Ocurrio un error al cargar los roles de usuario!");
 				}
 			);
 	}

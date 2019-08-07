@@ -184,7 +184,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 			this.toast.info("El usuario: " + user.userName + " ya se encuentra inhabilitado!", "Usuario", this.optionsToast);
 		} else {
 			this.userService
-				.disableUser(user._id, false)
+				.changeStateUser(user._id, false)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(resp => {
 					user.enabled = false;
@@ -198,7 +198,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 			this.toast.info("El usuario: " + user.userName + " ya se encuentra habilitado!", "Usuario", this.optionsToast);
 		} else {
 			this.userService
-				.disableUser(user._id, true)
+				.changeStateUser(user._id, true)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(resp => {
 					user.enabled = true;
