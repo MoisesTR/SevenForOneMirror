@@ -11,7 +11,6 @@ import {CookieService} from "ngx-cookie-service";
 import {throwError} from "rxjs";
 import {RoleEnum} from "../../../enums/RoleEnum";
 import {isPlatformBrowser} from "@angular/common";
-import {ModalService} from "../shared/modal.service";
 
 @Injectable({
 	providedIn: "root"
@@ -78,9 +77,9 @@ export class AuthService {
 		const headers = new HttpHeaders({ "Content-Type": "application/json" });
 		const options = { headers: headers };
 		const refreshToken = this.getRefreshToken();
-		const user = this.getUser();
+		const userName = this.getUser().userName;
 
-		const body = JSON.stringify({ user, refreshToken });
+		const body = JSON.stringify({ userName, refreshToken });
 		return this.http.post(this.urlAuth + "refreshtoken", body, options).pipe(
 			tap((bodyToken: Token) => {
 				this.logger.info("SAVE BODY TOKEN IN LOCAL STORAGE");
