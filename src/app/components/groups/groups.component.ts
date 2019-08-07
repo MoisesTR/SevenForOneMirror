@@ -175,10 +175,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
   }
 
-  okEventError() {
-
-  }
-
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();
