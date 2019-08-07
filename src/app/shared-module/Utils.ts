@@ -1,3 +1,5 @@
+import * as dayjs from "dayjs";
+
 export class Utils {
 	static msgError(message) {
 
@@ -21,4 +23,8 @@ export class Utils {
 
 		return 'Ha ocurrido un error interno en la API.';
 	}
+
+	static getYearOfDate(date: Date): number {
+	  return date ? dayjs(date).year() : null;
+  }
 }

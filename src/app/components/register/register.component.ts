@@ -90,8 +90,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 			]),
 			firstName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
 			lastName: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
-			gender: new FormControl(""),
-			birthday: new FormControl("")
+			gender: new FormControl("", Validators.required),
+			birthday: new FormControl("", [Validators.required, CustomValidators.birthDateUser])
 		});
 	}
 

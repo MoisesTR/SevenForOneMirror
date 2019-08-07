@@ -27,7 +27,8 @@ export class ShowErrorsComponent {
     'fechaNacimientoTrabajador' : (params) => params.message,
     'telefonos' : (params) => params.message,
     'rango' : (params) => params.message,
-    'nospace' : (params) => params.message
+    'nospace' : (params) => params.message,
+    'birthDateUser': (params) => params.message
   };
 
   @Input()
