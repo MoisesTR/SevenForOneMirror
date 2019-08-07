@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { AuthService } from "./auth.service";
 import { Observable } from "rxjs/Observable";
-import { catchError, filter, switchMap, take } from "rxjs/operators";
+import {catchError, filter, switchMap, take, timeout} from "rxjs/operators";
 import { Router } from "@angular/router";
 import { BehaviorSubject, throwError } from "rxjs";
 import { NGXLogger } from "ngx-logger";
@@ -32,6 +32,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
 		this.logger.debug(request.url);
 		return next.handle(request).pipe(
+		  timeout(25000),
 			catchError(error => {
 				let errorMessage;
 				if (error instanceof HttpErrorResponse) {
@@ -48,6 +49,10 @@ export class HttpInterceptorService implements HttpInterceptor {
 					return throwError(errorMessage);
 				} else {
 					this.spinner.hide();
+
+					if (error.name === 'TimeoutError') {
+					  this.modalService.showModalError('La petición ha tardado demasiado tiempo en responder!!');
+          }
 					return throwError(error);
 				}
 			})
