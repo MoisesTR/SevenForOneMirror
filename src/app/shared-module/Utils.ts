@@ -19,9 +19,11 @@ export class Utils {
 
 		// MONGO ERROR
 		if (mensaje.error.errmsg) {
-			return mensaje.error.errmsg;
+			// return mensaje.error.errmsg;
+      return 'Ha ocurrido un error interno en la API';
 		}
 
-		return undefined;
+
+		return 'Ha ocurrido un error interno en la API.';
 	}
 }
