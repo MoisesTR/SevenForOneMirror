@@ -1,13 +1,11 @@
-
-<div mdbModal #modalSuccess="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-success" role="document">
+<div mdbModal #modalSuccess="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
-    <div class="modal-content">
+    <div class="modal-content text-center">
       <!--Header-->
-      <div class="modal-header">
-        <p class="heading lead">{{title}}</p>
-
+      <div class="modal-header success-color white-text">
+        <h4 class="title">{{title}}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="eventOK()">
           <span aria-hidden="true" class="white-text">&times;</span>
         </button>
@@ -15,18 +13,12 @@
 
       <!--Body-->
       <div class="modal-body">
-        <div class="text-center">
-          <mdb-icon fas icon="check" size="4x" class="mb-3 animated rotateIn"></mdb-icon>
-          <p>{{messageBody}}</p>
-        </div>
+        <i class="fas fa-check fa-4x text-success animated rotateIn"></i>
+        <p>{{messageBody}}</p>
       </div>
 
-      <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="success" class="waves-effect" mdbWavesEffect (click)="eventOK()">OK
-          <mdb-icon class="ml-1"></mdb-icon>
-        </a>
-<!--        <a type="button" mdbBtn color="success" outline="true" class="waves-effect" mdbWavesEffect (click)="modalSuccess.hide()">No</a>-->
+        <a (click)="eventOK()" mdbBtn color="success" class="waves-effect" mdbWavesEffect>Ok</a>
       </div>
     </div>
     <!--/.Content-->
