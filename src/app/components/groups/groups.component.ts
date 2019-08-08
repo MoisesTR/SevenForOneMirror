@@ -171,10 +171,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		this.paymentModal.show();
 	}
 
-  okEventInfo() {
-
-  }
-
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();
