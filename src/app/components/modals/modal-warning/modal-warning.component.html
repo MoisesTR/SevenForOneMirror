@@ -1,12 +1,11 @@
 <div mdbModal #modalWarning="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-warning" role="document">
+  <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
-    <div class="modal-content">
+    <div class="modal-content text-center">
       <!--Header-->
-      <div class="modal-header">
-        <p class="heading lead">{{title}}</p>
-
+      <div class="modal-header warning-color white-text">
+          <h4 class="title">{{title}}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="emitEventOk()">
           <span aria-hidden="true" class="white-text">&times;</span>
         </button>
@@ -14,17 +13,13 @@
 
       <!--Body-->
       <div class="modal-body">
-        <div class="text-center">
-          <mdb-icon fas icon="check" size="4x" class="mb-3 animated rotateIn"></mdb-icon>
+          <i class="fas fa-exclamation fa-4x animated text-warning rotateIn mb-2"></i>
           <p>{{messageBody}}</p>
-        </div>
       </div>
 
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="warning" class="waves-effect" mdbWavesEffect (click)="emitEventOk()">OK
-          <mdb-icon far class="ml-1"></mdb-icon>
-        </a>
+        <a type="button" mdbBtn color="warning" class="waves-effect" mdbWavesEffect (click)="emitEventOk()">Ok</a>
       </div>
     </div>
     <!--/.Content-->
