@@ -63,8 +63,8 @@
                                                         <input type="text" id="user" class="form-control" name="user"
                                                             autocomplete="off" formControlName="user" mdbInput appAlphanumeric>
                                                         <label for="user">Usuario</label>
-                                                        <show-errors [control]="firstFormGroup.controls['user']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="firstFormGroup.controls['user']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 
@@ -75,8 +75,8 @@
                                                         <input type="text" id="firstNames" class="form-control"
                                                             autocomplete="off" formControlName="firstName" mdbInput>
                                                         <label for="firstNames">Nombres</label>
-                                                        <show-errors [control]="firstFormGroup.controls['firstName']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="firstFormGroup.controls['firstName']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 
@@ -87,8 +87,8 @@
                                                         <input type="text" id="lastName" class="form-control"
                                                             autocomplete="off" formControlName="lastName" mdbInput>
                                                         <label for="lastName">Apellidos</label>
-                                                        <show-errors [control]="firstFormGroup.controls['lastName']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="firstFormGroup.controls['lastName']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 
@@ -101,8 +101,8 @@
                                                             <option value="1">Masculino</option>
                                                             <option value="2">Femenino</option>
                                                         </select>
-                                                        <show-errors [control]="firstFormGroup.controls['gender']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="firstFormGroup.controls['gender']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 
@@ -117,8 +117,8 @@
                                                         <owl-date-time [pickerType]="'calendar'" #dt2>
                                                         </owl-date-time>
                                                         <label for="birthday">Fecha Nacimiento</label>
-                                                        <show-errors [control]="firstFormGroup.controls['birthday']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="firstFormGroup.controls['birthday']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 
@@ -141,8 +141,8 @@
                                                         <input type="text" id="email" class="form-control"
                                                             autocomplete="off" mdbInput formControlName="email">
                                                         <label for="email">Correo electrónico</label>
-                                                        <show-errors [control]="secondFormGroup.controls['email']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="secondFormGroup.controls['email']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 
@@ -153,8 +153,8 @@
                                                         <input type="password" id="pass" class="form-control"
                                                             autocomplete="off" mdbInput formControlName="password">
                                                         <label for="pass">Contraseña</label>
-                                                        <show-errors [control]="secondFormGroup.controls['password']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="secondFormGroup.controls['password']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 
@@ -181,8 +181,8 @@
                                                             (keypress)="keyPress($event)" autocomplete="off" mdbInput
                                                             formControlName="phone">
                                                         <label for="phone">Teléfono</label>
-                                                        <show-errors [control]="secondFormGroup.controls['phone']">
-                                                        </show-errors>
+                                                        <app-show-errors [control]="secondFormGroup.controls['phone']">
+                                                        </app-show-errors>
                                                     </div>
                                                 </div>
 

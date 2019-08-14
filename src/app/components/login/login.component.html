@@ -48,7 +48,7 @@
                                         <input type="text" id="user" class="form-control" name="user" autocomplete="off"
                                             formControlName="user" mdbInput>
                                         <label for="user">Usuario o correo</label>
-                                        <show-errors [control]="userForm.controls['user']"></show-errors>
+                                        <app-show-errors [control]="userForm.controls['user']"></app-show-errors>
                                     </div>
 
                                     <!-- Password -->
@@ -57,7 +57,7 @@
                                         <input type="password" id="password" class="form-control" name="user"
                                             autocomplete="off" formControlName="password" mdbInput>
                                         <label for="password">Contraseña</label>
-                                        <show-errors [control]="userForm.controls['password']"></show-errors>
+                                        <app-show-errors [control]="userForm.controls['password']"></app-show-errors>
                                     </div>
 
                                     <div class="mt-2">
