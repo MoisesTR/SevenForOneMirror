@@ -50,11 +50,8 @@
                   <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="md-form md-outline form">
                       <mdb-icon fas icon="users"></mdb-icon>
-                      <select class="browser-default custom-select width-select"
-                              formControlName="gender">
-                        <option value="1">Masculino</option>
-                        <option value="2">Femenino</option>
-                      </select>
+                      <mdb-select [outline]="true" class="width-select" [options]="optionsGender" label="Genero" formControlName="gender"></mdb-select>
+
                     </div>
                   </div>
 

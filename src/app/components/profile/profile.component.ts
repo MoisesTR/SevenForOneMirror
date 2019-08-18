@@ -14,6 +14,8 @@ export class ProfileComponent implements OnInit {
 	public user: User;
 	updateFormGroup: FormGroup;
 
+	optionsGender = [{ value: "1", label: "Masculino" }, { value: "2", label: "Femenino" }];
+
 	constructor(private authService: AuthService, private formBuilder: FormBuilder) {}
 
 	ngOnInit() {
