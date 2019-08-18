@@ -51,11 +51,11 @@ export class ProfileComponent implements OnInit {
 	}
 
 	getGender() {
-		if (this.user.gender === "M") return 1;
+		if (this.user.gender === "M") return "1";
 
-		if (this.user.gender === "F") return 2;
+		if (this.user.gender === "F") return "2";
 
-		if (!this.user.gender) return 3;
+		if (!this.user.gender) return "3";
 	}
 
 	disableInputs() {
