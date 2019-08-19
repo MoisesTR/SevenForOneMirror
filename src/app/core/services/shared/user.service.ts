@@ -69,13 +69,13 @@ export class UserService {
 		return this.http.post(this.urlAuth + "admin", admin, options);
 	}
 
-	updateUser(usuario: User): Observable<any> {
+	updateUser(user: User): Observable<any> {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
 		});
 		const options = { headers: headers };
 
-		return this.http.put(this.urlAuth + this.userUrl, usuario);
+		return this.http.put(this.urlAuth + this.userUrl + "/" + user._id, user, options);
 	}
 
 	changeStateUser(userId, enabled = false) {
@@ -83,7 +83,7 @@ export class UserService {
 			"Content-Type": "application/json"
 		});
 
-		const httpParams = new HttpParams().set("enabled", enabled ? 'true' : 'false');
+		const httpParams = new HttpParams().set("enabled", enabled ? "true" : "false");
 
 		const options = { headers, params: httpParams };
 
