@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { EventModal } from "../../models/interface/EventModal";
-import { ModalDirective } from "ng-uikit-pro-standard";
+import { ModalDirective, ToastService } from "ng-uikit-pro-standard";
 import { Router } from "@angular/router";
 import { ModalService } from "../../core/services/shared/modal.service";
 
@@ -27,6 +27,7 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 		private groupsService: GroupService,
 		private formBuilder: FormBuilder,
 		private router: Router,
+		private toastService: ToastService,
 		private modalService: ModalService
 	) {}
 
@@ -52,7 +53,9 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 				.subscribe(
 					() => {
 						this.modalAddGroup.hide();
-						this.modalService.showModalSuccess("El grupo ha sido creado!");
+						const options = { toastClass: "opacity" };
+						this.toastService.success("El grupo ha sido creado!", "Grupo", options);
+						this.router.navigateByUrl("/groups");
 					},
 					() => {
 						this.disableButton = false;
@@ -63,12 +66,6 @@ export class AddGroupsComponent implements OnInit, OnDestroy, EventModal {
 				);
 		} else {
 			this.disableButton = false;
-		}
-	}
-
-	okEventSuccess(value) {
-		if (value) {
-			this.router.navigateByUrl("/groups");
 		}
 	}
 

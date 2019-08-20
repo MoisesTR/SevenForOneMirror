@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
 import { CustomValidators } from "../../validators/CustomValidators";
@@ -13,7 +13,6 @@ import { Subject } from "rxjs";
 import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.service";
 import { take, takeUntil } from "rxjs/operators";
 import { CookieService } from "ngx-cookie-service";
-import * as dayjs from "dayjs";
 import { ModalService } from "../../core/services/shared/modal.service";
 
 declare var $: any;
@@ -45,7 +44,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		private socialAuthService: AuthService,
 		private authService: AuthServiceUser,
 		private cookieService: CookieService,
-		private modalService: ModalService
+		private modalService: ModalService,
+		private cdr: ChangeDetectorRef
 	) {
 		this.user = new User();
 	}
@@ -144,7 +144,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		// SECOND FORM
 		if (this.firstFormGroup.value.birthday) {
-			this.user.birthDate = dayjs(this.firstFormGroup.value.birthday).format("YYYY-MM-DD");
+			this.user.birthDate = this.firstFormGroup.value.birthday;
 		}
 
 		if (this.secondFormGroup.value.phone) {
@@ -168,9 +168,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(
 				res => {
+					this.cdr.markForCheck();
 					this.disabledButton = false;
 					this.cookieService.set("username", this.user.userName);
-
 					this.modalService.showModalSuccess(res["success"]);
 				},
 				() => {

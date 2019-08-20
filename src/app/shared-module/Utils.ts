@@ -2,7 +2,6 @@ import * as dayjs from "dayjs";
 
 export class Utils {
 	static msgError(message) {
-
 		// HTTP ERROR RESPONSE
 		if (message.error.message) {
 			return message.error.message;
@@ -17,14 +16,17 @@ export class Utils {
 		// MONGO ERROR
 		if (message.error.errmsg) {
 			// return mensaje.error.errmsg;
-      return 'Ha ocurrido un error interno en la API';
+			return "Ha ocurrido un error interno en la API";
 		}
 
-
-		return 'Ha ocurrido un error interno en la API.';
+		return "Ha ocurrido un error interno en la API.";
 	}
 
 	static getYearOfDate(date: Date): number {
-	  return date ? dayjs(date).year() : null;
-  }
+		return date ? dayjs(date).year() : undefined;
+	}
+
+	static formatDateYYYYMMDD(date: Date) {
+		return date ? dayjs(date).format("YYYY-MM-DD") : undefined;
+	}
 }

@@ -19,7 +19,7 @@ export class User {
 	public accessToken: string;
 	public getUserInfo: boolean;
 	public phones?: string[];
-	public birthDate?: string;
+	public birthDate?: Date;
 	public gender?: string;
 	public provider: string;
 	public image?: string;
