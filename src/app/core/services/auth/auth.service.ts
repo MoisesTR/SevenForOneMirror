@@ -1,16 +1,16 @@
-import {Inject, Injectable, PLATFORM_ID} from "@angular/core";
-import {Router} from "@angular/router";
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {User} from "../../../models/User";
-import {Token} from "../../../models/Token";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Global} from "../shared/global";
-import {tap} from "rxjs/operators";
-import {NGXLogger} from "ngx-logger";
-import {CookieService} from "ngx-cookie-service";
-import {throwError} from "rxjs";
-import {RoleEnum} from "../../../enums/RoleEnum";
-import {isPlatformBrowser} from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
+import { Router } from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { User } from "../../../models/User";
+import { Token } from "../../../models/Token";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Global } from "../shared/global";
+import { tap } from "rxjs/operators";
+import { NGXLogger } from "ngx-logger";
+import { CookieService } from "ngx-cookie-service";
+import { throwError } from "rxjs";
+import { RoleEnum } from "../../../enums/RoleEnum";
+import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
 	providedIn: "root"
@@ -57,7 +57,7 @@ export class AuthService {
 		if (this.getUser().role) {
 			return this.getUser().role.name === RoleEnum.Admin;
 		} else {
-		  this.logger.info('ERROR GET ROLE USER');
+			this.logger.info("ERROR GET ROLE USER");
 			this.logout();
 		}
 	}
@@ -98,6 +98,10 @@ export class AuthService {
 		this.cookieService.set("identity", JSON.stringify(response.user));
 	}
 
+	setCookieUSer(user: User) {
+		this.cookieService.set("identity", JSON.stringify(user));
+	}
+
 	setTokenValues(bodyToken: Token) {
 		this.cookieService.delete("token");
 		this.cookieService.delete("refreshToken");
@@ -109,7 +113,7 @@ export class AuthService {
 	}
 
 	public logout(): void {
-	  this.logger.info('CLOSE SESSION FROM AUTH SERVICE');
+		this.logger.info("CLOSE SESSION FROM AUTH SERVICE");
 		this.cookieService.deleteAll();
 		this.router.navigate(["/login"]);
 	}

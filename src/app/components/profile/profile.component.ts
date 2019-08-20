@@ -1,12 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	OnInit,
+	ViewChild
+} from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../core/services/auth/auth.service";
 import { User } from "../../models/User";
 import { UserService } from "../../core/services/shared/user.service";
 import { CustomValidators } from "../../validators/CustomValidators";
-import { Utils } from "../../shared-module/Utils";
-import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import { exhaustMap, takeUntil } from "rxjs/operators";
+import { fromEvent, Observable, Subject } from "rxjs";
 import { ModalService } from "../../core/services/shared/modal.service";
 
 @Component({
@@ -15,9 +22,9 @@ import { ModalService } from "../../core/services/shared/modal.service";
 	styleUrls: ["./profile.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
+	@ViewChild("updateButton") updateButton: ElementRef;
 	public user: User;
-	public userUpdate: User;
 	updateFormGroup: FormGroup;
 	public phones: string[] = [];
 	optionsGender = [{ value: "1", label: "Masculino" }, { value: "2", label: "Femenino" }];
@@ -33,8 +40,25 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() {
 		this.initFormUpdate();
 		this.user = this.authService.getUser();
-		this.userUpdate = new User();
-		this.setValueUser();
+		this.setValuesForm();
+	}
+
+	ngAfterViewInit(): void {
+		fromEvent(this.updateButton.nativeElement, "click")
+			.pipe(
+				takeUntil(this.ngUnsubscribe),
+				exhaustMap(click => this.updateUser())
+			)
+			.subscribe(() => {
+				this.cdr.markForCheck();
+				this.modalService.showModalSuccess("Los datos han sido actualizados!!");
+				this.authService.setCookieUSer(this.user);
+			});
+	}
+
+	updateUser(): Observable<any> {
+		this.getValuesForm();
+		return this.userService.updateUser(this.user);
 	}
 
 	initFormUpdate() {
@@ -51,7 +75,7 @@ export class ProfileComponent implements OnInit {
 		});
 	}
 
-	setValueUser() {
+	setValuesForm() {
 		this.updateFormGroup.controls["userName"].setValue(this.user.userName);
 		this.updateFormGroup.controls["firstName"].setValue(this.user.firstName);
 		this.updateFormGroup.controls["lastName"].setValue(this.user.lastName);
@@ -71,18 +95,6 @@ export class ProfileComponent implements OnInit {
 		if (!this.user.gender) return undefined;
 	}
 
-	updateUser() {
-		this.getValuesForm();
-
-		this.userService
-			.updateUser(this.userUpdate)
-			.pipe(takeUntil(this.ngUnsubscribe))
-			.subscribe(resp => {
-				this.cdr.markForCheck();
-				this.modalService.showModalSuccess("Los datos han sido actualizados!!");
-			});
-	}
-
 	getValuesForm() {
 		const firstName = this.updateFormGroup.value.firstName;
 		const lastName = this.updateFormGroup.value.lastName;
@@ -90,27 +102,25 @@ export class ProfileComponent implements OnInit {
 		const birthDate = this.updateFormGroup.value.birthDate;
 		const phones = this.updateFormGroup.value.phone;
 
-		this.userUpdate._id = this.user._id;
-
 		if (firstName) {
-			this.userUpdate.firstName = firstName;
+			this.user.firstName = firstName;
 		}
 
 		if (lastName) {
-			this.userUpdate.lastName = lastName;
+			this.user.lastName = lastName;
 		}
 
 		if (gender) {
-			this.userUpdate.gender = +gender === 1 ? "M" : "F";
+			this.user.gender = +gender === 1 ? "M" : "F";
 		}
 
 		if (birthDate) {
-			this.userUpdate.birthDate = Utils.formatDateYYYYMMDD(birthDate);
+			this.user.birthDate = birthDate;
 		}
 
 		if (phones) {
 			this.phones.push(phones);
-			this.userUpdate.phones = this.phones;
+			this.user.phones = this.phones;
 		}
 	}
 
