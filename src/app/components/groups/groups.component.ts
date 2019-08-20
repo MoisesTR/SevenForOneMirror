@@ -16,8 +16,8 @@ import { EventEnum } from "../../enums/EventEnum";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
-import { ModalService } from "../../core/services/shared/modal.service";
 import { PaypalService } from "../../core/services/shared/paypal.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: "app-groups",
@@ -46,8 +46,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		private socketGroupGame: SocketGroupGameService,
 		private ngZone: NgZone,
 		private toast: ToastService,
-		private logger: NGXLogger,
-		private modalService: ModalService
+		private spinnerService: NgxSpinnerService,
+		private logger: NGXLogger
 	) {
 		this.groupSelectedPayModal = new GroupGame();
 	}
@@ -130,28 +130,9 @@ export class GroupsComponent implements OnInit, OnDestroy {
 		};
 	}
 
-	validateMemberIsNotAlreadyRegistered(groupId) {
-		this.groupService
-			.getGroup(groupId)
-			.pipe(takeUntil(this.ngUnsubscribe))
-			.subscribe(group => {
-				const member = this.groupService.filterMemberByGroup(group, this.user._id);
-				this.actionViewGroup(member, groupId);
-			});
+	gameContainer(groupId) {
+		this.router.navigate(["/game", groupId]);
 	}
-
-	actionViewGroup(member, groupId) {
-		if (!this.userIsAdmin) {
-			if (member) {
-				this.router.navigate(["/game", groupId]);
-			} else {
-				this.modalService.showModalInfo("Necesitas comprar una entrada al grupo!");
-			}
-		} else {
-			this.router.navigate(["/game", groupId]);
-		}
-	}
-
 	showPaymentModal(group: GroupGame) {
 		this.groupSelectedPayModal = group;
 		this.finalPrice = this.groupSelectedPayModal.initialInvertion;

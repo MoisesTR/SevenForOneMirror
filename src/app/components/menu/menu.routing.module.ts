@@ -10,12 +10,18 @@ import { InvoicesComponent } from "../invoices/invoices.component";
 
 import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
+import { ValidateMemberGroupGuard } from "../../core/services/shared/validate-member-group.guard";
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
 	{ path: "profile", component: ProfileComponent, data: { titulo: "Profile" } },
 	{ path: "groups", component: GroupsComponent, data: { titulo: "Groups" } },
-	{ path: "game/:idGroup", component: GamecontainerComponent, data: { titulo: "Game container" } },
+	{
+		path: "game/:idGroup",
+		canActivate: [ValidateMemberGroupGuard],
+		component: GamecontainerComponent,
+		data: { titulo: "Game container" }
+	},
 	{ path: "top-players", component: TopPlayersComponent, data: { titulo: "Top Players" } },
 	{ path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } },
 	{ path: "win-history", component: WinHistoryComponent, data: { titulo: "Win History User" } },
