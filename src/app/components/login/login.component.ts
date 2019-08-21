@@ -65,15 +65,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 				take(1),
 				takeUntil(this.ngUnsubscribe)
 			)
-			.subscribe(
-				roles => {
-					this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
+			.subscribe(roles => {
+				this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
 
-					if (!this.idRolUser) {
-						this.modalService.showModalError("El rol de usuario no fue encontrado");
-					}
+				if (!this.idRolUser) {
+					this.modalService.showModalError("El rol de usuario no fue encontrado");
 				}
-			);
+			});
 	}
 
 	socialSignIn(socialPlatform: string) {
@@ -112,7 +110,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 				response => {
 					this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
-					console.log(response);
 				},
 				() => {
 					this.disabledButton = false;
