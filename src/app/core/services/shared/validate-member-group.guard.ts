@@ -38,7 +38,9 @@ export class ValidateMemberGroupGuard implements CanActivate {
 					if (member) {
 						return true;
 					} else {
-						this.modalService.showModalInfo("Necesitas comprar una entrada al grupo!");
+						this.router.navigateByUrl("/groups").then(() => {
+							this.modalService.showModalInfo("Necesitas comprar una entrada al grupo!");
+						});
 						return false;
 					}
 				} else {
