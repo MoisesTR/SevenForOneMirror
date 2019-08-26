@@ -35,4 +35,20 @@ export class ModalChangePasswordComponent implements OnInit {
 	onSubmit() {
 		// do something here
 	}
+
+	showPassword(idTextField) {
+		const inputType = (<HTMLInputElement>document.getElementById(idTextField)).type;
+		const iconEyeOpen = document.getElementById("eye-open");
+		const iconEyeLinked = document.getElementById("eye-linked");
+
+		if (inputType === "password") {
+			document.getElementById(idTextField).setAttribute("type", "text");
+			iconEyeOpen.style.display = "none";
+			iconEyeLinked.style.display = "block";
+		} else {
+			document.getElementById(idTextField).setAttribute("type", "password");
+			iconEyeOpen.style.display = "block";
+			iconEyeLinked.style.display = "none";
+		}
+	}
 }
