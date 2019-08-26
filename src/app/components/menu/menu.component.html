@@ -48,8 +48,10 @@
                         mdbWavesEffect>
                         <mdb-icon fas icon="user"></mdb-icon> Perfil <span class="caret"></span>
                     </a>
-                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary text-center" role="menu">
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary text-center"
+                        role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
+                        <a class="dropdown-item" (click)="mdlAvatar.show()">Cambiar imagen de perfil</a>
                         <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
                     </div>
                 </li>
@@ -386,8 +388,8 @@
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a (click)="logout()" mdbBtn color="danger" class="waves-effect" mdbWavesEffect>Si</a>
-                <a type="button" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect
+                <a (click)="logout()" rounded="true" mdbBtn color="danger" class="waves-effect" mdbWavesEffect>Si</a>
+                <a type="button" rounded="true" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect
                     data-dismiss="modal" (click)="mdlLogout.hide()">No</a>
             </div>
         </div>
@@ -404,7 +406,7 @@
 
             <!--Header-->
             <div class="modal-header green-seven-one white-text">
-                <h4 class="title" i18n="@@uploadAvatar"><i class="fas fa-user"></i> Upload new avatar</h4>
+                <h4 class="title" i18n="@@uploadAvatar"><i class="fas fa-user"></i> Imagen de perfil</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlAvatar.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
