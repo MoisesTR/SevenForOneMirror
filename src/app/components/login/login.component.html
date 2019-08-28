@@ -64,10 +64,9 @@
 
                                         <div class="row justify-content-center">
 
-                                            <div class="col-12 col-sm-12 col-lg-12 col-xl-6 text-center text-xl-right mt-1">
-<!--                                                <a (click)="forgotPassword.show()"-->
-                                                <a (click)="forgotPassword.show()"
-                                                    class="green-seven-one-text">
+                                            <div class="col-12 col-sm-12 col-lg-12 col-xl-12 text-center mt-1">
+                                                <!--                                                <a (click)="forgotPassword.show()"-->
+                                                <a (click)="forgotPassword.show()" class="green-seven-one-text">
                                                     <h5>¿Se te olvidó tu contraseña?</h5>
                                                 </a>
                                             </div>
@@ -127,10 +126,16 @@
                     <span aria-hidden="true">×</span>
                 </button>
 
+                <img src="assets/images/logo.png" class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+
                 <div class="text-center">
-                    <mdb-icon fas icon="lock" size="4x" class="green-seven-one-text"></mdb-icon>
-                    <h2 class="mt-2 font-weight-bold green-seven-one-text">¿Se te olvidó tu contraseña?</h2>
-                    <h6 class="text-muted">Puede restablecer su contraseña aquí.</h6>
+
+                    <h2 class="mt-2 font-weight-bold green-seven-one-text">
+                        ¿Se te olvidó tu contraseña?
+                    </h2>
+                    <span class="font-weight-bolder">
+                        Puede restablecer su contraseña aquí.
+                    </span>
                 </div>
                 <form action="">
 
@@ -143,7 +148,7 @@
                 </form>
 
                 <div class="text-center">
-                    <button type="button" rounded="true" mdbBtn color="primary" class="relative waves-light"
+                    <button type="button" rounded="true" mdbBtn class="relative waves-light green-seven-one white-text"
                         mdbWavesEffect>Restablecer la contraseña</button>
                 </div>
             </div>

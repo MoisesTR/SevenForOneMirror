@@ -1,97 +1,119 @@
 .circle-text {
-    width: 70%;
+  width: 70%;
 }
 
 .circle-text:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-    background: #017BFF;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)!important;
-    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)!important;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  background: #017bff;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19) !important;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
 .circle-text div {
-    float: left;
-    width: 100%;
-    padding-top: 5%;
-    line-height: 1em;
-    margin-top: -0.5em;
-    text-align: center;
-    color: white;
+  float: left;
+  width: 100%;
+  padding-top: 5%;
+  line-height: 1em;
+  margin-top: -0.5em;
+  text-align: center;
+  color: white;
 }
 
 .img-circle {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 .ratio {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 0;
-    padding-bottom: 100%;
-    position: relative;
-    width: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .img-circle {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .img-responsive {
-    display: block;
-    height: auto;
-    max-width: 100%;
+  display: block;
+  height: auto;
+  max-width: 100%;
 }
 
 .background-first {
-    background-image: url("/assets/images/first.svg");
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    padding-left: 7.7%;
-    padding-right: 8%;
-    padding-top: 4%;
-    padding-bottom: 9%;
+  background-image: url("/assets/images/first.svg");
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-left: 7.7%;
+  padding-right: 8%;
+  padding-top: 4%;
+  padding-bottom: 9%;
 }
 
 .background-blue {
-    background-position: center center;
-    background-repeat: no-repeat;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 @media only screen and (max-width: 991px) {
-    .background-first {
-        padding-left: 15%;
-        padding-right: 15%;
-        padding-top: 10%;
-        padding-bottom: 0%;
-    }
-    .background-blue {
-        padding: 9%;
-    }
+  .background-first {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 10%;
+    padding-bottom: 0%;
+  }
+  .background-blue {
+    padding: 9%;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-    .circle-text div {
-        padding-top: 8%;
-    }
-    .background-first {
-        padding-left: 15%;
-        padding-right: 15%;
-        padding-top: 10.5%;
-        padding-bottom: 0%;
-    }
-    .background-blue {
-        padding: 8%;
-    }
+  .circle-text div {
+    padding-top: 8%;
+  }
+  .background-first {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 10.5%;
+    padding-bottom: 0%;
+  }
+  .background-blue {
+    padding: 8%;
+  }
+}
+
+// Table styles
+.separate {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+.border-left {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.border-right {
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.border-top-bottom {
+  border-top: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #dee2e6 !important;
+}
+.table-text-size {
+  font-size: 18px;
+  font-weight: 390;
 }
