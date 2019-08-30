@@ -53,6 +53,7 @@
                         <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
                         <a *ngIf="user.provider === 'none'" class="dropdown-item"
                             (click)="showModalUpdateImage()">Cambiar imagen de perfil</a>
+                        <a class="dropdown-item" (click)="mdlEmailPaypal.show()">Correo paypal</a>
                         <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
                     </div>
                 </li>
@@ -536,3 +537,64 @@
 
 <app-add-groups></app-add-groups>
 <app-add-admin></app-add-admin>
+
+<!-- Modal email paypal -->
+<div mdbModal #mdlEmailPaypal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-all">
+            <div class="modal-body background-card">
+
+                <button type="button" class="close pull-right" aria-label="Close" (click)="mdlEmailPaypal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+                <div class="container-fluid mt-3">
+
+                    <img src="assets/images/logo.png" class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+
+                    <div class="text-center">
+                        <h2 class="mt-2 font-weight-bold blue-seven-one-text">Correo paypal</h2>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="md-form md-outline">
+                                <input type="email" class="form-control" mdbInput mdbValidate
+                                    formControlName="emailPaypal" id="emailPaypal">
+                                <label for="emailPaypal">Correo paypal</label>
+
+                            </div>
+
+                            <img src="https://www.paypalobjects.com/webstatic/en_US/mktg/pages/stories/pp_h_rgb.jpg"
+                                class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+
+                            <p>
+                                <span class="font-weight-bold">Correo de pago en paypal:</span>
+                                <br>
+                                <span class="font-weight-bolder">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, perspiciatis amet,
+                                    incidunt
+                                    atque
+                                    quos tempora reprehenderit consectetur, tenetur modi voluptate delectus vero labore
+                                    distinctio
+                                    aliquid animi excepturi libero omnis a?
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button mdbBtn rounded="true" class="green-seven-one white-text mt-3">
+                                Ingresar
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
