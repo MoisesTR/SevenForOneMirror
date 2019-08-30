@@ -6,12 +6,10 @@ import { UserService } from "../../core/services/shared/user.service";
 import { Router } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { RolService } from "../../core/services/shared/rol.service";
-import { Role } from "../../models/Role";
-import { RoleEnum } from "../../enums/RoleEnum";
 import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 import { Subject } from "rxjs";
 import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.service";
-import { take, takeUntil } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { CookieService } from "ngx-cookie-service";
 import { ModalService } from "../../core/services/shared/modal.service";
 
@@ -27,11 +25,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	public user: User;
 	public phones: string[] = [];
-	public roles: Role[];
 	public disabledButton = false;
 	public width = 100;
 	public height = 100;
-	public idRolUser: string;
 
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
@@ -77,7 +73,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		this.initFirstFormGroup();
 		this.initSecondFormGroup();
-		this.getRoles();
 	}
 
 	private initFirstFormGroup() {
@@ -117,19 +112,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	getRoles() {
-		this.rolService
-			.getRoles()
-			.pipe(
-				take(1),
-				takeUntil(this.ngUnsubscribe)
-			)
-			.subscribe(roles => {
-				this.roles = roles;
-				this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, this.roles);
-			});
-	}
-
 	getValuesForm() {
 		// FIRST FORM
 		this.user.userName = this.firstFormGroup.value.user;
@@ -156,7 +138,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		this.user.password = this.secondFormGroup.value.password;
 		this.user.passwordConfirm = this.secondFormGroup.value.confirmPassword;
 		this.user.email = this.secondFormGroup.value.email;
-		this.user.roleId = this.idRolUser;
 	}
 
 	createUser() {
@@ -218,7 +199,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
-			this.user.roleId = this.idRolUser;
 
 			this.usuarioService
 				.loginSocial(this.user, socialPlatformProvider)
