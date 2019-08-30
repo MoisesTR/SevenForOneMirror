@@ -51,7 +51,7 @@
                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary text-center"
                         role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
-                        <a class="dropdown-item" (click)="mdlAvatar.show()">Cambiar imagen de perfil</a>
+                        <a *ngIf="user.provider === 'none'" class="dropdown-item" (click)="showModalUpdateImage()">Cambiar imagen de perfil</a>
                         <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
                     </div>
                 </li>
@@ -76,7 +76,7 @@
 
                         <div class="col-12 mb-3 mt-3">
                             <div id="background-circle" class="p-3 size-img">
-                                <img src="{{this.user.image | imageUser}}"
+                                <img [src]="this.user.image | imageUserSrc: 'user' | async"
                                     class="img-fluid rounded-circle green-dark-seven-one" alt="Profile image">
                             </div>
                             <h4 class='text-capitalize mt-2'>
@@ -421,7 +421,7 @@
             </div>
 
             <div class="text-center mb-3">
-                <button mdbBtn rounded="true" class="green-seven-one white-text mt-3"><span
+                <button #btnUploadImage mdbBtn rounded="true" class="green-seven-one white-text mt-3" [disabled]="!this.fileToUpload"><span
                         i18n="@@update">Actualizar</span></button>
             </div>
 
@@ -482,7 +482,7 @@
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown"
                         data-wow-delay="0.3s">
                         <div class="ratio img-responsive img-circle green-seven-one"
-                            [ngStyle]="{'background-image': 'url(' + (user.image | imageUser) + ')'}">
+                             [style.background-image]="(user.image | imageUserStyle: 'user' | async)">
                         </div>
                     </div>
                     <div class="col-12 text-center">

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { GroupGame, User } from "../../models/models.index";
@@ -12,11 +12,13 @@ import { MainSocketService } from "../../core/services/shared/main-socket.servic
 import { EventEnum } from "../../enums/EventEnum";
 import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 import { NGXLogger } from "ngx-logger";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { ModalDirective } from "ng-uikit-pro-standard";
+import { fromEvent, Subject } from "rxjs";
+import { exhaustMap, takeUntil } from "rxjs/operators";
+import { ModalDirective, ToastService } from "ng-uikit-pro-standard";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
 import { RoleEnum } from "../../enums/RoleEnum";
+import { UploadService } from "../../core/services/shared/upload.service";
+import { MdbFileUploadComponent } from "mdb-file-upload";
 
 declare var $: any;
 
@@ -25,7 +27,7 @@ declare var $: any;
 	templateUrl: "./menu.component.html",
 	styleUrls: ["./menu.component.scss"]
 })
-export class MenuComponent implements OnInit, OnDestroy {
+export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	public user: User;
 	public purchaseHistory: PurchaseHistory[] = [];
@@ -34,10 +36,14 @@ export class MenuComponent implements OnInit, OnDestroy {
 	public isUserAdmin = false;
 	public currentGroupsUser: GroupGame[] = [];
 	public closeSession = false;
+	public fileToUpload: File;
 	public messageWin = "";
 	public usersOnline = 0;
 	public registeredUsers = 0;
 	@ViewChild("modalWin") modalWin: ModalDirective;
+	@ViewChild("mdlAvatar") mdlAvatar: ModalDirective;
+	@ViewChild("btnUploadImage") btnUploadImage: ElementRef;
+	@ViewChild("uploader") uploader: MdbFileUploadComponent;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -47,6 +53,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 		private purchaseHistoryService: PurchaseService,
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
+		private uploadService: UploadService,
+		private toastService: ToastService,
 		private router: Router,
 		private mainSocketService: MainSocketService,
 		private gameSocketSevice: SocketGroupGameService,
@@ -65,6 +73,35 @@ export class MenuComponent implements OnInit, OnDestroy {
 				this.getTotalEarned();
 			}
 		});
+	}
+
+	ngAfterViewInit(): void {
+		this.updateImage();
+	}
+
+	updateImage() {
+		fromEvent(this.btnUploadImage.nativeElement, "click")
+			.pipe(
+				takeUntil(this.ngUnsubscribe),
+				exhaustMap(() => this.uploadService.upload("user", this.user._id, this.fileToUpload))
+			)
+			.subscribe(resp => {
+				this.logger.info("IMAGE UPDATE SUCCESSFULLY", resp.image);
+
+				const options = { toastClass: "opacity" };
+				this.toastService.success("La imagen ha sido actualizada!", "Imagen", options);
+
+				this.user.image = resp.image;
+				this.authService.setCookieUSer(this.user);
+				this.fileToUpload = undefined;
+				this.mdlAvatar.hide();
+			});
+	}
+
+	showModalUpdateImage() {
+		this.fileToUpload = undefined;
+		this.uploader.reset();
+		this.mdlAvatar.show();
 	}
 
 	initSocket() {
@@ -112,6 +149,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 		this.mainSocketService.onEvent(EventEnum.UPDATE_PURCHASE_HISTORY_USER).subscribe(data => {
 			this.logger.info("UPDATE PURCHASE HISTORY USER", data);
+		});
+
+		this.mainSocketService.onEvent(EventEnum.LOGIN_AGAIN).subscribe(data => {
+			this.logger.info("LOGIN AGAIN DATA", data);
 		});
 	}
 
@@ -236,9 +277,13 @@ export class MenuComponent implements OnInit, OnDestroy {
 		window.scroll(0, 0);
 	}
 
-	onFileRemove() {}
+	onFileRemove() {
+		this.fileToUpload = undefined;
+	}
 
-	onFileAdd(event) {}
+	onFileAdd(file: File) {
+		this.fileToUpload = file;
+	}
 
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();

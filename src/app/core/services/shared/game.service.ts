@@ -1,16 +1,20 @@
-import {Injectable} from '@angular/core';
-import {MemberGroup} from '../../../models/MemberGroup';
-import {CircleStatusEnum} from '../../../enums/CircleStatusEnum';
-import {CircleUser} from '../../../models/CircleUser';
-import {User} from '../../../models/User';
+import { Injectable } from "@angular/core";
+import { MemberGroup } from "../../../models/MemberGroup";
+import { CircleStatusEnum } from "../../../enums/CircleStatusEnum";
+import { CircleUser } from "../../../models/CircleUser";
+import { User } from "../../../models/User";
+import { Global } from "./global";
 
 @Injectable({
 	providedIn: "root"
 })
 export class GameService {
 	public user: User;
+	public urlAuth: string;
 
-	constructor() {}
+	constructor() {
+		this.urlAuth = Global.urlAuth;
+	}
 
 	generateCircles(members: MemberGroup[], winner: MemberGroup, user: User) {
 		this.user = user;
@@ -28,7 +32,7 @@ export class GameService {
 			circleUsers.push(circleUser);
 		}
 
-		members.forEach((member) => {
+		members.forEach(member => {
 			const circleUser = this.createCircle(member, circleUsers.length + 1);
 			circleUsers.push(circleUser);
 		});
@@ -46,7 +50,8 @@ export class GameService {
 			circleUser.isUserLogged = this.user._id === member.userId;
 		} else {
 			circleUser.member = new MemberGroup();
-			circleUser.member.userName = 'Disponible';
+			circleUser.member.image = "inactive";
+			circleUser.member.userName = "Disponible";
 			circleUser.status = CircleStatusEnum.Inactive;
 		}
 

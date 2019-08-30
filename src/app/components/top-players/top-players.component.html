@@ -17,11 +17,11 @@
 
                 <div class="green-dark-seven-one top-padding rounded-all">
 
-                    <img src="{{winner.trophyImageSrc}}" class="top-img-1" alt="">
+                    <img [src]="winner.trophyImageSrc | imageUserSrc: 'user' | async" class="top-img-1" alt="">
 
                     <div class="avatar mx-auto flex-center">
-                        <img src="{{winner.image | imageUser}}" alt="avatar mx-auto"
-                            class="rounded-circle img-fluid blue-dark-seven-one">
+                        <img [src]="winner.image | imageUserSrc: 'user' | async" alt="avatar mx-auto"
+                             class="rounded-circle img-fluid blue-dark-seven-one">
                     </div>
 
                     <a>
@@ -78,8 +78,8 @@
                         </th>
                         <td class="border-top-bottom">
                             <div class="avatar-table mx-auto table-text-size top-text-color">
-                                <img src="{{winner.image | imageUser}}" alt="avatar mx-auto"
-                                    class="rounded-circle img-fluid mr-3 green-dark-seven-one">
+                                <img [src]="winner.image | imageUserSrc: 'user' | async" alt="avatar mx-auto"
+                                     class="rounded-circle img-fluid mr-3 green-dark-seven-one">
 
                                 {{winner.userName}}
                             </div>
