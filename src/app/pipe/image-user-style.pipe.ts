@@ -32,8 +32,8 @@ export class ImageUserStylePipe implements PipeTransform {
 		switch (folder) {
 			case "user":
 				img = "assets/images/main-user.png";
-				// return of(this.domSanitizer.bypassSecurityTrustStyle(`url('${img}')`));
-				return this.imageService.getImage(url + "/user/" + img);
+				return of(this.domSanitizer.bypassSecurityTrustStyle(`url('${img}')`));
+			// return this.imageService.getImage(url + "/user/" + img);
 			case "temp":
 				return this.imageService.getImage(url + "/temp/" + img);
 			default:
