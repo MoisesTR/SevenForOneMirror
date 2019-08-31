@@ -20,7 +20,7 @@
                     <img [src]="winner.trophyImageSrc | imageUserSrc: 'user' | async" class="top-img-1" alt="">
 
                     <div class="avatar mx-auto flex-center">
-                        <img [src]="winner.image | imageUserSrc: 'user' | async" alt="avatar mx-auto"
+                        <img [src]="winner.image | imageUserSrc: 'user' | async" appDefaultImg="assets/images/main-user.png" alt="avatar mx-auto"
                              class="rounded-circle img-fluid blue-dark-seven-one">
                     </div>
 
@@ -78,7 +78,7 @@
                         </th>
                         <td class="border-top-bottom">
                             <div class="avatar-table mx-auto table-text-size top-text-color">
-                                <img [src]="winner.image | imageUserSrc: 'user' | async" alt="avatar mx-auto"
+                                <img [src]="winner.image | imageUserSrc: 'user' | async" appDefaultImg="assets/images/main-user.png" alt="avatar mx-auto"
                                      class="rounded-circle img-fluid mr-3 green-dark-seven-one">
 
                                 {{winner.userName}}
