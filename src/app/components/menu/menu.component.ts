@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { UserService } from "../../core/services/shared/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { GroupGame, User } from "../../models/models.index";
@@ -12,13 +12,13 @@ import { MainSocketService } from "../../core/services/shared/main-socket.servic
 import { EventEnum } from "../../enums/EventEnum";
 import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
 import { NGXLogger } from "ngx-logger";
-import { fromEvent, Subject } from "rxjs";
-import { exhaustMap, takeUntil } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { ModalDirective, ToastService } from "ng-uikit-pro-standard";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
 import { RoleEnum } from "../../enums/RoleEnum";
 import { UploadService } from "../../core/services/shared/upload.service";
 import { MdbFileUploadComponent } from "mdb-file-upload";
+import { Subject } from "rxjs";
 
 declare var $: any;
 
@@ -27,7 +27,7 @@ declare var $: any;
 	templateUrl: "./menu.component.html",
 	styleUrls: ["./menu.component.scss"]
 })
-export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MenuComponent implements OnInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	public user: User;
 	public purchaseHistory: PurchaseHistory[] = [];
@@ -40,6 +40,7 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
 	public messageWin = "";
 	public usersOnline = 0;
 	public registeredUsers = 0;
+	public disableButtonUpload = false;
 	@ViewChild("modalWin") modalWin: ModalDirective;
 	@ViewChild("mdlAvatar") mdlAvatar: ModalDirective;
 	@ViewChild("btnUploadImage") btnUploadImage: ElementRef;
@@ -73,29 +74,6 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
 				this.getTotalEarned();
 			}
 		});
-	}
-
-	ngAfterViewInit(): void {
-		this.updateImage();
-	}
-
-	updateImage() {
-		fromEvent(this.btnUploadImage.nativeElement, "click")
-			.pipe(
-				takeUntil(this.ngUnsubscribe),
-				exhaustMap(() => this.uploadService.upload("user", this.user._id, this.fileToUpload))
-			)
-			.subscribe(resp => {
-				this.logger.info("IMAGE UPDATE SUCCESSFULLY", resp.image);
-
-				const options = { toastClass: "opacity" };
-				this.toastService.success("La imagen ha sido actualizada!", "Imagen", options);
-
-				this.user.image = resp.image;
-				this.authService.setCookieUSer(this.user);
-				this.fileToUpload = undefined;
-				this.mdlAvatar.hide();
-			});
 	}
 
 	showModalUpdateImage() {
@@ -283,6 +261,30 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	onFileAdd(file: File) {
 		this.fileToUpload = file;
+	}
+
+	uploadImage() {
+		this.disableButtonUpload = true;
+		this.uploadService
+			.upload("user", this.user._id, this.fileToUpload)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(
+				resp => {
+					this.logger.info("IMAGE UPDATE SUCCESSFULLY", resp.image);
+
+					const options = { toastClass: "opacity" };
+					this.toastService.success("La imagen ha sido actualizada!", "Imagen", options);
+
+					this.disableButtonUpload = false;
+					this.user.image = resp.image;
+					this.authService.setCookieUSer(this.user);
+					this.fileToUpload = undefined;
+					this.mdlAvatar.hide();
+				},
+				() => {
+					this.disableButtonUpload = false;
+				}
+			);
 	}
 
 	ngOnDestroy(): void {
