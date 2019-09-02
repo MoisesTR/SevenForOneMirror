@@ -13,7 +13,8 @@ export class UserService {
 	public url: string;
 	public identity: User;
 	public userUrl = "users";
-	public modalEvent = new EventEmitter<any>();
+	public modalAdmin = new EventEmitter<any>();
+	public modalChangePassword = new EventEmitter<any>();
 
 	constructor(private http: HttpClient) {
 		this.urlAuth = Global.urlAuth;
@@ -21,7 +22,11 @@ export class UserService {
 	}
 
 	showModalAdmin() {
-		this.modalEvent.emit(true);
+		this.modalAdmin.emit(true);
+	}
+
+	showModalChangePassword() {
+		this.modalChangePassword.emit(true);
 	}
 
 	getUsers() {
@@ -75,6 +80,28 @@ export class UserService {
 		const options = { headers };
 		const body = JSON.stringify({ paypalEmail });
 		return this.http.put(this.url + this.userUrl + "/paypalEmail/" + userId, body, options);
+	}
+
+	verifyPassword(userId: string, password: string): Observable<any> {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers };
+		const body = JSON.stringify({ password });
+		return this.http.post(this.urlAuth + this.userUrl + "/verifyPwd/" + userId, body, options);
+	}
+
+	changePassword(password: string, passwordConfirm: string, userId: string): Observable<any> {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers };
+		const body = {
+			password,
+			passwordConfirm
+		};
+
+		return this.http.put(this.urlAuth + this.userUrl + "/pwd/" + userId, body, options);
 	}
 
 	verifyEmail(token) {

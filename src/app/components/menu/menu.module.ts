@@ -14,7 +14,6 @@ import { InvoicesComponent } from "../invoices/invoices.component";
 import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
 import { ModalsModule } from "../modals/modals.module";
-import { ModalChangePasswordComponent } from "../modals/modal-change-password/modal-change-password.component";
 
 @NgModule({
 	imports: [SharedModule, ModalsModule, MenuRoutingModule, NgxPayPalModule],
@@ -28,8 +27,7 @@ import { ModalChangePasswordComponent } from "../modals/modal-change-password/mo
 		TopPlayersComponent,
 		InvoicesComponent,
 		WinHistoryComponent,
-		TopGlobalWinnersComponent,
-		ModalChangePasswordComponent
+		TopGlobalWinnersComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

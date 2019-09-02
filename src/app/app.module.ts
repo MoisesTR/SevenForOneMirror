@@ -27,6 +27,7 @@ import { LandingPageComponent } from "./components/landing-page/landing-page.com
 import { AddAdminComponent } from "./components/add-admin/add-admin.component";
 import { ModalsModule } from "./components/modals/modals.module";
 import { HttpClientModule } from "@angular/common/http";
+import { ModalChangePasswordComponent } from "./components/modals/modal-change-password/modal-change-password.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -56,7 +57,8 @@ export function getAuthServiceConfigs() {
 		LockedScreenComponent,
 		AddAdminComponent,
 		AddGroupsComponent,
-		LandingPageComponent
+		LandingPageComponent,
+		ModalChangePasswordComponent
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: "serverApp" }),

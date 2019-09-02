@@ -28,8 +28,7 @@ const menuRoutes = [
 	{ path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } },
 	{ path: "win-history", component: WinHistoryComponent, data: { titulo: "Win History User" } },
 	{ path: "global-winners", component: TopGlobalWinnersComponent, data: { titulo: "Top Global Winners" } },
-	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } },
-	{ path: "change-password", component: ModalChangePasswordComponent, data: { titulo: "Change password" } }
+	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 ];
 
 @NgModule({
