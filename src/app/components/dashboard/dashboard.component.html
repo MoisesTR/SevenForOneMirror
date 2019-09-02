@@ -23,101 +23,185 @@
                 </div>
             </div>
 
+            <div class="col-12">
+                <!-- Nav Tabs -->
+                <mdb-tabset #staticTabs [buttonClass]="'md-tabs tabs-2 green-seven-one'" [contentClass]="'card'">
+                    <!--Panel 1-->
+                    <mdb-tab heading="Administradores">
+                        <div class="row">
+                            <div class="col-12 mb-3">
 
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
+                                <div *ngIf="existsRegisteredUsers; else emptyRegisteredUsers"
+                                    class="container-fluid mt-3">
 
-                <div class="card card-cascade narrower rounded-all">
+                                    <div class="form-inline md-form form-sm mt-0">
+                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                        <input [(ngModel)]="searchText" class="form-control form-control-sm ml-3 w-95"
+                                            type="text" placeholder="Buscar" aria-label="Buscar" id="search">
+                                    </div>
 
-                    <!-- Card image -->
-                    <div class="view view-cascade gradient-card-header green-seven-one">
-                        <!-- Title -->
-                        <h2 class="card-header-title">Usuarios registrados</h2>
+                                    <div class="table-responsive">
+                                        <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true"
+                                            small="true" bordered="true" striped="true">
+                                            <thead>
+                                                <tr>
+                                                    <th *ngFor="let head of headElements; let i = index"
+                                                        [mdbTableSort]="users" [sortBy]="sortByElements[i]" scope="col">
+                                                        {{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let user of users; let i = index">
+                                                    <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle" scope="row"> {{i + 1}}</th>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.userName}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.firstName}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.lastName}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.email}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">
+                                                        <div class="text-center align-middle">
+                                                            <mdb-icon fas
+                                                                [icon]="user.enabled ? 'user-check' : 'user-alt-slash'">
+                                                            </mdb-icon> {{user.enabled ? 'Habilitado' : 'Inhabilitado'}}
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                        <div class="text-center">
+                                                            <button mdbBtn type="button" size="sm" color="success"
+                                                                mdbWavesEffect mdbTooltip="Habilitar usuario"
+                                                                (click)="enableUser(user)">
+                                                                <mdb-icon fas icon="user-check"></mdb-icon>
+                                                            </button>
+                                                            <button mdbBtn type="button" size="sm" color="danger"
+                                                                mdbWavesEffect mdbTooltip="Inhabilitar usuario"
+                                                                (click)="disableUser(user)">
+                                                                <mdb-icon fas icon="user-alt-slash"></mdb-icon>
+                                                            </button>
+                                                        </div>
 
-                    </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot class="grey lighten-5 w-100">
+                                                <tr>
+                                                    <td colspan="7">
+                                                        <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl"
+                                                            paginationAlign="" [searchDataSource]="users">
+                                                        </mdb-table-pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
 
-                    <!-- Card content -->
-                    <div class="card-body card-body-cascade text-center">
+                                </div>
 
-                        <div *ngIf="existsRegisteredUsers; else emptyRegisteredUsers" class="container-fluid mt-3">
+                                <ng-template #emptyRegisteredUsers>
+                                    <!-- No existen usuarios registrados -->
+                                    <app-empty-records></app-empty-records>
+                                </ng-template>
 
-                            <div class="form-inline md-form form-sm mt-0">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                                <input [(ngModel)]="searchText" class="form-control form-control-sm ml-3 w-95"
-                                    type="text" placeholder="Buscar" aria-label="Buscar" id="search">
                             </div>
-
-                            <div class="table-responsive">
-                                <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true"
-                                    bordered="true" striped="true">
-                                    <thead>
-                                        <tr>
-                                            <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="users"
-                                                [sortBy]="sortByElements[i]" scope="col">{{head | titlecase}} <mdb-icon
-                                                    fas icon="sort"></mdb-icon>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let user of users; let i = index">
-                                            <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                                                class="align-middle" scope="row"> {{i + 1}}</th>
-                                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                                                class="align-middle">{{user.userName}}</td>
-                                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                                                class="align-middle">{{user.firstName}}</td>
-                                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                                                class="align-middle">{{user.lastName}}</td>
-                                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                                                class="align-middle">{{user.email}}</td>
-                                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                                                class="align-middle">
-                                                <div class="text-center align-middle">
-                                                    <mdb-icon fas
-                                                        [icon]="user.enabled ? 'user-check' : 'user-alt-slash'">
-                                                    </mdb-icon> {{user.enabled ? 'Habilitado' : 'Inhabilitado'}}
-                                                </div>
-                                            </td>
-                                            <td
-                                                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                                                <div class="text-center">
-                                                    <button mdbBtn type="button" size="sm" color="success"
-                                                        mdbWavesEffect mdbTooltip="Habilitar usuario"
-                                                        (click)="enableUser(user)">
-                                                        <mdb-icon fas icon="user-check"></mdb-icon>
-                                                    </button>
-                                                    <button mdbBtn type="button" size="sm" color="danger" mdbWavesEffect
-                                                        mdbTooltip="Inhabilitar usuario" (click)="disableUser(user)">
-                                                        <mdb-icon fas icon="user-alt-slash"></mdb-icon>
-                                                    </button>
-                                                </div>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot class="grey lighten-5 w-100">
-                                        <tr>
-                                            <td colspan="7">
-                                                <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl"
-                                                    paginationAlign="" [searchDataSource]="users">
-                                                </mdb-table-pagination>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-
                         </div>
+                    </mdb-tab>
+                    <!--Panel 2-->
+                    <mdb-tab heading="Usuarios">
+                        <div class="row">
+                            <div class="col-12 mb-3">
 
-                        <ng-template #emptyRegisteredUsers>
-                            <!-- No existen usuarios registrados -->
-                            <app-empty-records></app-empty-records>
-                        </ng-template>
+                                <div *ngIf="existsRegisteredUsers; else emptyRegisteredUsers"
+                                    class="container-fluid mt-3">
 
-                    </div>
+                                    <div class="form-inline md-form form-sm mt-0">
+                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                        <input [(ngModel)]="searchText" class="form-control form-control-sm ml-3 w-95"
+                                            type="text" placeholder="Buscar" aria-label="Buscar" id="search">
+                                    </div>
 
-                </div>
+                                    <div class="table-responsive">
+                                        <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true"
+                                            small="true" bordered="true" striped="true">
+                                            <thead>
+                                                <tr>
+                                                    <th *ngFor="let head of headElements; let i = index"
+                                                        [mdbTableSort]="users" [sortBy]="sortByElements[i]" scope="col">
+                                                        {{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let user of users; let i = index">
+                                                    <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle" scope="row"> {{i + 1}}</th>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.userName}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.firstName}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.lastName}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">{{user.email}}</td>
+                                                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                                                        class="align-middle">
+                                                        <div class="text-center align-middle">
+                                                            <mdb-icon fas
+                                                                [icon]="user.enabled ? 'user-check' : 'user-alt-slash'">
+                                                            </mdb-icon> {{user.enabled ? 'Habilitado' : 'Inhabilitado'}}
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                        <div class="text-center">
+                                                            <button mdbBtn type="button" size="sm" color="success"
+                                                                mdbWavesEffect mdbTooltip="Habilitar usuario"
+                                                                (click)="enableUser(user)">
+                                                                <mdb-icon fas icon="user-check"></mdb-icon>
+                                                            </button>
+                                                            <button mdbBtn type="button" size="sm" color="danger"
+                                                                mdbWavesEffect mdbTooltip="Inhabilitar usuario"
+                                                                (click)="disableUser(user)">
+                                                                <mdb-icon fas icon="user-alt-slash"></mdb-icon>
+                                                            </button>
+                                                        </div>
 
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot class="grey lighten-5 w-100">
+                                                <tr>
+                                                    <td colspan="7">
+                                                        <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl"
+                                                            paginationAlign="" [searchDataSource]="users">
+                                                        </mdb-table-pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                                <ng-template #emptyRegisteredUsers>
+                                    <!-- No existen usuarios registrados -->
+                                    <app-empty-records></app-empty-records>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                    </mdb-tab>
+                </mdb-tabset>
             </div>
+
+
+
+
         </div>
     </div>
 
