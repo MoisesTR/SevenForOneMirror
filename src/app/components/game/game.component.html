@@ -34,12 +34,9 @@
                       <div class="view">
                         <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle'">
                          <img
-                            src="{{(circleUser.member.image ? circleUser.member.image : (circleUser.status === 'AC') ? 'assets/images/user.png' : 'assets/images/bg-gray.png')}}" class="ratio img-responsive img-circle"
+                           [src] = "(circleUser.member.image | imageUserSrc:'user' | async)"
+                           appDefaultImg="assets/images/main-user.png" class="ratio img-responsive img-circle"
                             alt="user image">
-<!--=======-->
-<!--                        <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'"-->
-<!--                             [style.background-image]="(circleUser.member.image | imageUserStyle:'user' | async)">-->
-<!--&gt;>>>>>> Improve image pipe and Add event for socket-->
                         </div>
                         <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong"
                           style="border-radius: 50%;">
@@ -66,15 +63,9 @@
                       <div
                         [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle'"
                         class="ratio img-responsive img-circle">
-                        <img
-                            src="{{(circleUser.member.image ? circleUser.member.image : (circleUser.status === 'AC') ? 'assets/images/user.png' : 'assets/images/bg-gray.png')}}" class="ratio img-responsive img-circle"
+                        <img  [src] = "(circleUser.member.image | imageUserSrc:'user' | async)"
+                             appDefaultImg="assets/images/main-user.png" class="ratio img-responsive img-circle"
                             alt="user image">
-<!--=======-->
-<!--                         [attr.data-wow-delay]="delay(i + 1)">-->
-<!--                      <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle gray-circle'"-->
-<!--                           class="ratio img-responsive img-circle gray-circle"-->
-<!--                           [style.background-image]="(circleUser.member.image | imageUserStyle:'user' | async)">-->
-<!--&gt;>>>>>> Improve image pipe and Add event for socket-->
                       </div>
                       <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong"
                         style="border-radius: 50%;">
