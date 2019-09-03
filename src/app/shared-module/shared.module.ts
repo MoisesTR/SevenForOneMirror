@@ -6,7 +6,6 @@ import { DateTimeAdapter, OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDate
 import { NativeDateTimeAdapter } from "ng-pick-datetime/date-time/adapter/native-date-time-adapter.class";
 import { Platform } from "@angular/cdk/platform";
 import { NgxSpinnerModule } from "ngx-spinner";
-import { ImageUserStylePipe } from "../pipe/image-user-style.pipe";
 import { EmptyRecordsComponent } from "../components/empty-records/empty-records.component";
 import { ShowErrorsComponent } from "../components/show-errors.component";
 import { ImageUserSrcPipe } from "../pipe/image-user-src.pipe";
@@ -23,10 +22,9 @@ import { ImageUserSrcPipe } from "../pipe/image-user-src.pipe";
 		OwlNativeDateTimeModule,
 		NgxSpinnerModule,
 		ImageUserSrcPipe,
-		ImageUserStylePipe,
 		EmptyRecordsComponent
 	],
-	declarations: [ShowErrorsComponent, ImageUserStylePipe, ImageUserSrcPipe, EmptyRecordsComponent],
+	declarations: [ShowErrorsComponent, ImageUserSrcPipe, EmptyRecordsComponent],
 	providers: [
 		{ provide: OWL_DATE_TIME_LOCALE, useValue: "es" },
 		{
