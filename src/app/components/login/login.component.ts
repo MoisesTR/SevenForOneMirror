@@ -6,10 +6,9 @@ import { Router } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angular-6-social-login";
 import { AuthService as AuthServiceUser } from "../../core/services/auth/auth.service";
 import { RolService } from "../../core/services/shared/rol.service";
-import { RoleEnum } from "../../enums/RoleEnum";
 import { SocialPlatFormEnum } from "../../enums/SocialPlatFormEnum";
 import { Subject } from "rxjs";
-import { take, takeUntil } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { isPlatformServer } from "@angular/common";
 import { ModalService } from "../../core/services/shared/modal.service";
 
@@ -23,9 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	userForm: FormGroup;
 	public user: User;
-	public roles: RoleEnum[] = [];
 	public disabledButton = false;
-	public idRolUser: string;
 	public exact: boolean;
 
 	constructor(
@@ -48,7 +45,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.initFormUser();
-		this.getRoles();
 	}
 
 	initFormUser() {
@@ -56,22 +52,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 			user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
 			password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
 		});
-	}
-
-	getRoles() {
-		this.rolService
-			.getRoles()
-			.pipe(
-				take(1),
-				takeUntil(this.ngUnsubscribe)
-			)
-			.subscribe(roles => {
-				this.idRolUser = this.rolService.filterIdRol(RoleEnum.User, roles);
-
-				if (!this.idRolUser) {
-					this.modalService.showModalError("El rol de usuario no fue encontrado");
-				}
-			});
 	}
 
 	socialSignIn(socialPlatform: string) {
@@ -86,7 +66,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
-			this.user.roleId = this.idRolUser;
 
 			this.usuarioService
 				.loginSocial(this.user, socialPlatformProvider)
