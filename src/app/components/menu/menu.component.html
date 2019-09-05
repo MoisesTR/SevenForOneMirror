@@ -372,28 +372,40 @@
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
         <!--Content-->
-        <div class="modal-content text-center">
+        <div class="modal-content rounded-all text-center">
             <!--Header-->
-            <div class="modal-header green-seven-one white-text">
+            <!-- <div class="modal-header green-seven-one white-text">
                 <h4 class="title">Cerrar sesión</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlLogout.hide()">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
+            </div> -->
 
 
             <!--Body-->
-            <div class="modal-body">
+            <div class="modal-body background-card text-center">
+
+                <button type="button" class="close close-seven-one-right red-seven-one white-text hoverable"
+                    aria-label="Close" (click)="mdlLogout.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+                <img src="assets/images/logo.png" class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+
+                <h3 class="my-2 font-weight-bold blue-seven-one-text">
+                    ¿Estás seguro de que quieres cerrar sesión ahora?
+                </h3>
                 <i class="fas fa-times fa-4x animated text-danger rotateIn"></i>
-                <p>¿Estás seguro de que quieres cerrar sesión ahora?</p>
+
+                <hr>
+                <div class="justify-content-center">
+                    <a (click)="logout()" rounded="true" mdbBtn color="danger" class="waves-effect"
+                        mdbWavesEffect>Si</a>
+                    <a type="button" rounded="true" mdbBtn class="waves-effect green-seven-one white-text"
+                        mdbWavesEffect data-dismiss="modal" (click)="mdlLogout.hide()">No</a>
+                </div>
             </div>
 
-            <!--Footer-->
-            <div class="modal-footer justify-content-center">
-                <a (click)="logout()" rounded="true" mdbBtn color="danger" class="waves-effect" mdbWavesEffect>Si</a>
-                <a type="button" rounded="true" mdbBtn class="waves-effect green-seven-one white-text" mdbWavesEffect
-                    data-dismiss="modal" (click)="mdlLogout.hide()">No</a>
-            </div>
         </div>
         <!--/.Content-->
     </div>
@@ -404,30 +416,32 @@
     <div class="modal-dialog cascading-modal" role="document">
 
         <!--Content-->
-        <div class="modal-content">
-
-            <!--Header-->
-            <div class="modal-header green-seven-one white-text">
-                <h4 class="title" i18n="@@uploadAvatar"><i class="fas fa-user"></i> Imagen de perfil</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mdlAvatar.hide()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="modal-content rounded-all">
 
             <!--Body-->
-            <div class="modal-body mb-0 text-center">
+            <div class="modal-body background-card mb-0 text-center">
+
+                <button type="button" class="close close-seven-one-right red-seven-one white-text hoverable"
+                    aria-label="Close" (click)="mdlAvatar.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+                <img src="assets/images/logo.png" class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+
+                <h2 class="mt-2 font-weight-bold blue-seven-one-text">
+                    Imagen de perfil
+                </h2>
 
                 <mdb-file-upload #uploader (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)">
                 </mdb-file-upload>
 
+                <div class="mb-3">
+                    <button (click)="uploadImage()" #btnUploadImage mdbBtn rounded="true"
+                        class="green-seven-one white-text mt-3"
+                        [disabled]="!this.fileToUpload || disableButtonUpload"><span
+                            i18n="@@update">Actualizar</span></button>
+                </div>
             </div>
-
-            <div class="text-center mb-3">
-                <button (click)="uploadImage()" #btnUploadImage mdbBtn rounded="true"
-                    class="green-seven-one white-text mt-3" [disabled]="!this.fileToUpload || disableButtonUpload"><span
-                        i18n="@@update">Actualizar</span></button>
-            </div>
-
         </div>
         <!--/.Content-->
 
@@ -446,7 +460,8 @@
     <div class="modal-dialog modal-full-height modal-right" role="document">
         <div class="modal-content rounded-all  background-card">
             <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="groupsUser.hide()">
+                <button type="button" class="close close-seven-one red-seven-one white-text hoverable"
+                    aria-label="Close" (click)="groupsUser.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
                 <h2 class="mt-2 font-weight-bold green-seven-one-text">Grupos individuales</h2>
@@ -480,6 +495,10 @@
     aria-hidden="true" [config]="{backdrop: false}" id="overlay">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content blue-dark-seven-one rounded-all">
+            <button type="button" class="close close-seven-one-winner red-seven-one white-text hoverable"
+                aria-label="Close" (click)="modalWin.hide()">
+                <span aria-hidden="true">×</span>
+            </button>
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown"
