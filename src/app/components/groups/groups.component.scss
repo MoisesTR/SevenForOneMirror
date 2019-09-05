@@ -1,7 +1,11 @@
 .background-card-groups {
-    background: url("/assets/images/groups.svg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  background: url("/assets/images/groups.svg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.close {
+  opacity: 0.9 !important;
 }

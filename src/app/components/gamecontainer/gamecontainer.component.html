@@ -29,17 +29,6 @@
     </div>
   </div>
 
-  <!-- <div class="row justify-content-center mb-3 mt-2">
-    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-center">
-      <button mdbBtn type="button" class="blue-seven-one white-text" rounded="true" (click)="top10WinnersByGroupId()" mdbWavesEffect>Ranking
-        por monto</button>
-    </div>
-    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-center">
-      <button mdbBtn type="button" class="blue-seven-one white-text" rounded="true" (click)="top10WinnersConcurrent()"
-        mdbWavesEffect>Ranking por concurrencia</button>
-    </div>
-  </div> -->
-
   <app-game [circleUsers]="groupSelected.circleUsers" [circleUsersPlaying]="groupSelected.circleUsersPlaying"
     [groupSelected]="groupSelected" [actualUser]="userActual" [iterationValue]="iterationValue"
     [isUserAdmin]="isUserAdmin">
@@ -53,15 +42,17 @@
     <div class="modal-content rounded-all">
       <div class="modal-body background-card">
 
-        <button type="button" class="close pull-right" aria-label="Close" (click)="topPlayers.hide()">
+        <button type="button" class="close close-seven-one-top red-seven-one white-text hoverable" aria-label="Close"
+          (click)="topPlayers.hide()">
           <span aria-hidden="true">×</span>
         </button>
 
-        <app-top-players [winners3]="this.topWinners3" [winners7]="this.topWinners7" [existsRecords]="existsRecordsTopMoneyUsers">
+        <app-top-players [winners3]="this.topWinners3" [winners7]="this.topWinners7"
+          [existsRecords]="existsRecordsTopMoneyUsers">
         </app-top-players>
 
         <div class="col-12 text-center">
-          <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayers.hide();">
+          <button mdbBtn rounded="true" class="red-seven-one white-text mt-2" (click)="topPlayers.hide();">
             Cerrar
           </button>
         </div>
@@ -78,16 +69,17 @@
     <div class="modal-content rounded-all">
       <div class="modal-body background-card">
 
-        <button type="button" class="close pull-right" aria-label="Close" (click)="topPlayersConcurrent.hide()">
+        <button type="button" class="close close-seven-one-top red-seven-one white-text hoverable" aria-label="Close"
+          (click)="topPlayersConcurrent.hide()">
           <span aria-hidden="true">×</span>
         </button>
 
         <app-top-players [winners3]="this.concurrentWinners3" [winners7]="this.concurrentWinners7" title="Veces"
-          [renderMount]="false" [existsRecords]="existsRecordsTopConcurrentUsers" >
+          [renderMount]="false" [existsRecords]="existsRecordsTopConcurrentUsers">
         </app-top-players>
 
         <div class="col-12 text-center">
-          <button mdbBtn rounded="true" class="green-seven-one white-text mt-2" (click)="topPlayersConcurrent.hide();">
+          <button mdbBtn rounded="true" class="red-seven-one white-text mt-2" (click)="topPlayersConcurrent.hide();">
             Cerrar
           </button>
         </div>
