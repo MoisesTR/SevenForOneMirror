@@ -5,3 +5,5 @@ dist
 *.htm
 *.html
 *.json
+*.css
+*.scss

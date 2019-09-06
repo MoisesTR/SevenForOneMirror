@@ -30,12 +30,12 @@
                         {{i+1}}
                       </h5>
                       <img *ngIf="circleUser.status === 'AC'" src="/assets/images/trophy-1.svg"
-                        class="img-fluid w-25 mx-auto mb-2 d-block" alt="Trofeo" />
+                        class="img-fluid w-25 mx-auto mt-2 mb-2 d-block" alt="Trofeo" />
                       <div class="view">
-                        <div [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle'">
+                        <div [ngClass]="circleUser.status === 'AC' ? 'img-round blue-seven-one' : 'img-round'">
                          <img
                            [src] = "(circleUser.member.image | imageUserSrc:'user' | async)"
-                           appDefaultImg="assets/images/main-user.png" class="ratio img-responsive img-circle"
+                           appDefaultImg="assets/images/main-user.png"
                             alt="user image">
                         </div>
                         <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong"
@@ -61,10 +61,9 @@
                     <div [ngClass]="[ iterationValue === 1 ? 'view wow fadeInRight' : 'view wow flipInX']"
                       [attr.data-wow-delay]="delay(i + 1)">
                       <div
-                        [ngClass]="circleUser.status === 'AC' ? 'ratio img-responsive img-circle blue-seven-one' : 'ratio img-responsive img-circle'"
-                        class="ratio img-responsive img-circle">
+                        [ngClass]="circleUser.status === 'AC' ? 'img-round blue-seven-one' : 'img-round'">
                         <img  [src] = "(circleUser.member.image | imageUserSrc:'user' | async)"
-                             appDefaultImg="assets/images/main-user.png" class="ratio img-responsive img-circle"
+                             appDefaultImg="assets/images/main-user.png"
                             alt="user image">
                       </div>
                       <div *ngIf="circleUser.isUserLogged" class="mask flex-center rgba-black-strong"
