@@ -32,7 +32,7 @@ export class AppComponent {
 			{ name: "twitter:title", content: this.title },
 			{ name: "twitter:description", content: this.descripcion },
 			{ name: "twitter:creator", content: this.nombreApp },
-			{ name: "twitter:image", content: "assets/images/logo.png" }
+			{ name: "twitter:image", content: "assets/images/ogimage.png" }
 		]);
 
 		//open Graph data for facebook
@@ -42,7 +42,7 @@ export class AppComponent {
 			{ property: "og:description", content: this.descripcion },
 			{ property: "og:url", content: this.urlsitio },
 			{ property: "og:site_name", content: this.nombreApp },
-			{ property: "og:image", content: "assets/images/logo.png" },
+			{ property: "og:image", content: "assets/images/ogimage.png" },
 			{ property: "article:section", content: "SevenForOne Ganar Dinero" },
 			{ property: "article:tag", contetn: "sevenforone" }
 		]);
