@@ -1,25 +1,26 @@
-<div class="view">
+<div class="view seven-one">
   <div class="mask blue-seven-one d-flex justify-content-center align-items-center">
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-7 text-center">
 
           <div class="card rounded-all z-depth-3">
-            <div class="card-body">
-              <img src="assets/images/logo.png" class="rounded mx-auto d-block wow fadeInDown" alt="Email confirm"
-                style="width:60%;" data-wow-delay="0.3s">
+            <div class="card-body background-card">
+              <a [routerLink]="['/dashboard']" class="logo" title="7x1">
+                <img src="assets/images/logo.png" class="w-25 mx-auto d-block wow fadeInDown" alt="Logo 7x1"  data-wow-delay="0.3s">
+              </a>
               <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
 
-              <h4 class="gray-heading mb-4 wow fadeInDown" data-wow-delay="0.4s">
+              <h2 class="gray-heading mb-4 wow fadeInDown" data-wow-delay="0.4s">
                 Surgió un bloqueo ya que <span class="green-seven-one-text">7x1</span>
                 está abierto en otra ventana
-              </h4>
+              </h2>
 
-              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown btn-rounded" data-wow-delay="0.4s"
-                (click)="close()" mdbWavesEffect>Cerrar</button>
+              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown btn-rounded"
+                data-wow-delay="0.4s" (click)="close()" mdbWavesEffect>Cerrar</button>
 
-              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown btn-rounded" data-wow-delay="0.4s"
-                (click)="stayHere()" mdbWavesEffect>Usar aquí</button>
+              <button mdbBtn type="button" class="btn-seven-one outline-seven-one wow fadeInDown btn-rounded"
+                data-wow-delay="0.4s" (click)="stayHere()" mdbWavesEffect>Usar aquí</button>
 
             </div>
           </div>

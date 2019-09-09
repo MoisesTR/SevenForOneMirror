@@ -20,3 +20,17 @@
   border-color: #42d583;
   color: #42d583;
 }
+
+// Logo fullScreen
+.seven-one .logo {
+	display: inline-block;
+	position: relative;
+	-webkit-transition: .3s all ease-in-out;
+	-o-transition: .3s all ease-in-out;
+	transition: .3s all ease-in-out;
+	top: 0;
+}
+
+.seven-one .logo:hover {
+	top: -10px;
+}
