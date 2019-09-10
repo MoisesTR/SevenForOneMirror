@@ -53,7 +53,7 @@
                         <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
                         <a *ngIf="user.provider === 'none'" class="dropdown-item"
                             (click)="showModalUpdateImage()">Cambiar imagen de perfil</a>
-                        <a class="dropdown-item" (click)="mdlEmailPaypal.show()">Correo paypal</a>
+                        <a class="dropdown-item" *ngIf="!isUserAdmin" (click)="showModalPaypalEmail()">Correo paypal</a>
                         <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
                     </div>
                 </li>
@@ -549,6 +549,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
 
+              <form [formGroup]="formPaypalEmail" (ngSubmit)="updatePaypalEmail()">
                 <div class="container-fluid mt-3">
 
                     <img src="assets/images/logo.png" class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
@@ -574,25 +575,22 @@
                                 <span class="font-weight-bold">Correo de pago en paypal:</span>
                                 <br>
                                 <span class="font-weight-bolder">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, perspiciatis amet,
-                                    incidunt
-                                    atque
-                                    quos tempora reprehenderit consectetur, tenetur modi voluptate delectus vero labore
-                                    distinctio
-                                    aliquid animi excepturi libero omnis a?
+                                    Debes de indicar un correo asociado a una cuenta de paypal a la cual tengas acceso y se encuentre vigente,
+                                  este correo sera utilizado como referencia para que puedas recibir el dinero que vayas ganando en la plataforma.
                                 </span>
                             </p>
                         </div>
 
                         <div class="col-12 text-center">
-                            <button mdbBtn rounded="true" class="green-seven-one white-text mt-3">
-                                Ingresar
+                            <button [disabled]="!formPaypalEmail.valid || disableButtonPaypalEmail" mdbBtn rounded="true" class="green-seven-one white-text mt-3">
+                                Actualizar
                             </button>
                         </div>
 
                     </div>
 
                 </div>
+              </form>
 
             </div>
         </div>

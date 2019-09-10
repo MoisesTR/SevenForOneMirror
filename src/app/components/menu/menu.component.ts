@@ -19,6 +19,7 @@ import { RoleEnum } from "../../enums/RoleEnum";
 import { UploadService } from "../../core/services/shared/upload.service";
 import { MdbFileUploadComponent } from "mdb-file-upload";
 import { Subject } from "rxjs";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 declare var $: any;
 
@@ -46,6 +47,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 	@ViewChild("btnUploadImage") btnUploadImage: ElementRef;
 	@ViewChild("uploader") uploader: MdbFileUploadComponent;
 
+	formPaypalEmail: FormGroup;
+	@ViewChild("mdlEmailPaypal") modalPaypal: ModalDirective;
+	public disableButtonPaypalEmail = false;
+	public optionsToast = { toastClass: "opacity" };
+
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private rolService: RolService,
@@ -59,7 +65,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private mainSocketService: MainSocketService,
 		private gameSocketSevice: SocketGroupGameService,
-		private logger: NGXLogger
+		private logger: NGXLogger,
+		private formBuilder: FormBuilder
 	) {}
 
 	ngOnInit() {
@@ -67,6 +74,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.initSocket();
 		this.dropdownAndScroll();
 		this.getTotalEarned();
+		this.initFormPaypalEmail();
 
 		this.updateMoneyService.updateMount$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(update => {
 			if (update) {
@@ -159,6 +167,39 @@ export class MenuComponent implements OnInit, OnDestroy {
 			this.getPurchaseHistory();
 			this.getGroupsCurrentUser();
 		}
+	}
+
+	initFormPaypalEmail() {
+		this.formPaypalEmail = this.formBuilder.group({
+			emailPaypal: new FormControl(
+				[],
+				Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")])
+			)
+		});
+	}
+
+	showModalPaypalEmail() {
+		this.formPaypalEmail.reset();
+		this.modalPaypal.show();
+	}
+
+	updatePaypalEmail() {
+		const paypalEmail = this.formPaypalEmail.value.emailPaypal;
+		this.disableButtonPaypalEmail = true;
+
+		// DESCOMENTAR CUANDO EL ENDPOINT ESTE LISTO
+		// this.userService
+		// 	.updatePaypalEmail(this.user._id, paypalEmail)
+		// 	.pipe(takeUntil(this.ngUnsubscribe))
+		// 	.subscribe(
+		// 		() => {
+		// 			this.disableButtonPaypalEmail = false;
+		// 			this.toastService.info("El correo de paypal ha sido actualizado!", "Paypal Email", this.optionsToast);
+		// 		},
+		// 		() => {
+		// 			this.disableButtonPaypalEmail = false;
+		// 		}
+		// 	);
 	}
 
 	getPurchaseHistory() {

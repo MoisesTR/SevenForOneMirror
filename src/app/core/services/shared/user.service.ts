@@ -67,6 +67,15 @@ export class UserService {
 		return this.http.delete(this.url + this.userUrl + "/" + userId, options);
 	}
 
+	updatePaypalEmail(userId: string, email: string): Observable<any> {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers: headers };
+		const body = JSON.stringify({ email });
+		return this.http.put(this.urlAuth + this.userUrl + "/paypalEmail/" + userId, body, options);
+	}
+
 	verifyEmail(token) {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json",
