@@ -9,6 +9,7 @@ import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.
 import { AuthGuardService } from "./core/services/auth/auth-guard.service";
 import { LockedScreenComponent } from "./components/locked-screen/locked-screen.component";
 import { LandingPageComponent } from "./components/landing-page/landing-page.component";
+import { ConfirmChangePasswordComponent } from "./components/confirm-change-password/confirm-change-password.component";
 
 export const routes: Routes = [
 	{
@@ -23,12 +24,18 @@ export const routes: Routes = [
 		loadChildren: "./components/menu/menu.module#MenuModule",
 		data: { titulo: "Menu" }
 	},
+
 	{ path: "login", component: LoginComponent },
 	{ path: "register", component: RegisterComponent },
 	{ path: "confirm/:token/:userName", component: ConfirmComponent, data: { titulo: "Confirm Email" } },
 	{ path: "emailConfirm", component: EmailConfirmComponent },
-	{ path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked-screen" } },
+	{ path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked screen" } },
 	{ path: "landing-page", component: LandingPageComponent, data: { titulo: "Landing page" } },
+	{
+		path: "confirm-change-password",
+		component: ConfirmChangePasswordComponent,
+		data: { titulo: "Confirm change screen" }
+	},
 	{
 		path: "**",
 		component: NotFound404Component,
