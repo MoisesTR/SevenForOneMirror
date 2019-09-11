@@ -1,14 +1,16 @@
-<div mdbModal #modalAddGroup="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-     aria-hidden="true">
+<div mdbModal #modalAddGroup="mdb-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="myBasicModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content rounded-all">
       <div class="modal-body background-card">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalAddGroup.hide()">
+
+        <button type="button" class="close close-seven-one-right red-seven-one white-text hoverable" aria-label="Close"
+          (click)="modalAddGroup.hide()">
           <span aria-hidden="true">×</span>
         </button>
 
         <div class="text-center">
-          <h2 class="mt-2 font-weight-bold green-seven-one-text">Agregar grupo</h2>
+          <h2 class="mt-2 font-weight-bold blue-seven-one-text">Agregar grupo</h2>
         </div>
 
         <form [formGroup]="formAddGroup" (ngSubmit)="createGroup()">
@@ -18,8 +20,8 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="md-form md-outline">
                   <mdb-icon fas icon="money-bill-wave"></mdb-icon>
-                  <input onlyPositiveNumber type="text" id="amount" class="form-control" formControlName="initialInvertion"
-                    autocomplete="off" mdbInput>
+                  <input onlyPositiveNumber type="text" id="amount" class="form-control"
+                    formControlName="initialInvertion" autocomplete="off" mdbInput>
                   <label for="amount">Monto</label>
                 </div>
               </div>
@@ -27,8 +29,8 @@
           </div>
 
           <div class="text-center">
-            <button type="submit" rounded="true" mdbBtn color="primary" class="relative waves-light"
-                    mdbWavesEffect [disabled]="formAddGroup.invalid || this.disableButton">Agregar</button>
+            <button type="submit" rounded="true" mdbBtn class="green-seven-one white-text relative waves-light"
+              mdbWavesEffect [disabled]="formAddGroup.invalid || this.disableButton">Agregar</button>
           </div>
 
         </form>
