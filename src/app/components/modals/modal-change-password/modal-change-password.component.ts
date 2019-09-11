@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../../core/services/shared/user.service";
 import { AuthService } from "../../../core/services/auth/auth.service";
@@ -7,7 +7,7 @@ import { MdbStepperComponent, ModalDirective, ToastService } from "ng-uikit-pro-
 import { CustomValidators } from "../../../validators/CustomValidators";
 import { NGXLogger } from "ngx-logger";
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { takeUntil, last } from "rxjs/operators";
 
 @Component({
 	selector: "app-modal-change-password",
@@ -23,6 +23,10 @@ export class ModalChangePasswordComponent implements OnInit, OnDestroy {
 	ngUnsubscribe = new Subject<void>();
 	firstFormGroup: FormGroup;
 	secondFormGroup: FormGroup;
+
+	@ViewChild("checkPassword") inputCheckPassword: ElementRef;
+	@ViewChild("newPassword") inputNewPassword: ElementRef;
+	@ViewChild("confirmPassword") inputConfirmPassword: ElementRef;
 
 	constructor(
 		private userService: UserService,
@@ -110,16 +114,35 @@ export class ModalChangePasswordComponent implements OnInit, OnDestroy {
 	}
 
 	showPassword(idTextField) {
-		const inputType = (<HTMLInputElement>document.getElementById(idTextField)).type;
-		const iconEyeOpen = document.getElementById("eye-open");
-		const iconEyeLinked = document.getElementById("eye-linked");
+		const lastPassword = this.inputCheckPassword.nativeElement;
+		const newPassword = this.inputNewPassword.nativeElement;
+		const confirmPassword = this.inputConfirmPassword.nativeElement;
+		let valueInput;
+		let iconEyeOpen;
+		let iconEyeLinked;
+
+		if (idTextField === "checkPassword") {
+			valueInput = lastPassword;
+			iconEyeOpen = document.getElementById("eye-open-1");
+			iconEyeLinked = document.getElementById("eye-linked-1");
+		} else if (idTextField === "newPassword") {
+			valueInput = newPassword;
+			iconEyeOpen = document.getElementById("eye-open-2");
+			iconEyeLinked = document.getElementById("eye-linked-2");
+		} else if (idTextField === "confirmPassword") {
+			valueInput = confirmPassword;
+			iconEyeOpen = document.getElementById("eye-open-3");
+			iconEyeLinked = document.getElementById("eye-linked-3");
+		}
+
+		const inputType = valueInput.type;
 
 		if (inputType === "password") {
-			document.getElementById(idTextField).setAttribute("type", "text");
+			valueInput.setAttribute("type", "text");
 			iconEyeOpen.style.display = "none";
 			iconEyeLinked.style.display = "block";
 		} else {
-			document.getElementById(idTextField).setAttribute("type", "password");
+			valueInput.setAttribute("type", "password");
 			iconEyeOpen.style.display = "block";
 			iconEyeLinked.style.display = "none";
 		}
