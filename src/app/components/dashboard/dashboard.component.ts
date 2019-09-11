@@ -1,28 +1,33 @@
 import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild
+	AfterViewInit,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	HostListener,
+	OnDestroy,
+	OnInit,
+	ViewChild
 } from "@angular/core";
-import {GroupService} from "../../core/services/shared/group.service";
-import {GroupGame} from "../../models/GroupGame";
-import {UserService} from "../../core/services/shared/user.service";
-import {User} from "../../models/User";
-import {AuthService} from "../../core/services/auth/auth.service";
-import {RoleEnum} from "../../enums/RoleEnum";
-import {GameService} from "../../core/services/shared/game.service";
-import {Router} from "@angular/router";
-import {Observable, Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {SocketGroupGameService} from "../../core/services/shared/socket-group-game.service";
-import {EventEnum} from "../../enums/EventEnum";
-import {NGXLogger} from "ngx-logger";
-import {NgxSpinnerService} from "ngx-spinner";
-import {MdbTableDirective, MdbTablePaginationComponent, ToastService} from "ng-uikit-pro-standard";
+import { GroupService } from "../../core/services/shared/group.service";
+import { GroupGame } from "../../models/GroupGame";
+import { UserService } from "../../core/services/shared/user.service";
+import { User } from "../../models/User";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { RoleEnum } from "../../enums/RoleEnum";
+import { GameService } from "../../core/services/shared/game.service";
+import { Router } from "@angular/router";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { SocketGroupGameService } from "../../core/services/shared/socket-group-game.service";
+import { EventEnum } from "../../enums/EventEnum";
+import { NGXLogger } from "ngx-logger";
+import { NgxSpinnerService } from "ngx-spinner";
+import { MdbTableDirective, MdbTablePaginationComponent, ToastService } from "ng-uikit-pro-standard";
+
+enum tabEnum {
+	ADMIN,
+	USER
+}
 
 @Component({
 	selector: "app-dashboard",
@@ -31,8 +36,10 @@ import {MdbTableDirective, MdbTablePaginationComponent, ToastService} from "ng-u
 })
 export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 	// DATATABLES PROPERTIES
-	@ViewChild(MdbTableDirective) mdbTable: MdbTableDirective;
-	@ViewChild(MdbTablePaginationComponent) mdbTablePagination: MdbTablePaginationComponent;
+	@ViewChild("tableEl") tableEl: MdbTableDirective;
+	@ViewChild("tableEl2") tableEl2: MdbTableDirective;
+	@ViewChild("mdbTablePagination") mdbTablePagination: MdbTablePaginationComponent;
+	@ViewChild("mdbTablePagination2") mdbTablePagination2: MdbTablePaginationComponent;
 	@ViewChild("row") row: ElementRef;
 
 	headElements = ["#", "Usuario", "Nombres", "Apellidos", "Correo", "Estado", "Acción"];
@@ -41,23 +48,26 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	searchText = "";
 	previous: string;
+	previous2: string;
 	keyword = "de";
 
-	maxVisibleItems = 20;
+	maxVisibleItems = 15;
 
 	// END DATATABLE PROPERTIES
-
 	public existsRegisteredUsers = true;
+	public existsRegisteredAdmins = true;
 	public optionsToast = { toastClass: "opacity" };
 	ngUnsubscribe = new Subject<void>();
 	public groupsAdmin: Observable<GroupGame[]>;
 	public groupsUser: GroupGame[] = [];
+	public admins: User[] = [];
 	public users: User[] = [];
 	public user: User;
 	public isUserAdmin = false;
 	public group: GroupGame;
 	public showWelcomeUser = true;
 	public iterationValue = 1;
+	public tabSelectected: tabEnum = tabEnum.ADMIN;
 
 	elements: any = [];
 
@@ -74,25 +84,6 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 		private toast: ToastService
 	) {}
 
-	@HostListener("input") oninput() {
-		this.mdbTablePagination.searchText = this.searchText;
-		this.searchElements();
-	}
-
-	searchElements() {
-		const prev = this.mdbTable.getDataSource();
-
-		if (!this.searchText) {
-			this.mdbTable.setDataSource(this.previous);
-			this.users = this.mdbTable.getDataSource();
-		}
-
-		if (this.searchText) {
-			this.users = this.mdbTable.searchLocalDataBy(this.searchText);
-			this.mdbTable.setDataSource(prev);
-		}
-	}
-
 	ngOnInit() {
 		this.user = this.authService.getUser();
 		this.isUserAdmin = this.authService.userIsAdmin();
@@ -100,13 +91,62 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.createContentDashboard(this.isUserAdmin);
 	}
 
+	@HostListener("input") oninput() {
+		if (this.tabSelectected === tabEnum.ADMIN) {
+			this.mdbTablePagination.searchText = this.searchText;
+		} else {
+			this.mdbTablePagination2.searchText = this.searchText;
+		}
+
+		this.searchElements();
+	}
+
+	searchElements() {
+		if (this.tabSelectected === tabEnum.ADMIN) {
+			const prev = this.tableEl.getDataSource();
+
+			if (!this.searchText) {
+				this.tableEl.setDataSource(this.previous);
+				this.admins = this.tableEl.getDataSource();
+			}
+
+			if (this.searchText) {
+				this.admins = this.tableEl.searchLocalDataBy(this.searchText);
+				this.tableEl.setDataSource(prev);
+			}
+		} else {
+			const prev = this.tableEl2.getDataSource();
+
+			if (!this.searchText) {
+				this.tableEl2.setDataSource(this.previous2);
+				this.users = this.tableEl2.getDataSource();
+			}
+
+			if (this.searchText) {
+				this.users = this.tableEl2.searchLocalDataBy(this.searchText);
+				this.tableEl.setDataSource(prev);
+			}
+		}
+	}
+
 	ngAfterViewInit(): void {
-		if (this.isUserAdmin && this.mdbTable) {
+		if (this.isUserAdmin) {
 			this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
-			this.mdbTablePagination.calculateFirstItemIndex();
-			this.mdbTablePagination.calculateLastItemIndex();
+			this.mdbTablePagination2.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
+			this.paginationAdmins();
+			this.paginationUsers();
 			this.cdRef.detectChanges();
 		}
+	}
+
+	paginationAdmins() {
+		this.mdbTablePagination.calculateFirstItemIndex();
+		this.mdbTablePagination.calculateLastItemIndex();
+	}
+
+	paginationUsers() {
+		this.mdbTablePagination2.calculateFirstItemIndex();
+		this.mdbTablePagination2.calculateLastItemIndex();
 	}
 
 	createContentDashboard(userIsAdmin) {
@@ -115,7 +155,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 		} else {
 			this.socketGroupGame.connect();
 			this.getGroupsAdmin();
-			this.getUsersNormal();
+			this.getAllUsers();
 		}
 	}
 
@@ -123,23 +163,35 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.groupsAdmin = this.groupService.getGroups();
 	}
 
-	getUsersNormal() {
+	getAllUsers() {
 		this.userService
 			.getUsers()
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(users => {
+				// ADMINS
+				this.admins = users;
+				this.admins = this.userService.filterUsersByRol(users, RoleEnum.Admin);
+
+				this.tableEl.setDataSource(this.admins);
+				this.admins = this.tableEl.getDataSource();
+				this.previous = this.tableEl.getDataSource();
+
+				if (this.admins.length === 0) {
+					this.existsRegisteredAdmins = false;
+				}
+
+				// USERS
 				this.users = users;
 				this.users = this.userService.filterUsersByRol(users, RoleEnum.User);
 
-				if (this.mdbTable) {
-					this.mdbTable.setDataSource(this.users);
-					this.users = this.mdbTable.getDataSource();
-					this.previous = this.mdbTable.getDataSource();
-				}
+				this.tableEl2.setDataSource(this.users);
+				this.users = this.tableEl2.getDataSource();
+				this.previous2 = this.tableEl2.getDataSource();
 
 				if (this.users.length === 0) {
 					this.existsRegisteredUsers = false;
 				}
+
 				this.spinner.hide();
 			});
 	}
@@ -205,6 +257,14 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 					this.toast.info("El usuario: " + user.userName + " ha sido habilitado!", "Usuario", this.optionsToast);
 				});
 		}
+	}
+
+	selectTabAdmins(event: any) {
+		this.tabSelectected = tabEnum.ADMIN;
+	}
+
+	selectTabUsers(event: any) {
+		this.tabSelectected = tabEnum.USER;
 	}
 
 	ngOnDestroy(): void {
