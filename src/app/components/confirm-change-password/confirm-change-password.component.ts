@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 @Component({
@@ -8,6 +8,9 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 })
 export class ConfirmChangePasswordComponent implements OnInit {
 	formChangePassword: FormGroup;
+
+	@ViewChild("newPassword") inputNewPassword: ElementRef;
+	@ViewChild("confirmPassword") inputConfirmPassword: ElementRef;
 
 	constructor(private formBuilder: FormBuilder) {}
 
@@ -22,16 +25,30 @@ export class ConfirmChangePasswordComponent implements OnInit {
 	}
 
 	showPassword(idTextField) {
-		const inputType = (<HTMLInputElement>document.getElementById(idTextField)).type;
-		const iconEyeOpen = document.getElementById("eye-open");
-		const iconEyeLinked = document.getElementById("eye-linked");
+		const newPassword = this.inputNewPassword.nativeElement;
+		const confirmPassword = this.inputConfirmPassword.nativeElement;
+		let valueInput;
+		let iconEyeOpen;
+		let iconEyeLinked;
+
+		if (idTextField === "newPassword") {
+			valueInput = newPassword;
+			iconEyeOpen = document.getElementById("eye-open-1");
+			iconEyeLinked = document.getElementById("eye-linked-1");
+		} else if (idTextField === "confirmPassword") {
+			valueInput = confirmPassword;
+			iconEyeOpen = document.getElementById("eye-open-2");
+			iconEyeLinked = document.getElementById("eye-linked-2");
+		}
+
+		const inputType = valueInput.type;
 
 		if (inputType === "password") {
-			document.getElementById(idTextField).setAttribute("type", "text");
+			valueInput.setAttribute("type", "text");
 			iconEyeOpen.style.display = "none";
 			iconEyeLinked.style.display = "block";
 		} else {
-			document.getElementById(idTextField).setAttribute("type", "password");
+			valueInput.setAttribute("type", "password");
 			iconEyeOpen.style.display = "block";
 			iconEyeLinked.style.display = "none";
 		}
