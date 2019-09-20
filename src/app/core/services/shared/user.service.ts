@@ -29,6 +29,18 @@ export class UserService {
 		this.modalChangePassword.emit(true);
 	}
 
+	login(usuario: User): Observable<any> {
+		return this.http.post(this.urlAuth + "login", usuario);
+	}
+
+	loginSocial(usuario: User, socialPlatformProvider): Observable<any> {
+		return this.http.post(this.urlAuth + this.getUrlSocial(socialPlatformProvider), usuario);
+	}
+
+	private getUrlSocial(socialPlatformProvider) {
+		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
+	}
+	
 	getUsers() {
 		return this.http.get<User[]>(this.url + this.userUrl).pipe(map(data => data));
 	}
@@ -87,6 +99,20 @@ export class UserService {
 		const options = { headers };
 		const body = JSON.stringify({ paypalEmail });
 		return this.http.put(this.url + this.userUrl + "/paypalEmail/" + userId, body, options);
+	}
+
+	recoverPassword(password: string, passwordConfirm: string) {
+		const body = {
+			password,
+			passwordConfirm
+		};
+
+		return this.http.post(this.url + "recoverPassword", body);
+	}
+
+	verifyEmailRecoverPassword(email: string): Observable<any> {
+		const body = JSON.stringify({ email });
+		return this.http.post(this.url + "recoverPassword", email);
 	}
 
 	filterUsersByRol(users: User[], rol) {

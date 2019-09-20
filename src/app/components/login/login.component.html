@@ -138,20 +138,21 @@
                         Puede restablecer su contraseña aquí.
                     </span>
                 </div>
-                <form action="">
+                <form [formGroup]="formRecoverPassword" (ngSubmit)="recoverPassword()">
 
                     <div class="md-form md-outline">
                         <mdb-icon fas icon="envelope"></mdb-icon>
-                        <input type="text" id="emailPasswordForgot" class="form-control" mdbInput>
+                        <input type="text" id="emailPasswordForgot" class="form-control" mdbInput formControlName="email">
                         <label for="emailPasswordForgot">Correo Electrónico</label>
+                      <app-show-errors [control]="formRecoverPassword.controls['email']"></app-show-errors>
                     </div>
 
-                </form>
+                  <div class="text-center">
+                    <button [disabled]="formRecoverPassword.invalid" type="submit" rounded="true" mdbBtn class="relative waves-light green-seven-one white-text"
+                            mdbWavesEffect>Restablecer la contraseña</button>
+                  </div>
 
-                <div class="text-center">
-                    <button type="button" rounded="true" mdbBtn class="relative waves-light green-seven-one white-text"
-                        mdbWavesEffect>Restablecer la contraseña</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

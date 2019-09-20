@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
 import { UserService } from "../../core/services/shared/user.service";
@@ -11,6 +11,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { isPlatformServer } from "@angular/common";
 import { ModalService } from "../../core/services/shared/modal.service";
+import { ModalDirective } from "ng-uikit-pro-standard";
 
 @Component({
 	selector: "app-login",
@@ -19,14 +20,17 @@ import { ModalService } from "../../core/services/shared/modal.service";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit, OnDestroy {
+	@ViewChild("forgotPassword") modalForgotPassword: ModalDirective;
+
 	ngUnsubscribe = new Subject<void>();
 	userForm: FormGroup;
+	formRecoverPassword: FormGroup;
 	public user: User;
 	public disabledButton = false;
 	public exact: boolean;
 
 	constructor(
-		private usuarioService: UserService,
+		private userService: UserService,
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private rolService: RolService,
@@ -45,12 +49,22 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.initFormUser();
+		this.initFormRecoverPassword();
 	}
 
 	initFormUser() {
 		this.userForm = this.formBuilder.group({
 			user: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(40)]),
 			password: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(25)])
+		});
+	}
+
+	initFormRecoverPassword() {
+		this.formRecoverPassword = this.formBuilder.group({
+			email: new FormControl(
+				"",
+				Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")])
+			)
 		});
 	}
 
@@ -116,6 +130,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	closeNav() {
 		document.getElementById("myNav").style.width = "0%";
+	}
+
+	recoverPassword() {
+		const email = this.formRecoverPassword.value.email;
+
+		// DESCOMENTAR CUANDO EL ENDPOINT PARA RECUPERAR CONTRASENIA ESTE LISTO
+		// this.userService
+		// 	.verifyEmailRecoverPassword(email)
+		// 	.pipe(takeUntil(this.ngUnsubscribe))
+		// 	.subscribe(resp => {});
+		this.modalForgotPassword.hide();
+
+		this.router.navigateByUrl("/recover-account-message");
 	}
 
 	ngOnDestroy(): void {

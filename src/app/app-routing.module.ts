@@ -10,6 +10,7 @@ import { AuthGuardService } from "./core/services/auth/auth-guard.service";
 import { LockedScreenComponent } from "./components/locked-screen/locked-screen.component";
 import { LandingPageComponent } from "./components/landing-page/landing-page.component";
 import { ConfirmChangePasswordComponent } from "./components/confirm-change-password/confirm-change-password.component";
+import { EmailConfirmRecoverPasswordComponent } from "./components/email-confirm-recover-password/email-confirm-recover-password.component";
 
 export const routes: Routes = [
 	{
@@ -35,6 +36,11 @@ export const routes: Routes = [
 		path: "confirm-change-password",
 		component: ConfirmChangePasswordComponent,
 		data: { titulo: "Confirm change screen" }
+	},
+	{
+		path: "recover-account-message",
+		component: EmailConfirmRecoverPasswordComponent,
+		data: { titulo: "Email confirm Recover Password" }
 	},
 	{
 		path: "**",
