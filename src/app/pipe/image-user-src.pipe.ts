@@ -33,7 +33,6 @@ export class ImageUserSrcPipe implements PipeTransform {
 			case "temp":
 				return this.imageService.getImage(url + "/temp/" + img);
 			default:
-				console.log(folder);
 				this.logger.info("El folder de la imagen no existe!");
 		}
 	}
