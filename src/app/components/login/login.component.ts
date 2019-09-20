@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
 
-			this.usuarioService
+			this.authService
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.user.getUserInfo = false;
 		this.disabledButton = true;
 
-		this.usuarioService
+		this.authService
 			.login(this.user)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(

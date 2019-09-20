@@ -8,7 +8,7 @@ import { Global } from "../shared/global";
 import { tap } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
 import { CookieService } from "ngx-cookie-service";
-import { throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { RoleEnum } from "../../../enums/RoleEnum";
 import { isPlatformBrowser } from "@angular/common";
 
@@ -29,6 +29,28 @@ export class AuthService {
 		@Inject(PLATFORM_ID) private platformID: object
 	) {
 		this.urlAuth = Global.urlAuth;
+	}
+
+	login(usuario: User): Observable<any> {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers: headers };
+
+		return this.http.post(this.urlAuth + "login", usuario, options);
+	}
+
+	loginSocial(usuario: User, socialPlatformProvider): Observable<any> {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers: headers };
+
+		return this.http.post(this.urlAuth + this.getUrlSocial(socialPlatformProvider), usuario, options);
+	}
+
+	private getUrlSocial(socialPlatformProvider) {
+		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
 	}
 
 	getToken() {
