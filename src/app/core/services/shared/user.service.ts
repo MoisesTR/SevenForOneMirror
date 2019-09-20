@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { User } from "../../../models/User";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { NGXLogger } from "ngx-logger";
 
 @Injectable({
 	providedIn: "root"
@@ -16,7 +15,7 @@ export class UserService {
 	public userUrl = "users";
 	public modalEvent = new EventEmitter<any>();
 
-	constructor(private http: HttpClient, private logger: NGXLogger) {
+	constructor(private http: HttpClient) {
 		this.urlAuth = Global.urlAuth;
 		this.url = Global.url;
 	}
@@ -25,30 +24,8 @@ export class UserService {
 		this.modalEvent.emit(true);
 	}
 
-	login(usuario: User): Observable<any> {
-		const headers = new HttpHeaders({
-			"Content-Type": "application/json"
-		});
-		const options = { headers: headers };
-
-		return this.http.post(this.urlAuth + "login", usuario, options);
-	}
-
-	loginSocial(usuario: User, socialPlatformProvider): Observable<any> {
-		const headers = new HttpHeaders({
-			"Content-Type": "application/json"
-		});
-		const options = { headers: headers };
-
-		return this.http.post(this.urlAuth + this.getUrlSocial(socialPlatformProvider), usuario, options);
-	}
-
-	private getUrlSocial(socialPlatformProvider) {
-		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
-	}
-
 	getUsers() {
-		return this.http.get<User[]>(this.urlAuth + this.userUrl).pipe(map(data => data));
+		return this.http.get<User[]>(this.url + this.userUrl).pipe(map(data => data));
 	}
 
 	createUser(usuario: User) {
@@ -75,7 +52,7 @@ export class UserService {
 		});
 		const options = { headers: headers };
 
-		return this.http.put(this.urlAuth + this.userUrl + "/" + user._id, user, options);
+		return this.http.put(this.url + this.userUrl + "/" + user._id, user, options);
 	}
 
 	changeStateUser(userId, enabled = false) {
@@ -87,7 +64,7 @@ export class UserService {
 
 		const options = { headers, params: httpParams };
 
-		return this.http.delete(this.urlAuth + this.userUrl + "/" + userId, options);
+		return this.http.delete(this.url + this.userUrl + "/" + userId, options);
 	}
 
 	verifyEmail(token) {

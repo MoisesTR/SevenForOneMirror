@@ -200,7 +200,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
 			this.user.accessToken = socialPlatformProvider === SocialPlatFormEnum.Google ? userData.idToken : userData.token;
 
-			this.usuarioService
+			this.authService
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {

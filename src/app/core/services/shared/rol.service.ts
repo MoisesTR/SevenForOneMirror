@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Global} from './global';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Cacheable} from "ngx-cacheable";
+import { Injectable } from "@angular/core";
+import { Global } from "./global";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Cacheable } from "ngx-cacheable";
 
 @Injectable({
 	providedIn: "root"
@@ -12,14 +12,14 @@ export class RolService {
 	public urlRol = "roles";
 
 	constructor(private http: HttpClient) {
-		this.url = Global.urlAuth;
+		this.url = Global.url;
 	}
 
 	getRol(rolId): Observable<any> {
 		return this.http.get(this.url + this.urlRol + "/" + rolId);
 	}
 
-  @Cacheable()
+	@Cacheable()
 	getRoles(): Observable<any> {
 		return this.http.get(this.url + this.urlRol);
 	}
