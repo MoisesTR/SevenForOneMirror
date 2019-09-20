@@ -1,3 +1,98 @@
-<p>
-  user-payments works!
-</p>
+<section>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 colsm-12 col-md-12 col-lg-12">
+
+        <div class="card card-cascade narrower rounded-all z-depth-3">
+
+          <div class="view view-cascade gradient-card-header green-seven-one">
+            <h2 class="card-header-title mb-2">Pagos a usuarios</h2>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade">
+
+            <div class="container-fluid mt-3">
+
+              <div class="row justify-content-center">
+
+                <div class="table-responsive">
+
+                  <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true"
+                    striped="true">
+                    <thead class="blue-seven-one white-text">
+
+                      <tr>
+                        <th *ngFor="let head of headElements; let i = index" class="text-center" scope="col">
+                          {{head | titlecase}}
+                          <mdb-icon fas icon="sort">
+                          </mdb-icon>
+                        </th>
+                      </tr>
+
+                    </thead>
+                    <tbody>
+
+                      <tr *ngFor="let el of elements; let i = index" class="text-center">
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="align-middle" scope="row">{{el.id}}
+                        </th>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="align-middle">
+                          {{el.user}}
+                        </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="align-middle">
+                          {{el.names}}
+                        </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="align-middle">
+                          {{el.email}}
+                        </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="align-middle">
+                          {{el.group}}
+                        </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="align-middle">
+                          {{el.earned}}
+                        </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          class="align-middle">
+                          {{el.date}}
+                        </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+
+                          <button mdbBtn type="button" size="sm" color="success" mdbWavesEffect
+                            mdbTooltip="Realizar pago a usuario">
+                            <mdb-icon fas icon="money-bill-alt"></mdb-icon>
+                          </button>
+
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot class="grey lighten-5 w-100">
+                      <tr>
+                        <td colspan="8">
+                          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements">
+                          </mdb-table-pagination>
+                        </td>
+                      </tr>
+
+                  </table>
+                </div>
+
+                <!-- <ng-template>
+                  <app-empty-records></app-empty-records>
+                </ng-template> -->
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
