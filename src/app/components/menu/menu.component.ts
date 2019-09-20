@@ -172,7 +172,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	initFormPaypalEmail() {
 		this.formPaypalEmail = this.formBuilder.group({
 			emailPaypal: new FormControl(
-				[],
+				[this.user.paypalEmail],
 				Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")])
 			)
 		});
@@ -180,6 +180,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	showModalPaypalEmail() {
 		this.formPaypalEmail.reset();
+		this.formPaypalEmail.controls["emailPaypal"].setValue(this.user.paypalEmail);
 		this.modalPaypal.show();
 	}
 
@@ -187,19 +188,23 @@ export class MenuComponent implements OnInit, OnDestroy {
 		const paypalEmail = this.formPaypalEmail.value.emailPaypal;
 		this.disableButtonPaypalEmail = true;
 
-		// DESCOMENTAR CUANDO EL ENDPOINT ESTE LISTO
-		// this.userService
-		// 	.updatePaypalEmail(this.user._id, paypalEmail)
-		// 	.pipe(takeUntil(this.ngUnsubscribe))
-		// 	.subscribe(
-		// 		() => {
-		// 			this.disableButtonPaypalEmail = false;
-		// 			this.toastService.info("El correo de paypal ha sido actualizado!", "Paypal Email", this.optionsToast);
-		// 		},
-		// 		() => {
-		// 			this.disableButtonPaypalEmail = false;
-		// 		}
-		// 	);
+		this.userService
+			.updatePaypalEmail(this.user._id, paypalEmail)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(
+				() => {
+					const user = this.user;
+					user.paypalEmail = paypalEmail;
+					this.authService.setCookieUSer(user);
+
+					this.disableButtonPaypalEmail = false;
+					this.modalPaypal.hide();
+					this.toastService.success("El correo de paypal ha sido actualizado!", "Paypal Email", this.optionsToast);
+				},
+				() => {
+					this.disableButtonPaypalEmail = false;
+				}
+			);
 	}
 
 	getPurchaseHistory() {

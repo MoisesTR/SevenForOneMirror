@@ -24,6 +24,7 @@ export class User {
 	public provider: string;
 	public image?: string;
 	public roleId?: string;
+	public paypalEmail?: string;
 
 	constructor() {}
 }
