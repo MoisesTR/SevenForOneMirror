@@ -238,6 +238,19 @@
                                         </a>
                                     </div>
 
+                                    <div *ngIf="isUserAdmin"
+                                        class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4 flex-center p-2">
+                                        <a [routerLink]="['/user-payments']"
+                                            [routerLinkActive]="['active-menu-dashboard']"
+                                            class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1"
+                                            mdbWavesEffect>
+                                            <mdb-icon fab icon="cc-paypal" size="2x"></mdb-icon>
+                                            <div class="font-weight-bolder text-wrap">
+                                                Realizar Pagos
+                                            </div>
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -324,6 +337,19 @@
                                                 <mdb-icon fas icon="trophy" size="2x"></mdb-icon>
                                                 <div class="font-weight-bolder text-wrap">
                                                     Ranking global
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div *ngIf="isUserAdmin"
+                                            class="col-sm-3 col-md-2 col-lg-6 col-xl-4 flex-center">
+                                            <a [routerLink]="['/user-payments']"
+                                                [routerLinkActive]="['active-menu-dashboard']"
+                                                class="hover-menu d-flex flex-column justify-content-center align-items-center hoverable text-menu pl-1 pr-1 pl-1 pr-1"
+                                                mdbWavesEffect>
+                                                <mdb-icon fab icon="cc-paypal" size="2x"></mdb-icon>
+                                                <div class="font-weight-bolder text-wrap">
+                                                    Realizar Pagos
                                                 </div>
                                             </a>
                                         </div>
