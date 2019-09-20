@@ -13,11 +13,13 @@ export class UserPaymentsComponent implements OnInit, AfterViewInit {
 	@ViewChild("row") row: ElementRef;
 
 	elements: any = [];
-	headElements = ["#", "Usuario", "Nombres", "Correo de Pago", "Grupo", "Ganancia", "Fecha", "Acción"];
+	headElements = ["#", "Usuario", "Nombres", "Correo de Pago", "Grupo", "Monto a pagar", "Fecha", "Estado", "Acción"];
 
 	previous: string;
 
 	maxVisibleItems = 15;
+
+	optionsSelectStatus = [{ value: "1", label: "Pendiente" }, { value: "2", label: "Pagado" }];
 
 	constructor(private cdRef: ChangeDetectorRef) {}
 
@@ -31,6 +33,7 @@ export class UserPaymentsComponent implements OnInit, AfterViewInit {
 				group: i.toString() + "0",
 				earned: i.toString() + "00",
 				date: "19/09/2019",
+				status: "Pagado",
 				buttons: ""
 			});
 		}
