@@ -79,7 +79,7 @@ export class ModalChangePasswordComponent implements OnInit, OnDestroy {
 		const password = this.firstFormGroup.value.checkPassword;
 		this.logger.info("CHECKING ACTUAL PASSWORD");
 		this.checkingPassword = true;
-		this.userService
+		this.authService
 			.verifyPassword(this.user._id, password)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(
@@ -97,7 +97,7 @@ export class ModalChangePasswordComponent implements OnInit, OnDestroy {
 		const password = this.secondFormGroup.value.password;
 		const confirmPassword = this.secondFormGroup.value.confirmPassword;
 		this.updatingPassword = true;
-		this.userService
+		this.authService
 			.changePassword(password, confirmPassword, this.user._id)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(

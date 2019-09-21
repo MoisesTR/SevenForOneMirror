@@ -82,38 +82,6 @@ export class UserService {
 		return this.http.put(this.url + this.userUrl + "/paypalEmail/" + userId, body, options);
 	}
 
-	verifyPassword(userId: string, password: string): Observable<any> {
-		const headers = new HttpHeaders({
-			"Content-Type": "application/json"
-		});
-		const options = { headers };
-		const body = JSON.stringify({ password });
-		return this.http.post(this.urlAuth + this.userUrl + "/verifyPwd/" + userId, body, options);
-	}
-
-	changePassword(password: string, passwordConfirm: string, userId: string): Observable<any> {
-		const headers = new HttpHeaders({
-			"Content-Type": "application/json"
-		});
-		const options = { headers };
-		const body = {
-			password,
-			passwordConfirm
-		};
-
-		return this.http.put(this.urlAuth + this.userUrl + "/pwd/" + userId, body, options);
-	}
-
-	verifyEmail(token) {
-		const headers = new HttpHeaders({
-			"Content-Type": "application/json",
-			Authorization: ""
-		});
-		const options = { headers: headers };
-
-		return this.http.post(this.urlAuth + "verifyemail/" + token, options);
-	}
-
 	filterUsersByRol(users: User[], rol) {
 		return users.filter(user => user.role && user.role.name === rol);
 	}

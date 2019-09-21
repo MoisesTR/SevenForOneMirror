@@ -53,6 +53,38 @@ export class AuthService {
 		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
 	}
 
+	verifyPassword(userId: string, password: string): Observable<any> {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers };
+		const body = JSON.stringify({ password });
+		return this.http.post(this.urlAuth + "/verifyPwd/" + userId, body, options);
+	}
+
+	changePassword(password: string, passwordConfirm: string, userId: string): Observable<any> {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers };
+		const body = {
+			password,
+			passwordConfirm
+		};
+
+		return this.http.put(this.urlAuth + "/pwd/" + userId, body, options);
+	}
+
+	verifyEmail(token) {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json",
+			Authorization: ""
+		});
+		const options = { headers: headers };
+
+		return this.http.post(this.urlAuth + "verifyemail/" + token, options);
+	}
+
 	getToken() {
 		return this.cookieService.get(this.JWT_ACCESS);
 	}
