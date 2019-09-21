@@ -14,18 +14,19 @@
 
             <div class="container-fluid mt-3">
 
-              <div class="row justify-content-center">
+              <div *ngIf="existsWinners; else emptyWinners" class="row justify-content-center">
 
                 <div class="col-12 col-md-8 col-lg-8">
                   <div class="form-inline md-form form-sm mt-0">
                     <i class="fas fa-search" aria-hidden="true"></i>
-                    <input class="form-control form-control-sm ml-3 w-90" type="text"
+                    <input [(ngModel)]="searchText" class="form-control form-control-sm ml-3 w-90" type="text"
                       placeholder="Buscar" aria-label="Buscar" id="search">
                   </div>
                 </div>
 
+
                 <div class="col-12 col-md-4 col-lg-4 mb-5">
-                  <mdb-select [outline]="true" [options]="optionsSelectStatus" label="Estado del pago"></mdb-select>
+                  <mdb-select (ngModelChange)="getSelectedValue($event)" [(ngModel)]="selectedValue" [outline]="true" [options]="optionsSelect" label="Grupos de Juego"></mdb-select>
                 </div>
 
                 <div class="table-responsive">
@@ -45,41 +46,41 @@
                     </thead>
                     <tbody>
 
-                      <tr *ngFor="let el of elements; let i = index" class="text-center">
+                      <tr *ngFor="let winner of winners; let i = index" class="text-center">
                         <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                          class="align-middle" scope="row">{{el.id}}
+                          class="align-middle" scope="row">{{i + 1}}
                         </th>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                           class="align-middle">
-                          {{el.user}}
+                          {{winner.userName}}
                         </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                           class="align-middle">
-                          {{el.names}}
+                          {{winner.userName}}
                         </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                           class="align-middle">
-                          {{el.email}}
+                          {{winner.paypalEmail}}
                         </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                           class="align-middle">
-                          {{el.group}}
+                          $ {{groupSelected}}
                         </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                           class="align-middle">
-                          {{el.earned}}
+                          $ {{winner.totalWon['$numberDecimal']}}
                         </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                           class="align-middle">
-                          {{el.date}}
+                          {{winner.lastWonDate | date:'dd-MM-yyyy'}}
                         </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                           class="align-middle">
-                          {{el.status}}
+                          {{winner.statusPayment}}
                         </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
 
-                          <button mdbBtn type="button" size="sm" color="success" mdbWavesEffect
+                          <button (click)="payToUser(winner)" mdbBtn type="button" size="sm" color="success" mdbWavesEffect
                             mdbTooltip="Realizar pago a usuario">
                             <mdb-icon fas icon="money-bill-alt"></mdb-icon>
                           </button>
@@ -90,19 +91,19 @@
                     <tfoot class="grey lighten-5 w-100">
                       <tr>
                         <td colspan="9">
-                          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements">
+                          <mdb-table-pagination #mdbTablePagination [tableEl]="tableEl" [ofKeyword]="keyword" [searchDataSource]="winners">
                           </mdb-table-pagination>
                         </td>
                       </tr>
 
                   </table>
                 </div>
-
-                <!-- <ng-template>
-                  <app-empty-records></app-empty-records>
-                </ng-template> -->
-
               </div>
+
+              <ng-template #emptyWinners>
+                <app-empty-records></app-empty-records>
+              </ng-template>
+
             </div>
 
           </div>

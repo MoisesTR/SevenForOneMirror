@@ -35,10 +35,10 @@ export class PaypalService {
 		return this.http.post(this.url + "capture-transaction", body, options);
 	}
 
-	payout(amountMoneyToPay: number): Observable<any> {
+	payout(amountMoneyToPay: number, paypalEmail: string): Observable<any> {
 		const headers = new HttpHeaders({ "Content-Type": "application/json" });
 		const options = { headers: headers };
-		const body = JSON.stringify({ amountMoneyToPay: amountMoneyToPay });
+		const body = JSON.stringify({ amountMoneyToPay, paypalEmail });
 		return this.http.post(this.url + "payout", body, options);
 	}
 }
