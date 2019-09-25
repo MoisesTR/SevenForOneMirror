@@ -52,7 +52,7 @@
                         role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
                         <a class="dropdown-item" *ngIf="!isUserAdmin" (click)="showModalPaypalEmail()">Correo paypal</a>
-                      <a class="dropdown-item" (click)="changePassword()">Cambiar contraseña</a>
+                        <a class="dropdown-item" (click)="changePassword()">Cambiar contraseña</a>
                         <a *ngIf="user.provider === 'none'" class="dropdown-item"
                             (click)="showModalUpdateImage()">Cambiar imagen de perfil</a>
                         <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
@@ -503,16 +503,21 @@
             </button>
             <div class="modal-body">
                 <div class="row justify-content-center">
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 background-first wow bounceInDown"
-                        data-wow-delay="0.3s">
-                        <div class="img-responsive img-circle green-seven-one">
 
 
-                            <img [src]="(user.image | imageUserSrc:'user' | async)"
-                                appDefaultImg="assets/images/main-user.png" class="ratio img-responsive img-circle"
-                                alt="user image">
+                    <div class="col-12 wow bounceInDown" data-wow-delay="0.3s">
+                        <div class="view">
+                            <img src="assets/images/first-green.svg" class="img-fluid mx-auto d-block wh-250"
+                                alt="trophy">
+
+                            <div class="mask flex-center avatar">
+                                <img [src]="(user.image | imageUserSrc:'user' | async)"
+                                    appDefaultImg="assets/images/main-user.png"
+                                    class="img-fluid rounded-circle mx-auto d-block wh-130" alt="user image">
+                            </div>
 
                         </div>
+
                     </div>
                     <div class="col-12 text-center">
                         <h2 class="mb-4 white-text mt-3 wow bounceInDown" data-wow-delay="0.2s">
@@ -550,48 +555,51 @@
                     <span aria-hidden="true">×</span>
                 </button>
 
-              <form [formGroup]="formPaypalEmail" (ngSubmit)="updatePaypalEmail()">
-                <div class="container-fluid mt-3">
+                <form [formGroup]="formPaypalEmail" (ngSubmit)="updatePaypalEmail()">
+                    <div class="container-fluid mt-3">
 
-                    <img src="assets/images/logo.png" class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+                        <img src="assets/images/logo.png" class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
 
-                    <div class="text-center">
-                        <h2 class="mt-2 font-weight-bold blue-seven-one-text">Correo paypal</h2>
-                    </div>
+                        <div class="text-center">
+                            <h2 class="mt-2 font-weight-bold blue-seven-one-text">Correo paypal</h2>
+                        </div>
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col-12">
-                            <div class="md-form md-outline">
-                                <input type="email" class="form-control" mdbInput mdbValidate
-                                    formControlName="emailPaypal" id="emailPaypal">
-                                <label for="emailPaypal">Correo paypal</label>
+                            <div class="col-12">
+                                <div class="md-form md-outline">
+                                    <input type="email" class="form-control" mdbInput mdbValidate
+                                        formControlName="emailPaypal" id="emailPaypal">
+                                    <label for="emailPaypal">Correo paypal</label>
 
+                                </div>
+
+                                <img src="https://www.paypalobjects.com/webstatic/en_US/mktg/pages/stories/pp_h_rgb.jpg"
+                                    class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+
+                                <p class="mt-4">
+                                    <span class="font-weight-bold">Correo de pago en paypal:</span>
+                                    <br>
+                                    <span class="font-weight-bolder">
+                                        Debes de indicar un correo asociado a una cuenta de paypal a la cual tengas
+                                        acceso y se encuentre vigente,
+                                        este correo sera utilizado como referencia para que puedas recibir el dinero que
+                                        vayas ganando en la plataforma.
+                                    </span>
+                                </p>
                             </div>
 
-                            <img src="https://www.paypalobjects.com/webstatic/en_US/mktg/pages/stories/pp_h_rgb.jpg"
-                                class="w-25 mx-auto d-block mb-2" alt="Logo 7x1">
+                            <div class="col-12 text-center">
+                                <button [disabled]="!formPaypalEmail.valid || disableButtonPaypalEmail" mdbBtn
+                                    rounded="true" class="green-seven-one white-text mt-3">
+                                    Actualizar
+                                </button>
+                            </div>
 
-                            <p class="mt-4">
-                                <span class="font-weight-bold">Correo de pago en paypal:</span>
-                                <br>
-                                <span class="font-weight-bolder">
-                                    Debes de indicar un correo asociado a una cuenta de paypal a la cual tengas acceso y se encuentre vigente,
-                                  este correo sera utilizado como referencia para que puedas recibir el dinero que vayas ganando en la plataforma.
-                                </span>
-                            </p>
-                        </div>
-
-                        <div class="col-12 text-center">
-                            <button [disabled]="!formPaypalEmail.valid || disableButtonPaypalEmail" mdbBtn rounded="true" class="green-seven-one white-text mt-3">
-                                Actualizar
-                            </button>
                         </div>
 
                     </div>
-
-                </div>
-              </form>
+                </form>
 
             </div>
         </div>
