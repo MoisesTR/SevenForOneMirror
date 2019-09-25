@@ -4,6 +4,7 @@ import { UserService } from "../../core/services/shared/user.service";
 import { Subject } from "rxjs";
 import { switchMap, takeUntil } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
+import { AuthService } from "../../core/services/auth/auth.service";
 
 @Component({
 	selector: "app-confirm",
@@ -19,6 +20,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private usuarioService: UserService,
+		private authService: AuthService,
 		private router: Router,
 		private logger: NGXLogger
 	) {}
@@ -48,7 +50,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
 		this.tokenConfirmacion = params["token"];
 		this.username = params["username"];
 		this.logger.info("VERIFY EMAIL", params);
-		return this.usuarioService.verifyEmail(this.tokenConfirmacion);
+		return this.authService.verifyEmail(this.tokenConfirmacion);
 	}
 
 	login() {

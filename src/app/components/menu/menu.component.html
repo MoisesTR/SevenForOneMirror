@@ -51,9 +51,10 @@
                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary text-center"
                         role="menu">
                         <a class="dropdown-item" (click)="updateProfile()">Editar perfil</a>
+                        <a class="dropdown-item" *ngIf="!isUserAdmin" (click)="showModalPaypalEmail()">Correo paypal</a>
+                      <a class="dropdown-item" (click)="changePassword()">Cambiar contraseña</a>
                         <a *ngIf="user.provider === 'none'" class="dropdown-item"
                             (click)="showModalUpdateImage()">Cambiar imagen de perfil</a>
-                        <a class="dropdown-item" *ngIf="!isUserAdmin" (click)="showModalPaypalEmail()">Correo paypal</a>
                         <a class="dropdown-item" (click)="mdlLogout.show()">Cerrar sesión</a>
                     </div>
                 </li>
@@ -596,3 +597,5 @@
         </div>
     </div>
 </div>
+
+<app-modal-change-password></app-modal-change-password>

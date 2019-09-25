@@ -284,6 +284,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.router.navigateByUrl("/profile");
 	}
 
+	changePassword() {
+		this.userService.showModalChangePassword();
+	}
+
 	logout() {
 		this.closeSockets();
 		this.authService.logout();
