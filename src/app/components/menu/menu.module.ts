@@ -14,6 +14,7 @@ import { InvoicesComponent } from "../invoices/invoices.component";
 import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
 import { ModalsModule } from "../modals/modals.module";
+import { ListGroupComponent } from "../list-group/list-group.component";
 
 @NgModule({
 	imports: [SharedModule, ModalsModule, MenuRoutingModule, NgxPayPalModule],
@@ -27,7 +28,8 @@ import { ModalsModule } from "../modals/modals.module";
 		TopPlayersComponent,
 		InvoicesComponent,
 		WinHistoryComponent,
-		TopGlobalWinnersComponent
+		TopGlobalWinnersComponent,
+		ListGroupComponent
 	],
 	schemas: [NO_ERRORS_SCHEMA]
 })

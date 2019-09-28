@@ -12,6 +12,8 @@ import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
 import { ValidateMemberGroupGuard } from "../../core/services/shared/validate-member-group.guard";
 
+import { ListGroupComponent } from "../list-group/list-group.component";
+
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
 	{ path: "profile", component: ProfileComponent, data: { titulo: "Profile" } },
@@ -26,7 +28,8 @@ const menuRoutes = [
 	{ path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } },
 	{ path: "win-history", component: WinHistoryComponent, data: { titulo: "Win History User" } },
 	{ path: "global-winners", component: TopGlobalWinnersComponent, data: { titulo: "Top Global Winners" } },
-	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
+	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } },
+	{ path: "list-group", component: ListGroupComponent, data: { titulo: "List Group" } }
 ];
 
 @NgModule({
