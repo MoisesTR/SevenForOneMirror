@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { AuthService } from "./auth.service";
 import { Observable } from "rxjs/Observable";
-import {catchError, filter, switchMap, take, timeout} from "rxjs/operators";
+import { catchError, filter, switchMap, take, timeout } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { BehaviorSubject, throwError } from "rxjs";
 import { NGXLogger } from "ngx-logger";
@@ -26,22 +26,29 @@ export class HttpInterceptorService implements HttpInterceptor {
 	) {}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		if (this.auth.getToken()) {
-			request = this.addToken(request, this.auth.getToken());
-		}
+		// if (this.auth.getToken()) {
+		// 	// request = this.addToken(request, this.auth.getToken());
+		// }
+
+		request = request.clone({
+			withCredentials: true
+		});
 
 		this.logger.debug(request.url);
 		return next.handle(request).pipe(
-		  timeout(25000),
+			timeout(25000),
 			catchError(error => {
 				let errorMessage;
 				if (error instanceof HttpErrorResponse) {
 					this.spinner.hide();
 
-					if (error.status === 401 && this.auth.getToken() && !this.auth.isAuthenticated()) {
-						return this.handle401Error(request, next);
-					}
+					// if (error.status === 401 && this.auth.getToken() && !this.auth.isAuthenticated()) {
+					// 	return this.handle401Error(request, next);
+					// }
 
+					if (error.status === 400 && error.error.code === "NAUTH") {
+						this.router.navigateByUrl("/login");
+					}
 					errorMessage = Utils.msgError(error);
 
 					this.modalService.showModalError(errorMessage);
@@ -50,9 +57,9 @@ export class HttpInterceptorService implements HttpInterceptor {
 				} else {
 					this.spinner.hide();
 
-					if (error.name === 'TimeoutError') {
-					  this.modalService.showModalError('La petición ha tardado demasiado tiempo en responder!!');
-          }
+					if (error.name === "TimeoutError") {
+						this.modalService.showModalError("La petición ha tardado demasiado tiempo en responder!!");
+					}
 					return throwError(error);
 				}
 			})

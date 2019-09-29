@@ -12,8 +12,6 @@ import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
 import { ValidateMemberGroupGuard } from "../../core/services/shared/validate-member-group.guard";
 
-import { ModalChangePasswordComponent } from "../modals/modal-change-password/modal-change-password.component";
-
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
 	{ path: "profile", component: ProfileComponent, data: { titulo: "Profile" } },

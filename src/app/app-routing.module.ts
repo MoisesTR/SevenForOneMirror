@@ -5,18 +5,17 @@ import { RegisterComponent } from "./components/register/register.component";
 import { MenuComponent } from "./components/menu/menu.component";
 import { NotFound404Component } from "./components/not-found404/not-found404.component";
 import { ConfirmComponent } from "./components/confirm/confirm.component";
-import { LoginGuardService } from "./core/services/auth/login.guard.service";
 import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.component";
 import { AuthGuardService } from "./core/services/auth/auth-guard.service";
 import { LockedScreenComponent } from "./components/locked-screen/locked-screen.component";
-import {LandingPageComponent} from "./components/landing-page/landing-page.component";
+import { LandingPageComponent } from "./components/landing-page/landing-page.component";
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
+	{
+		path: "",
+		redirectTo: "login",
+		pathMatch: "full"
+	},
 	{
 		path: "",
 		component: MenuComponent,
@@ -24,12 +23,12 @@ export const routes: Routes = [
 		loadChildren: "./components/menu/menu.module#MenuModule",
 		data: { titulo: "Menu" }
 	},
-  { path: "login", canActivate: [LoginGuardService], component: LoginComponent },
-  { path: "register", canActivate: [LoginGuardService], component: RegisterComponent },
-  { path: "confirm/:token/:userName", component: ConfirmComponent, data: { titulo: "Confirm Email" } },
-  { path: "emailConfirm", canActivate: [LoginGuardService], component: EmailConfirmComponent },
-  { path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked-screen" } },
-  { path: "landing-page", component: LandingPageComponent, data: { titulo: "Landing page" } },
+	{ path: "login", component: LoginComponent },
+	{ path: "register", component: RegisterComponent },
+	{ path: "confirm/:token/:userName", component: ConfirmComponent, data: { titulo: "Confirm Email" } },
+	{ path: "emailConfirm", component: EmailConfirmComponent },
+	{ path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked-screen" } },
+	{ path: "landing-page", component: LandingPageComponent, data: { titulo: "Landing page" } },
 	{
 		path: "**",
 		component: NotFound404Component,

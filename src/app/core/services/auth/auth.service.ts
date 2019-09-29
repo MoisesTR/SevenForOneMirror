@@ -1,16 +1,14 @@
 import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { Router } from "@angular/router";
-import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from "../../../models/User";
 import { Token } from "../../../models/Token";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Global } from "../shared/global";
-import { tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { NGXLogger } from "ngx-logger";
 import { CookieService } from "ngx-cookie-service";
 import { Observable, throwError } from "rxjs";
 import { RoleEnum } from "../../../enums/RoleEnum";
-import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
 	providedIn: "root"
@@ -18,8 +16,8 @@ import { isPlatformBrowser } from "@angular/common";
 export class AuthService {
 	public jwtHelper;
 	public urlAuth: string;
-	public JWT_REFRESH = "refreshToken";
-	public JWT_ACCESS = "token";
+	public JWT_REFRESH = "_RefreshToken";
+	public JWT_ACCESS = "_AccessToken";
 
 	constructor(
 		private router: Router,
@@ -31,13 +29,13 @@ export class AuthService {
 		this.urlAuth = Global.urlAuth;
 	}
 
-	login(usuario: User): Observable<any> {
+	login(user: User): Observable<any> {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json"
 		});
 		const options = { headers: headers };
 
-		return this.http.post(this.urlAuth + "login", usuario, options);
+		return this.http.post(this.urlAuth + "login", user, options);
 	}
 
 	loginSocial(usuario: User, socialPlatformProvider): Observable<any> {
@@ -116,15 +114,20 @@ export class AuthService {
 		}
 	}
 
-	public isAuthenticated(): boolean {
-		if (isPlatformBrowser(this.platformID)) {
-			this.jwtHelper = new JwtHelperService();
-			const token = this.getToken();
-
-			return token ? !this.jwtHelper.isTokenExpired(token) : false;
-		} else {
-			return false;
-		}
+	public isAuthenticated(): Observable<boolean> {
+		// if (isPlatformBrowser(this.platformID)) {
+		// 	this.jwtHelper = new JwtHelperService();
+		// 	const token = this.getToken();
+		//
+		// 	return token ? !this.jwtHelper.isTokenExpired(token) : false;
+		// } else {
+		// 	return false;
+		return this.me().pipe(
+			map(resp => {
+				return true;
+			})
+		);
+		// return of(false);
 	}
 
 	refreshToken() {
@@ -143,11 +146,11 @@ export class AuthService {
 	}
 
 	setValuesCookies(response) {
-		this.cookieService.deleteAll();
+		// this.cookieService.deleteAll();
 
-		this.cookieService.set("token", response.token);
-		this.cookieService.set("refreshToken", response.refreshToken);
-		this.cookieService.set("expiration", response.expiration);
+		// this.cookieService.set("token", response.token);
+		// this.cookieService.set("refreshToken", response.refreshToken);
+		// this.cookieService.set("expiration", response.expiration);
 
 		this.cookieService.set("identity", JSON.stringify(response.user));
 	}
@@ -166,9 +169,16 @@ export class AuthService {
 		this.cookieService.set("expiration", bodyToken.expiration);
 	}
 
+	me(): Observable<any> {
+		return this.http.get(this.urlAuth + "me");
+	}
+
 	public logout(): void {
 		this.logger.info("CLOSE SESSION FROM AUTH SERVICE");
-		this.cookieService.deleteAll();
-		this.router.navigate(["/login"]);
+		// this.cookieService.deleteAll();
+
+		this.http.get(this.urlAuth + "logout").subscribe(() => {
+			this.router.navigate(["/login"]);
+		});
 	}
 }
