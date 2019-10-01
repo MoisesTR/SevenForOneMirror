@@ -16,7 +16,6 @@ import { takeUntil } from "rxjs/operators";
 import { ModalDirective, ToastService } from "ng-uikit-pro-standard";
 import { ActionGameEnum } from "../../enums/ActionGameEnum";
 import { RoleEnum } from "../../enums/RoleEnum";
-import { UploadService } from "../../core/services/shared/upload.service";
 import { MdbFileUploadComponent } from "mdb-file-upload";
 import { Subject } from "rxjs";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
@@ -60,7 +59,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 		private purchaseHistoryService: PurchaseService,
 		private groupService: GroupService,
 		private updateMoneyService: UpdateMoneyService,
-		private uploadService: UploadService,
 		private toastService: ToastService,
 		private router: Router,
 		private mainSocketService: MainSocketService,
@@ -315,18 +313,18 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 	uploadImage() {
 		this.disableButtonUpload = true;
-		this.uploadService
-			.upload("user", this.user._id, this.fileToUpload)
+		this.userService
+			.updateImage(this.fileToUpload)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(
 				resp => {
-					this.logger.info("IMAGE UPDATE SUCCESSFULLY", resp.image);
+					this.user = resp.data;
+					this.logger.info("IMAGE UPDATE SUCCESSFULLY", resp);
 
 					const options = { toastClass: "opacity" };
 					this.toastService.success("La imagen ha sido actualizada!", "Imagen", options);
 
 					this.disableButtonUpload = false;
-					this.user.image = resp.image;
 					this.authService.setCookieUSer(this.user);
 					this.fileToUpload = undefined;
 					this.mdlAvatar.hide();

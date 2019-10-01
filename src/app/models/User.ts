@@ -18,6 +18,7 @@ export class User {
 	public updatedAt: string;
 	public accessToken: string;
 	public getUserInfo: boolean;
+	public isExternalImage: boolean;
 	public phones?: string[];
 	public birthDate?: Date;
 	public gender?: string;
@@ -25,6 +26,7 @@ export class User {
 	public image?: string;
 	public roleId?: string;
 	public paypalEmail?: string;
+	public thumbnail?: string;
 
 	constructor() {}
 }

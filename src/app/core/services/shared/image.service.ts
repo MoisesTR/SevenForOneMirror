@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
 import { DomSanitizer } from "@angular/platform-browser";
+import "rxjs/add/operator/map";
+import { Observable } from "rxjs";
 
 @Injectable({
 	providedIn: "root"

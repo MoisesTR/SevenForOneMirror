@@ -15,6 +15,7 @@ import { CustomValidators } from "../../validators/CustomValidators";
 import { exhaustMap, takeUntil } from "rxjs/operators";
 import { fromEvent, Observable, Subject } from "rxjs";
 import { ModalService } from "../../core/services/shared/modal.service";
+import { NGXLogger } from "ngx-logger";
 
 @Component({
 	selector: "app-profile",
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		private authService: AuthService,
 		private userService: UserService,
 		private modalService: ModalService,
+		private logger: NGXLogger,
 		private formBuilder: FormBuilder,
 		private cdr: ChangeDetectorRef
 	) {}
@@ -47,12 +49,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 		fromEvent(this.updateButton.nativeElement, "click")
 			.pipe(
 				takeUntil(this.ngUnsubscribe),
-				exhaustMap(click => this.updateUser())
+				exhaustMap(() => this.updateUser())
 			)
-			.subscribe(() => {
-				this.cdr.markForCheck();
-				this.modalService.showModalSuccess("Los datos han sido actualizados!!");
+			.subscribe(resp => {
+				this.logger.info("USER UPDATE SUCCESSFULLY", resp);
+				this.user = resp.data;
 				this.authService.setCookieUSer(this.user);
+				this.modalService.showModalSuccess("Los datos han sido actualizados!!");
+				this.cdr.markForCheck();
 			});
 	}
 
