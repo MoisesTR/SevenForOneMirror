@@ -12,13 +12,61 @@
           <!-- Card content -->
           <div class="card-body card-body-cascade">
 
-            <form [formGroup]="">
+            <div class="container-fluid mt-3">
+              <div class="row">
 
-              <div class="container-fluid">
-                
+                <div class="col-12">
+
+                  <div class="form-inline md-form form-sm mt-0">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input [(ngModel)]="searchText" class="form-control form-control-sm ml-3 w-95" type="text"
+                      (keyup)="searchItems()" placeholder="Buscar" aria-label="Buscar" id="search-input">
+                  </div>
+
+                  <div class="table-responsive">
+                    <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true"
+                      striped="true">
+                      <thead>
+                        <tr>
+                          <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="elements"
+                            [sortBy]="headElements[i]" scope="col">{{head | titlecase}} <mdb-icon fas icon="sort">
+                            </mdb-icon>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody #row>
+                        <tr mdbTableCol (rowCreated)="onRowCreate($event)" (rowRemoved)="onRowRemove($event)"
+                          *ngFor="let el of elements; let i = index">
+                          <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                            class="align-middle" scope="row">{{el.id}}</th>
+                          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                            class="align-middle">{{el.montoGrupo}}</td>
+                          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            <div class="text-center">
+                              <button mdbBtn type="button" size="sm" color="danger" mdbWavesEffect
+                                mdbTooltip="Inactivar grupo">
+                                <mdb-icon fas icon="times-circle"></mdb-icon>
+                              </button>
+                            </div>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot class="grey lighten-5 w-100">
+                        <tr>
+                          <td colspan="3">
+                            <mdb-table-pagination [tableEl]="tableEl" paginationAlign="" [searchDataSource]="elements">
+                            </mdb-table-pagination>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+
+                </div>
+
               </div>
-
-            </form>
+            </div>
 
           </div>
         </div>
