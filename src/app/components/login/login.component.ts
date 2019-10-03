@@ -11,7 +11,7 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { isPlatformServer } from "@angular/common";
 import { ModalService } from "../../core/services/shared/modal.service";
-import { ModalDirective } from "ng-uikit-pro-standard";
+import { ModalDirective, ToastService } from "ng-uikit-pro-standard";
 
 @Component({
 	selector: "app-login",
@@ -29,11 +29,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public disabledButton = false;
 	public exact: boolean;
 
+	public optionsToast = { toastClass: "opacity" };
+
 	constructor(
 		private userService: UserService,
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private rolService: RolService,
+		private toastService: ToastService,
 		private socialAuthService: AuthService,
 		private authService: AuthServiceUser,
 		@Inject(PLATFORM_ID) private platformId: Object,
@@ -101,6 +104,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(
 				response => {
+					this.disabledButton = false;
 					this.authService.setValuesCookies(response);
 					this.router.navigateByUrl("/dashboard");
 				},
@@ -133,16 +137,22 @@ export class LoginComponent implements OnInit, OnDestroy {
 	}
 
 	recoverPassword() {
+		this.disabledButton = true;
 		const email = this.formRecoverPassword.value.email;
 
-		// DESCOMENTAR CUANDO EL ENDPOINT PARA RECUPERAR CONTRASENIA ESTE LISTO
-		// this.userService
-		// 	.verifyEmailRecoverPassword(email)
-		// 	.pipe(takeUntil(this.ngUnsubscribe))
-		// 	.subscribe(resp => {});
-		this.modalForgotPassword.hide();
-
-		this.router.navigateByUrl("/recover-account-message");
+		this.authService
+			.forgotPassword(email)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(
+				() => {
+					this.disabledButton = false;
+					this.modalForgotPassword.hide();
+					this.router.navigateByUrl("/recover-account-message");
+				},
+				() => {
+					this.disabledButton = false;
+				}
+			);
 	}
 
 	ngOnDestroy(): void {

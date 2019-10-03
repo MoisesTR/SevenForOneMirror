@@ -29,6 +29,7 @@ import { ModalsModule } from "./components/modals/modals.module";
 import { HttpClientModule } from "@angular/common/http";
 import { ConfirmChangePasswordComponent } from "./components/confirm-change-password/confirm-change-password.component";
 import { ModalChangePasswordComponent } from "./components/modals/modal-change-password/modal-change-password.component";
+import { EmailConfirmRecoverPasswordComponent } from "./components/email-confirm-recover-password/email-confirm-recover-password.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -60,7 +61,8 @@ export function getAuthServiceConfigs() {
 		AddGroupsComponent,
 		LandingPageComponent,
 		ModalChangePasswordComponent,
-		ConfirmChangePasswordComponent
+		ConfirmChangePasswordComponent,
+		EmailConfirmRecoverPasswordComponent
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: "serverApp" }),

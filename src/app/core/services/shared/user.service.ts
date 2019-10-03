@@ -40,7 +40,7 @@ export class UserService {
 	private getUrlSocial(socialPlatformProvider) {
 		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
 	}
-	
+
 	getUsers() {
 		return this.http.get<User[]>(this.url + this.userUrl).pipe(map(data => data));
 	}
@@ -99,20 +99,6 @@ export class UserService {
 		const options = { headers };
 		const body = JSON.stringify({ paypalEmail });
 		return this.http.put(this.url + this.userUrl + "/paypalEmail/" + userId, body, options);
-	}
-
-	recoverPassword(password: string, passwordConfirm: string) {
-		const body = {
-			password,
-			passwordConfirm
-		};
-
-		return this.http.post(this.url + "recoverPassword", body);
-	}
-
-	verifyEmailRecoverPassword(email: string): Observable<any> {
-		const body = JSON.stringify({ email });
-		return this.http.post(this.url + "recoverPassword", email);
 	}
 
 	filterUsersByRol(users: User[], rol) {

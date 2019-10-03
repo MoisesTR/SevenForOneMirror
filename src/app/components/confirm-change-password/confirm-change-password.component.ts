@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { CustomValidators } from "../../validators/CustomValidators";
 import { UserService } from "../../core/services/shared/user.service";
-import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import { map, takeUntil } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
 import { ToastService } from "ng-uikit-pro-standard";
+import { AuthService } from "../../core/services/auth/auth.service";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 
 @Component({
 	selector: "app-confirm-change-password",
@@ -17,7 +19,18 @@ export class ConfirmChangePasswordComponent implements OnInit {
 	@ViewChild("newPassword") inputNewPassword: ElementRef;
 	@ViewChild("confirmPassword") inputConfirmPassword: ElementRef;
 
-	constructor(private formBuilder: FormBuilder, private userService: UserService, private toastService: ToastService) {}
+	public token: string;
+
+	constructor(
+		private formBuilder: FormBuilder,
+		private userService: UserService,
+		private route: ActivatedRoute,
+		private toastService: ToastService,
+		private router: Router,
+		private authService: AuthService
+	) {
+		this.token = this.route.snapshot.paramMap.get("token");
+	}
 
 	ngOnInit() {
 		this.initFormGroup();
@@ -45,16 +58,14 @@ export class ConfirmChangePasswordComponent implements OnInit {
 		const password = this.formChangePassword.value.password;
 		const confirmPassword = this.formChangePassword.value.confirmPassword;
 
-		console.log(password);
-		console.log(confirmPassword);
-
-		// this.userService
-		// 	.recoverPassword(password, confirmPassword)
-		// 	.pipe(takeUntil(this.ngUnsubscribe))
-		// 	.subscribe(resp => {});
-
-		const options = { toastClass: "opacity" };
-		this.toastService.success("La Contraseña ha sido reestablecida con exito, inicie sesion!", "Contraseña", options);
+		this.authService
+			.resetPassword(this.token, password, confirmPassword)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(resp => {
+				const options = { toastClass: "opacity" };
+				this.toastService.success("La Contraseña ha sido reestablecida con exito!", "Contraseña", options);
+				this.router.navigateByUrl("/dashboard");
+			});
 	}
 
 	showPassword(idTextField) {

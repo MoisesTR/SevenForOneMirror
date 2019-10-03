@@ -73,6 +73,20 @@ export class AuthService {
 		return this.http.put(this.urlAuth + "/pwd/" + userId, body, options);
 	}
 
+	forgotPassword(email: string, userName?: string) {
+		const body = {
+			userName,
+			email
+		};
+
+		return this.http.post(this.urlAuth + "forgotPasswd", body);
+	}
+
+	resetPassword(token: string, password: string, passwordConfirm: string): Observable<any> {
+		const body = JSON.stringify({ password, passwordConfirm });
+		return this.http.patch(this.urlAuth + "resetPasswd/" + token, body);
+	}
+
 	verifyEmail(token) {
 		const headers = new HttpHeaders({
 			"Content-Type": "application/json",
@@ -98,7 +112,7 @@ export class AuthService {
 			identity = JSON.parse(this.cookieService.get("identity"));
 		} catch (e) {
 			this.logger.info("MISTAKE FROM JSON PARSE IDENTITY, \n" + "PROBABLY SOMEONE DELETED THE KEY IN THE COOKIE");
-			this.logout();
+			this.router.navigate(["/login"]);
 			throwError(e);
 		}
 
@@ -106,11 +120,11 @@ export class AuthService {
 	}
 
 	public userIsAdmin() {
-		if (this.getUser().role) {
+		if (this.getUser() && this.getUser().role) {
 			return this.getUser().role.name === RoleEnum.Admin;
 		} else {
 			this.logger.info("ERROR GET ROLE USER");
-			this.logout();
+			this.router.navigate(["/login"]);
 		}
 	}
 
@@ -175,10 +189,10 @@ export class AuthService {
 
 	public logout(): void {
 		this.logger.info("CLOSE SESSION FROM AUTH SERVICE");
-		// this.cookieService.deleteAll();
 
 		this.http.get(this.urlAuth + "logout").subscribe(() => {
 			this.router.navigate(["/login"]);
+			this.cookieService.deleteAll();
 		});
 	}
 }

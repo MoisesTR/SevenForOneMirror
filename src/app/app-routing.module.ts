@@ -33,7 +33,7 @@ export const routes: Routes = [
 	{ path: "locked-screen", component: LockedScreenComponent, data: { titulo: "locked screen" } },
 	{ path: "landing-page", component: LandingPageComponent, data: { titulo: "Landing page" } },
 	{
-		path: "confirm-change-password",
+		path: "recover-account/:token",
 		component: ConfirmChangePasswordComponent,
 		data: { titulo: "Confirm change screen" }
 	},
