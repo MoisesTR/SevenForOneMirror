@@ -29,6 +29,18 @@ export class UserService {
 		this.modalChangePassword.emit(true);
 	}
 
+	login(usuario: User): Observable<any> {
+		return this.http.post(this.urlAuth + "login", usuario);
+	}
+
+	loginSocial(usuario: User, socialPlatformProvider): Observable<any> {
+		return this.http.post(this.urlAuth + this.getUrlSocial(socialPlatformProvider), usuario);
+	}
+
+	private getUrlSocial(socialPlatformProvider) {
+		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
+	}
+
 	getUsers() {
 		return this.http.get<User[]>(this.url + this.userUrl).pipe(map(data => data));
 	}

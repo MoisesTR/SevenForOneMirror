@@ -34,6 +34,12 @@ export class HttpInterceptorService implements HttpInterceptor {
 			withCredentials: true
 		});
 
+		if (!request.headers.has("Content-Type")) {
+			request = request.clone({ headers: request.headers.set("Content-Type", "application/json") });
+		}
+
+		request = request.clone({ headers: request.headers.set("Accept", "application/json") });
+
 		this.logger.debug(request.url);
 		return next.handle(request).pipe(
 			timeout(25000),

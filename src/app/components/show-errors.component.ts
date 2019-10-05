@@ -16,7 +16,7 @@ export class ShowErrorsComponent {
 		minlength: params => params.requiredLength + " caracteres minimos",
 		maxlength: params => params.requiredLength + " caracteres maximos",
 		/* 'pattern': (params) => 'The required pattern is: ' + params.requiredPattern,*/
-		pattern: params => "The email is not valid",
+		pattern: params => "El correo no es valido!",
 		uniqueName: params => params.message,
 		telephoneNumbers: params => params.message,
 		telephoneNumber: params => params.message,
