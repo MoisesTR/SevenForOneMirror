@@ -128,7 +128,7 @@ export class AuthService {
 		}
 	}
 
-	public isAuthenticated(): Observable<boolean> {
+	public isAuthenticated() {
 		// if (isPlatformBrowser(this.platformID)) {
 		// 	this.jwtHelper = new JwtHelperService();
 		// 	const token = this.getToken();
@@ -136,11 +136,12 @@ export class AuthService {
 		// 	return token ? !this.jwtHelper.isTokenExpired(token) : false;
 		// } else {
 		// 	return false;
-		return this.me().pipe(
-			map(resp => {
-				return true;
-			})
-		);
+		// return this.me().pipe(
+		// 	map(resp => {
+		//     this.setCookieUser(resp);
+		// 		return true;
+		// 	})
+		// );
 		// return of(false);
 	}
 
@@ -169,7 +170,7 @@ export class AuthService {
 		this.cookieService.set("identity", JSON.stringify(response.user));
 	}
 
-	setCookieUSer(user: User) {
+	setCookieUser(user: User) {
 		this.cookieService.set("identity", JSON.stringify(user));
 	}
 
@@ -189,7 +190,7 @@ export class AuthService {
 
 	public logout(): void {
 		this.logger.info("CLOSE SESSION FROM AUTH SERVICE");
-
+		this.cookieService.deleteAll();
 		this.http.get(this.urlAuth + "logout").subscribe(() => {
 			this.router.navigate(["/login"]);
 			this.cookieService.deleteAll();

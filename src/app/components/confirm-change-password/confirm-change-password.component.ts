@@ -62,6 +62,7 @@ export class ConfirmChangePasswordComponent implements OnInit {
 			.resetPassword(this.token, password, confirmPassword)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(resp => {
+				this.authService.setCookieUser(resp.user);
 				const options = { toastClass: "opacity" };
 				this.toastService.success("La Contraseña ha sido reestablecida con exito!", "Contraseña", options);
 				this.router.navigateByUrl("/dashboard");

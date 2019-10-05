@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				.loginSocial(this.user, socialPlatformProvider)
 				.pipe(takeUntil(this.ngUnsubscribe))
 				.subscribe(response => {
-					this.authService.setValuesCookies(response);
+					this.authService.setCookieUser(response.user);
 					this.router.navigateByUrl("/dashboard");
 				});
 		});
@@ -105,7 +105,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.subscribe(
 				response => {
 					this.disabledButton = false;
-					this.authService.setValuesCookies(response);
+					this.authService.setCookieUser(response.user);
 					this.router.navigateByUrl("/dashboard");
 				},
 				() => {

@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 			.subscribe(resp => {
 				this.logger.info("USER UPDATE SUCCESSFULLY", resp);
 				this.user = resp.data;
-				this.authService.setCookieUSer(this.user);
+				this.authService.setCookieUser(this.user);
 				this.modalService.showModalSuccess("Los datos han sido actualizados!!");
 				this.cdr.markForCheck();
 			});

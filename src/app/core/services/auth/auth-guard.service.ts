@@ -4,6 +4,7 @@ import { AuthService } from "./auth.service";
 import { isPlatformBrowser } from "@angular/common";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { User } from "../../../models/User";
 
 @Injectable({
 	providedIn: "root"
@@ -15,7 +16,8 @@ export class AuthGuardService implements CanActivate {
 		//verifica si esta en el lado del browser
 		if (isPlatformBrowser(this.platformId)) {
 			return this.auth.me().pipe(
-				map(() => {
+				map((resp: User) => {
+					this.auth.setCookieUser(resp);
 					return true;
 				})
 			);

@@ -193,7 +193,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 				() => {
 					const user = this.user;
 					user.paypalEmail = paypalEmail;
-					this.authService.setCookieUSer(user);
+					this.authService.setCookieUser(user);
 
 					this.disableButtonPaypalEmail = false;
 					this.modalPaypal.hide();
@@ -325,7 +325,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 					this.toastService.success("La imagen ha sido actualizada!", "Imagen", options);
 
 					this.disableButtonUpload = false;
-					this.authService.setCookieUSer(this.user);
+					this.authService.setCookieUser(this.user);
 					this.fileToUpload = undefined;
 					this.mdlAvatar.hide();
 				},
