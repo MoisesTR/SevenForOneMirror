@@ -23,7 +23,7 @@ export class WinHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
 	@ViewChild("row") row: ElementRef;
 
 	elements: any = [];
-	headElements = ["#", "Grupo", "Ganancias", "Fecha"];
+	headElements = ["#", "Grupo", "Ganancias", "Fecha", "Acción"];
 
 	sortByElements = ["#", "groupInfo.initialInvertion", "earned", "createdAt"];
 

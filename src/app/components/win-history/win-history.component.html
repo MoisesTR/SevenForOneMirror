@@ -51,16 +51,26 @@
                             ${{history.earned}}
                           </div>
                         </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="border-top-bottom">
+                          <div class="table-text-size mx-auto">
+                            {{history.createdAt | date:'dd-MM-yyyy'}}
+                          </div>
+                        </td>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="border-right border-top-bottom table-text-size align-middle">
 
-                          {{history.createdAt | date:'dd-MM-yyyy'}}
+                          <div class="text-center">
+                            <button mdbBtn type="button" size="sm" color="success"
+                                    mdbWavesEffect mdbTooltip="Realizar Cobro">
+                              <mdb-icon fas icon="money-bill-alt"></mdb-icon>
+                            </button>
+                          </div>
 
                         </td>
                       </tr>
                     </tbody>
                     <tfoot class="grey lighten-5 w-100">
                     <tr>
-                      <td colspan="4">
+                      <td colspan="5">
                         <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="purchaseHistoryEarned"></mdb-table-pagination>
                       </td>
                     </tr>
