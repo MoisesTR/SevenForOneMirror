@@ -138,6 +138,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.mainSocketService.onEvent(EventEnum.LOGIN_AGAIN).subscribe(data => {
 			this.logger.info("LOGIN AGAIN DATA", data);
 		});
+
+		this.mainSocketService.onEvent(EventEnum.CLOSE_SESSION).subscribe(data => {
+			this.authService.logout();
+			this.logger.info(EventEnum.CLOSE_SESSION + "DATA", data);
+		});
 	}
 
 	dropdownAndScroll() {
