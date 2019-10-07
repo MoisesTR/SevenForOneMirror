@@ -121,7 +121,8 @@ export class AuthService {
 
 	public userIsAdmin() {
 		if (this.getUser() && this.getUser().role) {
-			return this.getUser().role.name === RoleEnum.Admin;
+			return this.getUser().userName === "admin";
+			// return this.getUser().role.name === RoleEnum.Admin;
 		} else {
 			this.logger.info("ERROR GET ROLE USER");
 			this.router.navigate(["/login"]);
