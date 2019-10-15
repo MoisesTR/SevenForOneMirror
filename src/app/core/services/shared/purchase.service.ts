@@ -1,13 +1,13 @@
-import {Injectable} from "@angular/core";
-import {Global} from "./global";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import { Global } from "./global";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
 	providedIn: "root"
 })
 export class PurchaseService {
-	public purchaseUrl = "purchase-history";
+	public purchaseUrl = "game-groups/purchase-history/";
 
 	public url: string;
 	constructor(private http: HttpClient) {
@@ -15,10 +15,10 @@ export class PurchaseService {
 	}
 
 	getPurchaseHistory(): Observable<any> {
-		return this.http.get(this.url + this.purchaseUrl + "/me");
+		return this.http.get(this.url + this.purchaseUrl + "me");
 	}
 
 	getPurchaseHistoryByIdUser(userId): Observable<any> {
-		return this.http.get(this.url + this.purchaseUrl + "/" + userId);
+		return this.http.get(this.url + this.purchaseUrl + userId);
 	}
 }

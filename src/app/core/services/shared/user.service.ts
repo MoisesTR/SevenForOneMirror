@@ -12,7 +12,7 @@ export class UserService {
 	public urlAuth: string;
 	public url: string;
 	public identity: User;
-	public userUrl = "users";
+	public userUrl = "users/";
 	public modalAdmin = new EventEmitter<any>();
 	public modalChangePassword = new EventEmitter<any>();
 
@@ -69,14 +69,14 @@ export class UserService {
 		});
 		const options = { headers: headers };
 
-		return this.http.patch(this.url + this.userUrl + "/me", user, options);
+		return this.http.patch(this.url + this.userUrl + "me", user, options);
 	}
 
 	updateImage(file: File): Observable<any> {
 		const uploadData = new FormData();
 		uploadData.append("photo", file, file.name);
 		// return this.http.put(this.url + "upload/" + folder + "/" + id, uploadData);
-		return this.http.patch(this.url + this.userUrl + "/me", uploadData);
+		return this.http.patch(this.url + this.userUrl + "me", uploadData);
 	}
 
 	changeStateUser(userId, enabled = false) {
@@ -88,7 +88,7 @@ export class UserService {
 
 		const options = { headers, params: httpParams };
 
-		return this.http.delete(this.url + this.userUrl + "/" + userId, options);
+		return this.http.delete(this.url + this.userUrl + userId, options);
 	}
 
 	updatePaypalEmail(userId: string, paypalEmail: string): Observable<any> {
@@ -98,7 +98,7 @@ export class UserService {
 
 		const options = { headers };
 		const body = JSON.stringify({ paypalEmail });
-		return this.http.put(this.url + this.userUrl + "/paypalEmail/" + userId, body, options);
+		return this.http.put(this.url + this.userUrl + "paypalEmail/" + userId, body, options);
 	}
 
 	filterUsersByRol(users: User[], rol) {
