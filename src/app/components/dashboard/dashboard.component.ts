@@ -165,7 +165,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	getAllUsers() {
 		this.userService
-			.getUsers()
+			.getUsers(true)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(users => {
 				// ADMINS

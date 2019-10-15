@@ -41,8 +41,9 @@ export class UserService {
 		return socialPlatformProvider === "google" ? "loginGoogle" : "loginFacebook";
 	}
 
-	getUsers() {
-		return this.http.get<User[]>(this.url + this.userUrl).pipe(map(data => data));
+	getUsers(populateRole?: boolean) {
+		const params = new HttpParams().set("populateRole", populateRole ? "true" : "false");
+		return this.http.get<User[]>(this.url + this.userUrl, { params }).pipe(map(data => data));
 	}
 
 	createUser(usuario: User) {
