@@ -57,7 +57,7 @@ export class AuthService {
 		});
 		const options = { headers };
 		const body = JSON.stringify({ password });
-		return this.http.post(this.urlAuth + "/verifyPwd/" + userId, body, options);
+		return this.http.post(this.urlAuth + "verifyPwd/" + userId, body, options);
 	}
 
 	changePassword(password: string, passwordConfirm: string, userId: string): Observable<any> {
@@ -70,7 +70,7 @@ export class AuthService {
 			passwordConfirm
 		};
 
-		return this.http.put(this.urlAuth + "/pwd/" + userId, body, options);
+		return this.http.put(this.urlAuth + "pwd/" + userId, body, options);
 	}
 
 	forgotPassword(email: string, userName?: string) {

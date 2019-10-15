@@ -1,10 +1,10 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Global} from './global';
-import {Observable, Subject} from 'rxjs';
-import {GroupGame} from '../../../models/GroupGame';
-import {MemberGroup} from '../../../models/MemberGroup';
-import {Cacheable, CacheBuster} from "ngx-cacheable";
+import { EventEmitter, Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Global } from "./global";
+import { Observable, Subject } from "rxjs";
+import { GroupGame } from "../../../models/GroupGame";
+import { MemberGroup } from "../../../models/MemberGroup";
+import { Cacheable, CacheBuster } from "ngx-cacheable";
 
 const cacheBuster$ = new Subject<void>();
 
@@ -12,42 +12,42 @@ const cacheBuster$ = new Subject<void>();
 	providedIn: "root"
 })
 export class GroupService {
-	public gameUrl = "game-groups";
+	public gameUrl = "game-groups/";
 
 	public url: string;
-  public modalEvent = new EventEmitter<any>();
+	public modalEvent = new EventEmitter<any>();
 
 	constructor(private http: HttpClient) {
 		this.url = Global.url;
 	}
 
-  showModal() {
-    this.modalEvent.emit(true);
-  }
+	showModal() {
+		this.modalEvent.emit(true);
+	}
 
-  @CacheBuster({
-    cacheBusterNotifier: cacheBuster$
-  })
+	@CacheBuster({
+		cacheBusterNotifier: cacheBuster$
+	})
 	createGroup(initialInvertion: number): Observable<any> {
-		const headers = new HttpHeaders({"Content-Type": "application/json"});
+		const headers = new HttpHeaders({ "Content-Type": "application/json" });
 		const options = { headers: headers };
-    const body = JSON.stringify({  initialInvertion });
-		return this.http.post(this.url + this.gameUrl, body , options);
+		const body = JSON.stringify({ initialInvertion });
+		return this.http.post(this.url + this.gameUrl, body, options);
 	}
 
 	getGroup(groupId): Observable<any> {
-		return this.http.get(this.url + this.gameUrl + "/" + groupId);
+		return this.http.get(this.url + this.gameUrl + groupId);
 	}
 
-  @Cacheable({
-    cacheBusterObserver: cacheBuster$
-  })
+	@Cacheable({
+		cacheBusterObserver: cacheBuster$
+	})
 	getGroups(): Observable<GroupGame[]> {
 		return this.http.get<GroupGame[]>(this.url + this.gameUrl);
 	}
-	
+
 	getGroupsCurrentUser(userId): Observable<any> {
-		return this.http.get(this.url + this.gameUrl + "/current/" + userId);
+		return this.http.get(this.url + this.gameUrl + "current/" + userId);
 	}
 
 	addMemberToGroup(member: MemberGroup, groupId): Observable<any> {
@@ -55,14 +55,14 @@ export class GroupService {
 			"Content-Type": "application/json"
 		});
 		const options = { headers: headers };
-		return this.http.post(this.url + this.gameUrl + "/members/" + groupId, member, options);
+		return this.http.post(this.url + this.gameUrl + "members/" + groupId, member, options);
 	}
 
 	removeMemberFromGroup(userId, groupId): Observable<any> {
 		const params = new HttpParams().set("userId", userId);
 		const options = { params: params };
 
-		return this.http.delete(this.url + this.gameUrl + "/members/" + groupId, options);
+		return this.http.delete(this.url + this.gameUrl + "members/" + groupId, options);
 	}
 
 	filterMemberByGroup(group: GroupGame, userId) {
@@ -96,14 +96,13 @@ export class GroupService {
 		return groupsPlayingUser;
 	}
 
-  refund(authorizationID) {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    const options = { headers: headers };
-    const body = JSON.stringify({ authorizationID: authorizationID });
+	refund(authorizationID) {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/json"
+		});
+		const options = { headers: headers };
+		const body = JSON.stringify({ authorizationID: authorizationID });
 
-    return this.http.post(this.url + "capture-authorization", body, options);
-  }
-
+		return this.http.post(this.url + "capture-authorization", body, options);
+	}
 }

@@ -261,6 +261,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 			.getUsers()
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(users => {
+				console.log(users);
 				this.registeredUsers = this.userService.filterUsersByRol(users, RoleEnum.User).length;
 			});
 	}

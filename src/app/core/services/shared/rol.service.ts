@@ -9,14 +9,14 @@ import { Cacheable } from "ngx-cacheable";
 })
 export class RolService {
 	public url: string;
-	public urlRol = "roles";
+	public urlRol = "roles/";
 
 	constructor(private http: HttpClient) {
 		this.url = Global.url;
 	}
 
 	getRol(rolId): Observable<any> {
-		return this.http.get(this.url + this.urlRol + "/" + rolId);
+		return this.http.get(this.url + this.urlRol + rolId);
 	}
 
 	@Cacheable()
