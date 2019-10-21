@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 	providedIn: "root"
 })
 export class PurchaseService {
-	public purchaseUrl = "game-groups/purchase-history/";
+	public purchaseUrl = "purchase-history/";
 
 	public url: string;
 	constructor(private http: HttpClient) {
