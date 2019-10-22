@@ -5,12 +5,13 @@ import { ProfileComponent } from "../profile/profile.component";
 import { GroupsComponent } from "../groups/groups.component";
 import { GamecontainerComponent } from "../gamecontainer/gamecontainer.component";
 import { TopPlayersComponent } from "../top-players/top-players.component";
-
 import { InvoicesComponent } from "../invoices/invoices.component";
+import { GroupListComponent } from "../group-list/group-list.component";
 
 import { WinHistoryComponent } from "../win-history/win-history.component";
 import { TopGlobalWinnersComponent } from "../top-global-winners/top-global-winners.component";
 import { ValidateMemberGroupGuard } from "../../core/services/shared/validate-member-group.guard";
+import { AdminGuard } from "../../core/services/shared/admin.guard";
 
 const menuRoutes = [
 	{ path: "dashboard", component: DashboardComponent, data: { titulo: "Dashboard" } },
@@ -26,6 +27,7 @@ const menuRoutes = [
 	{ path: "invoices", component: InvoicesComponent, data: { titulo: "Invoices" } },
 	{ path: "win-history", component: WinHistoryComponent, data: { titulo: "Win History User" } },
 	{ path: "global-winners", component: TopGlobalWinnersComponent, data: { titulo: "Top Global Winners" } },
+	{ path: "group-list", canActivate: [AdminGuard], component: GroupListComponent, data: { titulo: "Group List" } },
 	{ path: "", redirectTo: "/dashboard", pathMatch: "full", data: { titulo: "Dashboard" } }
 ];
 

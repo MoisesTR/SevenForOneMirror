@@ -31,7 +31,7 @@ export class GroupService {
 	createGroup(initialInvertion: number): Observable<any> {
 		const headers = new HttpHeaders({ "Content-Type": "application/json" });
 		const options = { headers: headers };
-		const body = JSON.stringify({ initialInvertion });
+		const body = JSON.stringify({ initialInvertion, uniqueChange: true });
 		return this.http.post(this.url + this.gameUrl, body, options);
 	}
 

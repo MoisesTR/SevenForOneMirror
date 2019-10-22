@@ -1,0 +1,79 @@
+<section>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 colsm-12 col-md-12 col-lg-12">
+
+        <div class="card card-cascade narrower rounded-all z-depth-3">
+
+          <div class="view view-cascade gradient-card-header green-seven-one">
+            <h2 class="card-header-title mb-2">Grupos</h2>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade">
+
+            <div *ngIf="existsGroups; else emptyGroups" class="container-fluid mt-3">
+              <div class="row">
+
+                <div class="col-12">
+
+                  <div class="form-inline md-form form-sm mt-0">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input [(ngModel)]="searchText" class="form-control form-control-sm ml-3 w-95" type="text"
+                      (keyup)="searchItems()" placeholder="Buscar" aria-label="Buscar" id="search-input">
+                  </div>
+
+                  <div class="table-responsive">
+                    <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" small="true" bordered="true"
+                      striped="true">
+                      <thead>
+                        <tr>
+                          <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="groups"
+                            [sortBy]="sortByElements[i]" scope="col">{{head | titlecase}} <mdb-icon fas icon="sort">
+                            </mdb-icon>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody #row>
+                        <tr *ngFor="let group of groups; let i = index">
+                          <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                            class="align-middle" scope="row">{{i + 1}}</th>
+                          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                            class="align-middle">$ {{group.initialInvertion}}</td>
+                          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            <div class="text-center">
+                              <button (click)="disableGroup(group)" mdbBtn type="button" size="sm" color="danger" mdbWavesEffect
+                                mdbTooltip="Inactivar grupo">
+                                <mdb-icon fas icon="times-circle"></mdb-icon>
+                              </button>
+                            </div>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot class="grey lighten-5 w-100">
+                        <tr>
+                          <td colspan="3">
+                            <mdb-table-pagination [ofKeyword]="keyword" [tableEl]="tableEl" paginationAlign="" [searchDataSource]="groups">
+                            </mdb-table-pagination>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <ng-template #emptyGroups>
+              <app-empty-records></app-empty-records>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
