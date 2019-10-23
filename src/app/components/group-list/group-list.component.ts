@@ -1,20 +1,19 @@
-import { MdbTablePaginationComponent, MdbTableDirective } from "ng-uikit-pro-standard";
+import { MdbTableDirective, MdbTablePaginationComponent, ToastService } from "ng-uikit-pro-standard";
 import {
-	Component,
-	OnInit,
-	ViewChild,
-	HostListener,
 	AfterViewInit,
 	ChangeDetectorRef,
+	Component,
 	ElementRef,
-	OnDestroy
+	HostListener,
+	OnDestroy,
+	OnInit,
+	ViewChild
 } from "@angular/core";
 import { GroupService } from "../../core/services/shared/group.service";
 import { GroupGame } from "../../models/GroupGame";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { TableService } from "../../core/services/shared/table.service";
-import { NgxSpinner } from "ngx-spinner/lib/ngx-spinner.enum";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ModalService } from "../../core/services/shared/modal.service";
 
@@ -46,6 +45,7 @@ export class GroupListComponent implements OnInit, AfterViewInit, OnDestroy {
 		private groupService: GroupService,
 		private tableService: TableService,
 		private modalService: ModalService,
+		private toast: ToastService,
 		private spinner: NgxSpinnerService
 	) {}
 
@@ -86,13 +86,26 @@ export class GroupListComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	disableGroup(group: GroupGame) {
+		if (group.enabled === false) {
+			this.modalService.showModalInfo(`Este grupo ya se encuentra deshabilitado!`);
+			return;
+		}
+
 		if (group.totalMembers > 0) {
 			this.modalService.showModalInfo(
 				`Este grupo tiene ${group.totalMembers} jugadores registrados, no se puede inactivar!`
 			);
-		} else {
-			console.log("Inactivar miembros");
+			return;
 		}
+
+		this.groupService
+			.changeStateGroup(group._id, false)
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe(resp => {
+				group.enabled = false;
+				const options = { toastClass: "opacity" };
+				this.toast.success(`El grupo de $ ${group.initialInvertion} ha sido inactivado`, "Grupo", options);
+			});
 	}
 
 	ngOnDestroy(): void {

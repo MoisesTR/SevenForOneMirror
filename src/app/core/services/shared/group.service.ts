@@ -58,6 +58,12 @@ export class GroupService {
 		return this.http.post(this.url + this.gameUrl + "members/" + groupId, member, options);
 	}
 
+	changeStateGroup(idGroup: string, enabled: boolean): Observable<any> {
+		const params = new HttpParams().set("enabled", enabled ? "true" : "false");
+		const options = { params: params };
+		return this.http.delete(this.url + this.gameUrl + idGroup, options);
+	}
+
 	removeMemberFromGroup(userId, groupId): Observable<any> {
 		const params = new HttpParams().set("userId", userId);
 		const options = { params: params };
