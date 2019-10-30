@@ -81,32 +81,33 @@ export class GroupsComponent implements OnInit, OnDestroy {
 				});
 			},
 			onClientAuthorization: data => {
+				this.paymentModal.hide();
 				this.logger.info(
 					"onClientAuthorization - you should probably inform your server about completed transaction at this point",
 					data
 				);
 				const member = new MemberGroup();
 				member.payReference = data.id;
-				this.groupService
-					.addMemberToGroup(member, this.groupSelectedPayModal._id)
-					.pipe(takeUntil(this.ngUnsubscribe))
-					.subscribe(() => {
-						this.paymentModal.hide();
-						this.logger.info("SUCCESS MEMBER REGISTER DATABASE");
-
-						this.socketGroupGame.connect();
-						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
-
-						this.updateMoneyService.update(true);
-						this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id)).then();
-
-						const options = { toastClass: "opacity" };
-						this.toast.success(
-							"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",
-							"Grupo",
-							options
-						);
-					});
+				this.toast.info("Paypal is processing your payment!", "Please wait");
+				// this.groupService
+				// 	.addMemberToGroup(member, this.groupSelectedPayModal._id)
+				// 	.pipe(takeUntil(this.ngUnsubscribe))
+				// 	.subscribe(() => {
+				// 		this.logger.info("SUCCESS MEMBER REGISTER DATABASE");
+				//
+				// 		this.socketGroupGame.connect();
+				// 		this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
+				//
+				// 		this.updateMoneyService.update(true);
+				// 		this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id)).then();
+				//
+				// 		const options = { toastClass: "opacity" };
+				// 		this.toast.success(
+				// 			"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",
+				// 			"Grupo",
+				// 			options
+				// 		);
+				// 	});
 			},
 			onCancel: (data, actions) => {
 				// console.log("OnCancel", actions);
