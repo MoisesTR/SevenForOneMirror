@@ -70,9 +70,11 @@ export class GroupsComponent implements OnInit, OnDestroy {
 			// https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
 			createOrderOnServer: () =>
 				this.paypalService
-					.createPaypalTransaction(this.finalPrice)
+					.createPaypalTransaction(this.finalPrice, this.groupSelectedPayModal._id)
 					.toPromise()
 					.then(order => {
+						console.log(order);
+						this.logger.info("CREATE PAYPAL TRANSACTION", order.orderID);
 						return order.orderID;
 					}),
 			onApprove: (data, actions) => {
@@ -87,26 +89,32 @@ export class GroupsComponent implements OnInit, OnDestroy {
 				);
 				const member = new MemberGroup();
 				member.payReference = data.id;
-				this.groupService
-					.addMemberToGroup(member, this.groupSelectedPayModal._id)
-					.pipe(takeUntil(this.ngUnsubscribe))
-					.subscribe(() => {
-						this.paymentModal.hide();
-						this.logger.info("SUCCESS MEMBER REGISTER DATABASE");
-
-						this.socketGroupGame.connect();
-						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
-
-						this.updateMoneyService.update(true);
-						this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id)).then();
-
-						const options = { toastClass: "opacity" };
-						this.toast.success(
-							"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",
-							"Grupo",
-							options
-						);
-					});
+				const options = { toastClass: "opacity" };
+				this.toast.success(
+					"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",
+					"Grupo",
+					options
+				);
+				// this.groupService
+				// 	.addMemberToGroup(member, this.groupSelectedPayModal._id)
+				// 	.pipe(takeUntil(this.ngUnsubscribe))
+				// 	.subscribe(() => {
+				// 		this.paymentModal.hide();
+				// 		this.logger.info("SUCCESS MEMBER REGISTER DATABASE");
+				//
+				// 		this.socketGroupGame.connect();
+				// 		this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
+				//
+				// 		this.updateMoneyService.update(true);
+				// 		this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id)).then();
+				//
+				// 		const options = { toastClass: "opacity" };
+				// 		this.toast.success(
+				// 			"Te has registrado exitosamente en el grupo de " + this.groupSelectedPayModal.initialInvertion + " $",
+				// 			"Grupo",
+				// 			options
+				// 		);
+				// 	});
 			},
 			onCancel: (data, actions) => {
 				// console.log("OnCancel", actions);

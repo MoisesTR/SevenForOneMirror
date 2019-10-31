@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start:heroku": "node dist/server",
-    "heroku-postbuild": "npm run build:ssr",  
+    "heroku-postbuild": "npm run build:ssr",
     "build": "ng build --prod",
     "test": "ng test",
     "format:fix": "pretty-quick --staged --verbose",
@@ -55,7 +55,7 @@
     "ngx-cacheable": "^1.2.5",
     "ngx-cookie-service": "^2.2.0",
     "ngx-logger": "^3.4.5",
-    "ngx-paypal": "^5.0.0-beta.11",
+    "ngx-paypal": "^5.0.0-beta.12",
     "ngx-spinner": "^7.1.4 ",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
