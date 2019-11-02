@@ -70,16 +70,26 @@ export class GroupsComponent implements OnInit, OnDestroy {
 			// https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
 			createOrderOnServer: () =>
 				this.paypalService
-					.createPaypalTransaction(this.finalPrice)
+					.createPaypalTransaction(this.finalPrice, this.groupSelectedPayModal._id)
 					.toPromise()
 					.then(order => {
+						this.logger.info("CREATE PAYPAL TRANSACTION", order.orderID);
 						return order.orderID;
 					}),
 			onApprove: (data, actions) => {
+				console.log("onApprove - transaction was approved, but not authorized", data, actions);
 				actions.order.get().then(details => {
-					this.logger.info("onApprove - you can get full order details inside onApprove: ", details);
+					console.log("onApprove - you can get full order details inside onApprove: ", details);
 				});
 			},
+			// authorizeOnServer: approveData => {
+			// 	return this.paypalService
+			// 		.authorizeTransaction(approveData.orderID)
+			// 		.toPromise()
+			// 		.then(details => {
+			// 			alert("Authorization created for " + details);
+			// 		});
+			// },
 			onClientAuthorization: data => {
 				this.logger.info(
 					"onClientAuthorization - you should probably inform your server about completed transaction at this point",
@@ -98,7 +108,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 						this.socketGroupGame.send(EventEnum.JOIN_GROUP, "");
 
 						this.updateMoneyService.update(true);
-						this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id)).then();
+						this.ngZone.run(() => this.router.navigateByUrl("/game/" + this.groupSelectedPayModal._id));
 
 						const options = { toastClass: "opacity" };
 						this.toast.success(
