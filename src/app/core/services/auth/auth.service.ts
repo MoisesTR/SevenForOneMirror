@@ -70,7 +70,7 @@ export class AuthService {
 			passwordConfirm
 		};
 
-		return this.http.put(this.urlAuth + "pwd/" + userId, body, options);
+		return this.http.patch(this.urlAuth + "pwd/" + userId, body, options);
 	}
 
 	forgotPassword(email: string, userName?: string) {
